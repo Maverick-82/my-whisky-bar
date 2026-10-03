@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Bar</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#f4f4f5; --card:#fff; --line:#e7e5e4; --line2:#d6d3d1;
+  --ink:#1c1917; --ink2:#57534e; --ink3:#a8a29e;
+  --accent:#b45309; --accent-ink:#fff; --accent-soft:#fff7ed; --accent-line:#fdba74;
+  --st-new:#f59e0b; --st-open:#10b981; --st-done:#a1a1aa;
+  --radius:14px; --shadow:0 1px 2px rgba(0,0,0,.04),0 1px 8px rgba(0,0,0,.04);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:14px;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.wrap{max-width:1240px;margin:0 auto;padding:20px 20px 100px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.top h1{font-size:24px;font-weight:800;margin:0;letter-spacing:-.5px;flex:1}
+.btn{border:1px solid var(--line2);background:#fff;border-radius:10px;padding:9px 14px;font-weight:600;font-size:13px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--ink3)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.danger{color:#b91c1c;border-color:#fecaca}
+.btn.danger.armed{background:#b91c1c;color:#fff;border-color:#b91c1c}
+.btn.ghost{border-color:transparent;background:transparent}
+.btn[disabled]{opacity:.55;pointer-events:none}
+.icon{width:16px;height:16px;flex:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.muted{color:var(--ink2)} .faint{color:var(--ink3)}
+
+/* 요약 */
+.summary{display:grid;grid-template-columns:minmax(240px,300px) 1fr;margin-bottom:14px;overflow:hidden}
+.sum-l{padding:20px;border-right:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.lbl{font-size:12px;font-weight:700;color:var(--accent)}
+.big{font-size:34px;font-weight:800;letter-spacing:-1px;line-height:1.1;margin-top:6px}
+.big small{font-size:14px;font-weight:600;color:var(--ink2);margin-left:3px}
+.total{text-align:right}
+.total .t{font-size:11px;color:var(--ink2)}
+.total .v{font-size:19px;font-weight:800;margin-top:4px}
+.total .s{font-size:11px;color:var(--ink3);margin-top:3px}
+.sum-r{padding:16px 18px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tile{border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-align:left;background:#fff}
+.tile.on{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink) inset}
+.tile .k{font-size:12px;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
+.tile .n{font-size:22px;font-weight:800;margin-top:6px}
+.bar{display:flex;height:6px;border-radius:6px;overflow:hidden;margin-top:12px;background:#eee}
+.bar i{display:block;height:100%}
+.chips{display:flex;gap:6px;flex-wrap:wrap;padding:12px 20px;border-top:1px solid var(--line);align-items:center}
+.chips .cap{font-size:11px;color:var(--ink2);margin-right:4px;white-space:nowrap;flex:none}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;color:var(--ink2)}
+.chip b{color:var(--ink);margin-left:3px}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip.on b{color:#fff}
+
+/* 컨트롤 */
+.controls{padding:16px 18px;margin-bottom:14px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:end}
+.field-lbl{font-size:11px;font-weight:600;color:var(--ink2);margin-bottom:6px}
+.seg{display:inline-flex;background:#f5f5f4;border-radius:10px;padding:3px;gap:2px}
+.seg button{border:1px solid transparent;background:transparent;border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;color:var(--ink2);display:inline-flex;align-items:center;gap:5px}
+.seg button.on{background:#fff;border-color:var(--accent);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.search{position:relative}
+.search input{width:100%;border:1px solid var(--line2);border-radius:10px;padding:10px 38px 10px 12px;background:#fff}
+.search svg{position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--ink3)}
+select.sel{border:1px solid var(--line2);border-radius:10px;padding:10px 12px;background:#fff;min-width:140px}
+.filters{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.count{margin-left:auto;font-size:12px;color:var(--ink2)}
+
+/* 술장(카드) */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;padding:18px}
+.bottle{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;text-align:left;padding:0;transition:transform .12s,box-shadow .12s}
+.bottle:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.ph{position:relative;aspect-ratio:3/4;background:linear-gradient(#fff 55%,#efefef);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:contain;padding:14px}
+.tag{position:absolute;top:8px;left:8px;background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;border-radius:6px;padding:3px 7px}
+.st{position:absolute;top:8px;right:8px;font-size:11px;font-weight:700;border-radius:999px;padding:3px 8px;background:rgba(255,255,255,.92);border:1px solid var(--line);display:flex;align-items:center;gap:4px}
+.flags{position:absolute;bottom:8px;left:8px;display:flex;gap:4px}
+.flag{font-size:10px;font-weight:800;border-radius:5px;padding:2px 5px;background:#1c1917;color:#fff}
+.flag.peat{background:#57534e}
+.info{padding:12px 13px 13px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:4px;flex:1}
+.nm{font-weight:700;font-size:14px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}
+.sub{font-size:11px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pr{font-weight:800;font-size:14px;margin-top:6px;padding-top:8px;border-top:1px solid #f1f1f1;display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.pr span{font-size:11px;font-weight:500;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.done .ph img{filter:grayscale(1);opacity:.55}
+
+/* 목록 */
+.list{padding:6px 0}
+.lrow{display:grid;grid-template-columns:48px minmax(0,2.4fr) 90px 96px minmax(0,1.2fr) 70px 70px 100px 76px;gap:12px;align-items:center;padding:9px 18px;border-bottom:1px solid #f3f3f3;width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left}
+.lrow:hover{background:#fafaf9}
+.lrow.head{font-size:11px;font-weight:700;color:var(--ink2);pointer-events:none;border-bottom:1px solid var(--line)}
+.thumb{width:40px;height:52px;border-radius:6px;background:#f5f5f4;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.thumb img{width:100%;height:100%;object-fit:contain}
+.lrow .nm{min-height:0;-webkit-line-clamp:1;font-size:13px}
+.lrow .c{font-size:12px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lrow .p{font-weight:700;text-align:right;font-size:13px}
+.pill{font-size:11px;font-weight:700;border-radius:999px;padding:3px 8px;display:inline-flex;align-items:center;gap:4px;background:#f5f5f4;justify-self:start}
+
+/* 보드 */
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:18px}
+.col{background:#f7f7f6;border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;min-height:200px}
+.col.drop{border-color:var(--accent);background:var(--accent-soft)}
+.col h3{margin:0;padding:12px 14px;font-size:13px;display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--line)}
+.col h3 em{font-style:normal;color:var(--ink2);font-weight:600;margin-left:auto}
+.col .items{padding:10px;display:flex;flex-direction:column;gap:8px;max-height:70vh;overflow:auto}
+.bcard{display:flex;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px;text-align:left;align-items:center;width:100%}
+.bcard .thumb{width:38px;height:48px}
+.bcard .nm{min-height:0;font-size:13px}
+.bcard[draggable=true]{cursor:grab}
+
+.empty{padding:60px 20px;text-align:center;color:var(--ink2)}
+
+/* 모달 */
+.modal-bg{position:fixed;inset:0;background:rgba(20,16,12,.45);display:none;align-items:flex-start;justify-content:center;z-index:50;overflow:auto;padding:30px 16px}
+.modal-bg.show{display:flex}
+.modal{width:100%;max-width:880px;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.mh{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;border-radius:16px 16px 0 0;z-index:2}
+.mh h2{font-size:18px;margin:0;flex:1}
+.mb{display:grid;grid-template-columns:1fr 290px;gap:20px;padding:20px}
+.mf{display:flex;gap:8px;padding:14px 20px;border-top:1px solid var(--line);position:sticky;bottom:0;background:#fff;border-radius:0 0 16px 16px}
+.mf .sp{flex:1}
+.f{margin-bottom:14px}
+.f label.l{display:block;font-size:12px;font-weight:700;margin-bottom:6px}
+.f label.l i{color:#dc2626;font-style:normal}
+.in{width:100%;border:1px solid var(--line2);border-radius:10px;padding:10px 12px;background:#fff}
+.in:focus,.search input:focus,select.sel:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(180,83,9,.12)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.unit{position:relative}
+.unit .in{padding-right:34px}
+.unit span{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--ink3);font-size:12px}
+.presets{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.presets button{border:1px solid var(--line);background:#fff;border-radius:7px;padding:4px 8px;font-size:11px;font-weight:600;color:var(--ink2)}
+.presets button.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.box{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.checks{display:flex;gap:18px;flex-wrap:wrap}
+.checks label{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer}
+.checks input{width:17px;height:17px;accent-color:var(--accent)}
+.withbtn{display:flex;gap:6px}
+.withbtn .in{flex:1;min-width:0}
+.toggle2{display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden;font-size:11px;font-weight:700}
+.toggle2 button{border:0;background:#fff;padding:3px 9px;color:var(--ink2)}
+.toggle2 button.on{background:var(--ink);color:#fff}
+.hint{font-size:11px;color:var(--ink3);margin-top:5px}
+.hint.acc{color:var(--accent)}
+.statusSeg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.statusSeg button{border:1px solid var(--line2);background:#fff;border-radius:10px;padding:9px;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:6px}
+.statusSeg button.on{border-color:var(--ink);background:var(--ink);color:#fff}
+.imgbox{border:1px solid var(--line);border-radius:12px;padding:12px;position:sticky;top:78px}
+.imgprev{aspect-ratio:3/4;border:1px dashed var(--line2);border-radius:10px;background:linear-gradient(#fff 55%,#f1f1f1);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.imgprev img{width:100%;height:100%;object-fit:contain;padding:10px}
+.imgbtns{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.imgbtns .btn{justify-content:center;padding:8px 6px;font-size:12px}
+textarea.in{min-height:84px;resize:vertical}
+.counter{text-align:right;font-size:11px;color:var(--ink3);margin-top:4px}
+
+/* 토스트 · 로딩 */
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#1c1917;color:#fff;padding:11px 18px;border-radius:12px;font-size:13px;font-weight:600;opacity:0;transition:.2s;z-index:80;pointer-events:none;max-width:90vw}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.err{background:#b91c1c}
+.spin{width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sp .7s linear infinite;display:inline-block}
+@keyframes sp{to{transform:rotate(360deg)}}
+.sync{font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:6px}
+.fab{display:none}
+.hide-price .money{filter:blur(6px);user-select:none}
+
+/* 모바일 */
+@media (max-width:760px){
+  .wrap{padding:14px 12px 96px}
+  .top h1{font-size:21px}
+  .top .hide-m{display:none}
+  .summary{grid-template-columns:1fr}
+  .sum-l{border-right:0;border-bottom:1px solid var(--line);padding:16px}
+  .big{font-size:30px}
+  .sum-r{padding:12px}
+  .tiles{gap:8px}
+  .tile{padding:10px}
+  .tile .n{font-size:19px}
+  .chips{padding:10px 12px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none}
+  .controls{grid-template-columns:1fr auto;padding:12px;gap:10px}
+  .controls .v{grid-column:1/-1}
+  .filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .filters .chip{flex:none}
+  select.sel{min-width:0;width:118px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:10px}
+  .info{padding:10px}
+  .nm{font-size:13px}
+  .lrow{grid-template-columns:44px minmax(0,1fr) auto;padding:9px 12px;gap:10px}
+  .lrow .dsk{display:none}
+  .lrow.head{display:none}
+  .lrow .mob{display:block}
+  .board{grid-template-columns:repeat(3,82%);overflow-x:auto;scroll-snap-type:x mandatory;padding:10px;gap:10px}
+  .col{scroll-snap-align:start}
+  .modal-bg{padding:0}
+  .modal{border-radius:0;min-height:100%}
+  .mh,.mf{border-radius:0}
+  .mb{grid-template-columns:1fr;padding:16px;gap:6px}
+  .imgcol{order:-1;margin-bottom:10px}
+  .imgbox{position:static;display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:start}
+  .imgbox .imgbtns{margin-top:0}
+  .row3{grid-template-columns:1fr 1fr}
+  .fab{display:flex;position:fixed;right:18px;bottom:22px;width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;border:0;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(180,83,9,.4);z-index:40}
+}
+.mob{display:none}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <div class="top">
+    <h1>🥃 My Bar</h1>
+    <span class="sync hide-m" id="sync"></span>
+    <button class="btn" id="btnRefresh" title="다시 불러오기">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg><span class="hide-m">새로고침</span>
+    </button>
+    <button class="btn" id="btnPrice" title="금액 숨기기">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span class="hide-m" id="btnPriceTxt">금액 숨김</span>
+    </button>
+    <button class="btn primary hide-m" id="btnAdd">+ 주류 등록</button>
+  </div>
+
+  <section class="card summary" id="summary"></section>
+
+  <section class="card controls">
+    <div class="v">
+      <div class="field-lbl">보기 방식</div>
+      <div class="seg" id="viewSeg">
+        <button data-v="list"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>목록</button>
+        <button data-v="shelf"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="16" rx="1"/><rect x="14" y="4" width="7" height="16" rx="1"/></svg>술장</button>
+        <button data-v="board"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="16" rx="1"/><rect x="17" y="4" width="4" height="16" rx="1"/></svg>보드</button>
+      </div>
+    </div>
+    <div>
+      <div class="field-lbl">술장 검색</div>
+      <div class="search">
+        <input id="q" type="search" placeholder="술 이름, 스타일, 구매처, 메모 검색" autocomplete="off">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </div>
+    </div>
+    <div>
+      <div class="field-lbl">정렬</div>
+      <select class="sel" id="sort">
+        <option value="sheet">등록 순서</option>
+        <option value="dateDesc">최근 구매순</option>
+        <option value="dateAsc">오래된 구매순</option>
+        <option value="priceDesc">가격 높은순</option>
+        <option value="priceAsc">가격 낮은순</option>
+        <option value="name">이름순</option>
+        <option value="abvDesc">도수 높은순</option>
+      </select>
+    </div>
+    <div class="filters" id="filters"></div>
+  </section>
+
+  <section class="card" id="content"></section>
+</div>
+
+<button class="fab" id="fab" aria-label="주류 등록"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></button>
+
+<!-- 등록 / 수정 모달 -->
+<div class="modal-bg" id="modalBg">
+  <form class="modal" id="form" autocomplete="off">
+    <div class="mh">
+      <h2 id="mTitle">주류 등록</h2>
+      <button type="button" class="btn ghost" id="mClose" aria-label="닫기">✕</button>
+    </div>
+    <div class="mb">
+      <div>
+        <div class="f">
+          <label class="l">품명 <i>*</i></label>
+          <input class="in" name="name" list="dlNames" required placeholder="예: 글렌드로낙 12년">
+          <div class="hint" id="nameHint">기존에 등록한 술이나 Whisky DB에 있는 제품을 고르면 스타일·용량·도수를 자동으로 채워요.</div>
+          <div id="wdbInfoBox" style="display:none;margin-top:8px;border:1px solid var(--line2);border-radius:10px;padding:10px 12px;background:#fdf8f0">
+            <div style="font-size:11.5px;font-weight:800;color:#92600f;margin-bottom:4px">📖 Whisky DB에서 찾았어요</div>
+            <div id="wdbInfoText" style="font-size:12px;color:var(--ink2);line-height:1.5"></div>
+            <button type="button" id="wdbInfoUseMemo" style="margin-top:6px;background:none;border:0;padding:0;font-size:11.5px;font-weight:700;color:var(--accent);cursor:pointer">메모에 담기</button>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="f">
+            <label class="l">종류</label>
+            <select class="in" name="category">
+              <option>위스키</option><option>꼬냑</option><option>와인</option><option>기타</option>
+            </select>
+          </div>
+          <div class="f">
+            <label class="l">스타일(선택)</label>
+            <input class="in" name="style" list="dlStyles" placeholder="예: 싱글몰트">
+          </div>
+        </div>
+        <div class="row3">
+          <div class="f">
+            <label class="l">용량</label>
+            <div class="unit"><input class="in" name="volume" inputmode="numeric" placeholder="700"><span>ml</span></div>
+            <div class="presets" id="volPresets"></div>
+          </div>
+          <div class="f">
+            <label class="l">도수</label>
+            <div class="unit"><input class="in" name="abv" inputmode="decimal" placeholder="40"><span>%</span></div>
+          </div>
+          <div class="f">
+            <label class="l">숙성년수</label>
+            <div class="unit"><input class="in" name="age" placeholder="NAS"><span>년</span></div>
+            <div class="presets"><button type="button" data-age="NAS">NAS</button></div>
+          </div>
+        </div>
+        <div class="f box">
+          <div class="field-lbl" style="margin-bottom:8px">위스키 특징</div>
+          <div class="checks">
+            <label><input type="checkbox" name="cs"> 캐스크 스트렝스 (CS)</label>
+            <label><input type="checkbox" name="peat"> 피트 (Peat)</label>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="f">
+            <label class="l">구매일</label>
+            <div class="withbtn">
+              <input class="in" type="date" name="date">
+              <button type="button" class="btn" id="btnToday">오늘</button>
+            </div>
+          </div>
+          <div class="f">
+            <label class="l" style="display:flex;align-items:center">금액
+              <span class="toggle2" style="margin-left:auto" id="curSeg"><button type="button" data-c="KRW" class="on">KRW</button><button type="button" data-c="USD">USD</button></span>
+            </label>
+            <input class="in" name="price" inputmode="decimal" placeholder="0">
+            <div class="hint acc" id="priceHint"></div>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="f">
+            <label class="l">구입 매장</label>
+            <input class="in" name="store" list="dlStores" placeholder="예: 이마트">
+          </div>
+          <div class="f" id="qtyWrap">
+            <label class="l">수량 (같은 술 여러 병)</label>
+            <input class="in" name="qty" type="number" min="1" max="20" value="1">
+          </div>
+        </div>
+        <div class="f">
+          <label class="l">상태</label>
+          <div class="statusSeg" id="statusSeg"></div>
+        </div>
+        <div class="f">
+          <label class="l">메모</label>
+          <textarea class="in" name="memo" maxlength="1000" placeholder="시음 노트, 선물 받은 곳 등"></textarea>
+          <div class="counter"><span id="memoCnt">0</span>/1000</div>
+        </div>
+      </div>
+      <div class="imgcol">
+        <div class="imgbox">
+          <div>
+            <div class="field-lbl">대표 이미지</div>
+            <div class="imgprev" id="imgPrev"></div>
+          </div>
+          <div>
+            <div class="imgbtns">
+              <button type="button" class="btn" id="btnUrl">🔗 이미지 주소 붙여넣기</button>
+              <a class="btn" id="btnGImg" target="_blank" rel="noopener" href="#" style="text-decoration:none;color:inherit;justify-content:center">구글 이미지 검색 ↗</a>
+              <button type="button" class="btn ghost faint" id="btnImgDel" style="font-size:11px">이미지 지우기</button>
+            </div>
+            <div class="withbtn" id="urlRow" style="display:none;margin-top:8px"><input class="in" id="urlIn" placeholder="이미지 주소를 붙여넣어 주세요" style="padding:8px 10px;font-size:12px"><button type="button" class="btn" id="urlOk">적용</button></div>
+            <div class="hint" id="imgHint">매칭된 제품이 있으면 Whisky DB 사진이 자동으로 쓰여요.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mf">
+      <button type="button" class="btn danger" id="btnDel">삭제</button>
+      <span class="sp"></span>
+      <button type="button" class="btn" id="mCancel">취소</button>
+      <button type="submit" class="btn primary" id="btnSave">저장</button>
+    </div>
+  </form>
+</div>
+
+<datalist id="dlNames"></datalist>
+<datalist id="dlStyles"></datalist>
+<datalist id="dlStores"></datalist>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+'use strict';
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ---------- Supabase 설정 ---------- */
+const SUPABASE_URL = 'https://hevlgbkkzrambtkqfbka.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_SHekPJ0rm5wZHxQORLY8Wg_GA1Jk-It';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const STATUSES = ['미개봉','개봉','소진'];
+const ST_COLOR = {'미개봉':'var(--st-new)','개봉':'var(--st-open)','소진':'var(--st-done)'};
+const BASE_STYLES = ['싱글몰트','블렌디드 몰트','블렌디드','버번','밀 버번','테네시','라이','싱글 팟 스틸','그레인','재패니즈','대만','아이리쉬','VS','VSOP','XO','레드','화이트','로제','스파클링'];
+const VOLS = [375,500,700,750,1000,1750];
+
+const store = {
+  get(k,d){ try{ const v = localStorage.getItem('wk_'+k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem('wk_'+k, JSON.stringify(v)); }catch(e){} }
+};
+
+const S = {
+  items: [], rate: 1400, products: [],
+  view: store.get('view','shelf'),
+  sort: store.get('sort','sheet'),
+  hidePrice: store.get('hidePrice', false),
+  q: '', status: '', style: '', cs: false, peat: false,
+  lastSync: 0
+};
+
+/* ---------- 유틸 ---------- */
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const won = n => n == null || n === '' ? '-' : '₩' + Math.round(Number(n)).toLocaleString('ko-KR');
+const key = s => String(s||'').replace(/\s+/g,'').toLowerCase();
+const safeUrl = u => /^(https?:|data:image\/)/i.test(String(u||'')) ? u : '';
+function today(){ const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,10); }
+function toast(msg, err){
+  const t = $('#toast'); t.textContent = msg; t.className = 'toast show' + (err?' err':'');
+  clearTimeout(toast._t); toast._t = setTimeout(()=> t.className='toast', err?4200:2200);
+}
+function styleColor(style){
+  const s = String(style||'');
+  if (/버번|테네시|라이/.test(s)) return ['#8a3a17','#c2692f'];
+  if (/재패니즈|일본/.test(s)) return ['#6b3f22','#b07a45'];
+  if (/대만/.test(s)) return ['#5d2418','#a2532f'];
+  if (/아이리/.test(s)) return ['#2f6a3e','#8fbf7d'];
+  if (/블렌디드/.test(s)) return ['#8a5a14','#d6a13a'];
+  if (/와인|레드|로제/.test(s)) return ['#5f1430','#a23a5a'];
+  if (/VS|XO|꼬냑/.test(s)) return ['#6e3510','#c07a2c'];
+  return ['#8d4f10','#e0a24a'];
+}
+function bottleSvg(style){
+  const [d,l] = styleColor(style);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="${d}"/><stop offset=".45" stop-color="${l}"/><stop offset="1" stop-color="${d}"/></linearGradient></defs><rect x="53" y="8" width="14" height="12" rx="2" fill="#2b2118"/><rect x="54" y="20" width="12" height="22" fill="${d}" opacity=".85"/><path d="M40 64c0-14 10-20 14-22h12c4 2 14 8 14 22v80c0 4-3 7-7 7H47c-4 0-7-3-7-7z" fill="url(#g)"/><rect x="45" y="86" width="30" height="34" rx="2" fill="#f7efe1"/><rect x="50" y="94" width="20" height="3" fill="${d}" opacity=".6"/><rect x="50" y="101" width="14" height="2" fill="${d}" opacity=".4"/><path d="M46 66c0-8 4-13 8-15" stroke="#fff" stroke-opacity=".35" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+function imgTag(it){
+  const fb = bottleSvg(it.style);
+  const src = safeUrl(it.image);
+  return src ? `<img src="${esc(src)}" data-fb="${esc(fb)}" alt="" loading="lazy" referrerpolicy="no-referrer">`
+             : `<img src="${esc(fb)}" alt="">`;
+}
+document.addEventListener('error', e => {
+  const el = e.target;
+  if (el && el.tagName === 'IMG' && el.dataset.fb){ const f = el.dataset.fb; delete el.dataset.fb; el.src = f; }
+}, true);
+function subLine(it){
+  const p = [];
+  if (it.volume) p.push(it.volume + 'ml');
+  if (it.abv !== '' && it.abv != null) p.push(it.abv + '%');
+  if (it.age && it.age !== 'NAS') p.push(it.age + '년');
+  else if (it.age === 'NAS') p.push('NAS');
+  return p.join(' · ');
+}
+function stBadge(s, cls){ return `<span class="${cls||'st'}"><i class="dot" style="background:${ST_COLOR[s]||'#ccc'}"></i>${esc(s)}</span>`; }
+
+/* ---------- Supabase 호출 ---------- */
+function mapRow(r){
+  return {
+    row: r.id, productId: r.product_id,
+    category: r.category || '위스키', style: r.style || '',
+    date: r.purchase_date || '', name: r.raw_name_kr,
+    status: r.status || '미개봉', price: r.purchase_price,
+    store: r.purchase_store || '', volume: r.volume_ml,
+    abv: r.abv_display == null ? '' : r.abv_display,
+    age: r.age_text == null ? '' : r.age_text,
+    memo: r.memo || '', cs: !!r.cask_strength, peat: !!r.peated,
+    image: r.image_url || (r.whisky_products && r.whisky_products.image_url) || '',
+    created_at: r.created_at
+  };
+}
+async function getData(){
+  const { data, error } = await sb.from('whisky_my_bar')
+    .select('*, whisky_products(image_url)')
+    .order('created_at', { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data||[]).map(mapRow);
+}
+function rowPayload(d){
+  let price = d.price === '' || d.price == null ? null : Number(d.price);
+  return {
+    raw_name_kr: String(d.name||'').trim(),
+    category: d.category || '위스키',
+    style: d.style || null,
+    purchase_date: d.date || null,
+    status: d.status || '미개봉',
+    purchase_price: price,
+    purchase_store: d.store || null,
+    volume_ml: d.volume === '' || d.volume == null ? null : Number(d.volume),
+    abv_display: d.abv === '' ? null : (d.abv == null ? null : String(d.abv)),
+    age_text: d.age === '' ? null : (d.age == null ? null : String(d.age)),
+    memo: d.memo ? String(d.memo).slice(0,1000) : null,
+    cask_strength: !!d.cs, peated: !!d.peat,
+    product_id: d.productId || null,
+    image_url: d.imageUrl || null
+  };
+}
+async function addItem(d, qty){
+  if (!String(d.name||'').trim()) throw new Error('주류명을 입력해 주세요.');
+  qty = Math.max(1, Math.min(20, Number(qty)||1));
+  const payload = rowPayload(d);
+  const rows = Array.from({length:qty}, () => Object.assign({}, payload));
+  const { error } = await sb.from('whisky_my_bar').insert(rows);
+  if (error) throw new Error(error.message);
+  return getData();
+}
+async function updateItem(id, d){
+  if (!String(d.name||'').trim()) throw new Error('주류명을 입력해 주세요.');
+  const { error } = await sb.from('whisky_my_bar').update(rowPayload(d)).eq('id', id);
+  if (error) throw new Error(error.message);
+  return getData();
+}
+async function setStatus(id, status){
+  const { error } = await sb.from('whisky_my_bar').update({ status }).eq('id', id);
+  if (error) throw new Error(error.message);
+  return getData();
+}
+async function deleteItem(id){
+  const { error } = await sb.from('whisky_my_bar').delete().eq('id', id);
+  if (error) throw new Error(error.message);
+  return getData();
+}
+async function loadProducts(){
+  try {
+    const { data, error } = await sb.from('whisky_products')
+      .select('id,name_kr,base_name_kr,category,abv_display,volume_ml,image_url,nose,palate,finish')
+      .limit(5000);
+    if (error) throw error;
+    S.products = data || [];
+  } catch(e){ S.products = []; }
+  renderDatalists();
+}
+async function ensureRate(){
+  const cached = store.get('rateCache', null);
+  if (cached && Date.now() - cached.t < 6*3600*1000){ S.rate = cached.v; return; }
+  try {
+    const res = await fetch('https://open.er-api.com/v6/latest/USD');
+    const j = await res.json();
+    if (j && j.rates && j.rates.KRW){
+      S.rate = Math.round(j.rates.KRW * 100) / 100;
+      store.set('rateCache', { v: S.rate, t: Date.now() });
+    }
+  } catch(e){ /* 기본값 유지 */ }
+}
+function applyData(items){
+  S.items = items || [];
+  S.lastSync = Date.now();
+  renderAll();
+}
+
+/* ---------- 필터 · 정렬 ---------- */
+function filtered(){
+  const q = key(S.q);
+  let arr = S.items.filter(it => {
+    if (S.status && it.status !== S.status) return false;
+    if (S.style && it.style !== S.style) return false;
+    if (S.cs && !it.cs) return false;
+    if (S.peat && !it.peat) return false;
+    if (q){
+      const hay = key([it.name,it.style,it.store,it.memo,it.category,it.date,it.status].join(' '));
+      if (hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  });
+  const num = v => (v==null||v===''||isNaN(parseFloat(v))) ? -1 : parseFloat(v);
+  const by = {
+    sheet: (a,b) => (a.created_at||'').localeCompare(b.created_at||''),
+    dateDesc: (a,b) => (b.date||'').localeCompare(a.date||''),
+    dateAsc: (a,b) => (a.date||'').localeCompare(b.date||''),
+    priceDesc: (a,b) => num(b.price) - num(a.price),
+    priceAsc: (a,b) => (a.price==null?1e15:a.price) - (b.price==null?1e15:b.price),
+    name: (a,b) => a.name.localeCompare(b.name, 'ko'),
+    abvDesc: (a,b) => num(b.abv) - num(a.abv)
+  }[S.sort] || ((a,b)=>0);
+  return arr.slice().sort(by);
+}
+
+/* ---------- 렌더 ---------- */
+function renderSummary(){
+  const all = S.items;
+  const cnt = {'미개봉':0,'개봉':0,'소진':0};
+  let total = 0, holding = 0;
+  const cats = {}, styles = {};
+  all.forEach(it => {
+    cnt[it.status] = (cnt[it.status]||0) + 1;
+    total += Number(it.price)||0;
+    if (it.status !== '소진') holding += Number(it.price)||0;
+    cats[it.category||'기타'] = (cats[it.category||'기타']||0)+1;
+    if (it.style) styles[it.style] = (styles[it.style]||0)+1;
+  });
+  const n = all.length || 1;
+  const styleChips = Object.entries(styles).sort((a,b)=>b[1]-a[1])
+    .map(([s,c]) => `<button class="chip ${S.style===s?'on':''}" data-style="${esc(s)}">${esc(s)}<b>${c}</b></button>`).join('');
+  $('#summary').innerHTML = `
+    <div class="sum-l">
+      <div><div class="lbl">술장 요약</div><div class="big">${all.length}<small>병</small></div></div>
+      <div class="total"><div class="t">총 구매금액</div><div class="v money">${won(total)}</div><div class="s">보유 중 <span class="money">${won(holding)}</span></div></div>
+    </div>
+    <div class="sum-r">
+      <div class="tiles">
+        ${STATUSES.map(s => `<button class="tile ${S.status===s?'on':''}" data-status="${s}"><div class="k"><i class="dot" style="background:${ST_COLOR[s]}"></i>${s}</div><div class="n">${cnt[s]||0}</div></button>`).join('')}
+      </div>
+      <div class="bar">${STATUSES.map(s => `<i style="width:${(cnt[s]||0)/n*100}%;background:${ST_COLOR[s]}"></i>`).join('')}</div>
+    </div>
+    <div class="chips" style="grid-column:1/-1">
+      <span class="cap">종류별</span>
+      ${Object.entries(cats).map(([c,v]) => `<span class="chip">${esc(c)}<b>${v}</b></span>`).join('')}
+      <span class="cap" style="margin-left:8px">스타일</span>
+      ${styleChips}
+    </div>`;
+}
+function renderFilters(list){
+  const f = [
+    `<button class="chip ${!S.status?'on':''}" data-status="">전체</button>`,
+    ...STATUSES.map(s => `<button class="chip ${S.status===s?'on':''}" data-status="${s}">${s}</button>`),
+    `<button class="chip ${S.cs?'on':''}" data-flag="cs">캐스크 스트렝스</button>`,
+    `<button class="chip ${S.peat?'on':''}" data-flag="peat">피트</button>`
+  ];
+  if (S.style) f.push(`<button class="chip on" data-style="${esc(S.style)}">${esc(S.style)} ✕</button>`);
+  f.push(`<span class="count">${list.length}병 표시</span>`);
+  $('#filters').innerHTML = f.join('');
+}
+function renderShelf(list){
+  return `<div class="grid">${list.map(it => `
+    <button class="bottle ${it.status==='소진'?'done':''}" data-row="${it.row}">
+      <div class="ph">${imgTag(it)}
+        <span class="tag">${esc(it.style || it.category || '위스키')}</span>
+        ${stBadge(it.status)}
+        <span class="flags">${it.cs?'<span class="flag">CS</span>':''}${it.peat?'<span class="flag peat">PEAT</span>':''}</span>
+      </div>
+      <div class="info">
+        <div class="nm">${esc(it.name)}</div>
+        <div class="sub">${esc(subLine(it)) || '&nbsp;'}</div>
+        <div class="pr"><b class="money">${won(it.price)}</b><span>${esc(it.store||'')}</span></div>
+      </div>
+    </button>`).join('')}</div>`;
+}
+function renderList(list){
+  const head = `<div class="lrow head"><span></span><span>주류명</span><span>스타일</span><span>구매일</span><span>구매처</span><span>용량</span><span>도수</span><span style="text-align:right">구매가격</span><span>상태</span></div>`;
+  return `<div class="list">${head}${list.map(it => `
+    <button class="lrow" data-row="${it.row}">
+      <span class="thumb">${imgTag(it)}</span>
+      <span style="min-width:0"><div class="nm">${esc(it.name)}</div>
+        <div class="sub mob">${esc([it.style, subLine(it), it.date].filter(Boolean).join(' · '))}</div></span>
+      <span class="c dsk">${esc(it.style)}</span>
+      <span class="c dsk">${esc(it.date)}</span>
+      <span class="c dsk">${esc(it.store)}</span>
+      <span class="c dsk">${it.volume? it.volume+'ml':''}</span>
+      <span class="c dsk">${it.abv!==''? esc(it.abv)+'%':''}</span>
+      <span class="p dsk money">${won(it.price)}</span>
+      <span class="dsk">${stBadge(it.status,'pill')}</span>
+      <span class="mob" style="text-align:right"><div class="p money">${won(it.price)}</div><div style="margin-top:4px">${stBadge(it.status,'pill')}</div></span>
+    </button>`).join('')}</div>`;
+}
+function renderBoard(list){
+  return `<div class="board">${STATUSES.map(s => {
+    const col = list.filter(it => it.status === s);
+    return `<div class="col" data-drop="${s}"><h3><i class="dot" style="background:${ST_COLOR[s]}"></i>${s}<em>${col.length}</em></h3>
+      <div class="items">${col.map(it => `
+        <button class="bcard" draggable="true" data-row="${it.row}">
+          <span class="thumb">${imgTag(it)}</span>
+          <span style="min-width:0;flex:1"><div class="nm">${esc(it.name)}</div><div class="sub">${esc([it.style, subLine(it)].filter(Boolean).join(' · '))}</div></span>
+          <b class="money" style="font-size:12px">${won(it.price)}</b>
+        </button>`).join('') || '<div class="faint" style="font-size:12px;padding:8px">비어 있음</div>'}</div></div>`;
+  }).join('')}</div>`;
+}
+function renderContent(){
+  const list = filtered();
+  renderFilters(list);
+  $$('#viewSeg button').forEach(b => b.classList.toggle('on', b.dataset.v === S.view));
+  $('#sort').value = S.sort;
+  if (!list.length){
+    $('#content').innerHTML = `<div class="empty">${S.items.length ? '조건에 맞는 술이 없어요.' : '아직 등록된 술이 없어요. <b>주류 등록</b>으로 시작해 보세요.'}</div>`;
+    return;
+  }
+  $('#content').innerHTML = S.view === 'list' ? renderList(list) : S.view === 'board' ? renderBoard(list) : renderShelf(list);
+}
+function renderDatalists(){
+  const uniq = arr => Array.from(new Set(arr.filter(Boolean)));
+  const pNames = S.products.map(p=>p.name_kr);
+  $('#dlNames').innerHTML = uniq(S.items.map(i=>i.name).concat(pNames)).sort((a,b)=>a.localeCompare(b,'ko')).map(v=>`<option value="${esc(v)}">`).join('');
+  $('#dlStyles').innerHTML = uniq(S.items.map(i=>i.style).concat(S.products.map(p=>p.category)).concat(BASE_STYLES)).map(v=>`<option value="${esc(v)}">`).join('');
+  const freq = {}; S.items.forEach(i => { if (i.store) freq[i.store]=(freq[i.store]||0)+1; });
+  $('#dlStores').innerHTML = Object.keys(freq).sort((a,b)=>freq[b]-freq[a]).map(v=>`<option value="${esc(v)}">`).join('');
+}
+function renderSync(){
+  if (!S.lastSync) return;
+  const d = new Date(S.lastSync);
+  $('#sync').textContent = '동기화 ' + d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
+}
+function renderAll(){
+  document.body.classList.toggle('hide-price', S.hidePrice);
+  $('#btnPriceTxt').textContent = S.hidePrice ? '금액 보기' : '금액 숨김';
+  renderSummary(); renderContent(); renderDatalists(); renderSync();
+}
+
+/* ---------- 이벤트: 목록 ---------- */
+document.addEventListener('click', e => {
+  const st = e.target.closest('[data-status]');
+  if (st && !st.closest('#modalBg')){ S.status = (S.status === st.dataset.status) ? '' : st.dataset.status; renderSummary(); renderContent(); return; }
+  const sy = e.target.closest('[data-style]');
+  if (sy){ S.style = (S.style === sy.dataset.style) ? '' : sy.dataset.style; renderSummary(); renderContent(); return; }
+  const fl = e.target.closest('[data-flag]');
+  if (fl){ S[fl.dataset.flag] = !S[fl.dataset.flag]; renderContent(); return; }
+  const card = e.target.closest('[data-row]');
+  if (card && !card.closest('#modalBg')){ const it = S.items.find(i => i.row === card.dataset.row); if (it) openForm(it); }
+});
+$('#viewSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.view = b.dataset.v; store.set('view', S.view); renderContent(); });
+$('#sort').addEventListener('change', e => { S.sort = e.target.value; store.set('sort', S.sort); renderContent(); });
+let qT; $('#q').addEventListener('input', e => { clearTimeout(qT); qT = setTimeout(()=>{ S.q = e.target.value; renderContent(); }, 120); });
+$('#btnPrice').addEventListener('click', () => { S.hidePrice = !S.hidePrice; store.set('hidePrice', S.hidePrice); renderAll(); });
+$('#btnRefresh').addEventListener('click', () => refresh());
+$('#btnAdd').addEventListener('click', () => openForm(null));
+$('#fab').addEventListener('click', () => openForm(null));
+
+async function refresh(silent){
+  const b = $('#btnRefresh'); b.disabled = true;
+  try { applyData(await getData()); if (silent !== true) toast('최신 내용을 불러왔어요'); }
+  catch(err){ if (silent !== true) toast(err.message, true); }
+  finally { b.disabled = false; }
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && Date.now() - S.lastSync > 20000 && !$('#modalBg').classList.contains('show')) refresh(true);
+});
+setInterval(() => { if (document.visibilityState === 'visible' && !$('#modalBg').classList.contains('show') && Date.now() - S.lastSync > 120000) refresh(true); }, 30000);
+
+/* 보드 드래그 */
+let dragRow = null;
+document.addEventListener('dragstart', e => { const c = e.target.closest && e.target.closest('.bcard'); if (c){ dragRow = c.dataset.row; e.dataTransfer.effectAllowed = 'move'; } });
+document.addEventListener('dragover', e => { const col = e.target.closest && e.target.closest('[data-drop]'); if (col && dragRow){ e.preventDefault(); $$('.col').forEach(c => c.classList.toggle('drop', c === col)); } });
+document.addEventListener('dragend', () => { dragRow = null; $$('.col').forEach(c => c.classList.remove('drop')); });
+document.addEventListener('drop', async e => {
+  const col = e.target.closest && e.target.closest('[data-drop]'); if (!col || !dragRow) return;
+  e.preventDefault();
+  const it = S.items.find(i => i.row === dragRow); const to = col.dataset.drop;
+  $$('.col').forEach(c => c.classList.remove('drop')); dragRow = null;
+  if (!it || it.status === to) return;
+  const prev = it.status; it.status = to; renderSummary(); renderContent();
+  try { applyData(await setStatus(it.row, to)); toast(`${it.name} → ${to}`); }
+  catch(err){ it.status = prev; renderAll(); toast(err.message, true); }
+});
+
+/* ---------- 등록 / 수정 폼 ---------- */
+const F = $('#form');
+let editing = null, formStatus = '미개봉', currency = 'KRW', pendingImg = null, formProductId = null;
+
+$('#volPresets').innerHTML = VOLS.map(v => `<button type="button" data-vol="${v}">${v.toLocaleString()}ml</button>`).join('');
+$('#statusSeg').innerHTML = STATUSES.map(s => `<button type="button" data-st="${s}"><i class="dot" style="background:${ST_COLOR[s]}"></i>${s}</button>`).join('');
+
+function syncPresets(){
+  const v = String(F.volume.value).trim();
+  $$('#volPresets button').forEach(b => b.classList.toggle('on', b.dataset.vol === v));
+  $$('#statusSeg button').forEach(b => b.classList.toggle('on', b.dataset.st === formStatus));
+  $$('#curSeg button').forEach(b => b.classList.toggle('on', b.dataset.c === currency));
+  $('#memoCnt').textContent = F.memo.value.length;
+  priceHint();
+}
+function priceHint(){
+  const v = parseFloat(String(F.price.value).replace(/,/g,''));
+  $('#priceHint').textContent = currency === 'USD'
+    ? (isNaN(v) ? `USD로 입력하면 원화로 바꿔 저장해요 (환율 ${S.rate.toLocaleString()}원)` : `≈ ${won(v * S.rate)} 로 저장 (환율 ${S.rate.toLocaleString()}원)`)
+    : (isNaN(v) || !v ? '' : won(v));
+}
+function currentImage(){
+  if (pendingImg){ return pendingImg.type === 'clear' ? '' : pendingImg.value; }
+  const n = key(F.name.value);
+  const hit = n && S.items.find(i => key(i.name) === n && i.image);
+  return hit ? hit.image : '';
+}
+function renderImg(){
+  const src = safeUrl(currentImage());
+  const fb = bottleSvg(F.style.value);
+  $('#imgPrev').innerHTML = src ? `<img src="${esc(src)}" data-fb="${esc(fb)}" referrerpolicy="no-referrer" alt="">` : `<img src="${esc(fb)}" alt="" style="opacity:.55">`;
+  $('#btnImgDel').style.display = src ? '' : 'none';
+}
+function openForm(it){
+  editing = it; pendingImg = null; currency = 'KRW'; formProductId = it ? (it.productId || null) : null;
+  F.reset();
+  $('#mTitle').textContent = it ? '주류 정보' : '주류 등록';
+  $('#btnDel').style.display = it ? '' : 'none';
+  $('#qtyWrap').style.display = it ? 'none' : '';
+  $('#btnDel').classList.remove('armed'); $('#btnDel').textContent = '삭제';
+  if (it){
+    F.name.value = it.name; F.category.value = it.category || '위스키'; F.style.value = it.style;
+    F.volume.value = it.volume || ''; F.abv.value = it.abv || ''; F.age.value = it.age || '';
+    F.cs.checked = it.cs; F.peat.checked = it.peat; F.date.value = /^\d{4}-\d{2}-\d{2}$/.test(it.date) ? it.date : '';
+    F.price.value = it.price == null ? '' : it.price; F.store.value = it.store; F.memo.value = it.memo;
+    formStatus = it.status || '미개봉';
+    if (!['위스키','꼬냑','와인','기타'].includes(F.category.value)){ const o = document.createElement('option'); o.textContent = it.category; F.category.appendChild(o); F.category.value = it.category; }
+  } else {
+    formStatus = '미개봉'; F.date.value = today(); F.volume.value = 700; F.category.value = '위스키';
+  }
+  $('#urlRow').style.display = 'none'; $('#urlIn').value = '';
+  $('#imgHint').textContent = '매칭된 제품이 있으면 Whisky DB 사진이 자동으로 쓰여요.';
+  $('#nameHint').textContent = '기존에 등록한 술이나 Whisky DB에 있는 제품을 고르면 스타일·용량·도수를 자동으로 채워요.';
+  $('#wdbInfoBox').style.display = 'none'; curProductMatch = null;
+  updateGImg(); syncPresets(); renderImg();
+  $('#modalBg').classList.add('show'); document.body.style.overflow = 'hidden';
+  if (!it && window.innerWidth > 760) setTimeout(() => F.name.focus(), 50);
+}
+function closeForm(){ $('#modalBg').classList.remove('show'); document.body.style.overflow = ''; editing = null; }
+$('#mClose').addEventListener('click', closeForm);
+$('#mCancel').addEventListener('click', closeForm);
+$('#modalBg').addEventListener('mousedown', e => { if (e.target.id === 'modalBg') closeForm(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#modalBg').classList.contains('show')) closeForm(); });
+
+$('#volPresets').addEventListener('click', e => { const b = e.target.closest('button'); if (b){ F.volume.value = b.dataset.vol; syncPresets(); } });
+document.querySelector('[data-age]').addEventListener('click', () => { F.age.value = 'NAS'; });
+$('#statusSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (b){ formStatus = b.dataset.st; syncPresets(); } });
+$('#curSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (b){ currency = b.dataset.c; syncPresets(); } });
+$('#btnToday').addEventListener('click', () => { F.date.value = today(); });
+F.volume.addEventListener('input', syncPresets);
+F.price.addEventListener('input', priceHint);
+F.memo.addEventListener('input', () => $('#memoCnt').textContent = F.memo.value.length);
+F.style.addEventListener('change', renderImg);
+
+let curProductMatch = null;
+function renderWdbInfoBox(p){
+  const box = $('#wdbInfoBox');
+  if (!p || !(p.nose || p.palate || p.finish)){ box.style.display = 'none'; curProductMatch = null; return; }
+  curProductMatch = p;
+  const parts = [];
+  if (p.nose) parts.push(`<b>향</b> ${esc(p.nose)}`);
+  if (p.palate) parts.push(`<b>맛</b> ${esc(p.palate)}`);
+  if (p.finish) parts.push(`<b>여운</b> ${esc(p.finish)}`);
+  $('#wdbInfoText').innerHTML = parts.join('<br>');
+  box.style.display = '';
+}
+$('#wdbInfoUseMemo').addEventListener('click', () => {
+  if (!curProductMatch) return;
+  const parts = [];
+  if (curProductMatch.nose) parts.push('향: ' + curProductMatch.nose);
+  if (curProductMatch.palate) parts.push('맛: ' + curProductMatch.palate);
+  if (curProductMatch.finish) parts.push('여운: ' + curProductMatch.finish);
+  const add = parts.join(' / ');
+  F.memo.value = F.memo.value.trim() ? F.memo.value.trim() + '\n' + add : add;
+  $('#memoCnt').textContent = F.memo.value.length;
+  toast('메모에 담았어요');
+});
+F.name.addEventListener('change', () => {
+  renderImg();
+  if (editing) return;
+  const n = key(F.name.value);
+  const prev = S.items.filter(i => key(i.name) === n).sort((a,b)=>(b.created_at||'').localeCompare(a.created_at||''))[0];
+  if (prev){
+    F.category.value = prev.category || '위스키'; F.style.value = prev.style; F.volume.value = prev.volume || '';
+    F.abv.value = prev.abv || ''; F.age.value = prev.age || ''; F.cs.checked = prev.cs; F.peat.checked = prev.peat;
+    formProductId = prev.productId || null;
+    syncPresets(); renderImg();
+    $('#nameHint').textContent = `이전에 등록한 정보로 채웠어요 (최근 ${won(prev.price)}, ${prev.store||'-'})`;
+    renderWdbInfoBox(null);
+    return;
+  }
+  $('#nameHint').textContent = '기존에 등록한 술이나 Whisky DB에 있는 제품을 고르면 스타일·용량·도수를 자동으로 채워요.';
+  const pm = S.products.find(p => key(p.name_kr) === n || key(p.base_name_kr) === n);
+  if (pm){
+    formProductId = pm.id;
+    F.category.value = '위스키';
+    if (pm.category) F.style.value = pm.category;
+    if (pm.volume_ml) F.volume.value = pm.volume_ml;
+    if (pm.abv_display) F.abv.value = pm.abv_display;
+    if (!pendingImg && pm.image_url) pendingImg = { type:'url', value: pm.image_url };
+    syncPresets(); renderImg();
+    $('#nameHint').textContent = 'Whisky DB에 등록된 정보로 채웠어요.';
+  } else {
+    formProductId = null;
+  }
+  renderWdbInfoBox(pm || null);
+});
+
+/* 이미지 */
+$('#btnUrl').addEventListener('click', () => { const r = $('#urlRow'); r.style.display = r.style.display === 'none' ? '' : 'none'; if (r.style.display === '') $('#urlIn').focus(); });
+$('#urlOk').addEventListener('click', () => {
+  const u = $('#urlIn').value.trim();
+  if (u.indexOf('https://') !== 0 && u.indexOf('http://') !== 0){ toast('https:// 로 시작하는 이미지 주소를 넣어 주세요', true); return; }
+  pendingImg = { type:'url', value: u }; renderImg(); $('#urlRow').style.display = 'none';
+  $('#imgHint').textContent = '구글 이미지에서 사진을 길게 누르거나 우클릭 → "이미지 주소 복사"한 주소를 쓰면 돼요.';
+});
+$('#urlIn').addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); $('#urlOk').click(); } });
+function updateGImg(){ $('#btnGImg').href = 'https://www.google.com/search?tbm=isch&q=' + encodeURIComponent((F.name.value.trim() || '위스키') + ' bottle'); }
+F.name.addEventListener('input', updateGImg);
+$('#btnImgDel').addEventListener('click', () => { pendingImg = { type:'clear' }; renderImg(); });
+
+/* 저장 · 삭제 */
+function formData(){
+  let price = String(F.price.value).replace(/[^\d.]/g,'');
+  price = price === '' ? '' : Number(price);
+  if (price !== '' && currency === 'USD') price = Math.round(price * S.rate);
+  const img = pendingImg ? (pendingImg.type === 'clear' ? '' : pendingImg.value) : (editing ? editing.image : '');
+  return {
+    name: F.name.value.trim(), category: F.category.value, style: F.style.value.trim(),
+    volume: String(F.volume.value).replace(/[^\d]/g,''), abv: String(F.abv.value).trim(), age: String(F.age.value).trim(),
+    cs: F.cs.checked, peat: F.peat.checked, date: F.date.value, price: price,
+    store: F.store.value.trim(), memo: F.memo.value, status: formStatus,
+    productId: formProductId, imageUrl: img || null
+  };
+}
+F.addEventListener('submit', async e => {
+  e.preventDefault();
+  const d = formData();
+  if (!d.name){ toast('품명을 입력해 주세요', true); F.name.focus(); return; }
+  const btn = $('#btnSave'); btn.disabled = true; btn.innerHTML = '<span class="spin"></span> 저장 중';
+  const wasEdit = editing;
+  try {
+    const data = wasEdit ? await updateItem(wasEdit.row, d) : await addItem(d, Number(F.qty.value) || 1);
+    applyData(data); closeForm();
+    toast(wasEdit ? '수정했어요' : `${d.name} 등록 완료`);
+  } catch(err){ toast(err.message || '저장하지 못했어요', true); }
+  finally { btn.disabled = false; btn.textContent = '저장'; }
+});
+$('#btnDel').addEventListener('click', async () => {
+  const b = $('#btnDel');
+  if (!b.classList.contains('armed')){ b.classList.add('armed'); b.textContent = '한 번 더 누르면 삭제'; setTimeout(()=>{ b.classList.remove('armed'); b.textContent='삭제'; }, 3000); return; }
+  const it = editing; if (!it) return;
+  b.disabled = true;
+  try { applyData(await deleteItem(it.row)); closeForm(); toast('삭제했어요'); }
+  catch(err){ toast(err.message, true); }
+  finally { b.disabled = false; }
+});
+
+/* ---------- 시작 ---------- */
+(async function init(){
+  try {
+    await ensureRate();
+    const [items] = await Promise.all([ getData(), loadProducts() ]);
+    applyData(items);
+  } catch(err){
+    $('#content').innerHTML = `<div class="empty">불러오지 못했어요: ${esc(err.message||'')}</div>`;
+    toast(err.message || '불러오지 못했어요', true);
+  }
+})();
+})();
+</script>
+</body>
+</html>
