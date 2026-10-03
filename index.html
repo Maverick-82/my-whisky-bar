@@ -267,6 +267,77 @@ textarea.in{min-height:84px;resize:vertical}
 @media (max-width:760px){
   .cat-tools select{min-width:0;flex:1}
 }
+
+/* Collection (수집 목표) */
+.cl-wrap{max-width:1100px;margin:0 auto}
+.cl-head{display:flex;align-items:flex-end;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.cl-head h2{font-family:'Gowun Batang',Georgia,serif;font-size:22px;font-weight:700;margin:0;color:var(--ink)}
+.cl-head p{margin:5px 0 0;font-size:12px;color:var(--ink3)}
+.cl-seg{display:flex;gap:4px;background:#ece9e4;border-radius:999px;padding:3px;margin-left:auto}
+.cl-seg button{border:0;background:transparent;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:700;color:var(--ink2)}
+.cl-seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.cl-grp{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden}
+.cl-gh{display:flex;align-items:center;gap:16px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.cl-ring{flex:none}
+.cl-gh .ttl{flex:1;min-width:0}
+.cl-gh .ttl .n{font-weight:800;font-size:15px;color:var(--ink)}
+.cl-gh .ttl .d{font-size:11.5px;color:var(--ink3);margin-top:2px}
+.cl-stat{display:flex;gap:14px;flex:none}
+.cl-stat .s{text-align:center}
+.cl-stat .s b{display:block;font-size:17px;font-weight:800;color:var(--ink)}
+.cl-stat .s i{font-size:10.5px;color:var(--ink3);font-style:normal}
+.cl-bar{height:6px;background:#eee;border-radius:6px;overflow:hidden;margin:0 18px 14px}
+.cl-bar i{display:block;height:100%;background:var(--accent)}
+.cl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:14px 18px 18px}
+.slot{position:relative;border:1px solid var(--line);border-radius:12px;padding:10px;background:#faf9f7;text-align:left;display:flex;flex-direction:column;gap:6px;min-height:118px}
+.slot .ph{aspect-ratio:1/1;border-radius:8px;background:linear-gradient(135deg,#3a2a18,#1c130b);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.slot .ph img{width:100%;height:100%;object-fit:contain;background:#fff}
+.slot .nm{font-weight:700;font-size:11.5px;color:var(--ink);line-height:1.3}
+.slot .en{font-size:9.5px;color:var(--ink3)}
+.slot .act{display:flex;gap:4px;margin-top:auto}
+.slot .act button{flex:1;border:1px solid var(--line2);background:#fff;border-radius:7px;padding:5px 4px;font-size:10px;font-weight:700;color:var(--ink2)}
+.slot .act button:hover{border-color:var(--ink3)}
+.slot.own{border-color:#10b981;background:#f0fdf7}
+.slot.done{opacity:.6}
+.slot .stamp{position:absolute;top:6px;right:6px;background:#10b981;color:#fff;font-size:9px;font-weight:800;border-radius:6px;padding:2px 6px;letter-spacing:.3px}
+.slot.done .stamp{background:#a1a1aa}
+.cl-note{font-size:11px;color:var(--ink3);padding:0 18px 16px}
+.cl-empty{max-width:440px;margin:90px auto;text-align:center;color:var(--ink2)}
+.cl-empty .g{font-size:46px;margin-bottom:14px;opacity:.6}
+
+/* Tasting Notes (오늘의 한잔) */
+.jv-wrap{max-width:860px;margin:0 auto}
+.jv-head{display:flex;align-items:flex-end;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.jv-head h2{font-family:'Gowun Batang',Georgia,serif;font-size:22px;font-weight:700;margin:0;color:var(--ink)}
+.jv-head p{margin:5px 0 0;font-size:12px;color:var(--ink3)}
+.jv-head .sp{flex:1}
+.jv-month{font-size:12px;font-weight:800;color:var(--accent);margin:18px 2px 8px}
+.jv-month:first-child{margin-top:0}
+.jv-row{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:13px 14px;margin-bottom:8px}
+.jv-datecol{width:40px;flex:none;text-align:center}
+.jv-daynum{font-size:18px;font-weight:800;color:var(--ink)}
+.jv-dayname{font-size:10px;color:var(--ink3);margin-top:1px}
+.jv-rowmain{flex:1;min-width:0}
+.jv-rowhead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.jv-whisky{font-weight:700;font-size:13.5px;color:var(--ink)}
+.jv-stars{font-size:12px;color:#d97706;letter-spacing:1px}
+.jv-rowmeta{font-size:11.5px;color:var(--ink3);margin-top:3px;display:flex;gap:10px;flex-wrap:wrap}
+.jv-rownote{font-size:12.5px;color:var(--ink2);margin-top:7px;line-height:1.6;white-space:pre-wrap}
+.jv-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.jv-tags span{background:#f3ede3;color:var(--ink2);border-radius:999px;padding:3px 9px;font-size:10.5px;font-weight:600}
+.jv-rowphoto{margin-top:9px;border-radius:10px;overflow:hidden;max-height:160px;border:1px solid var(--line)}
+.jv-rowphoto img{width:100%;max-height:160px;object-fit:cover;display:block}
+.jv-rowfoot{display:flex;gap:10px;margin-top:9px}
+.jv-rowfoot button{border:0;background:transparent;font-size:11px;font-weight:700;color:var(--ink3);padding:0}
+.jv-rowfoot button:hover{color:var(--ink)}
+.jv-empty{max-width:440px;margin:90px auto;text-align:center;color:var(--ink2)}
+.jv-empty .g{font-size:46px;margin-bottom:14px;opacity:.6}
+.jv-rating{display:flex;gap:6px}
+.jv-rating button{border:1px solid var(--line2);background:#fff;border-radius:8px;width:38px;height:38px;font-size:17px;color:var(--line2)}
+.jv-rating button.on{color:#d97706;border-color:#fdba74;background:#fff7ed}
+.jv-glass{display:flex;gap:6px;flex-wrap:wrap}
+.jv-glassbtn{border:1px solid var(--line2);background:#fff;border-radius:10px;padding:8px 12px;font-size:12px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.jv-glassbtn.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
 </style>
 </head>
 <body>
@@ -331,6 +402,8 @@ textarea.in{min-height:84px;resize:vertical}
 
   <div id="wdbView" hidden></div>
   <div id="distView" hidden></div>
+  <div id="goalView" hidden></div>
+  <div id="journalView" hidden></div>
   <div id="soonView" hidden></div>
 </div>
 
@@ -483,6 +556,44 @@ textarea.in{min-height:84px;resize:vertical}
   </div>
 </div>
 
+<!-- Tasting Note 등록/수정 모달 -->
+<div class="modal-bg" id="jvModalBg">
+  <div class="modal" style="max-width:520px">
+    <div class="mh">
+      <h2 id="jvMTitle">Tasting Note</h2>
+      <button type="button" class="btn ghost" id="jvClose" aria-label="닫기">✕</button>
+    </div>
+    <form id="jvForm" style="padding:20px">
+      <div class="row2">
+        <div class="f"><label class="l">날짜 <i>*</i></label><input class="in" type="date" id="jvDate" required></div>
+        <div class="f"><label class="l">장소</label><input class="in" id="jvPlace" placeholder="예: 우리집, OO바" autocomplete="off"></div>
+      </div>
+      <div class="f"><label class="l">누구랑</label><input class="in" id="jvWith" placeholder="예: 혼자, 친구 OO" autocomplete="off"></div>
+      <div class="f"><label class="l">마신 위스키</label><input class="in" id="jvWhisky" list="dlNames" placeholder="예: 라가불린 16" autocomplete="off"></div>
+      <div class="f"><label class="l">평점</label><div class="jv-rating" id="jvRating">
+        <button type="button" data-star="1">★</button><button type="button" data-star="2">★</button><button type="button" data-star="3">★</button><button type="button" data-star="4">★</button><button type="button" data-star="5">★</button>
+      </div></div>
+      <div class="f"><label class="l">잔 (Glass)</label><div class="jv-glass" id="jvGlass"></div></div>
+      <div class="row3">
+        <div class="f"><label class="l">향 (Nose)</label><input class="in" id="jvNose" placeholder="예: 바닐라, 꿀"></div>
+        <div class="f"><label class="l">맛 (Palate)</label><input class="in" id="jvPalate" placeholder="예: 오크, 스파이스"></div>
+        <div class="f"><label class="l">여운 (Finish)</label><input class="in" id="jvFinish" placeholder="예: 길고 달콤한"></div>
+      </div>
+      <div class="f"><label class="l">총평 (선택)</label><textarea class="in" id="jvReview" placeholder="그날의 기분이나 전체적인 느낌을 자유롭게 적어보세요"></textarea></div>
+      <div class="f">
+        <label class="l">사진 주소 (선택)</label>
+        <div class="withbtn"><input class="in" id="jvPhotoUrl" placeholder="https://..."><button type="button" class="btn" id="jvPhotoClear">지우기</button></div>
+      </div>
+    </form>
+    <div class="mf">
+      <button type="button" class="btn danger" id="jvDel" style="display:none">삭제</button>
+      <span class="sp"></span>
+      <button type="button" class="btn" id="jvCancel">취소</button>
+      <button type="button" class="btn primary" id="jvSave">저장</button>
+    </div>
+  </div>
+</div>
+
 <datalist id="dlNames"></datalist>
 <datalist id="dlStyles"></datalist>
 <datalist id="dlStores"></datalist>
@@ -511,7 +622,7 @@ const store = {
 };
 
 const S = {
-  items: [], rate: 1400, products: [], distilleries: [],
+  items: [], rate: 1400, products: [], distilleries: [], goals: [], journal: [],
   view: store.get('view','shelf'),
   sort: store.get('sort','sheet'),
   hidePrice: store.get('hidePrice', false),
@@ -520,6 +631,7 @@ const S = {
 };
 const WDB = { q: '', distId: '' };
 const DIST = { q: '', country: '' };
+const GOAL = { filter: 'all' };
 
 /* ---------- 유틸 ---------- */
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -652,6 +764,66 @@ async function loadDistilleries(){
     if (error) throw error;
     S.distilleries = data || [];
   } catch(e){ S.distilleries = []; }
+}
+async function loadGoals(){
+  try {
+    const { data, error } = await sb.from('whisky_goals')
+      .select('id,group_name,group_order,item_order,name_kr,name_en,family,must_words,match_keys,exclude_words,image_url,memo')
+      .order('group_order').order('item_order');
+    if (error) throw error;
+    S.goals = data || [];
+  } catch(e){ S.goals = []; }
+}
+function mapJournalRow(r){
+  return {
+    id: r.id, date: r.entry_date || '', place: r.place || '',
+    withWhom: r.with_whom || '', whisky: r.whisky_name || '',
+    review: r.review || '', photo: r.photo_url || '',
+    rating: r.rating || 0, nose: r.nose || '', palate: r.palate || '',
+    finish: r.finish || '', glass: r.glass || ''
+  };
+}
+async function loadJournal(){
+  try {
+    const { data, error } = await sb.from('whisky_journal')
+      .select('*')
+      .order('entry_date', { ascending: false })
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    S.journal = (data||[]).map(mapJournalRow);
+  } catch(e){ S.journal = []; }
+}
+function journalPayload(d){
+  return {
+    entry_date: d.date || null,
+    place: d.place ? String(d.place).trim() : null,
+    with_whom: d.withWhom ? String(d.withWhom).trim() : null,
+    whisky_name: d.whisky ? String(d.whisky).trim() : null,
+    review: d.review ? String(d.review).trim() : null,
+    photo_url: d.photo || null,
+    rating: d.rating || null,
+    nose: d.nose ? String(d.nose).trim() : null,
+    palate: d.palate ? String(d.palate).trim() : null,
+    finish: d.finish ? String(d.finish).trim() : null,
+    glass: d.glass || null
+  };
+}
+async function journalAdd(d){
+  if (!d.date) throw new Error('날짜를 입력해 주세요.');
+  const { error } = await sb.from('whisky_journal').insert(journalPayload(d));
+  if (error) throw new Error(error.message);
+  return loadJournal();
+}
+async function journalUpdate(id, d){
+  if (!d.date) throw new Error('날짜를 입력해 주세요.');
+  const { error } = await sb.from('whisky_journal').update(journalPayload(d)).eq('id', id);
+  if (error) throw new Error(error.message);
+  return loadJournal();
+}
+async function journalDelete(id){
+  const { error } = await sb.from('whisky_journal').delete().eq('id', id);
+  if (error) throw new Error(error.message);
+  return loadJournal();
 }
 async function ensureRate(){
   const cached = store.get('rateCache', null);
@@ -921,6 +1093,13 @@ function openForm(it){
   $('#modalBg').classList.add('show'); document.body.style.overflow = 'hidden';
   if (!it && window.innerWidth > 760) setTimeout(() => F.name.focus(), 50);
 }
+function openNew(p){
+  openForm(null);
+  p = p || {};
+  ['name','category','style','volume','abv','age','store'].forEach(k => { if (p[k] != null && F[k]) F[k].value = p[k]; });
+  F.cs.checked = !!p.cs; F.peat.checked = !!p.peat;
+  updateGImg(); syncPresets(); renderImg();
+}
 function closeForm(){ $('#modalBg').classList.remove('show'); document.body.style.overflow = ''; editing = null; }
 $('#mClose').addEventListener('click', closeForm);
 $('#mCancel').addEventListener('click', closeForm);
@@ -1043,8 +1222,6 @@ $('#btnDel').addEventListener('click', async () => {
 
 /* ---------- 탭 전환 ---------- */
 const SOON_LABEL = {
-  goal: ['🎯 Collection', '수집 목표 기능은 곧 추가될 예정이에요.'],
-  journal: ['🥃 Tasting Notes', '시음 기록 기능은 곧 추가될 예정이에요.'],
   yt: ['▶ YouTube', '유튜브 연동 기능은 곧 추가될 예정이에요.']
 };
 function switchTab(tab){
@@ -1053,9 +1230,13 @@ function switchTab(tab){
   $('#barView').hidden = tab !== 'bar';
   $('#wdbView').hidden = tab !== 'wdb';
   $('#distView').hidden = tab !== 'dist';
+  $('#goalView').hidden = tab !== 'goal';
+  $('#journalView').hidden = tab !== 'journal';
   $('#soonView').hidden = !(tab in SOON_LABEL);
   if (tab === 'wdb') renderWdbTab();
   else if (tab === 'dist') renderDistTab();
+  else if (tab === 'goal') renderGoalTab();
+  else if (tab === 'journal') renderJournalTab();
   else if (SOON_LABEL[tab]) renderSoon(tab);
 }
 function renderSoon(tab){
@@ -1245,11 +1426,241 @@ $('#dsBody2').addEventListener('click', e => {
   setTimeout(() => { switchTab('wdb'); openProductDetail(c.dataset.pid2); }, 150);
 });
 
+/* ---------- Collection(수집 목표) 탭 ---------- */
+const GOAL_GROUP_META = [
+  { re:/맥캘란/, style:'싱글몰트', age:'18', cs:false },
+  { re:/카발란/, style:'대만', age:'NAS', cs:true },
+  { re:/조니워커|블루라벨/, style:'블렌디드', age:'', cs:false }
+];
+function goalGroupMeta(groupName){ const m = GOAL_GROUP_META.find(g => g.re.test(groupName||'')); return m || { style:'', age:'', cs:false }; }
+function goalBaseName(groupName){ return String(groupName||'').replace(/^\d+차\s*·\s*/,'').trim(); }
+function splitWords(s){ return String(s||'').split('|').map(w=>key(w)).filter(Boolean); }
+function goalMatches(goal, item){
+  const nm = key(item.name); if (!nm) return false;
+  const must = splitWords(goal.must_words), keys = splitWords(goal.match_keys), ex = splitWords(goal.exclude_words);
+  if (must.length && !must.every(w => nm.indexOf(w) !== -1)) return false;
+  if (keys.length && !keys.some(w => nm.indexOf(w) !== -1)) return false;
+  if (ex.length && ex.some(w => nm.indexOf(w) !== -1)) return false;
+  return true;
+}
+function goalCompute(goal){
+  const matches = S.items.filter(it => goalMatches(goal, it));
+  const state = !matches.length ? 'miss' : (matches.some(it => it.status !== '소진') ? 'own' : 'done');
+  return { state, matches };
+}
+function ring(pct){
+  pct = Math.max(0, Math.min(100, Math.round(pct)));
+  const size = 54, r = 22, c = Math.round(2*Math.PI*r), off = Math.round(c * (1 - pct/100));
+  return `<svg class="cl-ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#ece9e4" stroke-width="6"/>
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"
+      stroke-dasharray="${c}" stroke-dashoffset="${off}" transform="rotate(-90 ${size/2} ${size/2})"/>
+    <text x="50%" y="52%" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="800" fill="var(--ink)">${pct}%</text>
+  </svg>`;
+}
+function goalCard(goal, state, matches){
+  const img = goal.image_url ? `<img src="${esc(goal.image_url)}" loading="lazy" referrerpolicy="no-referrer" alt="">` : '<span class="noimg">🥃</span>';
+  const stamp = state === 'own' ? '<span class="stamp">보유중</span>' : state === 'done' ? '<span class="stamp">COLLECTED</span>' : '';
+  let actions;
+  if (state === 'miss'){
+    const meta = goalGroupMeta(goal.group_name);
+    const name = [goalBaseName(goal.group_name), goal.name_kr].filter(Boolean).join(' ');
+    const prefill = esc(JSON.stringify({ name, style: meta.style, age: meta.age, cs: meta.cs }));
+    actions = `<div class="act"><button type="button" data-add='${prefill}'>+ 구매 등록</button><button type="button" data-shop="${esc(name)}">가격 찾기</button></div>`;
+  } else {
+    const row = (matches.find(it => it.status !== '소진') || matches[0]).row;
+    actions = `<div class="act"><button type="button" data-open="${esc(row)}">내 바틀 보기</button></div>`;
+  }
+  return `<div class="slot ${state!=='miss'?state:''}">
+    ${stamp}
+    <div class="ph">${img}</div>
+    <div class="nm">${esc(goal.name_kr)}</div>
+    ${goal.name_en ? `<div class="en">${esc(goal.name_en)}</div>` : ''}
+    ${actions}
+  </div>`;
+}
+function renderGoalTab(){
+  const view = $('#goalView');
+  if (!view.dataset.inited){
+    view.dataset.inited = '1';
+    view.innerHTML = `<div class="cl-wrap">
+      <div class="cl-head"><div><h2>🎯 Collection</h2><p>모으고 있는 위스키 수집 목표예요</p></div>
+        <div class="cl-seg" id="goalSeg">
+          <button type="button" data-f="all" class="on">전체</button>
+          <button type="button" data-f="own">보유</button>
+          <button type="button" data-f="miss">채워야 할 바틀</button>
+        </div>
+      </div>
+      <div id="goalGroups"></div>
+    </div>`;
+    $('#goalSeg').addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      GOAL.filter = b.dataset.f; $$('#goalSeg button').forEach(x => x.classList.toggle('on', x === b));
+      renderGoalGrid();
+    });
+    view.addEventListener('click', e => {
+      const addBtn = e.target.closest('[data-add]');
+      if (addBtn){ let p = {}; try { p = JSON.parse(addBtn.dataset.add); } catch(err){} switchTab('bar'); openNew(p); return; }
+      const shopBtn = e.target.closest('[data-shop]');
+      if (shopBtn){ window.open('https://search.shopping.naver.com/search/all?query=' + encodeURIComponent(shopBtn.dataset.shop), '_blank', 'noopener'); return; }
+      const openBtn = e.target.closest('[data-open]');
+      if (openBtn){ const it = S.items.find(i => i.row === openBtn.dataset.open); if (it){ switchTab('bar'); openForm(it); } }
+    });
+  }
+  renderGoalGrid();
+}
+function renderGoalGrid(){
+  const map = new Map(); const order = [];
+  S.goals.forEach(g => { if (!map.has(g.group_name)){ map.set(g.group_name, []); order.push(g.group_name); } map.get(g.group_name).push(g); });
+  const wrap = $('#goalGroups');
+  if (!order.length){ wrap.innerHTML = `<div class="cl-empty"><div class="g">🎯</div>등록된 수집 목표가 없어요.</div>`; return; }
+  wrap.innerHTML = order.map(name => {
+    const list = map.get(name);
+    const computed = list.map(g => Object.assign({ goal: g }, goalCompute(g)));
+    const ownCnt = computed.filter(c => c.state !== 'miss').length;
+    const pct = list.length ? Math.round(ownCnt / list.length * 100) : 0;
+    const shown = computed.filter(c => GOAL.filter === 'all' ? true : GOAL.filter === 'own' ? c.state !== 'miss' : c.state === 'miss');
+    return `<div class="cl-grp">
+      <div class="cl-gh">
+        ${ring(pct)}
+        <div class="ttl"><div class="n">${esc(name)}</div><div class="d">${list.length}종 중 ${ownCnt}종 수집</div></div>
+        <div class="cl-stat"><div class="s"><b>${ownCnt}</b><i>보유</i></div><div class="s"><b>${list.length-ownCnt}</b><i>미보유</i></div><div class="s"><b>${list.length}</b><i>전체</i></div></div>
+      </div>
+      <div class="cl-bar"><i style="width:${pct}%"></i></div>
+      ${shown.length ? `<div class="cl-grid">${shown.map(c => goalCard(c.goal, c.state, c.matches)).join('')}</div>` : `<div class="cl-note">이 필터에 해당하는 항목이 없어요.</div>`}
+    </div>`;
+  }).join('');
+}
+
+/* ---------- Tasting Notes(오늘의 한잔) 탭 ---------- */
+const GLASS_TYPES = [
+  { key:'neat', label:'니트', icon:'🥃' },
+  { key:'highball', label:'하이볼잔', icon:'🥤' },
+  { key:'straight', label:'스트레이트', icon:'🍶' },
+  { key:'rock', label:'온더락', icon:'🧊' }
+];
+function glassLabel(k){ const g = GLASS_TYPES.find(x => x.key === k); return g ? g.label : ''; }
+function glassIcon(k){ const g = GLASS_TYPES.find(x => x.key === k); return g ? g.icon : ''; }
+const WD = ['일','월','화','수','목','금','토'];
+function starStr(n){ n = Math.max(0, Math.min(5, Number(n)||0)); return '★'.repeat(n) + '☆'.repeat(5-n); }
+function monthLabel2(ym){ const m = /^(\d{4})-(\d{2})$/.exec(ym); return m ? `${m[1]}년 ${Number(m[2])}월` : (ym || '날짜 없음'); }
+$('#jvGlass').innerHTML = GLASS_TYPES.map(g => `<button type="button" class="jv-glassbtn" data-glass="${g.key}">${g.icon} ${g.label}</button>`).join('');
+let jvEditing = null, jvRatingVal = 0, jvGlassVal = '';
+function jvSyncRating(){ $$('#jvRating button').forEach(b => b.classList.toggle('on', Number(b.dataset.star) <= jvRatingVal)); }
+function jvSyncGlass(){ $$('#jvGlass button').forEach(b => b.classList.toggle('on', b.dataset.glass === jvGlassVal)); }
+$('#jvRating').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const n = Number(b.dataset.star); jvRatingVal = (jvRatingVal === n) ? 0 : n; jvSyncRating();
+});
+$('#jvGlass').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  jvGlassVal = (jvGlassVal === b.dataset.glass) ? '' : b.dataset.glass; jvSyncGlass();
+});
+function openJournalForm(it){
+  jvEditing = it; $('#jvForm').reset();
+  $('#jvMTitle').textContent = it ? '시음 기록 수정' : '오늘의 한잔';
+  $('#jvDel').style.display = it ? '' : 'none';
+  $('#jvDel').classList.remove('armed'); $('#jvDel').textContent = '삭제';
+  if (it){
+    $('#jvDate').value = it.date || ''; $('#jvPlace').value = it.place || ''; $('#jvWith').value = it.withWhom || '';
+    $('#jvWhisky').value = it.whisky || ''; $('#jvNose').value = it.nose || ''; $('#jvPalate').value = it.palate || '';
+    $('#jvFinish').value = it.finish || ''; $('#jvReview').value = it.review || ''; $('#jvPhotoUrl').value = it.photo || '';
+    jvRatingVal = it.rating || 0; jvGlassVal = it.glass || '';
+  } else {
+    $('#jvDate').value = today(); jvRatingVal = 0; jvGlassVal = '';
+  }
+  jvSyncRating(); jvSyncGlass();
+  $('#jvModalBg').classList.add('show'); document.body.style.overflow = 'hidden';
+}
+function closeJournalForm(){ $('#jvModalBg').classList.remove('show'); document.body.style.overflow = ''; jvEditing = null; }
+$('#jvClose').addEventListener('click', closeJournalForm);
+$('#jvCancel').addEventListener('click', closeJournalForm);
+$('#jvModalBg').addEventListener('mousedown', e => { if (e.target.id === 'jvModalBg') closeJournalForm(); });
+$('#jvPhotoClear').addEventListener('click', () => { $('#jvPhotoUrl').value = ''; });
+$('#jvSave').addEventListener('click', async () => {
+  const d = {
+    date: $('#jvDate').value, place: $('#jvPlace').value.trim(), withWhom: $('#jvWith').value.trim(),
+    whisky: $('#jvWhisky').value.trim(), nose: $('#jvNose').value.trim(), palate: $('#jvPalate').value.trim(),
+    finish: $('#jvFinish').value.trim(), review: $('#jvReview').value.trim(),
+    photo: $('#jvPhotoUrl').value.trim(), rating: jvRatingVal, glass: jvGlassVal
+  };
+  if (!d.date){ toast('날짜를 입력해 주세요', true); return; }
+  const btn = $('#jvSave'); btn.disabled = true;
+  try {
+    if (jvEditing) await journalUpdate(jvEditing.id, d); else await journalAdd(d);
+    renderJournalGrid(); closeJournalForm(); toast(jvEditing ? '수정했어요' : '기록했어요');
+  } catch(err){ toast(err.message || '저장하지 못했어요', true); }
+  finally { btn.disabled = false; }
+});
+$('#jvDel').addEventListener('click', async () => {
+  const b = $('#jvDel');
+  if (!b.classList.contains('armed')){ b.classList.add('armed'); b.textContent = '한 번 더 누르면 삭제'; setTimeout(()=>{ b.classList.remove('armed'); b.textContent = '삭제'; }, 3000); return; }
+  if (!jvEditing) return;
+  b.disabled = true;
+  try { await journalDelete(jvEditing.id); renderJournalGrid(); closeJournalForm(); toast('삭제했어요'); }
+  catch(err){ toast(err.message, true); }
+  finally { b.disabled = false; }
+});
+function jvRow(it){
+  const d = it.date ? new Date(it.date + 'T00:00:00') : null;
+  const daynum = d && !isNaN(d) ? d.getDate() : '-';
+  const dayname = d && !isNaN(d) ? WD[d.getDay()] + '요일' : '';
+  const metaParts = [];
+  if (it.place) metaParts.push('📍 ' + esc(it.place));
+  if (it.withWhom) metaParts.push('👥 ' + esc(it.withWhom));
+  if (it.glass) metaParts.push(glassIcon(it.glass) + ' ' + esc(glassLabel(it.glass)));
+  const tags = [it.nose, it.palate, it.finish].filter(Boolean);
+  return `<div class="jv-row">
+    <div class="jv-datecol"><div class="jv-daynum">${daynum}</div><div class="jv-dayname">${esc(dayname)}</div></div>
+    <div class="jv-rowmain">
+      <div class="jv-rowhead">
+        <span class="jv-whisky">${esc(it.whisky || '(위스키 미입력)')}</span>
+        ${it.rating ? `<span class="jv-stars">${starStr(it.rating)}</span>` : ''}
+      </div>
+      ${metaParts.length ? `<div class="jv-rowmeta">${metaParts.join(' · ')}</div>` : ''}
+      ${tags.length ? `<div class="jv-tags">${tags.map(t => `<span>${esc(t)}</span>`).join('')}</div>` : ''}
+      ${it.review ? `<div class="jv-rownote">${esc(it.review)}</div>` : ''}
+      ${it.photo ? `<div class="jv-rowphoto"><img src="${esc(it.photo)}" loading="lazy" referrerpolicy="no-referrer" alt=""></div>` : ''}
+      <div class="jv-rowfoot"><button type="button" data-edit="${esc(it.id)}">수정</button><button type="button" data-del="${esc(it.id)}">삭제</button></div>
+    </div>
+  </div>`;
+}
+function renderJournalTab(){
+  const view = $('#journalView');
+  if (!view.dataset.inited){
+    view.dataset.inited = '1';
+    view.innerHTML = `<div class="jv-wrap">
+      <div class="jv-head"><div><h2>🥃 Tasting Notes</h2><p>오늘의 한 잔을 기록해보세요</p></div><span class="sp"></span>
+        <button type="button" class="btn primary" id="jvAddBtn">+ 기록하기</button>
+      </div>
+      <div id="journalList"></div>
+    </div>`;
+    $('#jvAddBtn').addEventListener('click', () => openJournalForm(null));
+    view.addEventListener('click', e => {
+      const editBtn = e.target.closest('[data-edit]');
+      if (editBtn){ const it = S.journal.find(j => j.id === editBtn.dataset.edit); if (it) openJournalForm(it); return; }
+      const delBtn = e.target.closest('[data-del]');
+      if (delBtn){
+        if (!confirm('이 기록을 삭제할까요?')) return;
+        journalDelete(delBtn.dataset.del).then(() => { renderJournalGrid(); toast('삭제했어요'); }).catch(err => toast(err.message, true));
+      }
+    });
+  }
+  renderJournalGrid();
+}
+function renderJournalGrid(){
+  const wrap = $('#journalList');
+  if (!S.journal.length){ wrap.innerHTML = `<div class="jv-empty"><div class="g">🥃</div>아직 기록한 한 잔이 없어요.<br>"+ 기록하기"로 오늘의 한 잔을 남겨보세요.</div>`; return; }
+  const map = new Map(); const order = [];
+  S.journal.forEach(it => { const ym = (it.date||'').slice(0,7); if (!map.has(ym)){ map.set(ym, []); order.push(ym); } map.get(ym).push(it); });
+  wrap.innerHTML = order.map(ym => `<div class="jv-month">${esc(monthLabel2(ym))}</div>${map.get(ym).map(jvRow).join('')}`).join('');
+}
+
 /* ---------- 시작 ---------- */
 (async function init(){
   try {
     await ensureRate();
-    const [items] = await Promise.all([ getData(), loadProducts(), loadDistilleries() ]);
+    const [items] = await Promise.all([ getData(), loadProducts(), loadDistilleries(), loadGoals(), loadJournal() ]);
     applyData(items);
   } catch(err){
     $('#content').innerHTML = `<div class="empty">불러오지 못했어요: ${esc(err.message||'')}</div>`;
