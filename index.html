@@ -440,7 +440,6 @@ textarea.in{min-height:84px;resize:vertical}
     <button data-tab="goal">🎯 Collection</button>
     <button data-tab="journal">🥃 Tasting Notes</button>
     <button data-tab="yt">▶ YouTube</button>
-    <button data-tab="dist">🏚️ Distillery</button>
     <button data-tab="wdb">📖 Whisky DB</button>
   </nav>
 
@@ -1634,13 +1633,23 @@ function ring(pct){
   </svg>`;
 }
 function goalCard(goal, state, matches){
-  const img = goal.image_url ? `<img src="${esc(goal.image_url)}" loading="lazy" referrerpolicy="no-referrer" alt="">` : '<span class="noimg">🥃</span>';
+  const meta0 = goalGroupMeta(goal.group_name);
+  let img;
+  if (state !== 'miss'){
+    // 보유 중인 목표 → 내가 등록한 실제 바틀 사진(= Whisky DB 연동 사진)을 그대로 사용
+    const it = (matches.find(m => m.status !== '소진') || matches[0]);
+    const fb = bottleSvg(it.style || meta0.style);
+    const src = safeUrl(it.image);
+    img = src ? `<img src="${esc(src)}" data-fb="${esc(fb)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<img src="${esc(fb)}" alt="">`;
+  } else {
+    // 아직 못 채운 목표 → 실물 사진 대신 빈 병 모양 아이콘
+    img = `<img src="${esc(bottleSvg(meta0.style))}" alt="">`;
+  }
   const stamp = state === 'own' ? '<span class="stamp">보유중</span>' : state === 'done' ? '<span class="stamp">COLLECTED</span>' : '';
   let actions;
   if (state === 'miss'){
-    const meta = goalGroupMeta(goal.group_name);
     const name = [goalBaseName(goal.group_name), goal.name_kr].filter(Boolean).join(' ');
-    const prefill = esc(JSON.stringify({ name, style: meta.style, age: meta.age, cs: meta.cs }));
+    const prefill = esc(JSON.stringify({ name, style: meta0.style, age: meta0.age, cs: meta0.cs }));
     actions = `<div class="act"><button type="button" data-add='${prefill}'>+ 구매 등록</button><button type="button" data-shop="${esc(name)}">가격 찾기</button></div>`;
   } else {
     const row = (matches.find(it => it.status !== '소진') || matches[0]).row;
