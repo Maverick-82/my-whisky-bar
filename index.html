@@ -338,6 +338,46 @@ textarea.in{min-height:84px;resize:vertical}
 .jv-glass{display:flex;gap:6px;flex-wrap:wrap}
 .jv-glassbtn{border:1px solid var(--line2);background:#fff;border-radius:10px;padding:8px 12px;font-size:12px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:6px}
 .jv-glassbtn.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+
+/* YouTube */
+.yt-wrap{max-width:1100px;margin:0 auto}
+.yt-head{display:flex;align-items:flex-end;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.yt-head h2{font-family:'Gowun Batang',Georgia,serif;font-size:22px;font-weight:700;margin:0;color:var(--ink)}
+.yt-head p{margin:5px 0 0;font-size:12px;color:var(--ink3)}
+.yt-head .sp{flex:1}
+.yt-chans{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 16px}
+.yt-chan{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 4px;font-size:12px;font-weight:600;color:var(--ink2)}
+.yt-chan img{width:22px;height:22px;border-radius:50%;object-fit:cover;background:#eee}
+.yt-chan button{border:0;background:transparent;color:var(--ink3);font-size:13px;line-height:1;padding:2px}
+.yt-chan button:hover{color:#b91c1c}
+.yt-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.yt-seg{display:flex;gap:4px;background:#ece9e4;border-radius:999px;padding:3px}
+.yt-seg button{border:0;background:transparent;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:700;color:var(--ink2)}
+.yt-seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.yt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.yt-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;text-align:left;display:flex;flex-direction:column}
+.yt-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.yt-thumb{position:relative;aspect-ratio:16/9;background:#111;overflow:hidden}
+.yt-card.short .yt-thumb{aspect-ratio:9/16}
+.yt-thumb img{width:100%;height:100%;object-fit:cover}
+.yt-badge{position:absolute;top:7px;right:7px;background:rgba(0,0,0,.7);color:#fff;font-size:10px;font-weight:700;border-radius:6px;padding:2px 7px}
+.yt-card-body{padding:10px 12px 12px}
+.yt-card-title{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.4;max-height:2.8em;overflow:hidden}
+.yt-card-meta{font-size:10.5px;color:var(--ink3);margin-top:6px;display:flex;justify-content:space-between;gap:6px}
+.yt-empty{max-width:460px;margin:70px auto;text-align:center;color:var(--ink2)}
+.yt-empty .g{font-size:42px;margin-bottom:12px;opacity:.7}
+.yt-addbox{padding:18px}
+.yt-addbox textarea{width:100%;min-height:110px;border:1px solid var(--line2);border-radius:10px;padding:10px 12px;font:inherit;resize:vertical}
+.yt-addbox .hint{font-size:11px;color:var(--ink3);margin-top:6px}
+.yt-results{margin-top:12px;display:flex;flex-direction:column;gap:6px;max-height:200px;overflow:auto}
+.yt-results .r{font-size:12px;padding:7px 10px;border-radius:8px;background:#f5f5f4}
+.yt-results .r.ok{background:#f0fdf7;color:#166534}
+.yt-results .r.err{background:#fef2f2;color:#b91c1c}
+.yt-player{aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}
+.yt-player iframe{width:100%;height:100%;border:0}
+.yt-pmeta{padding:14px 2px 2px}
+.yt-pmeta .t{font-size:15px;font-weight:700;color:var(--ink)}
+.yt-pmeta .c{font-size:12px;color:var(--ink3);margin-top:4px}
 </style>
 </head>
 <body>
@@ -356,11 +396,11 @@ textarea.in{min-height:84px;resize:vertical}
 
   <nav class="tabs" id="tabs">
     <button data-tab="bar" class="on">🥃 My Bar</button>
-    <button data-tab="wdb">📖 Whisky DB</button>
-    <button data-tab="dist">🏚️ Distillery</button>
     <button data-tab="goal">🎯 Collection</button>
     <button data-tab="journal">🥃 Tasting Notes</button>
     <button data-tab="yt">▶ YouTube</button>
+    <button data-tab="dist">🏚️ Distillery</button>
+    <button data-tab="wdb">📖 Whisky DB</button>
   </nav>
 
   <div id="barView">
@@ -404,6 +444,7 @@ textarea.in{min-height:84px;resize:vertical}
   <div id="distView" hidden></div>
   <div id="goalView" hidden></div>
   <div id="journalView" hidden></div>
+  <div id="ytView" hidden></div>
   <div id="soonView" hidden></div>
 </div>
 
@@ -556,6 +597,48 @@ textarea.in{min-height:84px;resize:vertical}
   </div>
 </div>
 
+<!-- YouTube 채널/영상 추가 모달 -->
+<div class="modal-bg" id="ytAddModalBg">
+  <div class="modal" style="max-width:520px">
+    <div class="mh">
+      <h2>채널·영상 추가</h2>
+      <button type="button" class="btn ghost" id="ytAddClose" aria-label="닫기">✕</button>
+    </div>
+    <div class="yt-addbox">
+      <textarea id="ytAddInput" placeholder="유튜브 채널 주소, @핸들, 채널명, 또는 영상 주소를 한 줄에 하나씩 붙여넣으세요&#10;예) https://www.youtube.com/@핸들&#10;예) https://youtu.be/xxxxxxxxxxx"></textarea>
+      <div class="hint">채널을 추가하면 그 채널의 최신 영상·숏츠를 자동으로 모아와요. 영상 주소 하나만 넣으면 그 영상만 추가돼요.</div>
+      <div class="yt-results" id="ytAddResults"></div>
+    </div>
+    <div class="mf">
+      <span class="sp"></span>
+      <button type="button" class="btn" id="ytAddCancel">닫기</button>
+      <button type="button" class="btn primary" id="ytAddSubmit">추가하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- YouTube 영상 재생 모달 -->
+<div class="modal-bg" id="ytModalBg">
+  <div class="modal" style="max-width:640px">
+    <div class="mh">
+      <h2>영상</h2>
+      <button type="button" class="btn ghost" id="ytPClose" aria-label="닫기">✕</button>
+    </div>
+    <div style="padding:20px">
+      <div class="yt-player" id="ytPlayer"></div>
+      <div class="yt-pmeta">
+        <div class="t" id="ytPTitle"></div>
+        <div class="c" id="ytPChannel"></div>
+      </div>
+    </div>
+    <div class="mf">
+      <button type="button" class="btn danger" id="ytPDel" style="display:none">삭제</button>
+      <span class="sp"></span>
+      <a class="btn" id="ytPOpen" href="#" target="_blank" rel="noopener">YouTube에서 열기 ↗</a>
+    </div>
+  </div>
+</div>
+
 <!-- Tasting Note 등록/수정 모달 -->
 <div class="modal-bg" id="jvModalBg">
   <div class="modal" style="max-width:520px">
@@ -610,6 +693,19 @@ const $$ = s => Array.from(document.querySelectorAll(s));
 const SUPABASE_URL = 'https://hevlgbkkzrambtkqfbka.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_SHekPJ0rm5wZHxQORLY8Wg_GA1Jk-It';
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+/* YouTube 수집용 Edge Function 호출 (유튜브 스크래핑은 브라우저 CORS 때문에 직접 못해서 서버리스 함수를 거침) */
+const YT_FN_URL = SUPABASE_URL + '/functions/v1/yt-sync';
+const YT_ANON_JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhldmxnYmtrenJhbWJ0a3FmYmthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA1NTY5ODksImV4cCI6MjEwNjEzMjk4OX0.iF55ca1RmOTvV-RkbaPvfdDUJB8GVWM_6D6fPYihYhE';
+async function callYtFn(action, payload){
+  const res = await fetch(YT_FN_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + YT_ANON_JWT, 'apikey': YT_ANON_JWT },
+    body: JSON.stringify(Object.assign({ action }, payload || {}))
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || data.ok === false) throw new Error(data.error || ('HTTP ' + res.status));
+  return data;
+}
 
 const STATUSES = ['미개봉','개봉','소진'];
 const ST_COLOR = {'미개봉':'var(--st-new)','개봉':'var(--st-open)','소진':'var(--st-done)'};
@@ -622,7 +718,7 @@ const store = {
 };
 
 const S = {
-  items: [], rate: 1400, products: [], distilleries: [], goals: [], journal: [],
+  items: [], rate: 1400, products: [], distilleries: [], goals: [], journal: [], ytChannels: [], ytVideos: [],
   view: store.get('view','shelf'),
   sort: store.get('sort','sheet'),
   hidePrice: store.get('hidePrice', false),
@@ -792,6 +888,32 @@ async function loadJournal(){
     if (error) throw error;
     S.journal = (data||[]).map(mapJournalRow);
   } catch(e){ S.journal = []; }
+}
+async function loadYtChannels(){
+  try {
+    const { data, error } = await sb.from('whisky_yt_channels').select('*').order('added_at', { ascending: true });
+    if (error) throw error;
+    S.ytChannels = data || [];
+  } catch(e){ S.ytChannels = []; }
+}
+async function loadYtVideos(){
+  try {
+    const { data, error } = await sb.from('whisky_yt_videos')
+      .select('*')
+      .order('published_at', { ascending: false, nullsFirst: false })
+      .order('added_at', { ascending: false })
+      .limit(2000);
+    if (error) throw error;
+    S.ytVideos = data || [];
+  } catch(e){ S.ytVideos = []; }
+}
+async function ytRemoveChannel(id){
+  const { error } = await sb.from('whisky_yt_channels').delete().eq('id', id);
+  if (error) throw new Error(error.message);
+}
+async function ytRemoveVideo(id){
+  const { error } = await sb.from('whisky_yt_videos').delete().eq('id', id);
+  if (error) throw new Error(error.message);
 }
 function journalPayload(d){
   return {
@@ -1221,9 +1343,7 @@ $('#btnDel').addEventListener('click', async () => {
 });
 
 /* ---------- 탭 전환 ---------- */
-const SOON_LABEL = {
-  yt: ['▶ YouTube', '유튜브 연동 기능은 곧 추가될 예정이에요.']
-};
+const SOON_LABEL = {};
 function switchTab(tab){
   S.tab = tab;
   $$('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
@@ -1232,11 +1352,13 @@ function switchTab(tab){
   $('#distView').hidden = tab !== 'dist';
   $('#goalView').hidden = tab !== 'goal';
   $('#journalView').hidden = tab !== 'journal';
+  $('#ytView').hidden = tab !== 'yt';
   $('#soonView').hidden = !(tab in SOON_LABEL);
   if (tab === 'wdb') renderWdbTab();
   else if (tab === 'dist') renderDistTab();
   else if (tab === 'goal') renderGoalTab();
   else if (tab === 'journal') renderJournalTab();
+  else if (tab === 'yt') renderYtTab();
   else if (SOON_LABEL[tab]) renderSoon(tab);
 }
 function renderSoon(tab){
@@ -1656,11 +1778,142 @@ function renderJournalGrid(){
   wrap.innerHTML = order.map(ym => `<div class="jv-month">${esc(monthLabel2(ym))}</div>${map.get(ym).map(jvRow).join('')}`).join('');
 }
 
+/* ---------- YouTube 탭 ---------- */
+const YT = { filter: 'all', chan: '' };
+function ytThumb(id){ return `https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`; }
+function ytDateLabel(iso){
+  if (!iso) return '';
+  const d = new Date(iso); if (isNaN(d)) return '';
+  return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+}
+function ytFiltered(){
+  return S.ytVideos.filter(v => {
+    if (YT.filter !== 'all' && v.video_type !== YT.filter) return false;
+    if (YT.chan && v.channel_id !== YT.chan) return false;
+    return true;
+  });
+}
+function ytCard(v){
+  return `<button type="button" class="yt-card ${v.video_type==='short'?'short':''}" data-vid="${esc(v.id)}">
+    <div class="yt-thumb"><img src="${esc(ytThumb(v.id))}" loading="lazy" alt=""><span class="yt-badge">${v.video_type==='short'?'숏츠':'일반'}</span></div>
+    <div class="yt-card-body">
+      <div class="yt-card-title">${esc(v.title)}</div>
+      <div class="yt-card-meta"><span>${esc(v.channel_title||'')}</span><span>${esc(ytDateLabel(v.published_at))}</span></div>
+    </div>
+  </button>`;
+}
+function renderYtTab(){
+  const view = $('#ytView');
+  if (!view.dataset.inited){
+    view.dataset.inited = '1';
+    view.innerHTML = `<div class="yt-wrap">
+      <div class="yt-head"><div><h2>▶ YouTube</h2><p>좋아하는 위스키 채널의 최신 영상을 모아봐요</p></div><span class="sp"></span>
+        <button type="button" class="btn" id="ytRefreshBtn">↻ 새로고침</button>
+        <button type="button" class="btn primary" id="ytAddBtn">+ 채널·영상 추가</button>
+      </div>
+      <div class="yt-chans" id="ytChans"></div>
+      <div class="yt-tools">
+        <div class="yt-seg" id="ytSeg">
+          <button type="button" data-f="all" class="on">전체</button>
+          <button type="button" data-f="video">일반</button>
+          <button type="button" data-f="short">숏츠</button>
+        </div>
+      </div>
+      <div id="ytGrid"></div>
+    </div>`;
+    $('#ytAddBtn').addEventListener('click', openYtAddModal);
+    $('#ytRefreshBtn').addEventListener('click', ytDoRefresh);
+    $('#ytSeg').addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      YT.filter = b.dataset.f; $$('#ytSeg button').forEach(x => x.classList.toggle('on', x === b));
+      renderYtGrid();
+    });
+    view.addEventListener('click', e => {
+      const chipDel = e.target.closest('[data-chandel]');
+      if (chipDel){ ytDoRemoveChannel(chipDel.dataset.chandel); return; }
+      const chip = e.target.closest('[data-chanpick]');
+      if (chip){ YT.chan = YT.chan === chip.dataset.chanpick ? '' : chip.dataset.chanpick; renderYtGrid(); return; }
+      const card = e.target.closest('[data-vid]');
+      if (card){ openYtPlayer(card.dataset.vid); }
+    });
+  }
+  renderYtGrid();
+}
+function renderYtGrid(){
+  $('#ytChans').innerHTML = S.ytChannels.length
+    ? S.ytChannels.map(c => `<span class="yt-chan ${YT.chan===c.id?'on':''}" data-chanpick="${esc(c.id)}" style="${YT.chan===c.id?'border-color:var(--accent);color:var(--accent)':''}">
+        ${c.thumb_url ? `<img src="${esc(c.thumb_url)}" alt="">` : ''}${esc(c.title)}
+        <button type="button" data-chandel="${esc(c.id)}" title="채널 삭제">✕</button>
+      </span>`).join('')
+    : `<span class="faint" style="font-size:12px">등록된 채널이 없어요. "+ 채널·영상 추가"로 좋아하는 채널을 등록해보세요.</span>`;
+  const list = ytFiltered();
+  $('#ytGrid').innerHTML = list.length
+    ? `<div class="yt-grid">${list.map(ytCard).join('')}</div>`
+    : `<div class="yt-empty"><div class="g">▶</div>아직 모아온 영상이 없어요.</div>`;
+}
+function openYtAddModal(){
+  $('#ytAddInput').value = ''; $('#ytAddResults').innerHTML = '';
+  $('#ytAddModalBg').classList.add('show'); document.body.style.overflow = 'hidden';
+}
+function closeYtAddModal(){ $('#ytAddModalBg').classList.remove('show'); document.body.style.overflow = ''; }
+$('#ytAddClose').addEventListener('click', closeYtAddModal);
+$('#ytAddCancel').addEventListener('click', closeYtAddModal);
+$('#ytAddModalBg').addEventListener('mousedown', e => { if (e.target.id === 'ytAddModalBg') closeYtAddModal(); });
+$('#ytAddSubmit').addEventListener('click', async () => {
+  const lines = $('#ytAddInput').value.split(/\n+/).map(s => s.trim()).filter(Boolean);
+  if (!lines.length){ toast('채널 주소나 영상 주소를 입력해 주세요', true); return; }
+  const btn = $('#ytAddSubmit'); btn.disabled = true; btn.innerHTML = '<span class="spin"></span> 가져오는 중';
+  $('#ytAddResults').innerHTML = `<div class="r">유튜브에서 정보를 가져오고 있어요… (채널은 영상까지 모아오느라 조금 걸려요)</div>`;
+  try {
+    const res = await callYtFn('add', { inputs: lines });
+    $('#ytAddResults').innerHTML = (res.results||[]).map(r => `<div class="r ${r.ok?'ok':'err'}">${r.ok ? `✓ ${esc(r.title||r.input)} ${r.kind==='channel' ? `(${r.found!=null?r.found+'개 영상':'채널'})` : ''}${r.note?' · '+esc(r.note):''}` : `✕ ${esc(r.input)} — ${esc(r.error||'실패')}`}</div>`).join('');
+    await Promise.all([loadYtChannels(), loadYtVideos()]);
+    renderYtGrid();
+    toast('추가를 완료했어요');
+  } catch(err){
+    $('#ytAddResults').innerHTML = `<div class="r err">✕ ${esc(err.message || '가져오지 못했어요')}</div>`;
+    toast(err.message || '가져오지 못했어요', true);
+  } finally { btn.disabled = false; btn.textContent = '추가하기'; }
+});
+async function ytDoRefresh(){
+  const btn = $('#ytRefreshBtn'); btn.disabled = true;
+  try {
+    const res = await callYtFn('refresh', {});
+    await loadYtVideos();
+    renderYtGrid();
+    toast(res.added ? `새 영상 ${res.added}개를 가져왔어요` : '새 영상이 없어요');
+  } catch(err){ toast(err.message || '새로고침하지 못했어요', true); }
+  finally { btn.disabled = false; }
+}
+async function ytDoRemoveChannel(id){
+  const c = S.ytChannels.find(x => x.id === id);
+  if (!confirm(`"${c ? c.title : '이 채널'}"을(를) 삭제할까요? 모아온 영상도 함께 삭제돼요.`)) return;
+  try { await ytRemoveChannel(id); await Promise.all([loadYtChannels(), loadYtVideos()]); if (YT.chan === id) YT.chan = ''; renderYtGrid(); toast('삭제했어요'); }
+  catch(err){ toast(err.message, true); }
+}
+function openYtPlayer(id){
+  const v = S.ytVideos.find(x => x.id === id); if (!v) return;
+  $('#ytPlayer').innerHTML = `<iframe src="https://www.youtube.com/embed/${esc(id)}?autoplay=1" title="${esc(v.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  $('#ytPTitle').textContent = v.title;
+  $('#ytPChannel').textContent = [v.channel_title, ytDateLabel(v.published_at)].filter(Boolean).join(' · ');
+  $('#ytPOpen').href = 'https://www.youtube.com/watch?v=' + id;
+  $('#ytPDel').style.display = '';
+  $('#ytPDel').onclick = async () => {
+    if (!confirm('이 영상을 목록에서 삭제할까요?')) return;
+    try { await ytRemoveVideo(id); await loadYtVideos(); renderYtGrid(); closeYtPlayer(); toast('삭제했어요'); }
+    catch(err){ toast(err.message, true); }
+  };
+  $('#ytModalBg').classList.add('show'); document.body.style.overflow = 'hidden';
+}
+function closeYtPlayer(){ $('#ytPlayer').innerHTML = ''; $('#ytModalBg').classList.remove('show'); document.body.style.overflow = ''; }
+$('#ytPClose').addEventListener('click', closeYtPlayer);
+$('#ytModalBg').addEventListener('mousedown', e => { if (e.target.id === 'ytModalBg') closeYtPlayer(); });
+
 /* ---------- 시작 ---------- */
 (async function init(){
   try {
     await ensureRate();
-    const [items] = await Promise.all([ getData(), loadProducts(), loadDistilleries(), loadGoals(), loadJournal() ]);
+    const [items] = await Promise.all([ getData(), loadProducts(), loadDistilleries(), loadGoals(), loadJournal(), loadYtChannels(), loadYtVideos() ]);
     applyData(items);
   } catch(err){
     $('#content').innerHTML = `<div class="empty">불러오지 못했어요: ${esc(err.message||'')}</div>`;
