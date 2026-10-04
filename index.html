@@ -254,6 +254,14 @@ textarea.in{min-height:84px;resize:vertical}
 .cat-badge{font-size:10px;font-weight:700;background:#f3ede3;color:var(--ink2);border-radius:6px;padding:2px 7px}
 .cat-badge.accent{background:#fdf0dc;color:#92600f}
 .cat-empty{max-width:440px;margin:70px auto;text-align:center;color:var(--ink2)}
+.cat-grid.compact{grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.cat-grid.compact .cat-card-ph img{padding:7px}
+.cat-grid.compact .cat-card-ph .noimg{font-size:20px}
+.cat-grid.compact .cat-card-body{padding:6px 7px 8px}
+.cat-grid.compact .cat-card-name{font-size:11px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+@media (max-width:480px){
+  .cat-grid.compact{grid-template-columns:repeat(auto-fill,minmax(78px,1fr))}
+}
 .cat-empty .g{font-size:42px;margin-bottom:12px;opacity:.7}
 
 /* 상세 모달 공용 */
@@ -1491,6 +1499,13 @@ function wdbCard(p){
     </div>
   </button>`;
 }
+function wdbCardCompact(p){
+  const img = p.image_url ? `<img src="${esc(p.image_url)}" loading="lazy" referrerpolicy="no-referrer" alt="">` : '<span class="noimg">🥃</span>';
+  return `<button type="button" class="cat-card" data-pid="${esc(p.id)}">
+    <div class="cat-card-ph">${img}</div>
+    <div class="cat-card-body"><div class="cat-card-name">${esc(p.name_kr)}</div></div>
+  </button>`;
+}
 function renderWdbTab(){
   const view = $('#wdbView');
   if (!view.dataset.inited){
@@ -1515,9 +1530,10 @@ function renderWdbTab(){
 }
 function renderWdbGrid(){
   const list = wdbFiltered();
+  const compact = !key(WDB.q);
   $('#wdbCount').textContent = `${list.length}개 제품`;
   $('#wdbGrid').innerHTML = list.length
-    ? `<div class="cat-grid">${list.map(wdbCard).join('')}</div>`
+    ? `<div class="cat-grid${compact ? ' compact' : ''}">${list.map(compact ? wdbCardCompact : wdbCard).join('')}</div>`
     : `<div class="cat-empty"><div class="g">📖</div>검색 결과가 없어요.</div>`;
 }
 function openProductDetail(id){
