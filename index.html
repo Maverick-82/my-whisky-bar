@@ -330,6 +330,18 @@ textarea.in{min-height:84px;resize:vertical}
 .slot .stamp{position:absolute;top:6px;right:6px;background:#10b981;color:#fff;font-size:9px;font-weight:800;border-radius:6px;padding:2px 6px;letter-spacing:.3px}
 .slot.done .stamp{background:#a1a1aa}
 .cl-note{font-size:11px;color:var(--ink3);padding:0 18px 16px}
+.bg-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px;padding:16px 18px}
+.bg-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.bg-top .t{font-weight:800;font-size:15px;color:var(--ink)}
+.bg-top .sub{font-size:11.5px;color:var(--ink3)}
+.bg-top .amt{margin-left:auto;font-size:13px;color:var(--ink2)}
+.bg-top .amt b{font-size:19px;font-weight:800;color:var(--ink)}
+.bg-bar{height:12px;background:var(--line);border-radius:12px;overflow:hidden;margin:12px 0 8px}
+.bg-bar i{display:block;height:100%;background:var(--accent);border-radius:12px;transition:width .4s}
+.bg-card.over .bg-bar i{background:#dc2626}
+.bg-foot{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;color:var(--ink3);flex-wrap:wrap}
+.bg-foot b{color:var(--ink2);font-weight:700}
+
 .cl-empty{max-width:440px;margin:90px auto;text-align:center;color:var(--ink2)}
 .cl-empty .g{font-size:46px;margin-bottom:14px;opacity:.6}
 
@@ -811,7 +823,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.0.2';
+const APP_VERSION = 'v1.0.3';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -1669,6 +1681,7 @@ $('#dsBody2').addEventListener('click', e => {
 
 /* ---------- Collection(수집 목표) 탭 ---------- */
 const GOAL_GROUP_META = [
+  { re:/30년/, style:'싱글몰트', age:'30', cs:false, noBase:true },
   { re:/맥캘란/, style:'싱글몰트', age:'18', cs:false },
   { re:/카발란/, style:'대만', age:'NAS', cs:true },
   { re:/조니워커|블루라벨/, style:'블렌디드', age:'', cs:false }
@@ -1715,7 +1728,7 @@ function goalCard(goal, state, matches){
   const stamp = state === 'own' ? '<span class="stamp">보유중</span>' : state === 'done' ? '<span class="stamp">COLLECTED</span>' : '';
   let actions;
   if (state === 'miss'){
-    const name = [goalBaseName(goal.group_name), goal.name_kr].filter(Boolean).join(' ');
+    const name = [meta0.noBase ? '' : goalBaseName(goal.group_name), goal.name_kr.replace(/\s*\(.*?\)\s*$/, '')].filter(Boolean).join(' ');
     const prefill = esc(JSON.stringify({ name, style: meta0.style, age: meta0.age, cs: meta0.cs }));
     actions = `<div class="act"><button type="button" data-add='${prefill}'>+ 구매 등록</button><button type="button" data-shop="${esc(name)}">가격 찾기</button></div>`;
   } else {
@@ -1742,6 +1755,7 @@ function renderGoalTab(){
           <button type="button" data-f="miss">채워야 할 바틀</button>
         </div>
       </div>
+      <div id="budgetGauge"></div>
       <div id="goalGroups"></div>
     </div>`;
     $('#goalSeg').addEventListener('click', e => {
@@ -1758,7 +1772,33 @@ function renderGoalTab(){
       if (openBtn){ const it = S.items.find(i => i.row === openBtn.dataset.open); if (it){ switchTab('bar'); openForm(it); } }
     });
   }
+  renderBudget();
   renderGoalGrid();
+}
+/* 연간 사용금액 게이지: 연 700만원 고정, 2027-01-01 구매분부터 집계 */
+const ANNUAL_BUDGET = 7000000;
+const BUDGET_FIRST_YEAR = 2027;
+function renderBudget(){
+  const box = $('#budgetGauge'); if (!box) return;
+  const year = Math.max(BUDGET_FIRST_YEAR, new Date().getFullYear());
+  const from = year + '-01-01', to = year + '-12-31';
+  const used = S.items.reduce((sum, it) => (it.date && it.date >= from && it.date <= to) ? sum + (Number(it.price) || 0) : sum, 0);
+  const pct = Math.min(100, Math.round(used / ANNUAL_BUDGET * 100));
+  const over = used > ANNUAL_BUDGET;
+  const left = ANNUAL_BUDGET - used;
+  const notStarted = new Date().getFullYear() < BUDGET_FIRST_YEAR;
+  box.innerHTML = `<div class="bg-card${over ? ' over' : ''}">
+    <div class="bg-top">
+      <span class="t">💰 ${year}년 사용금액</span>
+      <span class="sub">${notStarted ? `${year}.1.1 구매분부터 집계해요` : '연간 한도 ' + won(ANNUAL_BUDGET)}</span>
+      <span class="amt"><b class="money">${won(used)}</b> / <span class="money">${won(ANNUAL_BUDGET)}</span></span>
+    </div>
+    <div class="bg-bar money"><i style="width:${pct}%"></i></div>
+    <div class="bg-foot">
+      <span><b class="money">${pct}%</b> 사용</span>
+      <span class="money">${over ? '한도 초과 ' + won(-left) : '남은 금액 ' + won(left)}</span>
+    </div>
+  </div>`;
 }
 function renderGoalGrid(){
   const map = new Map(); const order = [];
