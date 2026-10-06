@@ -325,9 +325,18 @@ textarea.in{min-height:84px;resize:vertical}
 .slot .act{display:flex;gap:4px;margin-top:auto}
 .slot .act button{flex:1;border:1px solid var(--line2);background:var(--card);border-radius:7px;padding:5px 4px;font-size:10px;font-weight:700;color:var(--ink2)}
 .slot .act button:hover{border-color:var(--ink3)}
-.slot.own{border-color:#10b981;background:#f0fdf7}
+.slot.own{border-color:#059669;background:#d1fae5;box-shadow:0 0 0 2px #10b981 inset,0 4px 14px rgba(5,150,105,.25)}
+.slot.own .nm{color:#065f46;font-weight:800}
+.slot.own .en{color:#047857}
+.slot.own .act button{border-color:#10b981;color:#047857;background:#fff}
+.slot:not(.own):not(.done) .ph img{opacity:.5}
+:root[data-theme="dark"] .slot{background:var(--card)}
+:root[data-theme="dark"] .slot.own{background:rgba(16,185,129,.2);border-color:#34d399;box-shadow:0 0 0 2px #34d399 inset,0 4px 14px rgba(16,185,129,.25)}
+:root[data-theme="dark"] .slot.own .nm{color:#a7f3d0}
+:root[data-theme="dark"] .slot.own .en{color:#6ee7b7}
+:root[data-theme="dark"] .slot.own .act button{background:var(--card);color:#6ee7b7;border-color:#34d399}
 .slot.done{opacity:.6}
-.slot .stamp{position:absolute;top:6px;right:6px;background:#10b981;color:#fff;font-size:9px;font-weight:800;border-radius:6px;padding:2px 6px;letter-spacing:.3px}
+.slot .stamp{position:absolute;top:6px;right:6px;z-index:1;background:#059669;color:#fff;font-size:10.5px;font-weight:800;border-radius:6px;padding:3px 8px;letter-spacing:.3px;box-shadow:0 1px 4px rgba(0,0,0,.3)}
 .slot.done .stamp{background:#a1a1aa}
 .cl-note{font-size:11px;color:var(--ink3);padding:0 18px 16px}
 .bg-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px;padding:16px 18px}
@@ -823,7 +832,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.0.3';
+const APP_VERSION = 'v1.0.4';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
