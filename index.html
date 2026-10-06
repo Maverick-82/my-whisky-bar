@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>My Bar</title>
-<meta name="theme-color" content="#1c1917">
+<meta name="theme-color" content="#0d0a08">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="My Bar">
@@ -12,21 +12,32 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon/icon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Gowun+Batang:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root{
-  --bg:#f4f4f5; --card:#fff; --line:#e7e5e4; --line2:#d6d3d1;
-  --ink:#1c1917; --ink2:#57534e; --ink3:#a8a29e;
-  --accent:#b45309; --accent-ink:#fff; --accent-soft:#fff7ed; --accent-line:#fdba74;
-  --st-new:#f59e0b; --st-open:#10b981; --st-done:#a1a1aa;
-  --radius:14px; --shadow:0 1px 2px rgba(0,0,0,.04),0 1px 8px rgba(0,0,0,.04);
+  --bg:#f3eee5; --bg2:#ebe4d7; --card:#fffcf6; --card2:#faf5ea; --field:#faf6ee; --soft:#f0e8d8;
+  --line:#e6dccb; --line2:#d5c8b0;
+  --ink:#241a11; --ink2:#5b4c3a; --ink3:#86765f;
+  --accent:#9a5b12; --accent-ink:#fff8ea; --accent-soft:#f6e6c6; --accent-line:#d9a95a;
+  --gold:#b98a2e; --gold2:#e3bb69;
+  --st-new:#c98a1b; --st-open:#4f8f5f; --st-done:#a99c88;
+  --glow:rgba(201,150,60,.16); --plinth:radial-gradient(circle at 50% 30%,#fffdf8 0%,#f1e8d6 100%);
+  --own1:#fbf0d6; --own2:#f3dfb0;
+  --radius:18px; --shadow:0 1px 0 rgba(255,255,255,.8) inset,0 1px 2px rgba(70,45,10,.06),0 10px 28px rgba(70,45,10,.07);
 }
 :root[data-theme="dark"]{
-  --bg:#17171a; --card:#232326; --line:#36363b; --line2:#46464c;
-  --ink:#f2f1ef; --ink2:#b4b1ac; --ink3:#7d7a75;
-  --accent:#f0a84e; --accent-ink:#1c1917; --accent-soft:#3a2a12; --accent-line:#b45309;
-  --st-new:#f0a84e; --st-open:#34d399; --st-done:#7d7a75;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 1px 8px rgba(0,0,0,.4);
+  --bg:#0d0a08; --bg2:#13100c; --card:#17120d; --card2:#1d1711; --field:#110d09; --soft:#241c13;
+  --line:#2d2418; --line2:#403323;
+  --ink:#f3e9d7; --ink2:#c4b398; --ink3:#9a8a70;
+  --accent:#e0ae5a; --accent-ink:#1a1209; --accent-soft:rgba(224,174,90,.13); --accent-line:#8a6528;
+  --gold:#d9a652; --gold2:#f0cc83;
+  --st-new:#d9a652; --st-open:#6fbf86; --st-done:#7a6c58;
+  --glow:rgba(217,166,82,.14); --plinth:radial-gradient(circle at 50% 30%,#f6efe0 0%,#d8cbb1 100%);
+  --own1:rgba(217,166,82,.22); --own2:rgba(217,166,82,.07);
+  --shadow:0 1px 0 rgba(255,235,200,.04) inset,0 12px 32px rgba(0,0,0,.45);
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:14px;-webkit-text-size-adjust:100%}
@@ -325,18 +336,8 @@ textarea.in{min-height:84px;resize:vertical}
 .slot .act{display:flex;gap:4px;margin-top:auto}
 .slot .act button{flex:1;border:1px solid var(--line2);background:var(--card);border-radius:7px;padding:5px 4px;font-size:10px;font-weight:700;color:var(--ink2)}
 .slot .act button:hover{border-color:var(--ink3)}
-.slot.own{border-color:#059669;background:#d1fae5;box-shadow:0 0 0 2px #10b981 inset,0 4px 14px rgba(5,150,105,.25)}
-.slot.own .nm{color:#065f46;font-weight:800}
-.slot.own .en{color:#047857}
-.slot.own .act button{border-color:#10b981;color:#047857;background:#fff}
-.slot:not(.own):not(.done) .ph img{opacity:.5}
-:root[data-theme="dark"] .slot{background:var(--card)}
-:root[data-theme="dark"] .slot.own{background:rgba(16,185,129,.2);border-color:#34d399;box-shadow:0 0 0 2px #34d399 inset,0 4px 14px rgba(16,185,129,.25)}
-:root[data-theme="dark"] .slot.own .nm{color:#a7f3d0}
-:root[data-theme="dark"] .slot.own .en{color:#6ee7b7}
-:root[data-theme="dark"] .slot.own .act button{background:var(--card);color:#6ee7b7;border-color:#34d399}
 .slot.done{opacity:.6}
-.slot .stamp{position:absolute;top:6px;right:6px;z-index:1;background:#059669;color:#fff;font-size:10.5px;font-weight:800;border-radius:6px;padding:3px 8px;letter-spacing:.3px;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.slot .stamp{position:absolute;top:8px;right:8px;z-index:1}
 .slot.done .stamp{background:#a1a1aa}
 .cl-note{font-size:11px;color:var(--ink3);padding:0 18px 16px}
 .bg-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px;padding:16px 18px}
@@ -452,12 +453,206 @@ textarea.in{min-height:84px;resize:vertical}
 .yt-pmeta{padding:14px 2px 2px}
 .yt-pmeta .t{font-size:15px;font-weight:700;color:var(--ink)}
 .yt-pmeta .c{font-size:12px;color:var(--ink3);margin-top:4px}
+
+/* ===================== Premium theme (v1.1.0) : Ivory & Cask / Midnight Bar ===================== */
+:root{color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark}
+html{background:var(--bg)}
+body{min-height:100vh;-webkit-font-smoothing:antialiased;letter-spacing:-.005em;
+  background:radial-gradient(1100px 460px at 50% -120px,var(--glow),transparent 72%) no-repeat,var(--bg)}
+::selection{background:var(--gold);color:#1c1209}
+*{scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+.serif,.top h1,.cl-head h2,.cat-head h2,.jv-head h2,.yt-head h2,.big,.total .v,.tile .n,.mh h2,.bg-top .amt b,.cl-stat .s b{font-variant-numeric:lining-nums}
+
+/* 헤더 */
+.top{margin-bottom:20px;padding-top:4px}
+.top h1{display:flex;align-items:center;gap:10px;font-family:'Cormorant Garamond','Gowun Batang',Georgia,'Noto Serif KR',serif;font-size:36px;font-weight:600;letter-spacing:.01em;line-height:1;color:var(--ink)}
+.top h1 svg{color:var(--gold)!important;filter:drop-shadow(0 2px 6px rgba(217,166,82,.35))}
+.verbadge{font-family:"Pretendard Variable",Pretendard,sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.08em;color:var(--ink3);background:transparent;border:1px solid var(--line2);border-radius:999px;padding:2px 8px;margin-left:4px;position:relative;top:-2px}
+.titlesub{display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:8px 0 0 32px}
+.titlesub .verbadge{top:0;margin:0;letter-spacing:.08em;text-transform:none}
+.top h1{white-space:nowrap}
+.sync{letter-spacing:.02em}
+
+/* 버튼 */
+.btn{border-radius:12px;border:1px solid var(--line2);background:var(--card);color:var(--ink);transition:border-color .15s,background .15s,transform .1s}
+.btn:hover{border-color:var(--gold);background:var(--card2)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:linear-gradient(180deg,var(--gold2),var(--gold));border-color:transparent;color:#1c1209;font-weight:800;letter-spacing:.01em;box-shadow:0 6px 18px rgba(184,134,43,.32),inset 0 1px 0 rgba(255,255,255,.4)}
+.btn.primary:hover{filter:brightness(1.06);background:linear-gradient(180deg,var(--gold2),var(--gold))}
+.btn.danger{color:#c24141;border-color:color-mix(in srgb,#c24141 40%,var(--line2))}
+.fab{background:linear-gradient(180deg,var(--gold2),var(--gold))!important;color:#1c1209!important;box-shadow:0 10px 28px rgba(184,134,43,.45)!important}
+
+/* 탭 */
+.tabs{gap:2px;margin-bottom:22px;border-bottom:1px solid var(--line)}
+.tabs button{display:inline-flex;align-items:center;gap:8px;padding:13px 16px;margin-bottom:-1px;font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--ink3);border-bottom:2px solid transparent}
+.tabs button svg{flex:none;opacity:.8}
+.tabs button.on{color:var(--ink);border-color:var(--gold)}
+.tabs button.on svg{color:var(--gold);opacity:1}
+.tabs button:hover:not(.on){color:var(--ink2)}
+.tabi{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* 카드 공통 */
+.card,.cl-grp,.bg-card,.cat-card,.yt-card,.jv-row{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.empty,.muted{color:var(--ink2)}
+
+/* 요약 */
+.lbl{font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.big{font-family:'Cormorant Garamond','Gowun Batang',Georgia,serif;font-size:54px;font-weight:600;letter-spacing:-.01em;line-height:1}
+.big small{font-family:"Pretendard Variable",Pretendard,sans-serif;font-size:14px;color:var(--ink2);margin-left:6px;font-weight:600}
+.total .t{letter-spacing:.04em}
+.total .v{font-family:'Cormorant Garamond','Gowun Batang',Georgia,serif;font-size:27px;font-weight:700;letter-spacing:-.01em}
+.sum-l{border-right-color:var(--line)}
+.tile{border-radius:14px;background:var(--card2);border-color:var(--line)}
+.tile .n{font-family:'Cormorant Garamond','Gowun Batang',Georgia,serif;font-size:30px;font-weight:600;line-height:1.1;margin-top:8px}
+.tile.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset,0 8px 22px rgba(184,134,43,.16)}
+.bar{height:5px;background:var(--soft);margin-top:14px}
+.chips{border-top-color:var(--line)}
+.chips .cap{letter-spacing:.08em;font-size:10.5px;text-transform:uppercase;color:var(--ink3);font-weight:700}
+.chip{background:transparent;border:1px solid var(--line2);color:var(--ink2);transition:.15s}
+.chip:hover{border-color:var(--gold)}
+.chip b{color:var(--ink)}
+.chip.on{background:linear-gradient(180deg,var(--gold2),var(--gold));border-color:transparent;color:#1c1209}
+.chip.on b{color:#1c1209}
+
+/* 컨트롤 */
+.field-lbl{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.seg{background:var(--soft);border:1px solid var(--line)}
+.seg button.on{background:var(--card);border-color:var(--gold);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.search input,select.sel,.in,.cat-tools input[type=search],.cat-tools select,.yt-addbox textarea,.jv-tm-search input{background:var(--field);border:1px solid var(--line2);color:var(--ink);border-radius:12px}
+.cat-tools input[type=search],.cat-tools select{border-radius:999px}
+.search input::placeholder,.in::placeholder,.cat-tools input::placeholder{color:var(--ink3)}
+.in:focus,.search input:focus,select.sel:focus,.cat-tools input[type=search]:focus,.cat-tools select:focus,.yt-addbox textarea:focus,.jv-tm-search input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 22%,transparent);background:var(--card)}
+
+/* 술장(카드) */
+.grid{gap:16px}
+.bottle{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;transition:transform .18s,border-color .18s,box-shadow .18s}
+.bottle:hover{transform:translateY(-4px);border-color:var(--accent-line);box-shadow:0 18px 40px rgba(0,0,0,.22)}
+.bottle .ph{margin:9px 9px 0;border-radius:13px;aspect-ratio:4/5;background:var(--plinth)}
+.ph{background:var(--plinth)}
+.ph img,.thumb img,.cat-card-ph img,.slot .ph img,.cat-prow .thumb img{mix-blend-mode:multiply;background:transparent!important}
+.ph img{padding:10px}
+.tag,.st{background:color-mix(in srgb,var(--card) 90%,transparent);backdrop-filter:blur(6px);border:1px solid var(--line2);color:var(--accent);font-weight:700;letter-spacing:.02em}
+.st{color:var(--ink2)}
+.flag{background:var(--ink);color:var(--bg);letter-spacing:.04em}
+.flag.peat{background:var(--ink2)}
+.info{border-top:0;padding:13px 15px 15px;gap:5px}
+.bottle .nm{font-family:'Gowun Batang','Noto Serif KR',Georgia,serif;font-size:14.5px;font-weight:700;line-height:1.38;color:var(--ink)}
+.sub{color:var(--ink3);font-size:11.5px}
+.pr{border-top:1px dashed var(--line2);margin-top:8px;padding-top:10px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.pr span{color:var(--ink3)}
+.done .ph img{filter:grayscale(1);opacity:.5}
+
+/* 목록 · 보드 */
+.lrow{border-bottom:1px solid var(--line)}
+.lrow:hover{background:var(--soft)}
+.lrow.head{color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;font-size:10.5px}
+.thumb,.cat-prow .thumb{background:var(--plinth);border-radius:8px}
+.pill{background:var(--soft);color:var(--ink2)}
+.col{background:var(--bg2);border-radius:16px}
+.bcard{background:var(--card);border-radius:12px}
+
+/* 모달 */
+.modal-bg,#jvTagModalBg{background:rgba(8,6,4,.64);backdrop-filter:blur(7px)}
+.modal,#jvTagModal{background:var(--card);border:1px solid var(--line2);border-radius:22px;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.mh,.mf{background:var(--card)}
+.mh h2{font-family:'Cormorant Garamond','Gowun Batang',Georgia,serif;font-size:24px;font-weight:600}
+.f label.l{letter-spacing:.02em;color:var(--ink2)}
+.box,.imgbox{background:var(--card2);border-color:var(--line);border-radius:14px}
+.imgprev{background:var(--plinth);border:1px dashed var(--line2)}
+.imgprev img{mix-blend-mode:multiply}
+.presets button{background:var(--card2)}
+.statusSeg button,.toggle2 button,.jv-glassbtn,.jv-rating button{background:var(--card2)}
+.statusSeg button.on,.toggle2 button.on{background:linear-gradient(180deg,var(--gold2),var(--gold));border-color:transparent;color:#1c1209}
+.jv-glassbtn.on{background:var(--accent-soft);border-color:var(--gold);color:var(--accent)}
+.jv-rating button.on{background:var(--accent-soft);border-color:var(--gold);color:var(--gold)}
+#wdbInfoBox{background:var(--accent-soft)!important;border-color:var(--accent-line)!important}
+#wdbInfoBox>div:first-child{color:var(--accent)!important}
+.jv-tm-tile{background:var(--card2)}
+.jv-tm-search input{background:var(--field)}
+
+/* 토스트 */
+.toast{background:var(--card2);color:var(--ink);border:1px solid var(--gold);box-shadow:0 12px 34px rgba(0,0,0,.4);letter-spacing:0}
+.toast.err{background:#7a1f1f;color:#fff;border-color:#c24141}
+
+/* 섹션 제목 */
+.cl-head h2,.cat-head h2,.jv-head h2,.yt-head h2{font-family:'Cormorant Garamond','Gowun Batang',Georgia,'Noto Serif KR',serif;font-size:34px;font-weight:600;letter-spacing:.005em;line-height:1.05}
+.cl-head p,.cat-head p,.jv-head p,.yt-head p{font-size:12px;color:var(--ink3);margin-top:7px;letter-spacing:.01em}
+.cl-seg,.yt-seg{background:var(--soft);border:1px solid var(--line)}
+.cl-seg button.on,.yt-seg button.on{background:var(--card);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.14)}
+.jv-month{letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:var(--gold)}
+.jv-tags span,.jv-tagchip{background:color-mix(in srgb,var(--c,var(--ink3)) 14%,var(--card))!important;border-color:color-mix(in srgb,var(--c,var(--ink3)) 40%,var(--card))!important}
+.jv-tagadd{background:var(--card)}
+.jv-row{padding:15px 16px}
+
+/* Collection */
+.cl-grp{margin-bottom:18px}
+.cl-gh{border-bottom:1px solid var(--line);padding:18px 20px}
+.cl-gh .ttl .n{font-family:'Gowun Batang','Noto Serif KR',Georgia,serif;font-size:18px;font-weight:700;letter-spacing:-.01em}
+.cl-gh .ttl .d{color:var(--ink3);font-size:12px;margin-top:3px}
+.cl-stat .s b{font-family:'Cormorant Garamond','Gowun Batang',Georgia,serif;font-size:24px;font-weight:600;line-height:1}
+.cl-stat .s i{letter-spacing:.06em;font-size:10px}
+.cl-bar{height:4px;background:var(--soft);margin:0 20px 16px}
+.cl-bar i{background:linear-gradient(90deg,var(--gold),var(--gold2));box-shadow:0 0 12px color-mix(in srgb,var(--gold) 70%,transparent)}
+.cl-grid{padding:4px 20px 20px;gap:12px}
+.slot{background:var(--card2);border:1px dashed var(--line2);border-radius:16px;padding:10px;transition:transform .15s}
+.slot .ph{background:var(--plinth);border-radius:11px;opacity:1}
+.slot:not(.own):not(.done) .ph{opacity:.9}
+.slot:not(.own):not(.done) .ph img{opacity:.38;filter:grayscale(.5)}
+.slot .nm{font-family:'Gowun Batang','Noto Serif KR',Georgia,serif;font-size:12.5px;font-weight:700;color:var(--ink)}
+.slot .en{color:var(--ink3);font-size:10px;letter-spacing:.01em}
+.slot .act button{background:var(--card);border-color:var(--line2);color:var(--ink2);border-radius:9px;font-weight:700}
+.slot .act button:hover{border-color:var(--gold);color:var(--ink)}
+.slot.own{border:1.5px solid var(--gold);background:linear-gradient(180deg,var(--own1),var(--own2));box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 30%,transparent),0 12px 30px color-mix(in srgb,var(--gold) 24%,transparent);transform:translateY(-1px)}
+.slot.own .nm{color:var(--ink)}
+.slot.own .en{color:var(--accent);font-weight:600}
+.slot.own .act button{background:var(--card);border-color:var(--gold);color:var(--accent)}
+.slot.done{opacity:.7}
+.slot .stamp{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#1c1209;font-size:10px;font-weight:800;letter-spacing:.06em;border-radius:7px;padding:3px 8px;box-shadow:0 3px 10px rgba(0,0,0,.28)}
+.slot.done .stamp{background:var(--line2);color:var(--ink2);box-shadow:none}
+.bg-card{padding:20px 22px}
+.bg-top .t{font-family:'Gowun Batang','Noto Serif KR',Georgia,serif;font-size:17px}
+.bg-top .amt b{font-family:'Cormorant Garamond','Gowun Batang',Georgia,serif;font-size:30px;font-weight:700;line-height:1}
+.bg-bar{height:10px;background:var(--soft);border:1px solid var(--line);margin:14px 0 10px}
+.bg-bar i{background:linear-gradient(90deg,var(--gold),var(--gold2));box-shadow:0 0 14px color-mix(in srgb,var(--gold) 65%,transparent)}
+.bg-card.over .bg-bar i{background:linear-gradient(90deg,#b91c1c,#ef4444);box-shadow:0 0 14px rgba(239,68,68,.5)}
+
+/* Whisky DB / 상세 */
+.cat-card{overflow:hidden;transition:transform .18s,border-color .18s,box-shadow .18s}
+.cat-card:hover{transform:translateY(-3px);border-color:var(--accent-line);box-shadow:0 16px 36px rgba(0,0,0,.2)}
+.cat-card-ph{background:var(--plinth);margin:8px 8px 0;border-radius:12px;aspect-ratio:1/1}
+.cat-card-name{font-family:'Gowun Batang','Noto Serif KR',Georgia,serif}
+.cat-badge,.cat-chip{background:var(--soft);border-color:var(--line);color:var(--ink2)}
+.cat-badge.accent{background:var(--accent-soft);color:var(--accent)}
+.cat-prow{background:var(--card2);border-color:var(--line)}
+.cat-dsect h4{color:var(--gold);letter-spacing:.04em}
+.cat-dimg{background:var(--plinth)}
+.cat-dimg img{mix-blend-mode:multiply}
+
+/* YouTube */
+.yt-chan{background:var(--card2);border-color:var(--line)}
+.yt-results .r{background:var(--soft);color:var(--ink2)}
+.yt-results .r.ok{background:color-mix(in srgb,#4f8f5f 16%,var(--card));color:#6fbf86}
+.yt-results .r.err{background:color-mix(in srgb,#c24141 16%,var(--card));color:#e06b6b}
+
+.cat-grid.compact .cat-card-ph{margin:5px 5px 0;border-radius:9px}
+@media (max-width:760px){
+  .top h1{font-size:30px}
+  .titlesub{margin-left:30px}
+  .big{font-size:46px}
+  .cl-head h2,.cat-head h2,.jv-head h2,.yt-head h2{font-size:29px}
+  .bottle .ph{margin:7px 7px 0}
+  .cl-grid{padding:4px 12px 14px}
+  .cl-gh{padding:14px 14px}
+  .bg-card{padding:16px}
+  .tabs button{padding:12px 12px}
+}
 </style>
 <script>
 (function(){
   try{
     var saved = localStorage.getItem('wk_theme');
-    var t = saved ? JSON.parse(saved) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var t = saved ? JSON.parse(saved) : 'dark';
     document.documentElement.setAttribute('data-theme', t);
   }catch(e){}
 })();
@@ -483,8 +678,8 @@ textarea.in{min-height:84px;resize:vertical}
 <div class="wrap" id="app">
   <div class="top">
     <div class="titleblock">
-      <h1><svg viewBox="0 0 24 30" width="20" height="25" style="vertical-align:-5px;color:var(--ink)"><use href="#glencairnIcon"/></svg> My Whisky <span class="verbadge" id="appVersion"></span></h1>
-      <div class="titlesub">Maverick</div>
+      <h1><svg viewBox="0 0 24 30" width="22" height="27" style="color:var(--gold);flex:none"><use href="#glencairnIcon"/></svg> My Whisky</h1>
+      <div class="titlesub">Maverick<span class="verbadge" id="appVersion"></span></div>
     </div>
     <span class="sync hide-m" id="sync"></span>
     <button class="btn" id="btnTheme" title="테마 전환"></button>
@@ -499,10 +694,10 @@ textarea.in{min-height:84px;resize:vertical}
 
   <nav class="tabs" id="tabs">
     <button data-tab="bar" class="on"><svg viewBox="0 0 24 30" width="14" height="17.5" style="vertical-align:-3px;color:currentColor"><use href="#glencairnIcon"/></svg> My Bar</button>
-    <button data-tab="goal">🎯 Collection</button>
-    <button data-tab="journal">🥃 Tasting Notes</button>
-    <button data-tab="yt">▶ YouTube</button>
-    <button data-tab="wdb">📖 Whisky DB</button>
+    <button data-tab="goal"><svg class="tabi" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.6 14 7 22l5-3 5 3-1.6-8"/></svg>Collection</button>
+    <button data-tab="journal"><svg class="tabi" viewBox="0 0 24 24"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2z"/><path d="M9 9h6M9 13h4"/></svg>Tasting Notes</button>
+    <button data-tab="yt"><svg class="tabi" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9.2 4.6 2.8-4.6 2.8z"/></svg>YouTube</button>
+    <button data-tab="wdb"><svg class="tabi" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="8" ry="2.5"/><path d="M4 5.5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/><path d="M4 11.5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/></svg>Whisky DB</button>
   </nav>
 
   <div id="barView">
@@ -565,7 +760,7 @@ textarea.in{min-height:84px;resize:vertical}
           <label class="l">품명 <i>*</i></label>
           <input class="in" name="name" list="dlNames" required placeholder="예: 글렌드로낙 12년">
           <div class="hint" id="nameHint">기존에 등록한 술이나 Whisky DB에 있는 제품을 고르면 스타일·용량·도수를 자동으로 채워요.</div>
-          <div id="wdbInfoBox" style="display:none;margin-top:8px;border:1px solid var(--line2);border-radius:10px;padding:10px 12px;background:#fdf8f0">
+          <div id="wdbInfoBox" style="display:none;margin-top:8px;border:1px solid var(--line2);border-radius:10px;padding:10px 12px;background:var(--accent-soft)">
             <div style="font-size:11.5px;font-weight:800;color:#92600f;margin-bottom:4px">📖 Whisky DB에서 찾았어요</div>
             <div id="wdbInfoText" style="font-size:12px;color:var(--ink2);line-height:1.5"></div>
             <button type="button" id="wdbInfoUseMemo" style="margin-top:6px;background:none;border:0;padding:0;font-size:11.5px;font-weight:700;color:var(--accent);cursor:pointer">메모에 담기</button>
@@ -832,12 +1027,13 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.0.4';
+const APP_VERSION = 'v1.1.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
 function applyTheme(t){
   document.documentElement.setAttribute('data-theme', t);
+  const mt = document.querySelector('meta[name="theme-color"]'); if (mt) mt.setAttribute('content', t === 'dark' ? '#0d0a08' : '#f3eee5');
   $('#btnTheme').innerHTML = t === 'dark' ? ICON_SUN : ICON_MOON;
   $('#btnTheme').title = t === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환';
 }
@@ -1540,7 +1736,7 @@ function renderWdbTab(){
   if (!view.dataset.inited){
     view.dataset.inited = '1';
     view.innerHTML = `<div class="card" style="padding:20px"><div class="cat-wrap">
-      <div class="cat-head"><div><h2>📖 Whisky DB</h2><p>${S.products.length}개 제품이 정리돼 있어요 — My Bar 등록할 때 자동완성에 쓰여요</p></div></div>
+      <div class="cat-head"><div><h2>Whisky DB</h2><p>${S.products.length}개 제품이 정리돼 있어요 — My Bar 등록할 때 자동완성에 쓰여요</p></div></div>
       <div class="cat-tools">
         <input type="search" id="wdbQ" placeholder="제품명, 증류소로 검색" autocomplete="off">
         <select id="wdbDistSel"><option value="">전체 증류소</option></select>
@@ -1626,7 +1822,7 @@ function renderDistTab(){
   if (!view.dataset.inited){
     view.dataset.inited = '1';
     view.innerHTML = `<div class="card" style="padding:20px"><div class="cat-wrap">
-      <div class="cat-head"><div><h2>🏚️ Distillery</h2><p>${S.distilleries.length}개 증류소가 정리돼 있어요</p></div></div>
+      <div class="cat-head"><div><h2>Distillery</h2><p>${S.distilleries.length}개 증류소가 정리돼 있어요</p></div></div>
       <div class="cat-tools">
         <input type="search" id="distQ" placeholder="증류소명, 지역으로 검색" autocomplete="off">
         <select id="distCountrySel"><option value="">전체 국가</option></select>
@@ -1715,8 +1911,8 @@ function ring(pct){
   pct = Math.max(0, Math.min(100, Math.round(pct)));
   const size = 54, r = 22, c = Math.round(2*Math.PI*r), off = Math.round(c * (1 - pct/100));
   return `<svg class="cl-ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#ece9e4" stroke-width="6"/>
-    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--line2)" stroke-width="6"/>
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--gold)" stroke-width="6" stroke-linecap="round"
       stroke-dasharray="${c}" stroke-dashoffset="${off}" transform="rotate(-90 ${size/2} ${size/2})"/>
     <text x="50%" y="52%" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="800" fill="var(--ink)">${pct}%</text>
   </svg>`;
@@ -1757,7 +1953,7 @@ function renderGoalTab(){
   if (!view.dataset.inited){
     view.dataset.inited = '1';
     view.innerHTML = `<div class="cl-wrap">
-      <div class="cl-head"><div><h2>🎯 Collection</h2><p>모으고 있는 위스키 수집 목표예요</p></div>
+      <div class="cl-head"><div><h2>Collection</h2><p>모으고 있는 위스키 수집 목표예요</p></div>
         <div class="cl-seg" id="goalSeg">
           <button type="button" data-f="all" class="on">전체</button>
           <button type="button" data-f="own">보유</button>
@@ -1798,7 +1994,7 @@ function renderBudget(){
   const notStarted = new Date().getFullYear() < BUDGET_FIRST_YEAR;
   box.innerHTML = `<div class="bg-card${over ? ' over' : ''}">
     <div class="bg-top">
-      <span class="t">💰 ${year}년 사용금액</span>
+      <span class="t">${year}년 사용금액</span>
       <span class="sub">${notStarted ? `${year}.1.1 구매분부터 집계해요` : '연간 한도 ' + won(ANNUAL_BUDGET)}</span>
       <span class="amt"><b class="money">${won(used)}</b> / <span class="money">${won(ANNUAL_BUDGET)}</span></span>
     </div>
@@ -2012,7 +2208,7 @@ function renderJournalTab(){
   if (!view.dataset.inited){
     view.dataset.inited = '1';
     view.innerHTML = `<div class="jv-wrap">
-      <div class="jv-head"><div><h2>🥃 Tasting Notes</h2><p>오늘의 한 잔을 기록해보세요</p></div><span class="sp"></span>
+      <div class="jv-head"><div><h2>Tasting Notes</h2><p>오늘의 한 잔을 기록해보세요</p></div><span class="sp"></span>
         <button type="button" class="btn primary" id="jvAddBtn">+ 기록하기</button>
       </div>
       <div id="journalList"></div>
@@ -2067,7 +2263,7 @@ function renderYtTab(){
   if (!view.dataset.inited){
     view.dataset.inited = '1';
     view.innerHTML = `<div class="yt-wrap">
-      <div class="yt-head"><div><h2>▶ YouTube</h2><p>좋아하는 위스키 채널의 최신 영상을 모아봐요</p></div><span class="sp"></span>
+      <div class="yt-head"><div><h2>YouTube</h2><p>좋아하는 위스키 채널의 최신 영상을 모아봐요</p></div><span class="sp"></span>
         <button type="button" class="btn" id="ytRefreshBtn">↻ 새로고침</button>
         <button type="button" class="btn primary" id="ytAddBtn">+ 채널·영상 추가</button>
       </div>
