@@ -23,9 +23,10 @@
   --ink:#0f1c2e; --ink2:#38526f; --ink3:#647d9a;
   --accent:#1f56a0; --accent-ink:#f4f9ff; --accent-soft:#d3e4fa; --accent-line:#7ca6d9;
   --gold:#2259a6; --gold2:#5a9be0; --on-gold:#ffffff;
-  --st-new:#2f6cb8; --st-open:#2f9a73; --st-done:#8ea6c4;
+  --st-new:#3b9be8; --st-open:#22b58a; --st-done:#9a86d8;
   --glow:rgba(70,135,220,.26); --plinth:radial-gradient(circle at 50% 30%,#fafdff 0%,#cddff4 100%);
   --own1:#cde1fa; --own2:#a9c8f1;
+  --bgfx:radial-gradient(760px 460px at 4% -4%,rgba(255,170,205,.34),transparent 62%),radial-gradient(820px 480px at 98% 2%,rgba(176,150,250,.30),transparent 64%),radial-gradient(900px 560px at 8% 108%,rgba(120,226,196,.30),transparent 62%),radial-gradient(900px 520px at 100% 100%,rgba(255,206,140,.26),transparent 62%),radial-gradient(1100px 520px at 50% -140px,var(--glow),transparent 72%);
   --radius:18px; --shadow:0 1px 0 rgba(255,255,255,.85) inset,0 1px 2px rgba(20,60,120,.08),0 10px 28px rgba(20,60,120,.12);
 }
 :root[data-theme="dark"]{
@@ -34,9 +35,10 @@
   --ink:#e8f0fc; --ink2:#b0c4e4; --ink3:#7f97bd;
   --accent:#78b0f5; --accent-ink:#08172e; --accent-soft:rgba(120,176,245,.16); --accent-line:#3a69a8;
   --gold:#5d9cf0; --gold2:#a2c9fa; --on-gold:#08172e;
-  --st-new:#5d9cf0; --st-open:#5fc79c; --st-done:#587299;
+  --st-new:#5db4f5; --st-open:#4fd1a5; --st-done:#a995e8;
   --glow:rgba(70,140,235,.22); --plinth:radial-gradient(circle at 50% 30%,#f1f6fd 0%,#bcd0ea 100%);
   --own1:rgba(93,156,240,.30); --own2:rgba(93,156,240,.08);
+  --bgfx:radial-gradient(760px 460px at 4% -4%,rgba(255,120,170,.16),transparent 62%),radial-gradient(820px 480px at 98% 2%,rgba(150,120,250,.22),transparent 64%),radial-gradient(900px 560px at 8% 108%,rgba(60,200,170,.14),transparent 62%),radial-gradient(900px 520px at 100% 100%,rgba(255,170,90,.10),transparent 62%),radial-gradient(1100px 520px at 50% -140px,var(--glow),transparent 72%);
   --shadow:0 1px 0 rgba(200,225,255,.05) inset,0 12px 32px rgba(0,10,30,.5);
 }
 *{box-sizing:border-box}
@@ -647,6 +649,62 @@ body{min-height:100vh;-webkit-font-smoothing:antialiased;letter-spacing:-.005em;
   .bg-card{padding:16px}
   .tabs button{padding:12px 12px}
 }
+
+/* ===================== Colorful accents (v1.3.0) : Pastel Multi ===================== */
+:root{--c-bar:#f08a4b;--c-goal:#8a6fe0;--c-journal:#ea6a93;--c-yt:#ee5b5b;--c-wdb:#27b39a}
+body{background:transparent}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--bgfx)}
+
+/* 탭별 포인트 색 */
+.tabs button[data-tab="bar"]{--tc:var(--c-bar)}
+.tabs button[data-tab="goal"]{--tc:var(--c-goal)}
+.tabs button[data-tab="journal"]{--tc:var(--c-journal)}
+.tabs button[data-tab="yt"]{--tc:var(--c-yt)}
+.tabs button[data-tab="wdb"]{--tc:var(--c-wdb)}
+.tabs button svg{color:var(--tc);opacity:.7}
+.tabs button.on{border-color:var(--tc)}
+.tabs button.on svg{color:var(--tc);opacity:1}
+.cl-head{--tc:var(--c-goal)}.jv-head{--tc:var(--c-journal)}.yt-head{--tc:var(--c-yt)}.cat-head{--tc:var(--c-wdb)}
+.cl-head h2::after,.jv-head h2::after,.yt-head h2::after,.cat-head h2::after{content:"";display:block;width:38px;height:4px;border-radius:4px;margin-top:9px;background:linear-gradient(90deg,var(--tc),color-mix(in srgb,var(--tc) 35%,#fff))}
+.summary .lbl{color:var(--c-bar)}
+
+/* 스타일별 색 */
+[data-sty]{--sc:#8696ad}
+[data-sty="malt"]{--sc:#4f8fe6}
+[data-sty="blend"]{--sc:#8f74e0}
+[data-sty="bourbon"]{--sc:#ee8a3e}
+[data-sty="jp"]{--sc:#ea6a93}
+[data-sty="tw"]{--sc:#2db3a8}
+[data-sty="irish"]{--sc:#4db36a}
+[data-sty="wine"]{--sc:#c24f7b}
+[data-sty="cognac"]{--sc:#d9a02c}
+.tag[data-sty]{background:color-mix(in srgb,var(--sc) 22%,#fff);border-color:color-mix(in srgb,var(--sc) 55%,#fff);color:color-mix(in srgb,var(--sc) 58%,#14202e)}
+.bottle[data-sty]{border-color:color-mix(in srgb,var(--sc) 38%,var(--line));box-shadow:inset 0 3px 0 var(--sc),var(--shadow)}
+.bottle[data-sty]:hover{border-color:var(--sc);box-shadow:inset 0 3px 0 var(--sc),0 18px 40px color-mix(in srgb,var(--sc) 30%,transparent)}
+.bottle[data-sty] .ph{background:radial-gradient(circle at 50% 30%,#fff 0%,color-mix(in srgb,var(--sc) 30%,#fff) 100%)}
+.bottle[data-sty] .pr b{color:color-mix(in srgb,var(--sc) 55%,var(--ink))}
+.chip[data-sty]::before,.lrow .sty[data-sty]::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sc);margin-right:6px;flex:none}
+.chip[data-sty]{border-color:color-mix(in srgb,var(--sc) 45%,var(--line2))}
+.chip[data-sty].on::before{background:#fff}
+.lrow .sty[data-sty]{display:inline-flex;align-items:center}
+.cat-badge[data-sty]{background:color-mix(in srgb,var(--sc) 18%,var(--card));border-color:color-mix(in srgb,var(--sc) 45%,var(--line));color:color-mix(in srgb,var(--sc) 62%,var(--ink))}
+
+/* 상태별 색 */
+[data-st="미개봉"]{--stc:var(--st-new)}
+[data-st="개봉"]{--stc:var(--st-open)}
+[data-st="소진"]{--stc:var(--st-done)}
+.st[data-st],.pill[data-st]{background:color-mix(in srgb,var(--stc) 20%,var(--card));border-color:color-mix(in srgb,var(--stc) 55%,var(--line));color:color-mix(in srgb,var(--stc) 68%,var(--ink))}
+.tile[data-status="미개봉"]{--stc:var(--st-new)}
+.tile[data-status="개봉"]{--stc:var(--st-open)}
+.tile[data-status="소진"]{--stc:var(--st-done)}
+.tile[data-status]{background:color-mix(in srgb,var(--stc) 13%,var(--card));border-color:color-mix(in srgb,var(--stc) 38%,var(--line))}
+.tile[data-status] .n{color:color-mix(in srgb,var(--stc) 78%,var(--ink))}
+.tile.on[data-status]{border-color:var(--stc);box-shadow:0 0 0 1px var(--stc) inset,0 8px 22px color-mix(in srgb,var(--stc) 26%,transparent)}
+.chip[data-status="미개봉"]::before,.chip[data-status="개봉"]::before,.chip[data-status="소진"]::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.chip[data-status="미개봉"]::before{background:var(--st-new)}
+.chip[data-status="개봉"]::before{background:var(--st-open)}
+.chip[data-status="소진"]::before{background:var(--st-done)}
+.chip.on[data-status]::before{background:#fff}
 </style>
 <script>
 (function(){
@@ -1027,7 +1085,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.2.2';
+const APP_VERSION = 'v1.3.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -1101,7 +1159,19 @@ function subLine(it){
   else if (it.age === 'NAS') p.push('NAS');
   return p.join(' · ');
 }
-function stBadge(s, cls){ return `<span class="${cls||'st'}"><i class="dot" style="background:${ST_COLOR[s]||'#ccc'}"></i>${esc(s)}</span>`; }
+function styKey(s){
+  s = String(s||'');
+  if (/블렌디드|그레인/.test(s)) return 'blend';
+  if (/싱글|몰트|팟/.test(s)) return 'malt';
+  if (/버번|테네시|라이/.test(s)) return 'bourbon';
+  if (/재패니즈|일본/.test(s)) return 'jp';
+  if (/대만/.test(s)) return 'tw';
+  if (/아이리/.test(s)) return 'irish';
+  if (/와인|레드|화이트|로제|스파클링/.test(s)) return 'wine';
+  if (/VS|XO|꼬냑|코냑|브랜디/.test(s)) return 'cognac';
+  return 'other';
+}
+function stBadge(s, cls){ return `<span class="${cls||'st'}" data-st="${esc(s)}"><i class="dot" style="background:${ST_COLOR[s]||'#ccc'}"></i>${esc(s)}</span>`; }
 
 /* ---------- Supabase 호출 ---------- */
 function mapRow(r){
@@ -1335,7 +1405,7 @@ function renderSummary(){
   });
   const n = all.length || 1;
   const styleChips = Object.entries(styles).sort((a,b)=>b[1]-a[1])
-    .map(([s,c]) => `<button class="chip ${S.style===s?'on':''}" data-style="${esc(s)}">${esc(s)}<b>${c}</b></button>`).join('');
+    .map(([s,c]) => `<button class="chip ${S.style===s?'on':''}" data-style="${esc(s)}" data-sty="${styKey(s)}">${esc(s)}<b>${c}</b></button>`).join('');
   $('#summary').innerHTML = `
     <div class="sum-l">
       <div><div class="lbl">술장 요약</div><div class="big">${all.length}<small>병</small></div></div>
@@ -1367,9 +1437,9 @@ function renderFilters(list){
 }
 function renderShelf(list){
   return `<div class="grid">${list.map(it => `
-    <button class="bottle ${it.status==='소진'?'done':''}" data-row="${it.row}">
+    <button class="bottle ${it.status==='소진'?'done':''}" data-row="${it.row}" data-sty="${styKey(it.style||it.category)}">
       <div class="ph">${imgTag(it)}
-        <span class="tag">${esc(it.style || it.category || '위스키')}</span>
+        <span class="tag" data-sty="${styKey(it.style||it.category)}">${esc(it.style || it.category || '위스키')}</span>
         ${stBadge(it.status)}
         <span class="flags">${it.cs?'<span class="flag">CS</span>':''}${it.peat?'<span class="flag peat">PEAT</span>':''}</span>
       </div>
@@ -1387,7 +1457,7 @@ function renderList(list){
       <span class="thumb">${imgTag(it)}</span>
       <span style="min-width:0"><div class="nm">${esc(it.name)}</div>
         <div class="sub mob">${esc([it.style, subLine(it), it.date].filter(Boolean).join(' · '))}</div></span>
-      <span class="c dsk">${esc(it.style)}</span>
+      <span class="c dsk sty" data-sty="${styKey(it.style)}">${esc(it.style)}</span>
       <span class="c dsk">${esc(it.date)}</span>
       <span class="c dsk">${esc(it.store)}</span>
       <span class="c dsk">${it.volume? it.volume+'ml':''}</span>
@@ -1712,7 +1782,7 @@ function wdbCard(p){
   const dist = p.whisky_distilleries ? p.whisky_distilleries.name_kr : '';
   const img = p.image_url ? `<img src="${esc(p.image_url)}" loading="lazy" referrerpolicy="no-referrer" alt="">` : '<span class="noimg">🥃</span>';
   const badges = [];
-  if (p.category) badges.push(`<span class="cat-badge">${esc(p.category)}</span>`);
+  if (p.category) badges.push(`<span class="cat-badge" data-sty="${styKey(p.category)}">${esc(p.category)}</span>`);
   if (p.abv_display) badges.push(`<span class="cat-badge accent">${esc(p.abv_display)}%</span>`);
   if (p.volume_ml) badges.push(`<span class="cat-badge">${esc(p.volume_ml)}ml</span>`);
   return `<button type="button" class="cat-card" data-pid="${esc(p.id)}">
