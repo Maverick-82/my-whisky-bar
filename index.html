@@ -1235,7 +1235,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.7.1';
+const APP_VERSION = 'v1.8.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -1904,7 +1904,7 @@ const MK_ORDER = ['KR','US','COIN','GOLD','CASH','BANK','OTHER'];
 const MK_SERIES = { KR:'s1', US:'s2', COIN:'s3', GOLD:'s4', CASH:'s5', BANK:'s6', OTHER:'s7' };
 const INV_MK = ['KR','US','COIN','GOLD'];
 const isCashLike = h => h.market === 'CASH' || h.market === 'BANK' || h.market === 'OTHER';
-const EXP_CATS = ['식비','카페·간식','술·유흥','교통','주거·통신','쇼핑','의료·건강','문화·여가','경조사','보험·금융','기타'];
+const EXP_CATS = ['식비','카페·간식','술·유흥','위스키','교통','주거·통신','쇼핑','의료·건강','문화·여가','경조사','보험·금융','기타'];
 const INC_CATS = ['급여','부수입','투자수익','환불','기타수입'];
 const fnum = v => { const n = Number(v); return isFinite(n) ? n : 0; };
 const fxRate = () => FIN.fx.usdkrw > 0 ? FIN.fx.usdkrw : 1350;
@@ -2351,8 +2351,7 @@ document.addEventListener('click', e => {
 /* ===== Ledger (가계부) ===== */
 function monthEntries(ym){
   const manual = FIN.ledger.filter(r => String(r.entry_date).slice(0, 7) === ym).map(r => ({ id: r.id, date: String(r.entry_date), kind: r.kind, cat: r.category, amt: fnum(r.amount), memo: r.memo || '', merchant: r.merchant || '', card: r.card || '', auto: false }));
-  const whisky = S.items.filter(it => it.price != null && Number(it.price) > 0 && String(it.date).slice(0, 7) === ym).map(it => ({ id: 'w' + it.row, date: String(it.date).slice(0, 10), kind: '지출', cat: '위스키', amt: Number(it.price), memo: it.name, auto: true, row: it.row }));
-  return manual.concat(whisky).sort((a, b) => a.date < b.date ? 1 : a.date > b.date ? -1 : 0);
+  return manual.sort((a, b) => a.date < b.date ? 1 : a.date > b.date ? -1 : 0);
 }
 function monthLabel(ym){ return ym.slice(0, 4) + '년 ' + Number(ym.slice(5)) + '월'; }
 function shiftMonth(ym, d){ let y = Number(ym.slice(0, 4)), m = Number(ym.slice(5)) + d; while (m < 1) { m += 12; y--; } while (m > 12) { m -= 12; y++; } return y + '-' + String(m).padStart(2, '0'); }
@@ -2361,7 +2360,6 @@ function renderLedgerTab(){ finEnsure(renderLedger); }
 function yearExpense(y){
   const arr = new Array(12).fill(0);
   FIN.ledger.forEach(r => { const d = String(r.entry_date); if (d.slice(0, 4) === String(y) && r.kind === '지출') arr[Number(d.slice(5, 7)) - 1] += fnum(r.amount); });
-  S.items.forEach(it => { const d = String(it.date); if (it.price > 0 && d.slice(0, 4) === String(y)) arr[Number(d.slice(5, 7)) - 1] += Number(it.price); });
   return arr;
 }
 function renderLedger(){
@@ -2374,13 +2372,12 @@ function renderLedger(){
   const catSum = {}; es.filter(e => e.kind === '지출').forEach(e => { catSum[e.cat] = (catSum[e.cat] || 0) + e.amt; });
   const cats = Object.entries(catSum).sort((a, b) => b[1] - a[1]);
   const cmax = cats.length ? cats[0][1] : 1;
-  const nW = es.filter(e => e.auto).length;
   const yr = Number(ym.slice(0, 4)), ye = yearExpense(yr), ymax = Math.max.apply(null, ye.concat([1]));
   const days = {}; es.forEach(e => { (days[e.date] = days[e.date] || []).push(e); });
   const dayKeys = Object.keys(days).sort().reverse();
   el.innerHTML = `
     <div class="fin-head">
-      <div><h2>Ledger</h2><p>수입과 지출을 기록하고, 카드명세서를 올려 분석해요${nW ? ' · 이번 달 위스키 구매 ' + nW + '건은 My Bar에서 자동으로 들어와요' : ''}</p></div>
+      <div><h2>Ledger</h2><p>수입과 지출을 기록하고, 카드명세서를 올려 분석해요</p></div>
       <div class="fin-act"><button class="btn" id="ldImport"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 10h18M7 15h4"/></svg>명세서 가져오기</button><button class="btn primary" id="ldAdd"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span class="hide-m">내역 추가</span></button></div>
     </div>
     <div class="ld-month"><button class="btn" id="ldPrev" aria-label="이전 달">‹</button><b>${monthLabel(ym)}</b><button class="btn" id="ldNext" aria-label="다음 달">›</button>${ym !== today().slice(0, 7) ? '<button class="btn" id="ldNow">이번 달</button>' : ''}</div>
@@ -2465,19 +2462,21 @@ function brandKey(name){
   if (m && toks.length === 1) k = m[1];
   return k;
 }
+const CONV_RE = /gs ?25|지에스 ?\(?gs\)? ?25|지에스25|지에스리테일|세븐일레븐|코리아세븐|이마트24|미니스탑|\bcu\b|씨유|편의점/;
 const CARD_RULES = [
   ['경조사', /경조|축의|조의|부의|화환|웨딩|예식/],
-  ['주거·통신', /skt|sk텔레콤|\bkt\b|케이티|lg ?u\+|엘지유플|u\+|통신|한국전력|한전|도시가스|가스공사|관리비|수도|전기요금|인터넷|월세|알뜰폰|헬로모바일|브로드밴드/],
+  ['주거·통신', /skt|sk텔레콤|\bkt\b|케이티|lg ?u\+|엘지유플|u\+|통신|한국전력|한전|도시가스|가스공사|가스|관리비|수도|전기요금|인터넷|월세|알뜰폰|헬로모바일|브로드밴드|예스코|yesco|쉴더스|캡스/],
   ['보험·금융', /보험|연회비|수수료|이자|대출|캐피탈|저축|적금|페이 ?충전/],
   ['교통', /택시|카카오 ?t|kakao ?t|티머니|t-?money|지하철|버스|코레일|korail|ktx|srt|주유|주차|하이패스|고속도로|도로공사|에스오일|s-?oil|gs ?칼텍스|sk ?에너지|현대오일|알뜰주유|타다|우티|쏘카|그린카|따릉이|세차|톨게이트|카카오모빌리티/],
   ['의료·건강', /병원|의원|약국|치과|한의원|안과|이비인후|피부과|정형|내과|외과|소아과|산부인과|클리닉|메디|헬스|피트니스|필라테스|요가|\bgym\b|검진|라식/],
-  ['술·유흥', /위스키|와인|주류|양조|맥주|호프|포차|이자카야|\bbar\b|\bpub\b|펍|술집|리쿼|liquor|소주|막걸리|유흥|노래|코인노래|라운지|칵테일|하이볼|보틀/],
+  ['위스키', /데일리샷|dailyshot|와인앤모어|위스키샵|리쿼샵|주류백화점/],
+  ['술·유흥', /위스키|와인|주류|양조|맥주|비어|beer|호프|포차|이자카야|\bbar\b|\bpub\b|펍|술집|리쿼|liquor|소주|막걸리|유흥|노래|코인노래|라운지|칵테일|하이볼|보틀/],
   ['문화·여가', /넷플릭스|netflix|유튜브|youtube|디즈니|disney|왓챠|티빙|웨이브|wavve|쿠팡플레이|spotify|스포티파이|멜론|지니뮤직|apple\.com|itunes|app ?store|google ?play|구글 ?플레이|nintendo|스팀|steam|playstation|cgv|메가박스|롯데시네마|영화|교보문고|예스24|yes24|알라딘|밀리의서재|리디|ridi|골프|스크린|볼링|당구|여행|호텔|리조트|에어비앤비|airbnb|야놀자|여기어때|항공|대한항공|아시아나|진에어|티웨이|제주항공|공연|전시|티켓|인터파크|예매|에버랜드|롯데월드|캠핑|chatgpt|openai|claude|anthropic|notion|icloud|dropbox|github/],
-  ['카페·간식', /스타벅스|투썸|이디야|메가 ?mgc|메가커피|컴포즈|빽다방|할리스|폴바셋|커피|카페|cafe|coffee|베이커리|빵|파리바게|뚜레쥬르|배스킨|던킨|디저트|아이스크림|gs ?25|지에스25|세븐일레븐|이마트24|미니스탑|\bcu\b|씨유|편의점|마카롱|도넛|와플|샌드위치|공차|설빙/],
-  ['식비', /맥도날드|버거킹|롯데리아|맘스터치|\bkfc\b|서브웨이|김밥|분식|국밥|식당|한식|중식|일식|치킨|피자|족발|보쌈|곱창|삼겹|갈비|냉면|칼국수|순대|설렁탕|샤브|초밥|스시|돈까스|돈가스|라멘|우동|쌀국수|배달의민족|우아한형제|요기요|쿠팡이츠|마켓컬리|컬리|이마트|홈플러스|롯데마트|코스트코|하나로마트|푸드|반점|해장|횟집|고기|\bbbq\b|\bbhc\b|교촌|굽네|도미노|파파존스|밥/],
-  ['쇼핑', /쿠팡|coupang|네이버 ?페이|naver ?pay|11번가|지마켓|gmarket|옥션|올리브영|다이소|무신사|\bssg\b|쓱|롯데온|위메프|티몬|알리익스프레스|aliexpress|테무|temu|아마존|amazon|지그재그|에이블리|당근|이케아|ikea|하이마트|오늘의집|유니클로|\bzara\b|자라|h&m|나이키|아디다스|신세계|현대백화점|롯데백화점|백화점|아울렛|문구|오피스/]
+  ['카페·간식', /스타벅스|투썸|이디야|메가 ?mgc|메가커피|컴포즈|빽다방|할리스|폴바셋|커피|카페|cafe|coffee|베이커리|빵|파리바게|뚜레쥬르|배스킨|던킨|디저트|아이스크림|마카롱|도넛|와플|샌드위치|공차|설빙/],
+  ['식비', /맥도날드|버거킹|롯데리아|맘스터치|\bkfc\b|서브웨이|버거|김밥|분식|국밥|식당|한식|중식|일식|치킨|피자|족발|보쌈|곱창|삼겹|갈비|냉면|칼국수|순대|설렁탕|샤브|초밥|스시|돈까스|돈가스|라멘|우동|쌀국수|배달의민족|우아한형제|요기요|쿠팡이츠|마켓컬리|컬리|이마트|홈플러스|롯데마트|코스트코|하나로마트|트레이더스|노브랜드|마트|슈퍼|fresh|프레시|푸드|반점|해장|횟집|고기|\bbbq\b|\bbhc\b|교촌|굽네|도미노|파파존스|밥|쿡|도시락|휴게소/],
+  ['쇼핑', /쿠팡|coupang|네이버 ?페이|naver ?pay|11번가|지마켓|gmarket|옥션|올리브영|다이소|무신사|ssg|쓱|롯데온|위메프|티몬|알리익스프레스|aliexpress|테무|temu|아마존|amazon|지그재그|에이블리|당근|이케아|ikea|하이마트|오늘의집|유니클로|\bzara\b|자라|h&m|나이키|아디다스|신세계|현대백화점|롯데백화점|백화점|아울렛|문구|오피스/]
 ];
-function classifyMerchant(name){
+function classifyMerchant(name, amt){
   const raw = String(name || ''), k = mKey(raw), bk = brandKey(raw), R = FIN.rules || {};
   if (R[k]) return { cat: R[k], src: 'learned' };
   if (bk && R[bk]) return { cat: R[bk], src: 'learned' };
@@ -2485,6 +2484,7 @@ function classifyMerchant(name){
   Object.keys(R).forEach(rk => { if (rk.length >= 3 && k.indexOf(rk) === 0 && (!best || rk.length > best.length)) best = rk; });
   if (best) return { cat: R[best], src: 'learned' };
   const low = raw.toLowerCase();
+  if (CONV_RE.test(low) && !/더프레시|fresh|프레시/.test(low)) return { cat: Math.abs(amt || 0) >= 30000 ? '식비' : '카페·간식', src: 'auto' };
   for (const [cat, re] of CARD_RULES) if (re.test(low)) return { cat, src: 'auto' };
   return { cat: '기타', src: 'none' };
 }
@@ -2524,14 +2524,43 @@ function loadXLSX(){
   });
   return _xlsxP;
 }
+function htmlToSheets(text){
+  const doc = new DOMParser().parseFromString(text, 'text/html'), sheets = [];
+  doc.querySelectorAll('table').forEach((t, i) => {
+    if (t.querySelector('table')) return;
+    const rows = [];
+    t.querySelectorAll('tr').forEach(tr => {
+      const cells = Array.from(tr.children).filter(c => /^t[dh]$/i.test(c.tagName)).map(c => c.textContent.split('\n').map(x => x.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n'));
+      if (cells.some(c => c)) rows.push(cells);
+    });
+    if (rows.length) sheets.push({ name: '표 ' + (i + 1), rows });
+  });
+  return sheets;
+}
+function cleanMerchant(s){
+  let t = String(s || '').replace(/\s+/g, ' ').trim();
+  t = t.replace(/^#\s*/, '');
+  t = t.replace(/^(?:나이스|nice|kcp|ksnet|토스페이먼츠|다날|kg ?이니시스|이니시스|\(?주\)?\s*스마트로|스마트로|올앳|페이레터)\s*-\s*/i, '');
+  t = t.replace(/\(\s*주\s*\)|㈜/g, ' ').replace(/^(?:주식회사|유한회사)\s+|\s+(?:주식회사|유한회사)$/g, ' ');
+  t = t.replace(/\s*\d{1,2}월(?:[-\s].*)?$/, '').replace(/\s*\d+건\/월$/, '');
+  t = t.replace(/\s+/g, ' ').trim();
+  return t || String(s || '').trim();
+}
+function cardNameFromFile(fn){
+  const base = String(fn || '').replace(/\.[^.]+$/, '');
+  const m = base.match(/(삼성|현대|신한|국민|kb|롯데|하나|우리|비씨|bc|nh|농협|씨티|카카오|토스)\s?카드/i);
+  if (m) return m[0].replace(/\s/g, '');
+  return base.replace(/[\d_\-()\s]*(이용내역|명세서|거래내역|내역|이용대금).*$/, '').replace(/[_\-\s]*\d{0,4}년?\s*\d{1,2}월.*$/, '').replace(/[\d_\-()\s]+$/, '').trim();
+}
 async function readStatementFile(file){
   const buf = await file.arrayBuffer();
   if (/\.(csv|tsv|txt)$/i.test(file.name)) return [{ name: file.name, rows: parseCSVText(decodeKR(buf)) }];
-  const head = new TextDecoder('latin1').decode(new Uint8Array(buf.slice(0, 300))).toLowerCase();
+  const head = new TextDecoder('latin1').decode(new Uint8Array(buf.slice(0, 400))).toLowerCase();
+  if (/<html|<table|<!doctype|<meta/.test(head)) { const sh = htmlToSheets(decodeKR(buf)); if (sh.length) return sh; }
   const XL = await loadXLSX();
   let wb;
   try {
-    if (/<html|<table|<\?xml|<!doctype/.test(head)) wb = XL.read(decodeKR(buf), { type: 'string' });
+    if (/<\?xml/.test(head)) wb = XL.read(decodeKR(buf), { type: 'string' });
     else wb = XL.read(buf, { type: 'array' });
   } catch (e) {
     throw new Error('파일을 열지 못했어요. 비밀번호가 걸린 파일이면 엑셀에서 비밀번호를 푼 뒤 다시 저장해서 올려 주세요');
@@ -2545,7 +2574,7 @@ const COL_KEYS = {
   merchant: ['이용가맹점', '가맹점명', '가맹점', '이용처', '이용하신곳', '사용처', '상호', '거래처', '이용내역', '내용', '적요'],
   amount: ['이용금액', '승인금액', '사용금액', '매출금액', '청구금액', '결제금액', '거래금액', '금액'],
   status: ['취소여부', '승인구분', '거래구분', '상태', '취소'],
-  inst: ['할부개월', '할부']
+  inst: ['할부개월', '할부기간', '할부', '개월']
 };
 const AMT_BAD = /수수료|잔액|포인트|적립|할인|원금|이자|한도/;
 const hnorm = v => String(v == null ? '' : v).replace(/\s/g, '');
@@ -2584,13 +2613,14 @@ function parseAmt(v){
   s = s.replace(/[^\d.]/g, ''); if (!s || s === '.') return null;
   const n = Number(s); return isFinite(n) ? (neg ? -n : n) : null;
 }
-function detectStatement(rows){
+function detectStatement(rows, allowGuess = true){
   let hi = -1, map = {}, best = 0;
   for (let i = 0; i < Math.min(rows.length, 40); i++) {
     const m = detectCols(rows[i]); const sc = ['date', 'merchant', 'amount'].filter(f => m[f] != null).length;
     if (sc > best) { best = sc; hi = i; map = m; if (sc === 3) break; }
   }
   if (best >= 2) return { hi, map };
+  if (!allowGuess) return { hi: -1, map: {} };
   // 헤더가 없을 때: 내용으로 추측
   const ncol = Math.max.apply(null, rows.slice(0, 60).map(r => r.length).concat([0]));
   const stat = [];
@@ -2608,32 +2638,50 @@ function detectStatement(rows){
 }
 
 /* --- 행 만들기 --- */
-const IMP = { card: '', fileName: '', sheets: [], si: 0, hi: -1, map: {}, items: [], filter: 'all', learn: {} };
-function impBuild(){
-  const sh = IMP.sheets[IMP.si]; const rows = sh ? sh.rows : [];
-  const m = IMP.map, out = [];
-  if (m.date == null || m.merchant == null || m.amount == null) { IMP.items = []; return; }
-  for (let i = IMP.hi + 1; i < rows.length; i++) {
-    const r = rows[i]; const date = parseDateCell(r[m.date]); let amt = parseAmt(r[m.amount]);
-    const name = String(r[m.merchant] == null ? '' : r[m.merchant]).trim();
+const IMP = { card: '', fileName: '', sheets: [], si: 0, items: [], filter: 'all', learn: {} };
+function impBuildSheet(sh){
+  const rows = sh.rows, m = sh.map || {}, out = [];
+  if (m.date == null || m.merchant == null || m.amount == null) return out;
+  const hdr = sh.hi >= 0 ? rows[sh.hi] : [], hn = hdr.map(hnorm);
+  const colWon = hn.findIndex(h => h === '원금'), colBen = hn.findIndex(h => /혜택금액/.test(h));
+  const billed = colWon >= 0 && colBen >= 0;
+  for (let i = sh.hi + 1; i < rows.length; i++) {
+    const r = rows[i]; const date = parseDateCell(r[m.date]);
+    let rawName = String(r[m.merchant] == null ? '' : r[m.merchant]).trim();
+    let amt = parseAmt(r[m.amount]);
+    const mm = rawName.match(/^([\s\S]*?)\n\s*(-?[\d,]+)\s*$/);
+    if (mm) { if (amt == null || amt === 0) amt = parseAmt(mm[2]); rawName = mm[1]; }
+    const name = cleanMerchant(rawName.replace(/\n/g, ' '));
     if (!date || amt == null || amt === 0 || !name || /합계|소계|총계|^계$/.test(name.replace(/\s/g, ''))) continue;
+    const iv = m.inst != null ? String(r[m.inst]).trim() : '';
+    const inst = /^\d{1,2}$/.test(iv) ? Number(iv) : 0;
+    let skip = '', include = true;
+    if (billed && inst <= 1) {
+      const b = parseAmt(r[colWon]);
+      if (b != null) { if (b === 0) { skip = '청구 0원(상품권·전액할인)'; include = false; } else amt = b; }
+    }
     const st = m.status != null ? hnorm(r[m.status]) : '';
-    const hdrRow = IMP.hi >= 0 ? rows[IMP.hi] : null;
-    const flagCol = hdrRow && m.status != null && /취소/.test(hnorm(hdrRow[m.status]));
+    const flagCol = m.status != null && /취소/.test(hnorm(hdr[m.status]));
     if (amt > 0 && ((/취소/.test(st) && !/취소불가|미취소|취소안/.test(st)) || (flagCol && /^(y|yes|예|o|true)$/i.test(st)))) amt = -amt;
-    const inst = m.inst != null ? Number(String(r[m.inst]).replace(/[^\d]/g, '')) || 0 : 0;
-    const cl = classifyMerchant(name);
-    out.push({ date, name, amt, inst, cat: cl.src === 'none' ? '기타' : cl.cat, src: cl.src, bk: brandKey(name), include: true, skip: '' });
+    const cl = classifyMerchant(name, amt);
+    out.push({ date, name, amt, inst, cat: cl.src === 'none' ? '기타' : cl.cat, src: cl.src, bk: brandKey(name), include, skip });
   }
-  // 취소 짝 맞추기 (같은 가맹점·같은 금액)
+  return out;
+}
+function impBuild(){
+  let items = [];
+  IMP.sheets.forEach(sh => { if (!sh.skip) items = items.concat(impBuildSheet(sh)); });
+  const plain = items.filter(n => n.inst <= 1 && n.amt > 0).map(n => n.date).sort();
+  if (plain.length) { const cut = plain[0].slice(0, 7) + '-01'; items.forEach(n => { if (n.inst > 1 && n.date < cut && !n.skip) { n.include = false; n.skip = '이전 달 할부 구매'; } }); }
   const used = new Set();
-  out.forEach((n, ni) => {
+  items.forEach(n => {
     if (n.amt >= 0) return;
-    const pi = out.findIndex((p, j) => !used.has(j) && p.amt > 0 && p.amt === -n.amt && mKey(p.name) === mKey(n.name));
-    if (pi >= 0) { used.add(pi); out[pi].include = false; out[pi].skip = '취소됨'; n.include = false; n.skip = '취소'; }
+    const pi = items.findIndex((p, j) => !used.has(j) && p.amt > 0 && !p.skip && p.amt === -n.amt && mKey(p.name) === mKey(n.name));
+    if (pi >= 0) { used.add(pi); items[pi].include = false; items[pi].skip = '취소됨'; n.include = false; n.skip = '취소'; }
+    else { n.include = false; n.skip = '환불(원거래 없음)'; }
   });
-  out.sort((a, b) => a.date < b.date ? 1 : a.date > b.date ? -1 : 0);
-  IMP.items = out; impMarkDupes();
+  items.sort((a, b) => a.date < b.date ? 1 : a.date > b.date ? -1 : 0);
+  IMP.items = items; impMarkDupes();
 }
 function impMarkDupes(){
   const have = new Set(FIN.ledger.map(r => r.import_key).filter(Boolean));
@@ -2641,16 +2689,16 @@ function impMarkDupes(){
   IMP.items.forEach(n => {
     const base = [IMP.card.trim(), n.date, mKey(n.name), n.amt].join('|');
     seq[base] = (seq[base] || 0) + 1; n.key = base + '#' + seq[base];
-    if (n.skip === '이미 등록됨' || n.skip === '위스키 앱에 있음') { n.skip = ''; n.include = true; }
+    if (n.skip === '이미 등록됨') { n.skip = ''; n.include = true; }
     if (n.skip) return;
-    if (have.has(n.key)) { n.skip = '이미 등록됨'; n.include = false; return; }
-    if (n.amt > 0 && S.items.some(it => Number(it.price) === n.amt && String(it.date).slice(0, 10) === n.date)) { n.skip = '위스키 앱에 있음'; n.include = false; }
+    if (have.has(n.key)) { n.skip = '이미 등록됨'; n.include = false; }
   });
 }
-function impPickSheet(){
-  let bestI = 0, bestN = -1;
-  IMP.sheets.forEach((s, i) => { const d = detectStatement(s.rows); const save = { hi: IMP.hi, map: IMP.map, si: IMP.si }; IMP.si = i; IMP.hi = d.hi; IMP.map = d.map; impBuild(); const n = IMP.items.length; if (n > bestN) { bestN = n; bestI = i; } IMP.hi = save.hi; IMP.map = save.map; IMP.si = save.si; });
-  IMP.si = bestI; const d = detectStatement(IMP.sheets[bestI].rows); IMP.hi = d.hi; IMP.map = d.map; impBuild();
+function impDetectAll(){
+  IMP.sheets.forEach(sh => { sh.skip = /해외이용|취소/.test(sh.name); const d = detectStatement(sh.rows, IMP.sheets.length === 1); sh.hi = d.hi; sh.map = d.map; });
+  let best = 0, bn = -1;
+  IMP.sheets.forEach((sh, i) => { if (sh.skip) return; const n = impBuildSheet(sh).length; if (n > bn) { bn = n; best = i; } });
+  IMP.si = best; impBuild();
 }
 
 /* --- 모달 UI --- */
@@ -2668,15 +2716,15 @@ function openImport(){
         const t = ev.target;
         if (t.id === 'impFile') { const f = t.files && t.files[0]; if (f) await impLoad(f, box); return; }
         if (t.id === 'impCard') { IMP.card = t.value; impMarkDupes(); draw(); return; }
-        if (t.classList.contains('imp-ck')) { const n = IMP.items[Number(t.closest('.imp-r').dataset.i)]; n.include = t.checked; if (t.checked && n.skip) n.skip = n.skip + '·포함'; impSummaryRefresh(box); t.closest('.imp-r').classList.toggle('off', !n.include); return; }
+        if (t.classList.contains('imp-ck')) { const n = IMP.items[Number(t.closest('.imp-r').dataset.i)]; n.include = t.checked; impSummaryRefresh(box); t.closest('.imp-r').classList.toggle('off', !n.include); return; }
         if (t.classList.contains('imp-cat')) {
           const n = IMP.items[Number(t.closest('.imp-r').dataset.i)];
           IMP.items.forEach(x => { if (x.bk === n.bk && x.amt > 0) { x.cat = t.value; x.src = 'user'; } });
           IMP.learn[n.bk] = { cat: t.value, name: n.name };
           const sc = box.querySelector('.imp-list'); const top = sc ? sc.scrollTop : 0; draw(); const sc2 = box.querySelector('.imp-list'); if (sc2) sc2.scrollTop = top; return;
         }
-        if (t.classList.contains('imp-map')) { IMP.map[t.dataset.f] = t.value === '' ? undefined : Number(t.value); impBuild(); draw(); return; }
-        if (t.id === 'impSheet') { IMP.si = Number(t.value); const d = detectStatement(IMP.sheets[IMP.si].rows); IMP.hi = d.hi; IMP.map = d.map; impBuild(); draw(); return; }
+        if (t.classList.contains('imp-map')) { IMP.sheets[IMP.si].map[t.dataset.f] = t.value === '' ? undefined : Number(t.value); impBuild(); draw(); return; }
+        if (t.id === 'impSheet') { IMP.si = Number(t.value); draw(); return; }
       });
       box.addEventListener('click', ev => {
         const f = ev.target.closest('[data-if]'); if (f) { IMP.filter = f.dataset.if; draw(); return; }
@@ -2714,24 +2762,26 @@ async function impLoad(file, box){
   const el = box.querySelector('#impStatus'); if (el) el.textContent = '읽는 중…';
   try {
     IMP.sheets = await readStatementFile(file); IMP.fileName = file.name;
-    if (!IMP.card) IMP.card = file.name.replace(/\.[^.]+$/, '').replace(/[\d_\-()\s]*(이용내역|명세서|거래내역|내역).*$/, '').replace(/[\d_\-()\s]+$/, '').trim();
-    impPickSheet();
-    if (!IMP.items.length && !(IMP.map.date != null && IMP.map.merchant != null && IMP.map.amount != null)) toast('열을 자동으로 찾지 못했어요. 아래 “열 매칭”에서 직접 골라 주세요', true);
+    if (!IMP.card) IMP.card = cardNameFromFile(file.name);
+    impDetectAll();
+    const P = IMP.sheets[IMP.si], ok = P && P.map && P.map.date != null && P.map.merchant != null && P.map.amount != null;
+    if (!IMP.items.length && !ok) toast('열을 자동으로 찾지 못했어요. 아래 “열 매칭”에서 직접 골라 주세요', true);
     else if (!IMP.items.length) toast('인식된 내역이 없어요', true);
   } catch (e) { toast(e.message || '파일을 읽지 못했어요', true); IMP.sheets = []; }
   box._draw();
 }
 function impStats(){
   const on = IMP.items.filter(n => n.include), exp = on.filter(n => n.amt > 0).reduce((a, n) => a + n.amt, 0), ref = on.filter(n => n.amt < 0).reduce((a, n) => a - n.amt, 0);
-  const off = IMP.items.filter(n => !n.include);
-  return { on: on.length, exp, ref, none: IMP.items.filter(n => n.include && n.src === 'none' && n.amt > 0).length, dup: off.filter(n => /이미|위스키/.test(n.skip)).length, cancel: off.filter(n => /취소/.test(n.skip)).length, off: off.length };
+  const off = IMP.items.filter(n => !n.include), dates = IMP.items.map(n => n.date).sort();
+  return { on: on.length, exp, ref, none: IMP.items.filter(n => n.include && n.src === 'none' && n.amt > 0).length, dup: off.filter(n => /이미/.test(n.skip)).length, cancel: off.filter(n => /취소|환불/.test(n.skip)).length, off: off.length, from: dates[0] || '', to: dates[dates.length - 1] || '' };
 }
 function impSummaryRefresh(box){
   const s = impStats(); const el = box.querySelector('.imp-sum'); if (el) el.innerHTML = impSumHTML(s);
   const sv = $('#finSave'); if (sv) sv.textContent = s.on ? s.on + '건 등록' : '등록';
 }
 function impSumHTML(s){
-  return `<div><span>등록 대상</span><b>${s.on}건</b></div><div><span>지출 합계</span><b class="money">${won(s.exp)}</b></div>${s.ref ? `<div><span>환불</span><b class="money inc">${won(s.ref)}</b></div>` : ''}<div><span>분류 확인 필요</span><b class="${s.none ? 'up' : ''}">${s.none}건</b></div><div><span>제외</span><b>${s.off}건</b><small>${s.dup ? '중복 ' + s.dup : ''}${s.dup && s.cancel ? ' · ' : ''}${s.cancel ? '취소 ' + s.cancel : ''}</small></div>`;
+  const other = s.off - s.dup - s.cancel;
+  return `<div><span>이용 기간</span><b style="font-size:13px">${esc(s.from.slice(5).replace('-', '.'))} ~ ${esc(s.to.slice(5).replace('-', '.'))}</b></div><div><span>등록 대상</span><b>${s.on}건</b></div><div><span>지출 합계</span><b class="money">${won(s.exp)}</b></div>${s.ref ? `<div><span>환불</span><b class="money inc">${won(s.ref)}</b></div>` : ''}<div><span>분류 확인 필요</span><b class="${s.none ? 'up' : ''}">${s.none}건</b></div><div><span>제외</span><b>${s.off}건</b><small>${[s.dup ? '중복 ' + s.dup : '', s.cancel ? '취소·환불 ' + s.cancel : '', other > 0 ? '기타 ' + other : ''].filter(Boolean).join(' · ')}</small></div>`;
 }
 function impRender(box){
   if (!IMP.sheets.length) {
@@ -2741,30 +2791,31 @@ function impRender(box){
     const sv = $('#finSave'); if (sv) sv.textContent = '등록';
     return;
   }
-  const sh = IMP.sheets[IMP.si], hdr = IMP.hi >= 0 && sh.rows[IMP.hi] ? sh.rows[IMP.hi] : (sh.rows[0] || []);
-  const ncol = Math.max.apply(null, sh.rows.slice(0, 50).map(r => r.length).concat([hdr.length]));
-  const colName = i => { const h = hdr[i]; const t = h == null || h === '' ? '' : String(h).trim(); return (i + 1) + '열' + (t && IMP.hi >= 0 ? ' · ' + t.slice(0, 14) : ''); };
-  const sel = (f, label, opt) => `<label class="imp-ms"><span>${label}</span><select class="in imp-map" data-f="${f}"><option value="">${opt ? '없음' : '선택'}</option>${Array.from({ length: ncol }, (_, i) => `<option value="${i}" ${IMP.map[f] === i ? 'selected' : ''}>${esc(colName(i))}</option>`).join('')}</select></label>`;
-  const complete = IMP.map.date != null && IMP.map.merchant != null && IMP.map.amount != null;
+  const P = IMP.sheets[IMP.si], hdr = P.hi >= 0 && P.rows[P.hi] ? P.rows[P.hi] : (P.rows[0] || []);
+  const ncol = Math.max.apply(null, P.rows.slice(0, 50).map(r => r.length).concat([hdr.length]));
+  const colName = i => { const h = hdr[i]; const t = h == null || h === '' ? '' : String(h).replace(/\s+/g, ' ').trim(); return (i + 1) + '열' + (t && P.hi >= 0 ? ' · ' + t.slice(0, 14) : ''); };
+  const sel = (f, label, opt) => `<label class="imp-ms"><span>${label}</span><select class="in imp-map" data-f="${f}"><option value="">${opt ? '없음' : '선택'}</option>${Array.from({ length: ncol }, (_, i) => `<option value="${i}" ${P.map[f] === i ? 'selected' : ''}>${esc(colName(i))}</option>`).join('')}</select></label>`;
+  const complete = P.map.date != null && P.map.merchant != null && P.map.amount != null;
   const s = impStats();
+  const used = IMP.sheets.filter(x => !x.skip && x.map && x.map.date != null).map(x => x.name);
   const list = IMP.items.map((n, i) => ({ n, i })).filter(({ n }) => IMP.filter === 'all' ? true : IMP.filter === 'none' ? (n.src === 'none' && n.amt > 0) : !n.include);
   box.innerHTML = `
     <div class="imp-top">
       <div class="f"><label class="l">카드 이름 <small>(여러 장이면 카드별로 구분돼요)</small></label><input class="in" id="impCard" list="dlCards" value="${esc(IMP.card)}" placeholder="예: 삼성카드"></div>
       <div class="imp-fi"><span>${esc(IMP.fileName)}</span><label class="btn" for="impFile">다른 파일</label><input type="file" id="impFile" accept=".xlsx,.xls,.csv,.tsv,.txt" hidden></div>
     </div>
-    ${IMP.sheets.length > 1 ? `<div class="f"><label class="l">시트</label><select class="in" id="impSheet">${IMP.sheets.map((x, i) => `<option value="${i}" ${i === IMP.si ? 'selected' : ''}>${esc(x.name)} (${x.rows.length}행)</option>`).join('')}</select></div>` : ''}
-    <details class="imp-map-d" ${complete ? '' : 'open'}><summary>${complete ? '열 매칭 확인 · 날짜·가맹점·금액을 찾았어요' : '열 매칭 · 아래에서 직접 골라 주세요'}</summary>
+    <details class="imp-map-d" ${complete ? '' : 'open'}><summary>${complete ? '열 매칭 확인 · 날짜·가맹점·금액을 찾았어요' + (used.length > 1 ? ' (' + esc(used.join(', ')) + ')' : '') : '열 매칭 · 아래에서 직접 골라 주세요'}</summary>
+      ${IMP.sheets.length > 1 ? `<div class="f" style="margin-top:10px"><label class="l">열 매칭을 확인할 시트</label><select class="in" id="impSheet">${IMP.sheets.map((x, i) => x.skip ? '' : `<option value="${i}" ${i === IMP.si ? 'selected' : ''}>${esc(x.name)} (${x.rows.length}행)</option>`).join('')}</select></div>` : ''}
       <div class="imp-ms-g">${sel('date', '날짜')}${sel('merchant', '가맹점')}${sel('amount', '금액')}${sel('status', '취소 구분', true)}${sel('inst', '할부', true)}</div></details>
-    ${complete ? `<div class="imp-sum">${impSumHTML(s)}</div>
+    ${IMP.items.length ? `<div class="imp-sum">${impSumHTML(s)}</div>
     <div class="fin-chips"><button class="chip ${IMP.filter === 'all' ? 'on' : ''}" data-if="all">전체 ${IMP.items.length}</button><button class="chip ${IMP.filter === 'none' ? 'on' : ''}" data-if="none">분류 확인 필요 ${s.none}</button><button class="chip ${IMP.filter === 'off' ? 'on' : ''}" data-if="off">제외됨 ${s.off}</button>${IMP.items.some(n => !n.include && !n.skip) ? '<button class="chip" id="impAllOn">직접 제외한 항목 모두 포함</button>' : ''}</div>
     <div class="imp-list">${list.length ? list.map(({ n, i }) => `<div class="imp-r ${n.include ? '' : 'off'}" data-i="${i}">
       <input type="checkbox" class="imp-ck" ${n.include ? 'checked' : ''} aria-label="포함">
       <span class="imp-d">${esc(n.date.slice(5))}</span>
-      <span class="imp-n"><b>${esc(n.name)}</b>${n.inst > 1 ? `<em>할부 ${n.inst}</em>` : ''}${n.skip ? `<em class="sk">${esc(n.skip.replace('·포함', ''))}</em>` : ''}${n.src === 'none' && n.amt > 0 ? '<em class="nw">확인</em>' : ''}</span>
+      <span class="imp-n"><b>${esc(n.name)}</b>${n.inst > 1 ? `<em>할부 ${n.inst}</em>` : ''}${n.skip ? `<em class="sk">${esc(n.skip)}</em>` : ''}${n.src === 'none' && n.amt > 0 ? '<em class="nw">확인</em>' : ''}</span>
       ${n.amt < 0 ? '<span class="imp-rf">환불</span>' : `<select class="in imp-cat" aria-label="카테고리">${EXP_CATS.map(c => `<option ${c === n.cat ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select>`}
       <b class="money imp-a ${n.amt < 0 ? 'inc' : ''}">${n.amt < 0 ? '+' : ''}${won(Math.abs(n.amt))}</b></div>`).join('') : '<div class="tr-empty" style="padding:22px 6px">표시할 내역이 없어요.</div>'}</div>
-    <div class="hint" style="margin-top:10px">카테고리를 바꾸면 같은 가맹점이 한꺼번에 바뀌고, 등록할 때 기억해서 다음부터는 자동으로 분류돼요. 할부는 명세서에 찍힌 금액 그대로 들어가요.</div>` : '<div class="hint">날짜·가맹점·금액 열을 모두 고르면 내역이 나타나요.</div>'}`;
+    <div class="hint" style="margin-top:10px">카테고리를 바꾸면 같은 가맹점이 한꺼번에 바뀌고, 등록할 때 기억해서 다음부터는 자동으로 분류돼요. 금액은 실제 청구액 기준이고, 할부는 이용일에 전체 금액으로 넣어요(이전 달 할부 구매는 제외).</div>` : '<div class="hint">날짜·가맹점·금액 열을 모두 고르면 내역이 나타나요.</div>'}`;
   const sv = $('#finSave'); if (sv) sv.textContent = s.on ? s.on + '건 등록' : '등록';
 }
 
@@ -2833,7 +2884,6 @@ document.addEventListener('click', ev => {
   const r = ev.target.closest('.ld-row');
   if (r) {
     const id = r.dataset.eid;
-    if (id.charAt(0) === 'w') { toast('위스키 구매 내역은 My Bar에서 수정할 수 있어요'); return; }
     const x = FIN.ledger.find(y => y.id === id);
     if (x) openLedgerForm({ id: x.id, kind: x.kind, date: String(x.entry_date), cat: x.category, amt: fnum(x.amount), memo: x.memo, merchant: x.merchant });
   }
