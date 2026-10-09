@@ -711,8 +711,8 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .top .btn .icon{margin:0;width:18px;height:18px}
 
 /* ===================== 투자 · 가계부 (v1.4.0) ===================== */
-:root{--c-pf:#2fa56b;--c-ld:#e0a030;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--up:#e5484d;--down:#2f6fe0;--inc:#1c9a6a}
-:root[data-theme="dark"]{--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--up:#ff7b7f;--down:#6aa8ff;--inc:#4fd1a5}
+:root{--c-pf:#2fa56b;--c-ld:#e0a030;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s6:#008300;--s7:#4a3aa7;--up:#e5484d;--down:#2f6fe0;--inc:#1c9a6a}
+:root[data-theme="dark"]{--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--s7:#9085e9;--up:#ff7b7f;--down:#6aa8ff;--inc:#4fd1a5}
 .tabs button[data-tab="portfolio"]{--tc:var(--c-pf)}
 .tabs button[data-tab="ledger"]{--tc:var(--c-ld)}
 #portfolioView{--tc:var(--c-pf)}#ledgerView{--tc:var(--c-ld)}
@@ -738,7 +738,7 @@ body[data-tab="portfolio"] #btnAdd,body[data-tab="ledger"] #btnAdd{display:none}
 .fs-alloc{grid-column:1/-1}
 .al-bar{display:flex;gap:2px;height:14px}
 .al-bar i{display:block;border-radius:4px;min-width:6px}
-.al-bar i.s1,.dot.s1{background:var(--s1)}.al-bar i.s2,.dot.s2{background:var(--s2)}.al-bar i.s3,.dot.s3{background:var(--s3)}.al-bar i.s4,.dot.s4{background:var(--s4)}.al-bar i.s5,.dot.s5{background:var(--s5)}
+.al-bar i.s1,.dot.s1{background:var(--s1)}.al-bar i.s2,.dot.s2{background:var(--s2)}.al-bar i.s3,.dot.s3{background:var(--s3)}.al-bar i.s4,.dot.s4{background:var(--s4)}.al-bar i.s5,.dot.s5{background:var(--s5)}.al-bar i.s6,.dot.s6{background:var(--s6)}.al-bar i.s7,.dot.s7{background:var(--s7)}
 .al-legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:12px}
 .al-it{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink2)}
 .al-it b{color:var(--ink)}.al-it em{font-style:normal;color:var(--ink3)}
@@ -763,6 +763,14 @@ body[data-tab="portfolio"] #btnAdd,body[data-tab="ledger"] #btnAdd{display:none}
 .fh-w{background:color-mix(in srgb,#e5484d 14%,var(--card));color:var(--up);border:1px solid color-mix(in srgb,#e5484d 40%,var(--line))}
 .fh-t{background:var(--soft);color:var(--ink2);border:1px solid var(--line)}
 .fh-p{font-size:13px;color:var(--ink2);text-align:right;font-variant-numeric:tabular-nums}
+.fh-cash{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card2);border:0;border-top:1px dashed var(--line2);padding:11px 20px;color:var(--ink);cursor:pointer;font-size:13px}
+.fh-cash:hover{background:var(--soft)}.fh-cash span{color:var(--ink2);font-weight:700}.fh-cash b{font-variant-numeric:tabular-nums}.fh-cash small{color:var(--ink3);font-weight:600;margin-left:6px}
+.fh-cash.empty b{color:var(--c-pf);font-weight:700}
+.fin-sec{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:22px 2px 10px}
+.fin-sec h3{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--ink)}.fin-sec span{font-size:12px;color:var(--ink3)}
+.asset-empty{border:1.5px dashed var(--line2);border-radius:16px;padding:22px 18px;text-align:center;color:var(--ink3);font-size:12.5px;line-height:1.7;margin-bottom:14px}
+.asset-empty .btn{margin-top:10px}
+.fh-row.asset{grid-template-columns:minmax(0,1fr) auto}
 .fh-v{display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-variant-numeric:tabular-nums}.fh-v b{font-size:14px}.fh-v small{font-size:11.5px;font-weight:700}
 .ld-month{display:flex;align-items:center;gap:10px;margin:0 0 14px}.ld-month b{font-size:17px;min-width:116px;text-align:center}
 .ld-month .btn{height:38px;min-width:38px;padding:0 12px;justify-content:center}
@@ -1200,7 +1208,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.4.0';
+const APP_VERSION = 'v1.5.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -1864,16 +1872,18 @@ const FIN = {
   loaded: false, loading: false, updating: false,
   broker: store.get('finBroker', 'all'), month: today().slice(0,7), errors: {}, failed: []
 };
-const MK_LABEL = { KR:'국내 주식·ETF', US:'해외 주식', COIN:'코인', GOLD:'금', CASH:'현금' };
-const MK_ORDER = ['KR','US','COIN','GOLD','CASH'];
-const MK_SERIES = { KR:'s1', US:'s2', COIN:'s3', GOLD:'s4', CASH:'s5' };
+const MK_LABEL = { KR:'국내 주식·ETF', US:'해외 주식', COIN:'코인', GOLD:'금', CASH:'예수금', BANK:'통장·예금', OTHER:'기타 자산' };
+const MK_ORDER = ['KR','US','COIN','GOLD','CASH','BANK','OTHER'];
+const MK_SERIES = { KR:'s1', US:'s2', COIN:'s3', GOLD:'s4', CASH:'s5', BANK:'s6', OTHER:'s7' };
+const INV_MK = ['KR','US','COIN','GOLD'];
+const isCashLike = h => h.market === 'CASH' || h.market === 'BANK' || h.market === 'OTHER';
 const EXP_CATS = ['식비','카페·간식','교통','주거·통신','쇼핑','의료·건강','문화·여가','경조사','보험·금융','기타'];
 const INC_CATS = ['급여','부수입','투자수익','기타수입'];
 const fnum = v => { const n = Number(v); return isFinite(n) ? n : 0; };
 const fxRate = () => FIN.fx.usdkrw > 0 ? FIN.fx.usdkrw : 1350;
 const hMul = h => h.currency === 'USD' ? fxRate() : 1;
-function hValue(h){ if (h.market === 'CASH') return fnum(h.qty); if (h.last_price == null) return null; return fnum(h.last_price) * fnum(h.qty) * hMul(h); }
-function hCost(h){ if (h.market === 'CASH') return fnum(h.qty); return fnum(h.avg_price) * fnum(h.qty) * hMul(h); }
+function hValue(h){ if (isCashLike(h)) return fnum(h.qty) * hMul(h); if (h.last_price == null) return null; return fnum(h.last_price) * fnum(h.qty) * hMul(h); }
+function hCost(h){ if (isCashLike(h)) return fnum(h.qty) * hMul(h); return fnum(h.avg_price) * fnum(h.qty) * hMul(h); }
 function hNeedsSymbol(h){ return (h.market === 'KR' || h.market === 'US' || h.market === 'COIN') && !h.symbol; }
 const usd = n => '$' + Number(n).toLocaleString('en-US', { maximumFractionDigits: 2 });
 const fmtQty = n => { const v = fnum(n); return v.toLocaleString('ko-KR', { maximumFractionDigits: 8 }); };
@@ -1914,9 +1924,13 @@ function finEnsure(render){
 
 /* ===== Portfolio ===== */
 function finTotals(list){
-  let v = 0, c = 0; const byMk = {};
-  list.forEach(h => { const cost = hCost(h), val = hValue(h), vv = val == null ? cost : val; v += vv; c += cost; byMk[h.market] = (byMk[h.market] || 0) + vv; });
-  return { v, c, pnl: v - c, pct: c > 0 ? (v - c) / c * 100 : 0, byMk };
+  let v = 0, c = 0, iv = 0, ic = 0; const byMk = {};
+  list.forEach(h => {
+    const cost = hCost(h), val = hValue(h), vv = val == null ? cost : val;
+    v += vv; c += cost; byMk[h.market] = (byMk[h.market] || 0) + vv;
+    if (!isCashLike(h)) { iv += vv; ic += cost; }
+  });
+  return { v, c, iv, ic, other: v - iv, pnl: iv - ic, pct: ic > 0 ? (iv - ic) / ic * 100 : 0, byMk };
 }
 function renderPortfolioTab(){ finEnsure(renderPortfolio); }
 function renderPortfolio(){
@@ -1941,6 +1955,8 @@ function renderPortfolio(){
     if (!g) { g = { k, broker: h.broker, account: h.account, items: [] }; groups.push(g); }
     g.items.push(h);
   });
+  const isAssetGrp = g => g.items.every(h => h.market === 'BANK' || h.market === 'OTHER');
+  const invGroups = groups.filter(g => !isAssetGrp(g)), assetGroups = groups.filter(isAssetGrp);
   const failBanner = FIN.failed.length ? `<div class="fin-warn">시세를 못 가져온 종목 ${FIN.failed.length}개: ${esc(FIN.failed.slice(0, 6).join(', '))}${FIN.failed.length > 6 ? ' 외' : ''}<br><small>종목을 눌러 종목코드를 확인하거나 현재가를 직접 입력해 주세요. 마지막으로 저장된 가격을 쓰고 있어요.</small></div>` : '';
   const missSym = all.filter(hNeedsSymbol).length;
 
@@ -1949,19 +1965,20 @@ function renderPortfolio(){
       <div><h2>Portfolio</h2><p>${lastAt ? '시세 기준 ' + fmtDT(lastAt) : '아직 시세를 가져오지 않았어요'} · 환율 ${fxRate().toLocaleString('ko-KR', { maximumFractionDigits: 1 })}원</p></div>
       <div class="fin-act">
         <button class="btn" id="pfAdd" title="종목 추가" aria-label="종목 추가"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span class="hide-m">종목 추가</span></button>
+        <button class="btn" id="pfAsset" title="통장·기타 자산 추가" aria-label="통장·기타 자산 추가"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18M16 15h2"/></svg>자산 추가</button>
         <button class="btn primary" id="pfUpdate" ${FIN.updating ? 'disabled' : ''}><svg class="icon ${FIN.updating ? 'spin' : ''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>${FIN.updating ? '가져오는 중…' : '시세 업데이트'}</button>
       </div>
     </div>
     ${failBanner}
     <section class="card fin-sum">
       <div class="fs-hero">
-        <div class="lbl">총 평가금액</div>
+        <div class="lbl">총 자산</div>
         <div class="fs-big money">${won(T.v)}</div>
-        <div class="fs-pn ${pnCls(T.pnl)}"><span class="money">${arrow(T.pnl)} ${won(Math.abs(T.pnl))}</span> <b>${pctTxt(T.pct)}</b></div>
+        <div class="fs-pn ${pnCls(T.pnl)}"><span style="color:var(--ink3);font-weight:600">투자 손익</span> <span class="money">${arrow(T.pnl)} ${won(Math.abs(T.pnl))}</span> <b>${pctTxt(T.pct)}</b></div>
       </div>
       <div class="fs-side">
-        <div><span>총 매입금액</span><b class="money">${won(T.c)}</b></div>
-        <div><span>보유 종목</span><b>${all.length}개</b></div>
+        <div><span>투자자산 평가액</span><b class="money">${won(T.iv)}</b></div>
+        <div><span>예수금·통장·기타</span><b class="money">${won(T.other)}</b></div>
         <div><span>USD/KRW</span><b>${fxRate().toLocaleString('ko-KR', { maximumFractionDigits: 1 })}</b></div>
       </div>
       <div class="fs-alloc">${alloc}</div>
@@ -1972,17 +1989,34 @@ function renderPortfolio(){
       ${brokers.map(b => `<button class="chip ${FIN.broker === b ? 'on' : ''}" data-fb="${esc(b)}">${esc(b)}</button>`).join('')}
     </div>
     ${missSym ? `<div class="fin-note">종목코드가 없는 ${missSym}개는 시세 업데이트 때 이름으로 자동 매칭을 시도해요.</div>` : ''}
-    ${groups.map(g => {
+    ${invGroups.map(g => {
+      const gt = finTotals(g.items);
+      const stocks = g.items.filter(h => !isCashLike(h)), cashes = g.items.filter(h => h.market === 'CASH');
+      const cashV = cashes.reduce((a, h) => a + (hValue(h) || 0), 0);
+      const usdCash = cashes.filter(h => h.currency === 'USD').reduce((a, h) => a + fnum(h.qty), 0);
+      const cashRow = `<button class="fh-cash ${cashes.length ? '' : 'empty'}" data-cb="${esc(g.broker)}" data-ca="${esc(g.account)}"><span>예수금</span>${cashes.length ? `<div><b class="money">${won(cashV)}</b>${usdCash ? `<small class="money">${usd(usdCash)}</small>` : ''}</div>` : '<b>+ 예수금 입력</b>'}</button>`;
+      return `<section class="card fin-grp">
+        <header class="fg-h">
+          <div><div class="fg-t">${esc(g.broker)} <em>${esc(g.account)}</em></div><div class="fg-s">${stocks.length}종목${cashV ? ' · 예수금 포함' : ''} · 비중 ${(gt.v / (T.v || 1) * 100).toFixed(1)}%</div></div>
+          <div class="fg-r"><b class="money">${won(gt.v)}</b>${stocks.length ? `<span class="pn ${pnCls(gt.pnl)}"><span class="money">${arrow(gt.pnl)} ${won(Math.abs(gt.pnl))}</span> ${pctTxt(gt.pct)}</span>` : ''}</div>
+        </header>
+        <div class="fh-rows">${stocks.map(holdRow).join('')}</div>
+        ${cashRow}
+      </section>`;
+    }).join('')}
+    <div class="fin-sec"><h3>통장 · 기타 자산</h3><span>${assetGroups.length ? won(assetGroups.reduce((a, g) => a + finTotals(g.items).v, 0)) : ''}</span></div>
+    ${assetGroups.map(g => {
       const gt = finTotals(g.items);
       return `<section class="card fin-grp">
         <header class="fg-h">
-          <div><div class="fg-t">${esc(g.broker)} <em>${esc(g.account)}</em></div><div class="fg-s">${g.items.length}종목 · 비중 ${(gt.v / (T.v || 1) * 100).toFixed(1)}%</div></div>
-          <div class="fg-r"><b class="money">${won(gt.v)}</b><span class="pn ${pnCls(gt.pnl)}"><span class="money">${arrow(gt.pnl)} ${won(Math.abs(gt.pnl))}</span> ${pctTxt(gt.pct)}</span></div>
+          <div><div class="fg-t">${esc(g.broker || '기타')} <em>${esc(g.account)}</em></div><div class="fg-s">${g.items.length}개 · 비중 ${(gt.v / (T.v || 1) * 100).toFixed(1)}%</div></div>
+          <div class="fg-r"><b class="money">${won(gt.v)}</b></div>
         </header>
-        <div class="fh-rows">${g.items.map(holdRow).join('')}</div>
+        <div class="fh-rows">${g.items.map(assetRow).join('')}</div>
       </section>`;
     }).join('')}
-    <div class="fin-foot">해외주식 매입금액은 현재 환율로 환산해서 환차손익은 반영되지 않아요. 금 시세는 국제 금값 환산 근사치예요.</div>`;
+    ${!assetGroups.length && FIN.broker === 'all' ? `<div class="asset-empty">월급통장, 비상금 통장, 적금, 부동산 보증금처럼<br>시세가 없는 자산도 직접 금액을 넣어 총 자산에 합칠 수 있어요.<br><button class="btn primary" id="pfAsset2">+ 자산 추가</button></div>` : ''}
+    <div class="fin-foot">예수금·통장·기타 자산은 직접 입력한 금액이에요(빚은 마이너스로 입력). 해외주식 매입금액은 현재 환율로 환산해서 환차손익은 반영되지 않고, 금 시세는 국제 금값 환산 근사치예요.</div>`;
   renderTrend(T.v);
 }
 function holdRow(h){
@@ -1994,6 +2028,14 @@ function holdRow(h){
     <span class="fh-n"><b>${esc(h.name)}</b>${warn}${approx}<small>${fmtQty(h.qty)}${esc(h.unit)} · 평균 ${h.market === 'CASH' ? '-' : fmtPrice(h, h.avg_price)}${h.memo ? ' · ' + esc(h.memo) : ''}</small></span>
     <span class="fh-p">${fmtPrice(h, h.last_price)}</span>
     <span class="fh-v"><b class="money">${val == null ? '-' : won(val)}</b>${h.market === 'CASH' ? '' : `<small class="pn ${pnCls(pnl)}">${val == null ? '' : arrow(pnl) + ' ' + pctTxt(pct)}</small>`}</span>
+  </button>`;
+}
+function assetRow(h){
+  const val = hValue(h);
+  const sub = [h.market === 'BANK' ? '통장·예금' : '기타', h.currency === 'USD' ? usd(h.qty) : '', h.memo].filter(Boolean).join(' · ');
+  return `<button class="fh-row asset" data-hid="${esc(h.id)}">
+    <span class="fh-n"><b>${esc(h.name)}</b><small>${esc(sub)}</small></span>
+    <span class="fh-v"><b class="money ${val < 0 ? 'down' : ''}">${val == null ? '-' : won(val)}</b></span>
   </button>`;
 }
 function renderTrend(curTotal){
@@ -2010,8 +2052,8 @@ function renderTrend(curTotal){
   const line = pts.map((p, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(p.v).toFixed(1)).join(' ');
   const area = line + ' L' + X(pts.length - 1).toFixed(1) + ' ' + (H - pb) + ' L' + X(0).toFixed(1) + ' ' + (H - pb) + ' Z';
   const last = pts[pts.length - 1], first = pts[0];
-  box.innerHTML = `<div class="tr-h"><b>총 평가금액 추이</b><span>${esc(first.d.slice(5))} → ${esc(last.d.slice(5))}</span></div>
-    <div class="tr-wrap"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" class="tr-svg" role="img" aria-label="총 평가금액 추이">
+  box.innerHTML = `<div class="tr-h"><b>총 자산 추이</b><span>${esc(first.d.slice(5))} → ${esc(last.d.slice(5))}</span></div>
+    <div class="tr-wrap"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" class="tr-svg" role="img" aria-label="총 자산 추이">
       <defs><linearGradient id="trg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--s1)" stop-opacity=".28"/><stop offset="1" stop-color="var(--s1)" stop-opacity="0"/></linearGradient></defs>
       <path d="${area}" fill="url(#trg)"/><path d="${line}" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
       <g id="trHover" style="display:none"><line id="trLine" y1="${pt}" y2="${H - pb}" stroke="var(--ink3)" stroke-width="1" vector-effect="non-scaling-stroke"/><circle id="trDot" r="5" fill="var(--s1)" stroke="var(--card)" stroke-width="2" vector-effect="non-scaling-stroke"/></g>
@@ -2083,7 +2125,7 @@ async function refreshPrices(){
       else if (h.market === 'US' && h.symbol) k = 'US:' + h.symbol;
       else if (h.market === 'COIN' && h.symbol) k = 'COIN:' + h.symbol;
       else if (h.market === 'GOLD') k = 'GOLD';
-      if (!k) { if (h.market !== 'CASH') FIN.failed.push(h.name); return; }
+      if (!k) { if (h.market === 'KR' || h.market === 'US' || h.market === 'COIN') FIN.failed.push(h.name); return; }
       const p = prices[k];
       if (p && p.price > 0) {
         h.last_price = p.price; h.last_price_at = nowIso;
@@ -2143,13 +2185,13 @@ function openHolding(h){
   h = h || { broker: FIN.broker !== 'all' ? FIN.broker : '', account: '', name: '', market: 'KR', symbol: '', qty: '', avg_price: '', last_price: '', unit: '주', memo: '' };
   const brokers = Array.from(new Set(FIN.holdings.map(x => x.broker)));
   const accounts = Array.from(new Set(FIN.holdings.map(x => x.account)));
-  const hint = { KR: '종목코드 6자리 (예: 005930). 비워두면 이름으로 찾아봐요', US: '티커 (예: TSLA)', COIN: '업비트 마켓 (예: KRW-BTC)', GOLD: '입력 안 해도 돼요', CASH: '입력 안 해도 돼요' };
+  const hint = { KR: '종목코드 6자리 (예: 005930). 비워두면 이름으로 찾아봐요', US: '티커 (예: TSLA)', COIN: '업비트 마켓 (예: KRW-BTC)', GOLD: '입력 안 해도 돼요' };
   openFinModal({
     title: isNew ? '종목 추가' : '종목 수정',
     html: `<datalist id="dlBrk">${brokers.map(b => `<option value="${esc(b)}">`).join('')}</datalist><datalist id="dlAcc">${accounts.map(b => `<option value="${esc(b)}">`).join('')}</datalist>
       <div class="row2">${fld('증권사/거래소', `<input class="in" name="broker" list="dlBrk" value="${esc(h.broker)}" placeholder="예: 키움증권">`)}${fld('계좌', `<input class="in" name="account" list="dlAcc" value="${esc(h.account)}" placeholder="예: ISA, 연금저축">`)}</div>
       ${fld('종목명', `<input class="in" name="name" value="${esc(h.name)}" placeholder="종목 이름">`)}
-      <div class="row2">${fld('종류', `<select class="in" name="market">${MK_ORDER.map(k => `<option value="${k}" ${h.market === k ? 'selected' : ''}>${esc(MK_LABEL[k])}</option>`).join('')}</select>`)}${fld('종목코드', `<input class="in" name="symbol" value="${esc(h.symbol || '')}" placeholder="${esc(hint[h.market])}" id="finSym">`)}</div>
+      <div class="row2">${fld('종류', `<select class="in" name="market">${INV_MK.map(k => `<option value="${k}" ${h.market === k ? 'selected' : ''}>${esc(MK_LABEL[k])}</option>`).join('')}</select>`)}${fld('종목코드', `<input class="in" name="symbol" value="${esc(h.symbol || '')}" placeholder="${esc(hint[h.market])}" id="finSym">`)}</div>
       <div class="row2">${fld('수량', `<input class="in" name="qty" inputmode="decimal" value="${esc(h.qty)}" placeholder="0">`)}${fld('단위', `<input class="in" name="unit" value="${esc(h.unit || '')}" placeholder="주, 개, g">`)}</div>
       <div class="row2">${fld('평균 매입가 <span id="finCur">(' + (h.currency === 'USD' ? 'USD' : '원') + ')</span>', `<input class="in" name="avg_price" inputmode="decimal" value="${esc(h.avg_price)}" placeholder="0">`)}${fld('현재가 (직접 입력, 선택)', `<input class="in" name="last_price" inputmode="decimal" value="${esc(h.last_price == null ? '' : h.last_price)}" placeholder="자동 시세가 없을 때만">`)}</div>
       ${fld('메모', `<input class="in" name="memo" value="${esc(h.memo || '')}">`)}
@@ -2159,7 +2201,7 @@ function openHolding(h){
       mk.addEventListener('change', () => {
         body.querySelector('#finSym').placeholder = hint[mk.value];
         body.querySelector('#finCur').textContent = '(' + (mk.value === 'US' ? 'USD' : '원') + ')';
-        const u = body.querySelector('[name=unit]'); if (!u.value || ['주', '개', 'g', '원'].indexOf(u.value) >= 0) u.value = { KR: '주', US: '주', COIN: '개', GOLD: 'g', CASH: '원' }[mk.value];
+        const u = body.querySelector('[name=unit]'); if (!u.value || ['주', '개', 'g', '원'].indexOf(u.value) >= 0) u.value = { KR: '주', US: '주', COIN: '개', GOLD: 'g' }[mk.value];
       });
     },
     async onSave(body){
@@ -2169,7 +2211,6 @@ function openHolding(h){
       const qty = num(g('qty')); if (qty == null || !isFinite(qty)) throw new Error('수량을 입력해 주세요');
       let avg = num(g('avg_price')), last = num(g('last_price'));
       if ((avg != null && !isFinite(avg)) || (last != null && !isFinite(last))) throw new Error('가격은 숫자로 입력해 주세요');
-      if (market === 'CASH') { avg = 1; last = 1; }
       const symRaw = g('symbol');
       const symbol = symRaw ? (market === 'US' || market === 'COIN' ? symRaw.toUpperCase() : symRaw) : (market === 'GOLD' ? 'GOLD' : null);
       const row = { broker: g('broker'), account: g('account'), name, market, symbol, currency: market === 'US' ? 'USD' : 'KRW', qty, avg_price: avg == null ? 0 : avg, unit: g('unit'), memo: g('memo'), updated_at: new Date().toISOString() };
@@ -2194,11 +2235,85 @@ function openHolding(h){
     }
   });
 }
+/* ===== 예수금 · 통장 · 기타 자산 ===== */
+function cashOf(broker, account){ return FIN.holdings.find(x => x.market === 'CASH' && x.broker === broker && x.account === account) || null; }
+function openCash(broker, account){
+  const ex = cashOf(broker, account);
+  const hasUS = FIN.holdings.some(x => x.broker === broker && x.account === account && x.market === 'US');
+  openAsset(ex, { market: 'CASH', broker, account, name: '예수금', currency: ex ? ex.currency : (hasUS ? 'USD' : 'KRW'), lock: true });
+}
+function openAsset(h, preset){
+  const isNew = !h;
+  preset = preset || {};
+  h = h || Object.assign({ broker: '', account: '', name: '', market: 'BANK', qty: '', currency: 'KRW', memo: '' }, preset);
+  const lock = !!preset.lock;
+  const brokers = Array.from(new Set(FIN.holdings.map(x => x.broker)));
+  const accounts = Array.from(new Set(FIN.holdings.map(x => x.account)));
+  const ph = { BANK: ['예: 카카오뱅크', '예: 월급통장, 비상금, 적금', '예: 월급통장'], OTHER: ['예: 부동산, 보험', '예: 전세보증금, 연금보험', '예: 전세보증금'], CASH: ['예: 삼성증권', '예: 종합, 연금저축', '예수금'] };
+  const kinds = ['BANK', 'OTHER', 'CASH'];
+  const title = lock ? `${h.broker} ${h.account} · 예수금` : (isNew ? '자산 추가' : '자산 수정');
+  openFinModal({
+    title,
+    html: `<datalist id="dlBrk">${brokers.map(b => `<option value="${esc(b)}">`).join('')}</datalist><datalist id="dlAcc">${accounts.map(b => `<option value="${esc(b)}">`).join('')}</datalist>
+      ${lock
+        ? `<input type="hidden" name="market" value="CASH"><input type="hidden" name="broker" value="${esc(h.broker)}"><input type="hidden" name="account" value="${esc(h.account)}"><input type="hidden" name="name" value="예수금">`
+        : `${fld('구분', `<select class="in" name="market">${kinds.map(k => `<option value="${k}" ${h.market === k ? 'selected' : ''}>${k === 'CASH' ? '증권계좌 예수금' : esc(MK_LABEL[k])}</option>`).join('')}</select>`)}
+           <div class="row2">${fld('<span id="asL1">기관·분류</span>', `<input class="in" name="broker" list="dlBrk" value="${esc(h.broker)}" placeholder="${ph[h.market][0]}">`)}${fld('<span id="asL2">계좌·종류</span>', `<input class="in" name="account" list="dlAcc" value="${esc(h.account)}" placeholder="${ph[h.market][1]}">`)}</div>
+           ${fld('이름', `<input class="in" name="name" value="${esc(h.name)}" placeholder="${ph[h.market][2]}">`)}`}
+      <div class="row2">${fld('금액 <span id="asCur">(' + (h.currency === 'USD' ? 'USD' : '원') + ')</span>', `<input class="in" name="qty" inputmode="decimal" value="${esc(h.qty)}" placeholder="0" autofocus>`)}${fld('통화', `<select class="in" name="currency"><option value="KRW" ${h.currency !== 'USD' ? 'selected' : ''}>원 (KRW)</option><option value="USD" ${h.currency === 'USD' ? 'selected' : ''}>달러 (USD)</option></select>`)}</div>
+      ${fld('메모', `<input class="in" name="memo" value="${esc(h.memo || '')}">`)}
+      <div class="hint" id="asHint">${h.market === 'OTHER' ? '빚(대출 등)은 금액을 마이너스(-)로 입력하면 총 자산에서 빠져요.' : (lock ? '증권사 앱의 예수금(주문가능금액)을 입력하세요. 달러 예수금은 통화를 달러로 바꿔 주세요.' : '금액은 직접 수정하기 전까지 그대로 유지돼요.')}</div>`,
+    onOpen(body){
+      const q = n => body.querySelector('[name=' + n + ']');
+      const cur = q('currency'), mk = q('market');
+      const sync = () => { body.querySelector('#asCur').textContent = '(' + (cur.value === 'USD' ? 'USD' : '원') + ')'; };
+      cur.addEventListener('change', sync);
+      if (!lock) mk.addEventListener('change', () => {
+        const p = ph[mk.value];
+        q('broker').placeholder = p[0]; q('account').placeholder = p[1]; q('name').placeholder = p[2];
+        body.querySelector('#asL1').textContent = mk.value === 'CASH' ? '증권사' : '기관·분류';
+        body.querySelector('#asL2').textContent = mk.value === 'CASH' ? '계좌' : '계좌·종류';
+        body.querySelector('#asHint').textContent = mk.value === 'OTHER' ? '빚(대출 등)은 금액을 마이너스(-)로 입력하면 총 자산에서 빠져요.' : (mk.value === 'CASH' ? '이미 예수금이 있는 계좌면 금액이 덮어써져요.' : '금액은 직접 수정하기 전까지 그대로 유지돼요.');
+      });
+    },
+    async onSave(body){
+      const g = n => body.querySelector('[name=' + n + ']').value.trim();
+      const market = g('market'), broker = g('broker'), account = g('account');
+      let name = g('name'); if (market === 'CASH' && !name) name = '예수금';
+      if (!name) throw new Error('이름을 입력해 주세요');
+      if (market === 'CASH' && (!broker || !account)) throw new Error('증권사와 계좌를 입력해 주세요');
+      const amt = Number(String(g('qty')).replace(/,/g, ''));
+      if (g('qty') === '' || !isFinite(amt)) throw new Error('금액을 숫자로 입력해 주세요');
+      const currency = g('currency') === 'USD' ? 'USD' : 'KRW';
+      const row = { broker, account, name, market, symbol: null, currency, qty: amt, avg_price: 1, last_price: 1, last_price_at: new Date().toISOString(), unit: currency === 'USD' ? '$' : '원', memo: g('memo'), updated_at: new Date().toISOString() };
+      const target = h.id ? h : (market === 'CASH' ? cashOf(broker, account) : null);
+      if (!target) {
+        row.sort_order = FIN.holdings.reduce((m, x) => Math.max(m, x.sort_order || 0), 0) + 1;
+        const { data, error } = await sb.from('fin_holdings').insert(row).select().single();
+        if (error) throw new Error(error.message);
+        FIN.holdings.push(data);
+      } else {
+        const { data, error } = await sb.from('fin_holdings').update(row).eq('id', target.id).select().single();
+        if (error) throw new Error(error.message);
+        const i = FIN.holdings.findIndex(x => x.id === target.id); if (i >= 0) FIN.holdings[i] = data;
+      }
+      closeFinModal(); renderPortfolio(); toast('저장했어요');
+    },
+    onDelete: isNew ? null : async () => {
+      const { error } = await sb.from('fin_holdings').delete().eq('id', h.id);
+      if (error) throw new Error(error.message);
+      FIN.holdings = FIN.holdings.filter(x => x.id !== h.id);
+      closeFinModal(); renderPortfolio(); toast('삭제했어요');
+    }
+  });
+}
 document.addEventListener('click', e => {
   if (S.tab !== 'portfolio') return;
-  const row = e.target.closest('.fh-row'); if (row) { const h = FIN.holdings.find(x => x.id === row.dataset.hid); if (h) openHolding(h); return; }
+  const cb = e.target.closest('.fh-cash'); if (cb) { openCash(cb.dataset.cb, cb.dataset.ca); return; }
+  const row = e.target.closest('.fh-row'); if (row) { const h = FIN.holdings.find(x => x.id === row.dataset.hid); if (h) (isCashLike(h) ? openAsset(h) : openHolding(h)); return; }
   const chip = e.target.closest('[data-fb]'); if (chip) { FIN.broker = chip.dataset.fb; store.set('finBroker', FIN.broker); renderPortfolio(); return; }
   if (e.target.closest('#pfAdd')) { openHolding(null); return; }
+  if (e.target.closest('#pfAsset, #pfAsset2')) { openAsset(null); return; }
   if (e.target.closest('#pfUpdate')) { refreshPrices(); return; }
 });
 
