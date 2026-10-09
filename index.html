@@ -1174,6 +1174,133 @@ body[data-grp="w"] #tabs button:not([data-g="w"]),body[data-grp="m"] #tabs butto
 .big{white-space:nowrap}
 .grptabs button{white-space:nowrap}
 @media(max-width:640px){.grptabs{gap:5px}.grptabs button{padding:11px 6px;font-size:13px;gap:6px}.grptabs button[data-grp="h"]{flex:0 0 auto;padding:11px 14px}}
+
+/* ===== v1.15 — 음주 관리 · 리뷰 · 재무 건전성 · 캘린더 ===== */
+:root{--c-cal:#4fb3d9}
+:root[data-theme="dark"]{--c-cal:#6cc8ea}
+.tabs button[data-tab="cal"]{--tc:var(--c-cal)}
+body[data-tab="cal"] #btnAdd{display:none}
+.hm-card.wfull{grid-column:1/-1}
+/* 음주 */
+.dk-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:2px 2px 12px}
+.dk-head b{font-size:16px;font-weight:800;letter-spacing:-.02em;display:block}
+.dk-head span{font-size:12px;color:var(--ink3)}
+.dk-sub{font-size:12px;color:var(--ink3);font-weight:600}
+.dk-note{padding:14px 16px;margin-bottom:14px;display:flex;flex-direction:column;gap:8px}
+.dk-m{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.5;color:var(--ink)}
+.dk-m i{flex:none;width:9px;height:9px;border-radius:50%;margin-top:6px;background:var(--ink3)}
+.dk-m.ok i{background:var(--inc)}.dk-m.hi i{background:#eda100}.dk-m.bad i{background:var(--up)}
+.dk-week{padding:14px 16px;margin-bottom:14px}
+.dk-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.dk-d{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 0 8px;border-radius:14px;background:color-mix(in srgb,var(--ink) 4%,transparent);min-width:0}
+.dk-d em{font-style:normal;font-size:11.5px;font-weight:700;color:var(--ink3)}
+.dk-d span{height:30px;min-width:30px;padding:0 4px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--ink2);font-variant-numeric:tabular-nums}
+.dk-d span svg{width:16px;height:16px}
+.dk-d small{font-size:11px;color:var(--ink3)}
+.dk-d.dry span{background:color-mix(in srgb,var(--inc) 22%,transparent);color:var(--inc)}
+.dk-d.mid span{background:color-mix(in srgb,var(--c-bar) 24%,transparent);color:var(--ink)}
+.dk-d.hi span{background:color-mix(in srgb,#eda100 34%,transparent);color:var(--ink)}
+.dk-d.bad span{background:color-mix(in srgb,var(--up) 32%,transparent);color:var(--ink)}
+.dk-d.fut{opacity:.45}
+.dk-d.today{box-shadow:0 0 0 1.5px var(--c-life) inset}
+.dk-recheck{padding:14px 16px;margin-bottom:14px}
+.dk-rcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.dk-rc{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--ink) 4%,transparent)}
+.dk-rc span{font-size:11.5px;font-weight:700;color:var(--ink3)}
+.dk-rc b{font-size:19px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.dk-rc b small{font-size:11px;color:var(--ink3);margin-left:3px;font-weight:600}
+.dk-rc b.hi{color:var(--up)}
+.dk-rc>small{font-size:11.5px;font-weight:700;color:var(--ink3)}
+.dk-rc>small.up{color:var(--up)}.dk-rc>small.down{color:var(--down)}
+.dk-guide{padding:14px 16px;margin:0 0 28px}
+.dk-guide>b{font-size:14px;font-weight:800}
+.dk-gl{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.dk-gl span{font-size:12px;padding:6px 10px;border-radius:999px;background:color-mix(in srgb,var(--ink) 5%,transparent);color:var(--ink2)}
+.dk-gl em{font-style:normal;font-weight:800;color:var(--c-life);margin-left:3px}
+.dk-calc{margin:-4px 0 12px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--c-life) 10%,transparent);font-size:13px;color:var(--ink2)}
+.dk-calc b{color:var(--ink);font-weight:800}
+.dk-src{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:999px;background:color-mix(in srgb,var(--c-bar) 20%,transparent);color:var(--ink2);margin-left:4px}
+/* 리뷰 */
+.rv .hm-t{align-items:center}
+.rv .hm-t>span{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.rv-span{font-style:normal;font-size:12px;font-weight:600;color:var(--ink3);margin-left:6px}
+.rv-seg{flex:none}
+.rv-seg button{padding:5px 14px;font-size:12.5px}
+.rv-tiles{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:6px}
+.rv-t{display:flex;flex-direction:column;gap:4px;padding:12px 12px 11px;border-radius:16px;background:color-mix(in srgb,var(--tc) 8%,var(--card));border:1px solid color-mix(in srgb,var(--tc) 16%,var(--line));min-width:0}
+.rv-t span{font-size:11.5px;font-weight:700;color:var(--ink3)}
+.rv-t b{font-size:21px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rv-t b small{font-size:12px;color:var(--ink3);margin-left:2px;font-weight:600}
+.rv-t b .money{font-size:17px;color:inherit}
+.rv-t b .up{color:var(--up)}.rv-t b .down{color:var(--down)}
+.rv-t>small{font-size:11.5px;color:var(--ink3);font-weight:600}
+.rv-no{font-size:15px;color:var(--ink3);font-weight:700}
+.rv-d.g{color:var(--inc)!important}.rv-d.b{color:var(--up)!important}
+.rv-lines{display:flex;flex-direction:column;gap:7px;margin-top:14px}
+.rv-l{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.5;color:var(--ink)}
+.rv-l i{flex:none;width:8px;height:8px;border-radius:50%;margin-top:7px;background:var(--ink3)}
+.rv-l.ok i{background:var(--inc)}.rv-l.hi i{background:#eda100}.rv-l.in i{background:var(--c-home)}
+.rv-foot{margin-top:10px;font-size:11.5px;color:var(--ink3)}
+/* 재무 건전성 */
+.fz{padding:16px 18px;margin-bottom:14px}
+.fz-h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.fz-h b{font-size:16px;font-weight:800;letter-spacing:-.02em;display:block}
+.fz-h span{font-size:12px;color:var(--ink3)}
+.fz-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.fz-t{display:flex;flex-direction:column;gap:6px;padding:13px 14px;border-radius:16px;background:color-mix(in srgb,var(--c-ld) 8%,var(--card));border:1px solid color-mix(in srgb,var(--c-ld) 18%,var(--line));min-width:0}
+.fz-t:nth-child(2){background:color-mix(in srgb,var(--c-pf) 8%,var(--card));border-color:color-mix(in srgb,var(--c-pf) 20%,var(--line))}
+.fz-t:nth-child(3){background:color-mix(in srgb,var(--c-goal) 8%,var(--card));border-color:color-mix(in srgb,var(--c-goal) 20%,var(--line))}
+.fz-t:nth-child(4){background:color-mix(in srgb,var(--c-bar) 9%,var(--card));border-color:color-mix(in srgb,var(--c-bar) 22%,var(--line))}
+.fz-t>span{font-size:12px;font-weight:700;color:var(--ink3)}
+.fz-t>b{font-size:24px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:3px;flex-wrap:wrap;line-height:1.15}
+.fz-t>b small{font-size:12px;color:var(--ink3);font-weight:600}
+.fz-t>b .money{font-size:inherit}
+.fz-t>b .lf-tag{margin-left:6px;align-self:center}
+.fz-t>small{font-size:11.5px;color:var(--ink3);line-height:1.4}
+.fz-no{font-size:15px!important;color:var(--ink3)!important;font-weight:700!important}
+.fz-bar{height:7px;border-radius:999px;background:color-mix(in srgb,var(--ink) 8%,transparent);overflow:hidden}
+.fz-bar i{display:block;height:100%;border-radius:999px}
+.fz-foot{margin-top:12px;font-size:11.5px;color:var(--ink3);line-height:1.55}
+/* 캘린더 */
+.ev-nav{display:flex;align-items:center;gap:10px;margin:0 0 12px}
+.ev-nav b{font-size:17px;font-weight:800;letter-spacing:-.02em;min-width:110px;text-align:center}
+.ev-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:8px;gap:0;margin-bottom:8px}
+.ev-dow{text-align:center;font-size:12px;font-weight:700;color:var(--ink3);padding:6px 0}
+.ev-dow.su{color:var(--up)}.ev-dow.sa{color:var(--down)}
+.ev-c{min-height:84px;padding:5px 4px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:3px;min-width:0}
+.ev-c.out{background:color-mix(in srgb,var(--ink) 2.5%,transparent)}
+.ev-n{font-size:12.5px;font-weight:700;color:var(--ink2);width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.ev-c.su .ev-n{color:var(--up)}.ev-c.sa .ev-n{color:var(--down)}
+.ev-c.today .ev-n{background:var(--c-cal);color:#fff}
+.ev-chip{display:flex;align-items:center;gap:4px;border:0;border-radius:8px;padding:3px 5px;text-align:left;font-size:11px;font-weight:700;color:var(--ink);cursor:pointer;min-width:0;background:color-mix(in srgb,var(--c-pf) 18%,var(--card))}
+.ev-chip.iv{background:color-mix(in srgb,var(--c-home) 18%,var(--card))}
+.ev-chip i,.ev-dot{flex:none;width:7px;height:7px;border-radius:50%;background:var(--c-pf);display:inline-block}
+.ev-chip.iv i,.ev-dot.iv{background:var(--c-home)}
+.ev-chip b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
+.ev-more{font-size:10.5px;color:var(--ink3);padding-left:4px}
+.ev-row .d{display:flex;align-items:center;gap:7px}
+.ev-row .m small{margin-left:6px;color:var(--ink3)}
+.ev-row .r{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.ev-dd{color:var(--c-cal);font-weight:800}
+.ev-sum{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:10px;font-size:12.5px;color:var(--ink3)}
+.ev-sum b{color:var(--ink);font-weight:800;margin-left:4px}
+.ev-pre{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.ev-pre .btn{padding:6px 11px;font-size:12px}
+@media(max-width:900px){.rv-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}.fz-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){
+  .rv-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.rv-t b{font-size:19px}
+  .dk-d{padding:8px 0 6px}.dk-d span{height:26px;min-width:26px;font-size:12px}
+  .ev-c{min-height:58px;padding:3px 2px}
+  .ev-chip{padding:2px 3px;justify-content:center;background:transparent!important}
+  .ev-chip b{display:none}
+  .ev-chip i{width:8px;height:8px}
+  .ev-dow{font-size:11px}
+}
+
+.jv-abvrow{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12.5px;color:var(--ink3)}
+#jvMl{display:flex;flex-wrap:wrap;gap:6px}
+.dk-r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:420px){.dk-r3{grid-template-columns:1fr 1fr}}
 </style>
 <script>
 (function(){
@@ -1233,6 +1360,7 @@ body[data-grp="w"] #tabs button:not([data-g="w"]),body[data-grp="m"] #tabs butto
     <button data-tab="wdb" data-g="w"><svg class="tabi" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="8" ry="2.5"/><path d="M4 5.5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/><path d="M4 11.5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/></svg>Library</button>
     <button data-tab="portfolio" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M3 17l5.5-5.5 4 4L21 7"/><path d="M15 7h6v6"/></svg>Portfolio</button>
     <button data-tab="ledger" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10.5h18"/><circle cx="16.5" cy="14.8" r="1.1"/></svg>Ledger</button>
+    <button data-tab="cal" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/><path d="M8 14h2M12 14h2M8 17h2"/></svg>Calendar</button>
     <button data-tab="life" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.9c0 5.6-7.5 10-7.5 10z"/><path d="M7.5 12.5h2.6l1.4-2.4 2 4 1.2-1.6h1.8"/></svg>Life</button>
   </nav>
 
@@ -1282,6 +1410,7 @@ body[data-grp="w"] #tabs button:not([data-g="w"]),body[data-grp="m"] #tabs butto
   <div id="lifeView" hidden></div>
   <div id="portfolioView" hidden></div>
   <div id="ledgerView" hidden></div>
+  <div id="calView" hidden></div>
   <div id="soonView" hidden></div>
 </div>
 
@@ -1510,6 +1639,7 @@ body[data-grp="w"] #tabs button:not([data-g="w"]),body[data-grp="m"] #tabs butto
         <button type="button" data-star="1">★</button><button type="button" data-star="2">★</button><button type="button" data-star="3">★</button><button type="button" data-star="4">★</button><button type="button" data-star="5">★</button>
       </div></div>
       <div class="f"><label class="l">잔 (Glass)</label><div class="jv-glass" id="jvGlass"></div></div>
+      <div class="f"><label class="l">마신 양 <span style="font-weight:500;color:var(--ink3)">· 건강 탭의 음주 기록에 자동 반영돼요</span></label><div class="lf-chips" id="jvMl"></div><div class="jv-abvrow">도수 <input class="in" id="jvAbv" inputmode="decimal" placeholder="40" style="width:84px"> %</div></div>
       <div class="f"><label class="l">향 (Nose)</label><div class="jv-tagfield" id="jvTagNose"></div></div>
       <div class="f"><label class="l">맛 (Palate)</label><div class="jv-tagfield" id="jvTagPalate"></div></div>
       <div class="f"><label class="l">여운 (Finish)</label><div class="jv-tagfield" id="jvTagFinish"></div></div>
@@ -1596,7 +1726,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.14.1';
+const APP_VERSION = 'v1.15.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -1843,9 +1973,10 @@ function journalPayload(d){
 }
 async function journalAdd(d){
   if (!d.date) throw new Error('날짜를 입력해 주세요.');
-  const { error } = await sb.from('whisky_journal').insert(journalPayload(d));
+  const { data, error } = await sb.from('whisky_journal').insert(journalPayload(d)).select().single();
   if (error) throw new Error(error.message);
-  return loadJournal();
+  await loadJournal();
+  return data && data.id;
 }
 async function journalUpdate(id, d){
   if (!d.date) throw new Error('날짜를 입력해 주세요.');
@@ -1856,6 +1987,7 @@ async function journalUpdate(id, d){
 async function journalDelete(id){
   const { error } = await sb.from('whisky_journal').delete().eq('id', id);
   if (error) throw new Error(error.message);
+  try { await jvDrinkRemove(id); } catch (e) {}
   return loadJournal();
 }
 async function ensureRate(){
@@ -2040,7 +2172,7 @@ let qT; $('#q').addEventListener('input', e => { clearTimeout(qT); qT = setTimeo
 $('#btnPrice').addEventListener('click', () => { S.hidePrice = !S.hidePrice; store.set('hidePrice', S.hidePrice); renderAll(); });
 $('#btnRefresh').addEventListener('click', () => { refresh(); if (S.tab === 'home' || S.tab === 'life') { Promise.all([loadLife(), loadFin()]).then(() => { lifeRerender(); }); } });
 $('#btnAdd').addEventListener('click', () => openForm(null));
-$('#fab').addEventListener('click', () => { if (S.tab === 'home') return; if (S.tab === 'life') lifeAdd(); else if (S.tab === 'portfolio') openHolding(null); else if (S.tab === 'ledger') openLedgerForm(null); else openForm(null); });
+$('#fab').addEventListener('click', () => { if (S.tab === 'home') return; if (S.tab === 'life') lifeAdd(); else if (S.tab === 'portfolio') openHolding(null); else if (S.tab === 'ledger') openLedgerForm(null); else if (S.tab === 'cal') openEvent(null); else openForm(null); });
 
 async function refresh(silent){
   if (!APP.started) return;
@@ -2257,7 +2389,7 @@ $('#btnDel').addEventListener('click', async () => {
 
 /* ---------- 투자(Portfolio) · 가계부(Ledger) ---------- */
 const FIN = {
-  holdings: [], ledger: [], snaps: [], subs: null, rules: {}, fx: { usdkrw: 1354.83, at: '' },
+  holdings: [], ledger: [], snaps: [], subs: null, events: [], rules: {}, fx: { usdkrw: 1354.83, at: '' },
   loaded: false, loading: false, updating: false,
   broker: store.get('finBroker', 'all'), month: today().slice(0,7), errors: {}, failed: []
 };
@@ -2291,16 +2423,18 @@ async function loadFin(){
   if (FIN.loading) return;
   FIN.loading = true;
   try {
-    const [h, l, s, m, ru, sx] = await Promise.all([
+    const [h, l, s, m, ru, sx, ev] = await Promise.all([
       sb.from('fin_holdings').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: true }),
       sb.from('fin_ledger').select('*').order('entry_date', { ascending: false }).order('created_at', { ascending: false }),
       sb.from('fin_snapshots').select('*').order('snap_date', { ascending: true }).limit(800),
       sb.from('fin_meta').select('*'),
       sb.from('fin_merchant_rules').select('*'),
-      sb.from('fin_subs').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: true })
+      sb.from('fin_subs').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: true }),
+      sb.from('fin_events').select('*').order('created_at', { ascending: true })
     ]);
     const bad = [h, l, s, m, ru].find(r => r.error);
     FIN.subs = sx.error ? (FIN.subs || []) : (sx.data || []);
+    FIN.events = ev.error ? (FIN.events || []) : (ev.data || []);
     if (sx.error) toast('구독 목록을 불러오지 못했어요: ' + sx.error.message, true);
     if (bad) throw new Error(bad.error.message);
     FIN.holdings = h.data || []; FIN.ledger = l.data || []; FIN.snaps = s.data || [];
@@ -2721,7 +2855,7 @@ function monthEntries(ym){
 function monthLabel(ym){ return ym.slice(0, 4) + '년 ' + Number(ym.slice(5)) + '월'; }
 function shiftMonth(ym, d){ let y = Number(ym.slice(0, 4)), m = Number(ym.slice(5)) + d; while (m < 1) { m += 12; y--; } while (m > 12) { m -= 12; y++; } return y + '-' + String(m).padStart(2, '0'); }
 const DOW = ['일', '월', '화', '수', '목', '금', '토'];
-function renderLedgerTab(){ finEnsure(renderLedger); }
+function renderLedgerTab(){ finEnsure(renderLedger); if (!LIFE.loaded) lifeReady().then(() => { if (S.tab === 'ledger') renderLedger(); }); }
 function yearExpense(y){
   const arr = new Array(12).fill(0);
   FIN.ledger.forEach(r => { const d = String(r.entry_date); if (d.slice(0, 4) === String(y) && r.kind === '지출') arr[Number(d.slice(5, 7)) - 1] += fnum(r.amount); });
@@ -2759,6 +2893,7 @@ function renderLedger(){
         <div class="ld-bars">${ye.map((v, i) => { const m = yr + '-' + String(i + 1).padStart(2, '0'); return `<button class="ld-b ${m === ym ? 'on' : ''}" data-ym="${m}" title="${i + 1}월 ${won(v)}"><i style="height:${v > 0 ? Math.max(4, v / ymax * 100) : 0}%"></i><span>${i + 1}</span></button>`; }).join('')}</div>
       </section>
     </div>
+    ${fzHTML()}
     ${sxHTML()}
     ${analysisHTML(ym)}
     <section class="card ld-list">
@@ -3364,7 +3499,7 @@ document.addEventListener('click', ev => {
 
 /* ---------- 탭 전환 ---------- */
 const SOON_LABEL = {};
-const TAB_GRP = { home:'h', bar:'w', yt:'w', goal:'w', journal:'w', wdb:'w', portfolio:'m', ledger:'m', life:'m' };
+const TAB_GRP = { home:'h', bar:'w', yt:'w', goal:'w', journal:'w', wdb:'w', portfolio:'m', ledger:'m', cal:'m', life:'m' };
 const GRP_LAST = { h:'home', w:'bar', m:'portfolio' };
 function switchTab(tab){
   S.tab = tab;
@@ -3382,12 +3517,14 @@ function switchTab(tab){
   $('#ytView').hidden = tab !== 'yt';
   $('#portfolioView').hidden = tab !== 'portfolio';
   $('#ledgerView').hidden = tab !== 'ledger';
+  $('#calView').hidden = tab !== 'cal';
   $('#soonView').hidden = !(tab in SOON_LABEL);
   document.body.dataset.tab = tab;
   if (tab === 'home') renderHomeTab();
   else if (tab === 'life') renderLifeTab();
   else if (tab === 'portfolio') renderPortfolioTab();
   else if (tab === 'ledger') renderLedgerTab();
+  else if (tab === 'cal') renderCalTab();
   else if (tab === 'wdb') renderWdbTab();
   else if (tab === 'dist') renderDistTab();
   else if (tab === 'goal') renderGoalTab();
@@ -3849,10 +3986,13 @@ function openJournalForm(it){
     $('#jvWhisky').value = it.whisky || ''; $('#jvReview').value = it.review || ''; $('#jvPhotoUrl').value = it.photo || '';
     jvRatingVal = it.rating || 0; jvGlassVal = it.glass || '';
     jvTags = { nose: splitTags(it.nose), palate: splitTags(it.palate), finish: splitTags(it.finish) };
+    const dr = LIFE.drinks.find(x => x.journal_id === it.id); jvMlVal = dr ? Number(dr.ml) : 0; $('#jvAbv').value = dr ? dr.abv : ''; jvAbvManual = !!dr;
   } else {
     $('#jvDate').value = today(); jvRatingVal = 0; jvGlassVal = '';
     jvTags = { nose: [], palate: [], finish: [] };
+    jvMlVal = 30; $('#jvAbv').value = ''; jvAbvManual = false;
   }
+  jvMlRender();
   jvSyncRating(); jvSyncGlass(); renderAllTagFields();
   $('#jvModalBg').classList.add('show'); document.body.style.overflow = 'hidden';
 }
@@ -3861,6 +4001,9 @@ $('#jvClose').addEventListener('click', closeJournalForm);
 $('#jvCancel').addEventListener('click', closeJournalForm);
 $('#jvModalBg').addEventListener('mousedown', e => { if (e.target.id === 'jvModalBg') closeJournalForm(); });
 $('#jvPhotoClear').addEventListener('click', () => { $('#jvPhotoUrl').value = ''; });
+$('#jvMl').addEventListener('click', e => { const b = e.target.closest('[data-ml]'); if (!b) return; jvMlVal = Number(b.dataset.ml); jvMlRender(); });
+$('#jvAbv').addEventListener('input', () => { jvAbvManual = true; });
+$('#jvWhisky').addEventListener('input', () => { if (jvAbvManual) return; const a = jvAbvFor($('#jvWhisky').value); $('#jvAbv').value = a || ''; });
 $('#jvSave').addEventListener('click', async () => {
   const d = {
     date: $('#jvDate').value, place: $('#jvPlace').value.trim(), withWhom: $('#jvWith').value.trim(),
@@ -3871,8 +4014,10 @@ $('#jvSave').addEventListener('click', async () => {
   if (!d.date){ toast('날짜를 입력해 주세요', true); return; }
   const btn = $('#jvSave'); btn.disabled = true;
   try {
-    if (jvEditing) await journalUpdate(jvEditing.id, d); else await journalAdd(d);
-    renderJournalGrid(); closeJournalForm(); toast(jvEditing ? '수정했어요' : '기록했어요');
+    const wasEdit = !!jvEditing; let jid;
+    if (wasEdit) { await journalUpdate(jvEditing.id, d); jid = jvEditing.id; } else { jid = await journalAdd(d); }
+    let dkErr = null; try { await jvDrinkSync(jid, d, jvMlVal, lfNum($('#jvAbv').value) || jvAbvFor(d.whisky) || 40); } catch (e2) { dkErr = e2; }
+    renderJournalGrid(); closeJournalForm(); toast(dkErr ? '노트는 저장했지만 음주 기록은 반영하지 못했어요' : (wasEdit ? '수정했어요' : '기록했어요'), !!dkErr);
   } catch(err){ toast(err.message || '저장하지 못했어요', true); }
   finally { btn.disabled = false; }
 });
@@ -4098,7 +4243,7 @@ const LIFE = {
   sub: store.get('lifeSub', 'health'), hsub: (v => (v === 'body' || v === 'sleep') ? 'status' : v)(store.get('lifeH', 'status')), gsub: store.get('lifeG', 'habit'),
   bm: 'weight', rng: '90', ck: '혈압',
   more: {}, showDone: false,
-  body: [], workout: [], sleep: [], check: [], exam: [], goals: [], habits: [], logs: [], todos: [], meta: {}, logSet: new Set()
+  body: [], workout: [], sleep: [], check: [], exam: [], drinks: [], goals: [], habits: [], logs: [], todos: [], meta: {}, logSet: new Set()
 };
 const HM_DEF = { height: null, target_weight: null, start_weight: null, sleep_goal: 7, workout_goal: 3 };
 const hm = () => Object.assign({}, HM_DEF, LIFE.meta.health || {});
@@ -4111,7 +4256,7 @@ async function loadLife() {
   LIFE.loading = true;
   try {
     const since = lfAdd(today(), -150);
-    const [b, w, s, c, g, h, l, t, m, xm] = await Promise.all([
+    const [b, w, s, c, g, h, l, t, m, xm, dk] = await Promise.all([
       sb.from('health_body').select('*').order('measured_on', { ascending: false }).limit(1000),
       sb.from('health_workout').select('*').order('done_on', { ascending: false }).limit(1000),
       sb.from('health_sleep').select('*').order('sleep_date', { ascending: false }).limit(1000),
@@ -4121,12 +4266,14 @@ async function loadLife() {
       sb.from('life_habit_logs').select('habit_id,log_date').gte('log_date', since).limit(1000),
       sb.from('life_todos').select('*').order('created_at', { ascending: false }).limit(1000),
       sb.from('life_meta').select('*'),
-      sb.from('health_exam').select('*').order('exam_date', { ascending: false })
+      sb.from('health_exam').select('*').order('exam_date', { ascending: false }),
+      sb.from('health_drink').select('*').order('drink_date', { ascending: false }).limit(3000)
     ]);
     const bad = [b, w, s, c, g, h, l, t, m].find(r => r.error);
     if (bad) throw new Error(bad.error.message);
     LIFE.body = b.data || []; LIFE.workout = w.data || []; LIFE.sleep = s.data || []; LIFE.check = c.data || [];
     LIFE.exam = xm.error ? (LIFE.exam || []) : (xm.data || []);
+    LIFE.drinks = dk.error ? (LIFE.drinks || []) : (dk.data || []);
     LIFE.goals = g.data || []; LIFE.habits = h.data || []; LIFE.logs = l.data || []; LIFE.todos = t.data || [];
     LIFE.meta = {}; (m.data || []).forEach(r => { LIFE.meta[r.key] = r.value; });
     lfRebuildLogs();
@@ -4660,7 +4807,7 @@ function hxPlan(ex) {
   if (/음주/.test(advice)) {
     P.push({ rank: 4, lv: 1, title: '음주', now: '문진 결과 위험음주 상태 · 절주 권고',
       text: `위스키 한 잔(30ml)에 알코올이 약 10g 들어 있어서 소주 한 잔보다 조금 많은 양이에요. 간 수치·체중·혈압·위염 모두 술의 영향을 받는 항목이라, 완전히 끊지 않더라도 '마시는 날 수와 한 번에 마시는 양'을 정해두는 게 현실적인 첫걸음이에요.`,
-      tips: ['일주일에 2~3일은 안 마시는 날로 정하고 습관으로 체크', '마신 날은 잔 수를 세기', '재검 전에 ALT·LDL이 내려가는지 보면 효과가 눈에 보여요'], act: { t: 'habit', label: '습관에 추가', title: '술 안 마신 날', per: 3 } });
+      tips: ['일주일에 2~3일은 안 마시는 날로 정하고 습관으로 체크', '마신 날은 잔 수를 세기', '재검 전에 ALT·LDL이 내려가는지 보면 효과가 눈에 보여요'], act: { t: 'go', label: '음주 기록·관리 보기', h: 'drink' } });
   }
   if (v.glu != null && v.glu >= 100) {
     P.push({ rank: 5, lv: v.glu >= 126 ? 2 : 1, title: '공복혈당', now: `${v.glu} mg/dL (정상 100 미만)`,
@@ -4812,10 +4959,10 @@ function openExam(ex) {
   });
 }
 function healthHTML() {
-  const opts = [['status', '건강 상태'], ['workout', '운동'], ['check', '검진·혈압·혈당']];
+  const opts = [['status', '건강 상태'], ['workout', '운동'], ['drink', '음주'], ['check', '검진·혈압·혈당']];
   if (!opts.some(o => o[0] === LIFE.hsub)) LIFE.hsub = 'status';
   const nav = `<div class="fin-chips" id="lfH">${opts.map(o => `<button type="button" class="chip ${LIFE.hsub === o[0] ? 'on' : ''}" data-h="${o[0]}">${o[1]}</button>`).join('')}</div>`;
-  return nav + (LIFE.hsub === 'status' ? hxStatusHTML() : LIFE.hsub === 'workout' ? workoutHTML() : checkHTML());
+  return nav + (LIFE.hsub === 'status' ? hxStatusHTML() : LIFE.hsub === 'workout' ? workoutHTML() : LIFE.hsub === 'drink' ? dkHTML() : checkHTML());
 }
 
 /* ===== 습관 ===== */
@@ -4997,7 +5144,7 @@ function renderLifeTab() { lifeEnsure(renderLife); }
 function renderLife() {
   const el = $('#lifeView'); if (!el) return;
   const hs = LIFE.sub === 'health';
-  const addLabel = hs ? (LIFE.hsub === 'status' ? '+ 체중·허리' : LIFE.hsub === 'workout' ? '+ 운동' : '+ 기록') : LIFE.gsub === 'habit' ? '+ 습관' : LIFE.gsub === 'todo' ? '+ 할 일' : '+ 목표';
+  const addLabel = hs ? (LIFE.hsub === 'status' ? '+ 체중·허리' : LIFE.hsub === 'workout' ? '+ 운동' : LIFE.hsub === 'drink' ? '+ 음주 기록' : '+ 기록') : LIFE.gsub === 'habit' ? '+ 습관' : LIFE.gsub === 'todo' ? '+ 할 일' : '+ 목표';
   LFQ = [];
   const scroll = window.scrollY;
   el.innerHTML = `<div class="fin-head"><div><h2>Life</h2><p>건강과 습관, 목표를 한곳에서 관리해요</p></div><div class="fin-act">${hs ? '<button type="button" class="btn" data-act="hset">키·목표</button>' : ''}<button type="button" class="btn primary" data-act="add">${addLabel}</button></div></div>
@@ -5007,7 +5154,7 @@ function renderLife() {
   if (Math.abs(window.scrollY - scroll) > 2) window.scrollTo(0, scroll);
 }
 function lifeAdd() {
-  if (LIFE.sub === 'health') { ({ status: () => openWeight(), workout: () => openWorkout(), check: () => openCheck(null) })[LIFE.hsub](); }
+  if (LIFE.sub === 'health') { ({ status: () => openWeight(), workout: () => openWorkout(), drink: () => openDrink(), check: () => openCheck(null) })[LIFE.hsub](); }
   else { ({ habit: openHabit, todo: openTodo, goal: openGoal })[LIFE.gsub](); }
 }
 async function addTodoQuick() {
@@ -5021,6 +5168,7 @@ $('#lifeView').addEventListener('click', e => {
   let x;
   if ((x = t.closest('[data-s]'))) { LIFE.sub = x.dataset.s; store.set('lifeSub', LIFE.sub); renderLife(); return; }
   if ((x = t.closest('[data-hk]'))) { if (x.dataset.hk === 'new') openHike(); return; }
+  if ((x = t.closest('[data-dk]'))) { if (x.dataset.dk === 'goal') openDrinkGoal(); return; }
   if ((x = t.closest('[data-hx]'))) { hxAct(x.dataset.hx); return; }
   if ((x = t.closest('[data-h]'))) { LIFE.hsub = x.dataset.h; store.set('lifeH', LIFE.hsub); renderLife(); return; }
   if ((x = t.closest('[data-g]'))) { LIFE.gsub = x.dataset.g; store.set('lifeG', LIFE.gsub); renderLife(); return; }
@@ -5030,7 +5178,7 @@ $('#lifeView').addEventListener('click', e => {
   if ((x = t.closest('[data-more]'))) { LIFE.more[x.dataset.more] = true; renderLife(); return; }
   if ((x = t.closest('[data-act]'))) { if (x.dataset.act === 'add') lifeAdd(); else if (x.dataset.act === 'hset') openHealthSettings(); return; }
   if ((x = t.closest('[data-edit]'))) {
-    const [k, id] = x.dataset.edit.split(':'), map = { body: [LIFE.body, openWeight], workout: [LIFE.workout, r => hkIs(r) ? openHike(r) : openWorkout(r)], sleep: [LIFE.sleep, openSleep], check: [LIFE.check, openCheck] }[k];
+    const [k, id] = x.dataset.edit.split(':'), map = { body: [LIFE.body, openWeight], workout: [LIFE.workout, r => hkIs(r) ? openHike(r) : openWorkout(r)], sleep: [LIFE.sleep, openSleep], drink: [LIFE.drinks, openDrink], check: [LIFE.check, openCheck] }[k];
     const r = map && map[0].find(y => y.id === id); if (r) map[1](r); return;
   }
   if ((x = t.closest('[data-hlog]'))) { const [hid, d] = x.dataset.hlog.split('|'); toggleHabit(hid, d); return; }
@@ -5048,6 +5196,357 @@ document.addEventListener('visibilitychange', () => {
   const ae = document.activeElement; if (ae && ae.matches && ae.matches('input,textarea,select') && ae.closest('#lifeView')) return;
   loadLife().then(() => { if (LIFE.loaded) lifeRerender(); });
 });
+
+/* ===== v1.15 음주 관리 ===== */
+const DK_G = 0.789, DK_STD = 10;
+const DK_KINDS = [
+  { k: '위스키', per: 30, abv: 40, u: '잔' }, { k: '소주', per: 50, abv: 16.5, u: '잔' }, { k: '맥주', per: 500, abv: 4.5, u: '잔' },
+  { k: '와인', per: 150, abv: 13, u: '잔' }, { k: '막걸리', per: 300, abv: 6, u: '사발' }, { k: '기타', per: 100, abv: 10, u: '잔' }
+];
+const dkKind = k => DK_KINDS.find(x => x.k === k) || DK_KINDS[5];
+const dkG = r => Number(r.ml) * Number(r.abv) / 100 * DK_G;
+const dkStd = r => dkG(r) / DK_STD;
+function dkLimits() { const h = hm(); return { week: h.drink_week_max != null ? Number(h.drink_week_max) : 7, days: h.drink_days_max != null ? Number(h.drink_days_max) : 3, day: 4 }; }
+function dkDayMap() { const m = {}; LIFE.drinks.forEach(r => { const d = String(r.drink_date).slice(0, 10); m[d] = (m[d] || 0) + dkG(r); }); return m; }
+function dkStats() {
+  const t = today(), ws = lfWeek(t), dm = dkDayMap(), L = dkLimits();
+  let wg = 0, days = 0; const strip = [];
+  for (let i = 0; i < 7; i++) { const d = lfAdd(ws, i), g = d > t ? 0 : (dm[d] || 0); wg += g; if (g > 0) days++; strip.push({ d, g }); }
+  const dates = Object.keys(dm).filter(d => dm[d] > 0).sort();
+  const last = dates.length ? dates[dates.length - 1] : null;
+  const dry = last ? (last >= t ? 0 : lfDiff(t, last)) : null;
+  const weeks = [];
+  for (let i = 7; i >= 0; i--) { const s = lfAdd(ws, -7 * i); let g = 0, n = 0; for (let j = 0; j < 7; j++) { const d = lfAdd(s, j); if (dm[d] > 0) { g += dm[d]; n++; } } weeks.push({ s, std: g / DK_STD, n }); }
+  const ms = t.slice(0, 7); let mg = 0, mn = 0; Object.keys(dm).forEach(d => { if (d.slice(0, 7) === ms && d <= t) { mg += dm[d]; if (dm[d] > 0) mn++; } });
+  return { t, ws, wg, wstd: wg / DK_STD, days, elapsed: lfDiff(t, ws) + 1, strip, last, dry, weeks, mstd: mg / DK_STD, mdays: mn, L, dm };
+}
+function dkHomeLine() {
+  if (!LIFE.drinks.length) return '';
+  const s = dkStats();
+  return `<br>이번 주 술 <b>${lfFix(s.wstd, 1)}</b> / ${s.L.week}표준잔${s.dry != null ? ` · ${s.dry === 0 ? '오늘 마심' : '금주 <b>' + s.dry + '</b>일째'}` : ''}`;
+}
+function dkRecheckHTML() {
+  const ex = hxExams(); if (!ex.length) return '';
+  const cur = ex[0].vals || {}, prev = ex[1] ? ex[1].vals || {} : null;
+  const items = [['alt', 'ALT', 35, 'IU/L', 0], ['ast', 'AST', 40, 'IU/L', 0], ['ggt', '감마GTP', 63, 'IU/L', 0], ['ldl', 'LDL', 130, 'mg/dL', 0], ['weight', '체중', null, 'kg', 1], ['waist', '허리', 90, 'cm', 0]].filter(x => cur[x[0]] != null);
+  if (!items.length) return '';
+  const rows = items.map(([k, l, lim, u, dec]) => {
+    const v = Number(cur[k]), p = prev && prev[k] != null ? Number(prev[k]) : null, hi = lim != null && (k === 'ldl' || k === 'waist' ? v >= lim : v > lim);
+    const dl = p == null ? '<small>첫 기록</small>' : lfDelta(v, p, '', dec);
+    return `<div class="dk-rc"><span>${l}</span><b class="${hi ? 'hi' : ''}">${lfFix(v, dec)}<small>${u}</small></b>${dl}</div>`;
+  }).join('');
+  const w4 = dkStats().weeks.slice(-4), avg = w4.reduce((s, w) => s + w.std, 0) / 4;
+  return `<div class="card dk-recheck"><div class="lf-ch"><b>재검 때 비교할 수치</b><span class="dk-sub">${ex[0].exam_date} 검진 기준${prev ? ' · 직전 ' + ex[1].exam_date + ' 대비' : ''}</span></div><div class="dk-rcs">${rows}</div>
+    <div class="lf-note" style="margin:10px 0 0">${prev ? '' : '다음 검진(재검) 결과를 입력하면 같은 항목이 직전 결과와 나란히 비교돼요. '}최근 4주 평균 음주량은 주 <b>${lfFix(avg, 1)}</b>표준잔이에요. 재검 때 간수치가 어떻게 달라지는지 이 숫자와 같이 보면 효과가 보여요.</div>
+    ${prev ? '' : '<div style="margin-top:10px"><button type="button" class="btn" data-hx="newexam">+ 재검 결과 입력</button></div>'}</div>`;
+}
+function dkHTML() {
+  const head = `<div class="dk-head"><div><b>음주 관리</b><span>술 종류와 상관없이 순알코올 10g = 1표준잔으로 합산해요</span></div><button type="button" class="btn" data-dk="goal">목표 설정</button></div>`;
+  if (!LIFE.drinks.length) return head + lfEmpty('아직 음주 기록이 없어요.<br>마신 날만 기록하면 기록 없는 날은 금주로 계산해서 주간 통계와 연속 금주일을 만들어요.<br>시음 노트에서 마신 양을 고르면 여기에도 자동으로 쌓여요.', '+ 첫 음주 기록') + dkRecheckHTML();
+  const st = dkStats(), L = st.L, over = st.wstd > L.week;
+  const tiles = lfTile('이번 주 음주량', `${lfFix(st.wstd, 1)}<small>/ ${L.week}표준잔</small>`, `<small class="${over ? 'up' : 'ok'}">${over ? lfFix(st.wstd - L.week, 1) + '잔 초과' : lfFix(L.week - st.wstd, 1) + '잔 남음'} · 순알코올 ${Math.round(st.wg)}g</small>`)
+    + lfTile('이번 주 마신 날', `${st.days}<small>/ ${L.days}일</small>`, `<small class="${st.days > L.days ? 'up' : 'ok'}">이번 주 금주 ${st.elapsed - st.days}일</small>`)
+    + lfTile('연속 금주', st.dry === 0 ? '오늘 마심' : `${st.dry}<small>일</small>`, `<small>마지막 ${lfMD(st.last)}</small>`)
+    + lfTile('이번 달', `${lfFix(st.mstd, 1)}<small>표준잔</small>`, `<small>마신 날 ${st.mdays}일</small>`);
+  const strip = st.strip.map(x => { const fut = x.d > st.t, s = x.g / DK_STD, c = fut ? 'fut' : x.g === 0 ? 'dry' : s >= 7 ? 'bad' : s > L.day ? 'hi' : 'mid'; return `<div class="dk-d ${c}${x.d === st.t ? ' today' : ''}"><em>${lfDow(x.d)}</em><span>${fut ? '' : x.g === 0 ? CHECK_SVG : lfFix(s, 1)}</span><small>${Number(x.d.slice(8))}</small></div>`; }).join('');
+  const heavy = st.strip.filter(x => x.g / DK_STD > L.day && x.g / DK_STD < 7).length, binge = st.strip.filter(x => x.g / DK_STD >= 7).length;
+  const msgs = [];
+  if (binge) msgs.push(['bad', `하루에 7표준잔 이상 마신 날이 있어요. 한 번에 이만큼 마시는 날이 주 2회 이상이면 질병관리청 기준으로 고위험음주예요.`]);
+  if (heavy) msgs.push(['hi', `하루 적정 한도(4표준잔, 순알코올 40g)를 넘은 날이 이번 주 ${heavy}일 있어요.`]);
+  if (over) msgs.push(['hi', `이번 주 합계가 내가 정한 목표(${L.week}표준잔)를 ${lfFix(st.wstd - L.week, 1)}잔 넘었어요.`]);
+  if (st.days > L.days) msgs.push(['hi', `마신 날이 목표(주 ${L.days}일)보다 많아요. 남은 날은 쉬는 날로 두면 목표 안에 들어와요.`]);
+  if (!msgs.length) msgs.push(['ok', st.dry >= 2 ? `${st.dry}일째 금주 중이에요. 이번 주 목표 안에서 잘 가고 있어요.` : '이번 주 음주량이 목표 안에 있어요.']);
+  const ex0 = hxExams()[0], ev = ex0 && ex0.vals || {}, ctx = ex0 && (ev.alt != null && ev.alt > 35) ? `<div class="lf-note" style="margin:8px 0 0">검진에서 ALT ${ev.alt}${/음주/.test(((ex0.summary || {}).advice || []).join(' ')) ? '와 위험음주 문진 결과가' : '가'} 나왔어요. 술은 간수치·체중·혈압·위염 모두에 영향을 주는 항목이라 재검 전까지 이 숫자를 낮게 유지하는 게 가장 직접적인 방법이에요. 참고용이며 진단은 병원에서 해요.</div>` : '';
+  const note = `<div class="card dk-note">${msgs.map(m => `<div class="dk-m ${m[0]}"><i></i><span>${m[1]}</span></div>`).join('')}${ctx}</div>`;
+  LFQ.push(() => drawBars($('#dkChart'), { items: st.weeks.map((w, i) => ({ v: Math.round(w.std * 10) / 10, txt: lfFix(w.std, 1), label: lfMD(w.s), on: i === st.weeks.length - 1, tip: `${lfMD(w.s)} 주<br><b>${lfFix(w.std, 1)}표준잔 · ${w.n}일</b>` })), goal: L.week, goalLabel: '목표 ' + L.week, min: Math.max(3, L.week), color: 'var(--c-life)', label: '주간 음주량' }));
+  const chart = `<div class="card lf-chart-card"><div class="lf-ch"><b>주간 음주량 (최근 8주)</b><span class="dk-sub">표준잔 합계</span></div>${lfChartBox('dkChart')}</div>`;
+  const guide = `<div class="card dk-guide"><b>표준잔 참고</b><div class="dk-gl"><span>위스키 30ml(40도) <em>0.9잔</em></span><span>소주 1잔(50ml) <em>0.7잔</em></span><span>소주 1병 <em>4.7잔</em></span><span>맥주 500ml <em>1.8잔</em></span><span>와인 150ml <em>1.5잔</em></span><span>막걸리 300ml <em>1.4잔</em></span></div>
+    <div class="lf-note" style="margin:8px 0 0">1표준잔은 순알코올 10g이에요. 하루 적정 상한은 남성 4잔 안쪽(WHO 기준 40g 미만), 1회 7잔 이상을 주 2회 이상이면 고위험음주예요(질병관리청). 내 목표는 위의 '목표 설정'에서 바꿀 수 있고, 검진에서 절주 권고가 나온 만큼 기준보다 낮게 두는 게 좋아요.</div></div>`;
+  const shown = lfShown('dk', 10), list = LIFE.drinks.slice(0, shown);
+  const rows = list.map(r => `<button type="button" class="lf-row" data-edit="drink:${esc(r.id)}"><span class="d">${lfMD(String(r.drink_date).slice(0, 10))}<em>${lfDow(String(r.drink_date).slice(0, 10))}</em></span><span class="m"><b>${esc(r.name || r.kind)}</b> · ${lfFix(r.ml, 0)}ml ${lfFix(r.abv, 1)}%${r.journal_id ? ' <small class="dk-src">시음노트</small>' : ''}</span><span class="r">${lfFix(dkStd(r), 1)}잔</span></button>`).join('');
+  return head + '<div class="lf-tiles">' + tiles + '</div>' + note + `<div class="card dk-week"><div class="lf-ch"><b>이번 주</b><span class="dk-sub">숫자는 표준잔 · 체크는 금주한 날</span></div><div class="dk-strip">${strip}</div></div>` + chart + dkRecheckHTML() + `<div class="hk-sec"><b>음주 기록</b></div><section class="card lf-list">${rows}${lfMoreBtn('dk', LIFE.drinks.length, shown)}</section>` + guide;
+}
+function openDrink(r) {
+  const isNew = !r; r = r || { drink_date: today(), kind: '위스키', ml: 30, abv: 40, name: '' };
+  let kind = r.kind || '위스키'; const k0 = dkKind(kind);
+  let per = isNew ? k0.per : (Number(r.ml) % k0.per === 0 ? k0.per : Number(r.ml)), qty = isNew ? 1 : Number(r.ml) / per;
+  openFinModal({
+    title: isNew ? '음주 기록' : '음주 기록 수정',
+    html: `${lfDateField(String(r.drink_date).slice(0, 10))}
+      ${fld('술 종류', lfChips('kd', DK_KINDS.map(x => ({ v: x.k, t: x.k })), kind))}
+      <div class="dk-r3">${fld('몇 잔?', `<input class="in" name="qty" inputmode="decimal" value="${lfFix(qty, 2)}">`)}${fld('1잔 용량(ml)', `<input class="in" name="per" inputmode="decimal" value="${lfFix(per, 0)}">`)}${fld('도수(%)', `<input class="in" name="abv" inputmode="decimal" value="${lfFix(r.abv, 1)}">`)}</div>
+      <div class="dk-calc" id="dkCalc"></div>
+      ${fld('이름 · 메모 (선택)', `<input class="in" name="nm" value="${esc(r.name || '')}" placeholder="예: 글렌피딕 12년, 회식 맥주">`)}
+      ${r.journal_id ? '<div class="hint faint" style="font-size:11.5px">시음 노트에서 자동으로 만들어진 기록이에요. 마신 양은 노트에서 바꾸면 같이 바뀌어요.</div>' : ''}`,
+    onOpen(b) {
+      const g = n => lfNum(b.querySelector(`[name=${n}]`).value);
+      const calc = () => { const q = g('qty') || 0, p = g('per') || 0, a = g('abv') || 0, gr = q * p * a / 100 * DK_G; b.querySelector('#dkCalc').innerHTML = `총 <b>${lfFix(q * p, 0)}ml</b> · 순알코올 <b>${lfFix(gr, 1)}g</b> · <b>${lfFix(gr / DK_STD, 1)}표준잔</b>`; };
+      lfChipsBind(b, 'kd', v => { kind = v; const k = dkKind(v); b.querySelector('[name=per]').value = k.per; b.querySelector('[name=abv]').value = k.abv; calc(); });
+      ['qty', 'per', 'abv'].forEach(n => b.querySelector(`[name=${n}]`).addEventListener('input', calc)); calc();
+    },
+    async onSave(b) {
+      const g = n => lfNum(b.querySelector(`[name=${n}]`).value), d = b.querySelector('[name=d]').value;
+      const q = g('qty'), p = g('per'), a = g('abv');
+      if (!d) throw new Error('날짜를 선택해 주세요');
+      if (!(q > 0) || q > 60) throw new Error('잔 수를 확인해 주세요');
+      if (!(p > 0) || p > 3000) throw new Error('1잔 용량을 확인해 주세요');
+      if (a == null || a < 0 || a > 100) throw new Error('도수를 확인해 주세요');
+      await lfSave('health_drink', 'drinks', 'drink_date', { drink_date: d, kind, ml: Math.round(q * p * 10) / 10, abv: a, name: b.querySelector('[name=nm]').value.trim() || null }, r.id);
+      lfDone();
+    },
+    onDelete: isNew ? null : async () => { await lfDel('health_drink', 'drinks', r.id); lfDone('삭제했어요'); }
+  });
+}
+function openDrinkGoal() {
+  const L = dkLimits();
+  openFinModal({
+    title: '음주 목표 설정',
+    html: `<div class="row2">${fld('주간 상한(표준잔)', `<input class="in" name="wk" inputmode="decimal" value="${L.week}">`)}${fld('주 최대 음주일(일)', `<input class="in" name="dy" inputmode="numeric" value="${L.days}">`)}</div>
+      <div class="hint faint" style="font-size:11.5px">표준잔 1개는 순알코올 10g이에요(위스키 30ml ≈ 0.9잔). 주 7잔은 위스키로 환산하면 약 7~8잔이에요. 검진에서 절주 권고가 나왔다면 처음엔 느슨하게 시작해서 2주마다 조금씩 낮춰 보세요.</div>`,
+    async onSave(b) {
+      const wk = lfNum(b.querySelector('[name=wk]').value), dy = lfNum(b.querySelector('[name=dy]').value);
+      if (wk == null || wk < 0 || wk > 70) throw new Error('주간 상한을 확인해 주세요');
+      if (dy == null || dy < 0 || dy > 7) throw new Error('음주일 수를 확인해 주세요');
+      await saveHealthMeta({ drink_week_max: wk, drink_days_max: Math.round(dy) });
+      lfDone();
+    }
+  });
+}
+/* 시음 노트 → 음주 기록 연동 */
+const JV_ML = [[0, '기록 안 함'], [15, '15ml'], [30, '30ml · 1잔'], [45, '45ml'], [60, '60ml · 2잔'], [90, '90ml']];
+let jvMlVal = 30, jvAbvManual = false;
+function jvMlRender() { const w = $('#jvMl'); const L = JV_ML.some(o => o[0] === jvMlVal) ? JV_ML : JV_ML.concat([[jvMlVal, jvMlVal + 'ml']]); if (w) w.innerHTML = L.map(o => `<button type="button" class="chip ${o[0] === jvMlVal ? 'on' : ''}" data-ml="${o[0]}">${o[1]}</button>`).join(''); }
+function jvAbvFor(name) {
+  const n = key(name || ''); if (!n) return null;
+  const it = S.items.find(i => key(i.name) === n) || S.items.find(i => key(i.name).includes(n) || n.includes(key(i.name)));
+  const a = it && lfNum(it.abv); return a && a > 0 && a <= 100 ? a : null;
+}
+async function jvDrinkSync(jid, d, ml, abv) {
+  if (!jid) return;
+  await lifeReady();
+  const ex = LIFE.drinks.find(x => x.journal_id === jid);
+  if (!(ml > 0)) { if (ex) await lfDel('health_drink', 'drinks', ex.id); return; }
+  await lfSave('health_drink', 'drinks', 'drink_date', { drink_date: d.date, kind: '위스키', ml, abv, name: d.whisky || null, journal_id: jid }, ex && ex.id);
+}
+async function jvDrinkRemove(jid) {
+  await lifeReady();
+  const { error } = await sb.from('health_drink').delete().eq('journal_id', jid);
+  if (error) throw new Error(error.message);
+  LIFE.drinks = LIFE.drinks.filter(x => x.journal_id !== jid);
+}
+
+/* ===== v1.15 주간·월간 리뷰 (Home) ===== */
+const RV = { mode: store.get('rvMode', 'week') };
+const rvIn = (d, a, b) => { d = String(d).slice(0, 10); return d >= a && d <= b; };
+function rvRange(mode) {
+  const t = today();
+  if (mode === 'month') {
+    const s = t.slice(0, 8) + '01', n = lfDiff(t, s) + 1, ps = shiftMonth(t.slice(0, 7), -1) + '-01', pm = new Date(Number(ps.slice(0, 4)), Number(ps.slice(5, 7)), 0).getDate();
+    return { s, e: t, ps, pe: lfAdd(ps, Math.min(n, pm) - 1), n, title: Number(t.slice(5, 7)) + '월 리뷰', span: `${lfMD(s)} ~ ${lfMD(t)} · ${n}일째`, vs: '지난달 같은 기간 대비' };
+  }
+  const s = lfWeek(t), n = lfDiff(t, s) + 1, ps = lfAdd(s, -7);
+  return { s, e: t, ps, pe: lfAdd(ps, n - 1), n, title: '이번 주 리뷰', span: `${lfMD(s)} ~ ${lfMD(t)} · ${n}일째`, vs: '지난주 같은 요일까지 대비' };
+}
+function rvStats(s, e) {
+  const days = lfDiff(e, s) + 1, sum = (a, k) => a.reduce((m, x) => m + (Number(x[k]) || 0), 0);
+  const wo = LIFE.workout.filter(x => rvIn(x.done_on, s, e)), hk = wo.filter(x => hkIs(x));
+  const hs = LIFE.habits.filter(h => !h.archived); let exp = 0, done = 0;
+  hs.forEach(h => { exp += (h.per_week || 7) * days / 7; for (let i = 0; i < days; i++) if (LIFE.logSet.has(h.id + '|' + lfAdd(s, i))) done++; });
+  const led = FIN.loaded ? FIN.ledger.filter(x => x.kind === '지출' && rvIn(x.entry_date, s, e)) : null;
+  const dr = LIFE.drinks.filter(x => rvIn(x.drink_date, s, e));
+  return {
+    days, wo: wo.length, wmin: sum(wo, 'minutes'), hk: hk.length, hkm: sum(hk, 'distance_km'), hkup: sum(hk, 'ascent_m'),
+    hb: hs.length ? Math.min(100, Math.round(done / exp * 100)) : null,
+    spend: led ? sum(led, 'amount') : null, whisky: led ? sum(led.filter(x => x.category === '위스키'), 'amount') : null,
+    dstd: dr.reduce((m, x) => m + dkStd(x), 0), ddays: new Set(dr.map(x => String(x.drink_date).slice(0, 10))).size, dn: dr.length,
+    wml: dr.filter(x => x.kind === '위스키').reduce((m, x) => m + Number(x.ml), 0)
+  };
+}
+function rvDelta(cur, prev, fmt, upGood) {
+  if (cur == null || prev == null) return '';
+  const d = cur - prev; if (Math.abs(d) < 1e-9) return '<small class="rv-d">지난 기간과 같아요</small>';
+  const good = (d > 0) === upGood;
+  return `<small class="rv-d ${good ? 'g' : 'b'}">${d > 0 ? '▲' : '▼'} ${fmt(Math.abs(d))}</small>`;
+}
+function rvHTML() {
+  const R = rvRange(RV.mode);
+  const seg = `<div class="seg rv-seg"><button type="button" data-rv="week" class="${RV.mode === 'week' ? 'on' : ''}">주간</button><button type="button" data-rv="month" class="${RV.mode === 'month' ? 'on' : ''}">월간</button></div>`;
+  if (!LIFE.loaded || !FIN.loaded) return `<section class="card hm-card wfull rv" style="--tc:var(--c-home)"><div class="hm-t"><span>${R.title}</span>${seg}</div><div class="hm-empty">불러오는 중…</div></section>`;
+  const c = rvStats(R.s, R.e), p = rvStats(R.ps, R.pe), L = dkLimits(), fz = fzCfg(), h = hm();
+  const tile = (lbl, big, sub) => `<div class="rv-t"><span>${lbl}</span><b>${big}</b>${sub || ''}</div>`;
+  const hasD = LIFE.drinks.length > 0;
+  const tiles = tile('운동', `${c.wo}<small>회</small>`, rvDelta(c.wo, p.wo, v => v + '회', true) || `<small>${c.wmin}분</small>`)
+    + tile('등산', c.hk ? `${lfFix(c.hkm, 1)}<small>km</small>` : '<span class="rv-no">없음</span>', c.hk ? `<small>${c.hk}회 · 누적 상승 ${Math.round(c.hkup)}m</small>` : '<small>이번 기간 기록 없음</small>')
+    + tile('습관 달성', c.hb == null ? '-' : `${c.hb}<small>%</small>`, c.hb == null ? '' : rvDelta(c.hb, p.hb, v => v + '%p', true))
+    + tile('지출', c.spend == null ? '-' : `<span class="money">${won(c.spend)}</span>`, rvDelta(c.spend, p.spend, v => won(v), false))
+    + tile('음주', hasD ? `${lfFix(c.dstd, 1)}<small>표준잔</small>` : '<span class="rv-no">기록 전</span>', hasD ? (rvDelta(c.dstd, p.dstd, v => lfFix(v, 1) + '잔', false) || `<small>마신 날 ${c.ddays}일</small>`) : '<small>음주 기록을 시작해 보세요</small>');
+  const tt = finTotals(FIN.holdings), snap = FIN.snaps.slice().reverse().find(x => x.snap_date < R.s), dl = snap ? tt.v - fnum(snap.total_value) : null;
+  const t6 = tile('자산 변화', dl == null ? '-' : `<span class="money ${dl > 0 ? 'up' : dl < 0 ? 'down' : ''}">${dl > 0 ? '+' : dl < 0 ? '-' : ''}${won(Math.abs(dl))}</span>`, snap ? `<small>${lfMD(snap.snap_date)} 기록 대비</small>` : '<small>비교할 기록이 없어요</small>');
+  const lines = [];
+  const wkGoal = h.workout_goal || 3;
+  if (RV.mode === 'week') { if (c.wo >= wkGoal) lines.push(['ok', `운동 목표(주 ${wkGoal}회)를 채웠어요.`]); else if (c.wo > 0) lines.push(['in', `운동 ${c.wo}회 했어요. 목표까지 ${wkGoal - c.wo}회 남았어요.`]); else lines.push(['hi', `이번 주 운동 기록이 아직 없어요.`]); }
+  else if (c.wo) lines.push(['ok', `이번 달 운동 ${c.wo}회, ${lfFix(c.wmin / 60, 1)}시간 했어요.`]);
+  if (c.hk) lines.push(['ok', `등산 ${c.hk}회 · ${lfFix(c.hkm, 1)}km를 올랐어요.`]);
+  if (c.hb != null) { if (c.hb >= 80) lines.push(['ok', `습관을 ${c.hb}% 지켰어요.`]); else if (c.hb < 50) lines.push(['hi', `습관 달성률이 ${c.hb}%예요. 하나만 골라 먼저 챙겨 보세요.`]); }
+  if (hasD) {
+    const lim = RV.mode === 'week' ? L.week : L.week * (c.days / 7);
+    if (c.dstd > lim) lines.push(['hi', `음주량이 목표를 넘었어요 (${lfFix(c.dstd, 1)} / ${lfFix(lim, 1)}표준잔).`]);
+    else lines.push(['ok', `음주량이 목표 안이에요.${c.wml ? ` 위스키는 ${lfFix(c.wml / 30, 1)}잔 마셨어요.` : ''}`]);
+  }
+  if (c.spend != null && p.spend > 0 && c.spend > p.spend * 1.3) lines.push(['hi', `지출이 지난 기간보다 ${Math.round((c.spend / p.spend - 1) * 100)}% 많아요.`]);
+  if (RV.mode === 'month' && c.whisky != null && c.whisky > fz.whisky) lines.push(['hi', `위스키 지출이 월 예산(${won(fz.whisky)})을 넘었어요.`]);
+  if (!lines.length) lines.push(['in', '이번 기간 기록이 아직 적어요. 기록이 쌓이면 여기에서 요약해 줘요.']);
+  return `<section class="card hm-card wfull rv" style="--tc:var(--c-home)"><div class="hm-t"><span>${R.title} <i class="rv-span">${R.span}</i></span>${seg}</div>
+    <div class="rv-tiles">${tiles}${t6}</div>
+    <div class="rv-lines">${lines.slice(0, 5).map(l => `<div class="rv-l ${l[0]}"><i></i><span>${l[1]}</span></div>`).join('')}</div>
+    <div class="rv-foot">${R.vs}</div></section>`;
+}
+
+/* ===== v1.15 재무 건전성 (Ledger) ===== */
+async function saveLifeMeta(k, patch) {
+  const v = Object.assign({}, LIFE.meta[k] || {}, patch);
+  const { error } = await sb.from('life_meta').upsert(Object.assign({ key: k, value: v, updated_at: new Date().toISOString() }, APP.uid ? { user_id: APP.uid } : {}), { onConflict: 'user_id,key' });
+  if (error) throw new Error(error.message);
+  LIFE.meta[k] = v;
+}
+function fzCfg() {
+  const f = (LIFE.meta && LIFE.meta.fin) || {};
+  return { income: f.income != null && Number(f.income) > 0 ? Number(f.income) : null, whisky: f.whisky_budget != null && Number(f.whisky_budget) > 0 ? Number(f.whisky_budget) : Math.round(ANNUAL_BUDGET / 12 / 10000) * 10000, set: f.income != null };
+}
+function fzCalc() {
+  const ym = FIN.month, cur = today().slice(0, 7), sp = m => monthEntries(m).filter(e => e.kind === '지출').reduce((s, e) => s + e.amt, 0);
+  const past = [1, 2, 3].map(i => shiftMonth(cur, -i)).map(m => sp(m)).filter(v => v > 0);
+  const nowSp = sp(cur), avg = past.length ? past.reduce((a, b) => a + b, 0) / past.length : (nowSp || null);
+  let liquid = 0; FIN.holdings.forEach(h => { if (!(h.market === 'BANK' || h.market === 'CASH')) return; if (/청약/.test((h.name || '') + (h.account || '') + (h.broker || ''))) return; const v = hValue(h); liquid += v == null ? hCost(h) : v; });
+  const subs = (FIN.subs || []).filter(s => s.active && !s.bundled).reduce((a, s) => a + sxMonthly(s), 0);
+  const wh = monthEntries(cur).filter(e => e.kind === '지출' && e.cat === '위스키').reduce((s, e) => s + e.amt, 0);
+  return { avg, nowSp, liquid, subs, wh, months: past.length, cur };
+}
+function fzHTML() {
+  const cfg = fzCfg(), c = fzCalc(), inc = cfg.income;
+  const sr = inc && c.avg != null ? (inc - c.avg) / inc : null, em = c.avg ? c.liquid / c.avg : null, fx = inc ? c.subs / inc : null;
+  const lvl = (v, hi, mid) => v >= hi ? ['양호', 'var(--inc)'] : v >= mid ? ['보통', '#eda100'] : ['주의', 'var(--up)'];
+  const tg = (a) => `<span class="lf-tag" style="--tg:${a[1]}">${a[0]}</span>`;
+  const bar = (pct, color) => `<div class="fz-bar"><i style="width:${Math.max(0, Math.min(100, pct))}%;background:${color}"></i></div>`;
+  const wp = cfg.whisky ? c.wh / cfg.whisky * 100 : 0, wOver = c.wh > cfg.whisky;
+  const t1 = `<div class="fz-t"><span>저축률</span>${sr == null ? `<b class="fz-no">${inc ? '지출 기록 필요' : '소득 입력 필요'}</b><small>${inc ? '' : '설정에서 월 실수령액을 넣어 주세요'}</small>` : `<b>${Math.round(sr * 100)}<small>%</small>${tg(lvl(sr, 0.3, 0.1))}</b>${bar(sr * 100, sr >= 0.3 ? 'var(--inc)' : sr >= 0.1 ? '#eda100' : 'var(--up)')}<small>소득 <span class="money">${won(inc)}</span> − 월평균 지출 <span class="money">${won(c.avg)}</span></small>`}</div>`;
+  const t2 = `<div class="fz-t"><span>비상금</span>${em == null ? '<b class="fz-no">지출 기록 필요</b>' : `<b>${lfFix(em, 1)}<small>개월</small>${tg(lvl(em, 6, 3))}</b>${bar(em / 6 * 100, em >= 6 ? 'var(--inc)' : em >= 3 ? '#eda100' : 'var(--up)')}<small>통장·예수금 <span class="money">${won(c.liquid)}</span> ÷ 월평균 지출</small>`}</div>`;
+  const t3 = `<div class="fz-t"><span>고정비 비율</span>${fx == null ? `<b class="fz-no">${inc ? '' : '소득 입력 필요'}</b>` : `<b>${(fx * 100).toFixed(1)}<small>%</small></b>${bar(fx * 100 * 5, 'var(--c-ld)')}<small>구독·보험 월 <span class="money">${won(Math.round(c.subs))}</span></small>`}</div>`;
+  const t4 = `<div class="fz-t"><span>${Number(c.cur.slice(5))}월 위스키 예산</span><b><span class="money">${won(c.wh)}</span><small>/ <span class="money">${won(cfg.whisky)}</span></small></b>${bar(wp, wOver ? 'var(--up)' : 'var(--c-bar)')}<small>${wOver ? '예산 초과 ' + won(c.wh - cfg.whisky) : '남은 예산 ' + won(cfg.whisky - c.wh)} · 2027년 연 한도 ${won(ANNUAL_BUDGET)}</small></div>`;
+  return `<section class="card fz"><div class="fz-h"><div><b>재무 건전성</b><span>${c.months ? '최근 ' + c.months + '개월 평균 지출 기준' : '이번 달 지출 기준'}</span></div><button type="button" class="btn" data-fz="set">${cfg.set ? '설정' : '소득 입력'}</button></div>
+    <div class="fz-grid">${t1}${t2}${t3}${t4}</div>
+    <div class="fz-foot">${cfg.set ? '' : '월 실수령액을 입력하면 저축률과 고정비 비율이 계산돼요. '}비상금은 통장·예수금(청약 제외)을 월평균 지출로 나눈 값이고, 카드·계좌 기록이 일부면 실제보다 길게 나올 수 있어요. 기준(저축률 30%·비상금 6개월)은 일반적인 참고치예요.</div></section>`;
+}
+function openFinPlan() {
+  const cfg = fzCfg();
+  openFinModal({
+    title: '재무 설정',
+    html: `${fld('월 실수령액 (원)', `<input class="in" name="inc" inputmode="numeric" value="${cfg.income ? cfg.income.toLocaleString('ko-KR') : ''}" placeholder="예: 3,500,000">`)}
+      ${fld('위스키 월 예산 (원)', `<input class="in" name="wh" inputmode="numeric" value="${cfg.whisky.toLocaleString('ko-KR')}" placeholder="예: 580,000">`)}
+      <div class="hint faint" style="font-size:11.5px">월 실수령액은 저축률과 고정비 비율 계산에만 쓰이고, 내 계정 DB에만 저장돼요. 위스키 월 예산 기본값은 2027년 연 한도 700만원 ÷ 12예요.</div>`,
+    onOpen(b) { ['inc', 'wh'].forEach(n => { const a = b.querySelector(`[name=${n}]`); a.addEventListener('input', () => { const d = a.value.replace(/[^\d]/g, ''); a.value = d ? Number(d).toLocaleString('ko-KR') : ''; }); }); },
+    async onSave(b) {
+      const g = n => lfNum(b.querySelector(`[name=${n}]`).value), inc = g('inc'), wh = g('wh');
+      if (inc != null && (inc < 0 || inc > 1e9)) throw new Error('월 실수령액을 확인해 주세요');
+      await saveLifeMeta('fin', { income: inc == null ? 0 : inc, whisky_budget: wh == null ? null : wh });
+      closeFinModal(); renderLedger(); toast('저장했어요');
+    }
+  });
+}
+
+/* ===== v1.15 배당 · 적립 캘린더 ===== */
+const CAL = { ym: today().slice(0, 7) };
+const EV_KIND = { dividend: { t: '배당', c: 'dv' }, invest: { t: '적립', c: 'iv' } };
+const evMonths = e => (e.months || []).map(Number).filter(m => m >= 1 && m <= 12);
+function evDay(e, ym) { if (e.day == null || e.day === '') return null; const last = new Date(Number(ym.slice(0, 4)), Number(ym.slice(5)), 0).getDate(); return Math.min(Number(e.day), last); }
+function evOcc(ym) { const m = Number(ym.slice(5)); return (FIN.events || []).filter(e => e.active !== false && evMonths(e).includes(m)).map(e => ({ e, day: evDay(e, ym) })); }
+function evUpcoming(t, span) {
+  const out = [];
+  [0, 1].forEach(k => { const ym = shiftMonth(t.slice(0, 7), k); evOcc(ym).forEach(o => { if (o.day == null) return; const d = ym + '-' + String(o.day).padStart(2, '0'), n = lfDiff(d, t); if (n >= 0 && n <= span) out.push({ d, e: o.e }); }); });
+  return out;
+}
+function renderCalTab() { finEnsure(renderCalendar); }
+function renderCalendar() {
+  const el = $('#calView'); if (!el) return;
+  if (!FIN.loaded) { el.innerHTML = '<div class="fin-head"><div><h2>Calendar</h2><p>불러오는 중…</p></div></div>'; return; }
+  const ym = CAL.ym, y = Number(ym.slice(0, 4)), m = Number(ym.slice(5)), first = new Date(y, m - 1, 1).getDay(), dim = new Date(y, m, 0).getDate(), t = today();
+  const occ = evOcc(ym), byDay = {}; occ.forEach(o => { if (o.day != null) (byDay[o.day] = byDay[o.day] || []).push(o); });
+  const head = ['일', '월', '화', '수', '목', '금', '토'].map((d, i) => `<div class="ev-dow ${i === 0 ? 'su' : i === 6 ? 'sa' : ''}">${d}</div>`).join('');
+  let cells = ''; for (let i = 0; i < first; i++) cells += '<div class="ev-c out"></div>';
+  for (let d = 1; d <= dim; d++) {
+    const ds = ym + '-' + String(d).padStart(2, '0'), list = byDay[d] || [], dow = (first + d - 1) % 7;
+    cells += `<div class="ev-c ${ds === t ? 'today' : ''} ${dow === 0 ? 'su' : dow === 6 ? 'sa' : ''}"><span class="ev-n">${d}</span>${list.slice(0, 2).map(o => `<button type="button" class="ev-chip ${EV_KIND[o.e.kind] ? EV_KIND[o.e.kind].c : 'dv'}" data-ev="edit:${esc(o.e.id)}"><i></i><b>${esc(o.e.title)}</b></button>`).join('')}${list.length > 2 ? `<small class="ev-more">+${list.length - 2}</small>` : ''}</div>`;
+  }
+  const tail = (first + dim) % 7; if (tail) for (let i = tail; i < 7; i++) cells += '<div class="ev-c out"></div>';
+  const rows = occ.slice().sort((a, b) => (a.day == null ? 99 : a.day) - (b.day == null ? 99 : b.day)).map(o => {
+    const k = EV_KIND[o.e.kind] || EV_KIND.dividend, dd = o.day == null ? null : ym + '-' + String(o.day).padStart(2, '0'), n = dd ? lfDiff(dd, t) : null;
+    return `<button type="button" class="lf-row ev-row" data-ev="edit:${esc(o.e.id)}"><span class="d"><i class="ev-dot ${k.c}"></i>${o.day == null ? '월중' : m + '/' + o.day}</span><span class="m"><b>${esc(o.e.title)}</b> <small class="dk-src">${k.t}</small>${o.e.account ? `<small>${esc(o.e.account)}</small>` : ''}</span><span class="r">${o.e.amount ? `<span class="money">${won(o.e.amount)}</span>` : '<small>금액 미정</small>'}${n != null && n >= 0 && ym === t.slice(0, 7) ? `<small class="ev-dd">${n === 0 ? '오늘' : 'D-' + n}</small>` : ''}</span></button>`;
+  }).join('');
+  const evs = (FIN.events || []).filter(e => e.active !== false), mon = Array.from({ length: 12 }, (_, i) => ({ dv: 0, iv: 0 }));
+  evs.forEach(e => evMonths(e).forEach(mm => { mon[mm - 1][EV_KIND[e.kind] ? EV_KIND[e.kind].c : 'dv'] += Number(e.amount) || 0; }));
+  const dvYear = mon.reduce((s, x) => s + x.dv, 0), ivMonth = evs.filter(e => e.kind === 'invest').reduce((s, e) => s + (e.months && evMonths(e).length ? (Number(e.amount) || 0) * evMonths(e).length / 12 : 0), 0), ivYear = mon.reduce((s, x) => s + x.iv, 0);
+  LFQ.push(() => { const b = $('#evChart'); if (b) drawBars(b, { items: !dvYear ? [] : mon.map((x, i) => ({ v: x.dv, txt: x.dv ? Math.round(x.dv / 1000) / 10 + '만' : '', label: (i + 1) + '월', on: i + 1 === m, tip: `${i + 1}월 배당 예상<br><b>${won(x.dv)}</b>` })), color: 'var(--c-cal)', min: 1, empty: '배당 일정을 등록하면 월별 예상 금액이 보여요.', label: '월별 배당 예상' }); });
+  const empty = !(FIN.events || []).length;
+  el.innerHTML = `<div class="fin-head"><div><h2>Calendar</h2><p>배당과 정기 적립 일정을 한눈에 봐요</p></div><div class="fin-act"><button type="button" class="btn primary" data-ev="new">+ 일정 추가</button></div></div>
+    ${empty ? `<div class="lf-empty">아직 등록한 일정이 없어요.<br>배당 받는 종목과 매달 자동으로 사는 적립(연금저축·ETF 등)을 한 번 등록하면 달력에 계속 표시돼요.<br><button type="button" class="btn primary" data-ev="new">+ 첫 일정 등록</button></div>` : ''}
+    <div class="ev-nav"><button type="button" class="btn" data-ev="prev">‹</button><b>${y}년 ${m}월</b><button type="button" class="btn" data-ev="next">›</button>${ym !== t.slice(0, 7) ? '<button type="button" class="btn" data-ev="now">오늘</button>' : ''}</div>
+    <div class="card ev-grid">${head}${cells}</div>
+    <div class="fin-sec"><h3>${m}월 일정</h3><span>${occ.length}건</span></div>
+    <section class="card lf-list">${rows || '<div class="lf-empty" style="padding:22px">이번 달 일정이 없어요.</div>'}</section>
+    <div class="card lf-chart-card"><div class="lf-ch"><b>월별 배당 예상</b><span class="dk-sub">연 예상 배당 <span class="money">${won(dvYear)}</span></span></div>${lfChartBox('evChart')}
+      <div class="ev-sum"><span>월 평균 배당 <b class="money">${won(Math.round(dvYear / 12))}</b></span><span>정기 적립 월 평균 <b class="money">${won(Math.round(ivMonth))}</b></span><span>연 적립 합계 <b class="money">${won(ivYear)}</b></span></div>
+      <div class="lf-note" style="margin:8px 0 0">배당 금액은 내가 입력한 세전 예상치예요. 실제 지급일·금액은 증권사 앱에서 확인해 주세요.</div></div>`;
+  lfRunQueue();
+}
+function openEvent(e) {
+  const isNew = !e;
+  e = e || { kind: 'dividend', title: '', months: [3, 6, 9, 12], day: '', amount: '', account: '', active: true, memo: '' };
+  let kind = e.kind || 'dividend', months = new Set(evMonths(e)), active = e.active !== false;
+  const names = Array.from(new Set(FIN.holdings.filter(h => h.market === 'KR' || h.market === 'US').map(h => h.name))), accs = Array.from(new Set(FIN.holdings.map(h => h.account)));
+  const seg = (id, items) => `<div class="seg" id="${id}">${items.map(([k, t, on]) => `<button type="button" data-k="${k}" class="${on ? 'on' : ''}">${t}</button>`).join('')}</div>`;
+  const mchips = () => Array.from({ length: 12 }, (_, i) => `<button type="button" class="chip ${months.has(i + 1) ? 'on' : ''}" data-m="${i + 1}">${i + 1}월</button>`).join('');
+  openFinModal({
+    title: isNew ? '일정 추가' : '일정 수정',
+    html: `${fld('종류', seg('evKind', [['dividend', '배당 받는 날', kind === 'dividend'], ['invest', '정기 적립 (매수)', kind === 'invest']]))}
+      <datalist id="dlEvN">${names.map(n => `<option value="${esc(n)}">`).join('')}</datalist><datalist id="dlEvA">${accs.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
+      ${fld('이름', `<input class="in" name="t" list="dlEvN" value="${esc(e.title)}" placeholder="예: SCHD, 연금저축 적립">`)}
+      ${fld('해당하는 달', `<div class="lf-chips" id="evMonths">${mchips()}</div><div class="ev-pre"><button type="button" class="btn" data-pre="1,2,3,4,5,6,7,8,9,10,11,12">매월</button><button type="button" class="btn" data-pre="3,6,9,12">분기(3·6·9·12)</button><button type="button" class="btn" data-pre="6,12">반기</button><button type="button" class="btn" data-pre="4">연 1회(4월)</button></div>`)}
+      <div class="row2">${fld('날짜 (일, 선택)', `<input class="in" name="day" inputmode="numeric" value="${esc(e.day == null ? '' : e.day)}" placeholder="예: 25 (모르면 비워도 돼요)">`)}${fld('1회 금액 (원)', `<input class="in" name="amt" inputmode="numeric" value="${e.amount ? Number(e.amount).toLocaleString('ko-KR') : ''}" placeholder="세전 예상 금액">`)}</div>
+      ${fld('계좌 · 메모 (선택)', `<input class="in" name="acc" list="dlEvA" value="${esc(e.account || '')}" placeholder="예: 삼성증권 연금저축">`)}
+      ${isNew ? '' : fld('상태', seg('evAct', [['1', '사용 중', active], ['0', '중지', !active]]))}`,
+    onOpen(b) {
+      const sync = () => b.querySelectorAll('#evMonths [data-m]').forEach(x => x.classList.toggle('on', months.has(Number(x.dataset.m))));
+      b.querySelector('#evKind').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; kind = x.dataset.k; b.querySelectorAll('#evKind button').forEach(y => y.classList.toggle('on', y === x)); if (isNew) { months = new Set(kind === 'invest' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [3, 6, 9, 12]); sync(); } });
+      b.querySelector('#evMonths').addEventListener('click', ev => { const x = ev.target.closest('[data-m]'); if (!x) return; const n = Number(x.dataset.m); months.has(n) ? months.delete(n) : months.add(n); sync(); });
+      b.querySelectorAll('[data-pre]').forEach(x => x.addEventListener('click', () => { months = new Set(x.dataset.pre.split(',').map(Number)); sync(); }));
+      const a = b.querySelector('[name=amt]'); a.addEventListener('input', () => { const d = a.value.replace(/[^\d]/g, ''); a.value = d ? Number(d).toLocaleString('ko-KR') : ''; });
+      const ac = b.querySelector('#evAct'); if (ac) ac.addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; active = x.dataset.k === '1'; ac.querySelectorAll('button').forEach(y => y.classList.toggle('on', y === x)); });
+      setTimeout(() => b.querySelector('[name=t]').focus(), 50);
+    },
+    async onSave(b) {
+      const title = b.querySelector('[name=t]').value.trim(), day = lfNum(b.querySelector('[name=day]').value), amt = lfNum(b.querySelector('[name=amt]').value);
+      if (!title) throw new Error('이름을 입력해 주세요');
+      if (!months.size) throw new Error('해당하는 달을 하나 이상 골라 주세요');
+      if (day != null && (day < 1 || day > 31)) throw new Error('날짜는 1~31 사이로 입력해 주세요');
+      if (kind === 'invest' && day == null) throw new Error('적립은 날짜(일)를 입력해 주세요');
+      const row = { kind, title, months: Array.from(months).sort((x, y) => x - y), day: day == null ? null : Math.round(day), amount: amt, account: b.querySelector('[name=acc]').value.trim() || null, active };
+      let data;
+      if (e.id) { const r = await sb.from('fin_events').update(row).eq('id', e.id).select().single(); if (r.error) throw new Error(r.error.message); data = r.data; FIN.events = FIN.events.map(x => x.id === e.id ? data : x); }
+      else { const r = await sb.from('fin_events').insert(row).select().single(); if (r.error) throw new Error(r.error.message); data = r.data; FIN.events.push(data); }
+      closeFinModal(); renderCalendar(); toast('저장했어요');
+    },
+    onDelete: isNew ? null : async () => { const r = await sb.from('fin_events').delete().eq('id', e.id); if (r.error) throw new Error(r.error.message); FIN.events = FIN.events.filter(x => x.id !== e.id); closeFinModal(); renderCalendar(); toast('삭제했어요'); }
+  });
+}
+$('#calView').addEventListener('click', ev => {
+  const x = ev.target.closest('[data-ev]'); if (!x) return; const a = x.dataset.ev;
+  if (a === 'new') return openEvent(null);
+  if (a === 'prev') { CAL.ym = shiftMonth(CAL.ym, -1); return renderCalendar(); }
+  if (a === 'next') { CAL.ym = shiftMonth(CAL.ym, 1); return renderCalendar(); }
+  if (a === 'now') { CAL.ym = today().slice(0, 7); return renderCalendar(); }
+  if (a.indexOf('edit:') === 0) { const e = FIN.events.find(y => y.id === a.slice(5)); if (e) openEvent(e); }
+});
+$('#ledgerView').addEventListener('click', ev => { if (ev.target.closest('[data-fz="set"]')) { lifeReady().then(openFinPlan); } });
 
 /* ===== Home ===== */
 function finReady() { return FIN.loaded ? Promise.resolve() : (FIN._p || (FIN._p = loadFin().then(() => { FIN._p = null; }, () => { FIN._p = null; }))); }
@@ -5085,7 +5584,7 @@ function renderHome() {
     const wk = LIFE.workout.filter(r => r.done_on >= lfWeek(t)).length, xs = hxSummary();
     const nx = LIFE.check.filter(r => r.next_due && r.next_due >= t).sort((a, b) => a.next_due < b.next_due ? -1 : 1)[0];
     health = `<div class="hm-big">${w0 ? lfFix(w0.weight) + '<small>kg</small>' : '<span style="font-size:18px;color:var(--ink3)">체중 기록 없음</span>'}</div>
-      <div class="hm-sub">${w0 && w1 ? lfDelta(Number(w0.weight), Number(w1.weight), 'kg').replace('<small', '<b').replace('</small>', '</b>') + ' · ' : ''}이번 주 운동 <b>${wk}</b> / ${h.workout_goal}회${xs ? `<br>${xs.ex.exam_date.slice(0, 4)} 검진 <b>${esc(xs.judge || '결과')}</b> · 주의 ${xs.warn}항목` : ''}${nx ? `<br>다음 검진 <b>${esc(nx.title || '검진')}</b> ${lfDday(nx.next_due)}` : ''}</div>`;
+      <div class="hm-sub">${w0 && w1 ? lfDelta(Number(w0.weight), Number(w1.weight), 'kg').replace('<small', '<b').replace('</small>', '</b>') + ' · ' : ''}이번 주 운동 <b>${wk}</b> / ${h.workout_goal}회${xs ? `<br>${xs.ex.exam_date.slice(0, 4)} 검진 <b>${esc(xs.judge || '결과')}</b> · 주의 ${xs.warn}항목` : ''}${nx ? `<br>다음 검진 <b>${esc(nx.title || '검진')}</b> ${lfDday(nx.next_due)}` : ''}${dkHomeLine()}</div>`;
   }
   /* 습관 */
   let habits = wait;
@@ -5113,6 +5612,7 @@ function renderHome() {
     LIFE.todos.filter(x => !x.done && x.due_date && lfDiff(x.due_date, t) <= 7).forEach(x => it.push({ d: x.due_date, k: '할 일', n: x.title }));
     LIFE.check.filter(x => x.next_due && lfDiff(x.next_due, t) >= -7 && lfDiff(x.next_due, t) <= 60).forEach(x => it.push({ d: x.next_due, k: '검진', n: x.title || '검진' }));
     LIFE.goals.filter(x => !x.done && x.due_date && lfDiff(x.due_date, t) >= -7 && lfDiff(x.due_date, t) <= 45).forEach(x => it.push({ d: x.due_date, k: '목표', n: x.title }));
+    if (FIN.loaded) evUpcoming(t, 14).forEach(o => it.push({ d: o.d, k: (EV_KIND[o.e.kind] || EV_KIND.dividend).t, n: o.e.title + (o.e.amount ? ' ' + won(o.e.amount) : '') }));
     it.sort((a, b) => a.d < b.d ? -1 : 1);
     soon = it.length ? `<div class="hm-list">${it.slice(0, 6).map(x => { const n = lfDiff(x.d, t); return `<div class="hm-li"><span class="gl-cat" style="margin:0">${x.k}</span><span class="tx">${esc(x.n)}</span><span class="dd ${n < 0 ? 'od' : n === 0 ? 'tdy' : ''}">${lfDday(x.d)}</span><span class="rt">${lfMD(x.d)}</span></div>`; }).join('')}</div>` : '<div class="hm-empty">앞으로 일주일 안에 마감되는 일, 두 달 안의 검진 일정이 여기에 모여요.</div>';
   }
@@ -5124,6 +5624,7 @@ function renderHome() {
   const hb = H(habits), td = H(todos);
   el.innerHTML = `<div class="hm-hello"><div><h2>Today</h2><p>${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일</p></div></div>
     <div class="hm-grid">
+      ${rvHTML()}
       ${hmCard('portfolio', 'var(--c-pf)', '총 자산', 'Portfolio', asset)}
       ${hmCard('ledger', 'var(--c-ld)', '이번 달 지출', 'Ledger', spend)}
       ${hmCard('life:health', 'var(--c-life)', '건강', 'Life', health)}
@@ -5137,6 +5638,7 @@ function renderHome() {
 }
 $('#homeView').addEventListener('click', e => {
   let x;
+  if ((x = e.target.closest('[data-rv]'))) { RV.mode = x.dataset.rv; store.set('rvMode', RV.mode); renderHome(); return; }
   if ((x = e.target.closest('[data-hlog]'))) { const [hid, dd] = x.dataset.hlog.split('|'); toggleHabit(hid, dd); return; }
   if ((x = e.target.closest('[data-tdone]'))) { toggleTodo(x.dataset.tdone); return; }
   if (e.target.closest('#hmLogout')) { if (confirm('로그아웃할까요?')) sb.auth.signOut().then(() => location.reload()); return; }
