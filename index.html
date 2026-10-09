@@ -1301,6 +1301,9 @@ body[data-tab="cal"] #btnAdd{display:none}
 #jvMl{display:flex;flex-wrap:wrap;gap:6px}
 .dk-r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 @media(max-width:420px){.dk-r3{grid-template-columns:1fr 1fr}}
+.ev-chip.got{opacity:.5}.ev-chip.got b{text-decoration:line-through}
+.ev-got{color:var(--inc);font-weight:800}
+#evOne[hidden],#evRep[hidden]{display:none}
 </style>
 <script>
 (function(){
@@ -1726,7 +1729,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.15.0';
+const APP_VERSION = 'v1.15.1';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -5459,10 +5462,14 @@ const CAL = { ym: today().slice(0, 7) };
 const EV_KIND = { dividend: { t: '배당', c: 'dv' }, invest: { t: '적립', c: 'iv' } };
 const evMonths = e => (e.months || []).map(Number).filter(m => m >= 1 && m <= 12);
 function evDay(e, ym) { if (e.day == null || e.day === '') return null; const last = new Date(Number(ym.slice(0, 4)), Number(ym.slice(5)), 0).getDate(); return Math.min(Number(e.day), last); }
-function evOcc(ym) { const m = Number(ym.slice(5)); return (FIN.events || []).filter(e => e.active !== false && evMonths(e).includes(m)).map(e => ({ e, day: evDay(e, ym) })); }
+function evOcc(ym) {
+  const m = Number(ym.slice(5)), out = [];
+  (FIN.events || []).forEach(e => { if (e.active === false) return; if (e.pay_date) { if (String(e.pay_date).slice(0, 7) === ym) out.push({ e, day: Number(String(e.pay_date).slice(8, 10)) }); } else if (evMonths(e).includes(m)) out.push({ e, day: evDay(e, ym) }); });
+  return out;
+}
 function evUpcoming(t, span) {
   const out = [];
-  [0, 1].forEach(k => { const ym = shiftMonth(t.slice(0, 7), k); evOcc(ym).forEach(o => { if (o.day == null) return; const d = ym + '-' + String(o.day).padStart(2, '0'), n = lfDiff(d, t); if (n >= 0 && n <= span) out.push({ d, e: o.e }); }); });
+  [0, 1].forEach(k => { const ym = shiftMonth(t.slice(0, 7), k); evOcc(ym).forEach(o => { if (o.day == null || o.e.received) return; const d = ym + '-' + String(o.day).padStart(2, '0'), n = lfDiff(d, t); if (n >= 0 && n <= span) out.push({ d, e: o.e }); }); });
   return out;
 }
 function renderCalTab() { finEnsure(renderCalendar); }
@@ -5475,16 +5482,16 @@ function renderCalendar() {
   let cells = ''; for (let i = 0; i < first; i++) cells += '<div class="ev-c out"></div>';
   for (let d = 1; d <= dim; d++) {
     const ds = ym + '-' + String(d).padStart(2, '0'), list = byDay[d] || [], dow = (first + d - 1) % 7;
-    cells += `<div class="ev-c ${ds === t ? 'today' : ''} ${dow === 0 ? 'su' : dow === 6 ? 'sa' : ''}"><span class="ev-n">${d}</span>${list.slice(0, 2).map(o => `<button type="button" class="ev-chip ${EV_KIND[o.e.kind] ? EV_KIND[o.e.kind].c : 'dv'}" data-ev="edit:${esc(o.e.id)}"><i></i><b>${esc(o.e.title)}</b></button>`).join('')}${list.length > 2 ? `<small class="ev-more">+${list.length - 2}</small>` : ''}</div>`;
+    cells += `<div class="ev-c ${ds === t ? 'today' : ''} ${dow === 0 ? 'su' : dow === 6 ? 'sa' : ''}"><span class="ev-n">${d}</span>${list.slice(0, 2).map(o => `<button type="button" class="ev-chip ${EV_KIND[o.e.kind] ? EV_KIND[o.e.kind].c : 'dv'}${o.e.received ? ' got' : ''}" data-ev="edit:${esc(o.e.id)}"><i></i><b>${esc(o.e.title)}</b></button>`).join('')}${list.length > 2 ? `<small class="ev-more">+${list.length - 2}</small>` : ''}</div>`;
   }
   const tail = (first + dim) % 7; if (tail) for (let i = tail; i < 7; i++) cells += '<div class="ev-c out"></div>';
   const rows = occ.slice().sort((a, b) => (a.day == null ? 99 : a.day) - (b.day == null ? 99 : b.day)).map(o => {
     const k = EV_KIND[o.e.kind] || EV_KIND.dividend, dd = o.day == null ? null : ym + '-' + String(o.day).padStart(2, '0'), n = dd ? lfDiff(dd, t) : null;
-    return `<button type="button" class="lf-row ev-row" data-ev="edit:${esc(o.e.id)}"><span class="d"><i class="ev-dot ${k.c}"></i>${o.day == null ? '월중' : m + '/' + o.day}</span><span class="m"><b>${esc(o.e.title)}</b> <small class="dk-src">${k.t}</small>${o.e.account ? `<small>${esc(o.e.account)}</small>` : ''}</span><span class="r">${o.e.amount ? `<span class="money">${won(o.e.amount)}</span>` : '<small>금액 미정</small>'}${n != null && n >= 0 && ym === t.slice(0, 7) ? `<small class="ev-dd">${n === 0 ? '오늘' : 'D-' + n}</small>` : ''}</span></button>`;
+    return `<button type="button" class="lf-row ev-row" data-ev="edit:${esc(o.e.id)}"><span class="d"><i class="ev-dot ${k.c}"></i>${o.day == null ? '월중' : m + '/' + o.day}</span><span class="m"><b>${esc(o.e.title)}</b> <small class="dk-src">${k.t}</small>${o.e.account ? `<small>${esc(o.e.account)}</small>` : ''}</span><span class="r">${o.e.amount ? `<span class="money">${won(o.e.amount)}</span>` : '<small>금액 미정</small>'}${o.e.received ? '<small class="ev-got">수령 완료</small>' : (n != null && n >= 0 && ym === t.slice(0, 7) ? `<small class="ev-dd">${n === 0 ? '오늘' : 'D-' + n}</small>` : '')}</span></button>`;
   }).join('');
-  const evs = (FIN.events || []).filter(e => e.active !== false), mon = Array.from({ length: 12 }, (_, i) => ({ dv: 0, iv: 0 }));
-  evs.forEach(e => evMonths(e).forEach(mm => { mon[mm - 1][EV_KIND[e.kind] ? EV_KIND[e.kind].c : 'dv'] += Number(e.amount) || 0; }));
-  const dvYear = mon.reduce((s, x) => s + x.dv, 0), ivMonth = evs.filter(e => e.kind === 'invest').reduce((s, e) => s + (e.months && evMonths(e).length ? (Number(e.amount) || 0) * evMonths(e).length / 12 : 0), 0), ivYear = mon.reduce((s, x) => s + x.iv, 0);
+  const evs = (FIN.events || []).filter(e => e.active !== false), mon = Array.from({ length: 12 }, () => ({ dv: 0, iv: 0, got: 0 }));
+  evs.forEach(e => { const c = EV_KIND[e.kind] ? EV_KIND[e.kind].c : 'dv', a = Number(e.amount) || 0; if (e.pay_date) { if (Number(String(e.pay_date).slice(0, 4)) === y) { const i = Number(String(e.pay_date).slice(5, 7)) - 1; mon[i][c] += a; if (e.received) mon[i].got += a; } } else evMonths(e).forEach(mm => { mon[mm - 1][c] += a; }); });
+  const dvYear = mon.reduce((s, x) => s + x.dv, 0), gotYear = mon.reduce((s, x) => s + x.got, 0), ivYear = mon.reduce((s, x) => s + x.iv, 0), ivMonth = ivYear / 12;
   LFQ.push(() => { const b = $('#evChart'); if (b) drawBars(b, { items: !dvYear ? [] : mon.map((x, i) => ({ v: x.dv, txt: x.dv ? Math.round(x.dv / 1000) / 10 + '만' : '', label: (i + 1) + '월', on: i + 1 === m, tip: `${i + 1}월 배당 예상<br><b>${won(x.dv)}</b>` })), color: 'var(--c-cal)', min: 1, empty: '배당 일정을 등록하면 월별 예상 금액이 보여요.', label: '월별 배당 예상' }); });
   const empty = !(FIN.events || []).length;
   el.innerHTML = `<div class="fin-head"><div><h2>Calendar</h2><p>배당과 정기 적립 일정을 한눈에 봐요</p></div><div class="fin-act"><button type="button" class="btn primary" data-ev="new">+ 일정 추가</button></div></div>
@@ -5493,46 +5500,56 @@ function renderCalendar() {
     <div class="card ev-grid">${head}${cells}</div>
     <div class="fin-sec"><h3>${m}월 일정</h3><span>${occ.length}건</span></div>
     <section class="card lf-list">${rows || '<div class="lf-empty" style="padding:22px">이번 달 일정이 없어요.</div>'}</section>
-    <div class="card lf-chart-card"><div class="lf-ch"><b>월별 배당 예상</b><span class="dk-sub">연 예상 배당 <span class="money">${won(dvYear)}</span></span></div>${lfChartBox('evChart')}
-      <div class="ev-sum"><span>월 평균 배당 <b class="money">${won(Math.round(dvYear / 12))}</b></span><span>정기 적립 월 평균 <b class="money">${won(Math.round(ivMonth))}</b></span><span>연 적립 합계 <b class="money">${won(ivYear)}</b></span></div>
-      <div class="lf-note" style="margin:8px 0 0">배당 금액은 내가 입력한 세전 예상치예요. 실제 지급일·금액은 증권사 앱에서 확인해 주세요.</div></div>`;
+    <div class="card lf-chart-card"><div class="lf-ch"><b>${y}년 월별 배당</b><span class="dk-sub">${y}년 합계 <span class="money">${won(dvYear)}</span></span></div>${lfChartBox('evChart')}
+      <div class="ev-sum">${gotYear ? `<span>수령 완료 <b class="money">${won(gotYear)}</b></span>` : ''}<span>월 평균 배당 <b class="money">${won(Math.round(dvYear / 12))}</b></span><span>정기 적립 월 평균 <b class="money">${won(Math.round(ivMonth))}</b></span><span>적립 합계 <b class="money">${won(ivYear)}</b></span></div>
+      <div class="lf-note" style="margin:8px 0 0">배당 금액은 내가 입력한 값이에요. 반복 일정은 예상치이고, 증권사 앱에서 확인한 날짜·금액은 '특정 날짜'로 등록한 뒤 받으면 '수령 완료'로 바꿔 주세요.</div></div>`;
   lfRunQueue();
 }
 function openEvent(e) {
   const isNew = !e;
-  e = e || { kind: 'dividend', title: '', months: [3, 6, 9, 12], day: '', amount: '', account: '', active: true, memo: '' };
-  let kind = e.kind || 'dividend', months = new Set(evMonths(e)), active = e.active !== false;
+  e = e || { kind: 'dividend', title: '', months: [3, 6, 9, 12], day: '', amount: '', account: '', active: true, received: false, pay_date: null };
+  let kind = e.kind || 'dividend', months = new Set(evMonths(e)), mode = e.pay_date ? 'one' : 'rep', state = e.active === false ? 'x' : e.received ? 'r' : 'p';
   const names = Array.from(new Set(FIN.holdings.filter(h => h.market === 'KR' || h.market === 'US').map(h => h.name))), accs = Array.from(new Set(FIN.holdings.map(h => h.account)));
   const seg = (id, items) => `<div class="seg" id="${id}">${items.map(([k, t, on]) => `<button type="button" data-k="${k}" class="${on ? 'on' : ''}">${t}</button>`).join('')}</div>`;
   const mchips = () => Array.from({ length: 12 }, (_, i) => `<button type="button" class="chip ${months.has(i + 1) ? 'on' : ''}" data-m="${i + 1}">${i + 1}월</button>`).join('');
   openFinModal({
     title: isNew ? '일정 추가' : '일정 수정',
-    html: `${fld('종류', seg('evKind', [['dividend', '배당 받는 날', kind === 'dividend'], ['invest', '정기 적립 (매수)', kind === 'invest']]))}
+    html: `${fld('종류', seg('evKind', [['dividend', '배당', kind === 'dividend'], ['invest', '정기 적립 (매수)', kind === 'invest']]))}
+      ${fld('입력 방식', seg('evMode', [['one', '특정 날짜 (불규칙 배당)', mode === 'one'], ['rep', '매년·매월 반복', mode === 'rep']]))}
       <datalist id="dlEvN">${names.map(n => `<option value="${esc(n)}">`).join('')}</datalist><datalist id="dlEvA">${accs.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
       ${fld('이름', `<input class="in" name="t" list="dlEvN" value="${esc(e.title)}" placeholder="예: SCHD, 연금저축 적립">`)}
-      ${fld('해당하는 달', `<div class="lf-chips" id="evMonths">${mchips()}</div><div class="ev-pre"><button type="button" class="btn" data-pre="1,2,3,4,5,6,7,8,9,10,11,12">매월</button><button type="button" class="btn" data-pre="3,6,9,12">분기(3·6·9·12)</button><button type="button" class="btn" data-pre="6,12">반기</button><button type="button" class="btn" data-pre="4">연 1회(4월)</button></div>`)}
-      <div class="row2">${fld('날짜 (일, 선택)', `<input class="in" name="day" inputmode="numeric" value="${esc(e.day == null ? '' : e.day)}" placeholder="예: 25 (모르면 비워도 돼요)">`)}${fld('1회 금액 (원)', `<input class="in" name="amt" inputmode="numeric" value="${e.amount ? Number(e.amount).toLocaleString('ko-KR') : ''}" placeholder="세전 예상 금액">`)}</div>
+      <div id="evOne">${fld('날짜', `<input class="in" type="date" name="pd" value="${esc(e.pay_date ? String(e.pay_date).slice(0, 10) : '')}">`)}</div>
+      <div id="evRep">${fld('해당하는 달', `<div class="lf-chips" id="evMonths">${mchips()}</div><div class="ev-pre"><button type="button" class="btn" data-pre="1,2,3,4,5,6,7,8,9,10,11,12">매월</button><button type="button" class="btn" data-pre="3,6,9,12">분기(3·6·9·12)</button><button type="button" class="btn" data-pre="6,12">반기</button><button type="button" class="btn" data-pre="4">연 1회(4월)</button></div>`)}
+      ${fld('날짜 (일, 선택)', `<input class="in" name="day" inputmode="numeric" value="${esc(e.day == null ? '' : e.day)}" placeholder="예: 25 (모르면 비워도 돼요)">`)}</div>
+      ${fld('금액 (원)', `<input class="in" name="amt" inputmode="numeric" value="${e.amount ? Number(e.amount).toLocaleString('ko-KR') : ''}" placeholder="세전 또는 받은 금액">`)}
       ${fld('계좌 · 메모 (선택)', `<input class="in" name="acc" list="dlEvA" value="${esc(e.account || '')}" placeholder="예: 삼성증권 연금저축">`)}
-      ${isNew ? '' : fld('상태', seg('evAct', [['1', '사용 중', active], ['0', '중지', !active]]))}`,
+      ${isNew ? '' : fld('상태', seg('evAct', [['p', '예정·사용 중', state === 'p'], ['r', '수령 완료', state === 'r'], ['x', '중지', state === 'x']]))}`,
     onOpen(b) {
       const sync = () => b.querySelectorAll('#evMonths [data-m]').forEach(x => x.classList.toggle('on', months.has(Number(x.dataset.m))));
-      b.querySelector('#evKind').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; kind = x.dataset.k; b.querySelectorAll('#evKind button').forEach(y => y.classList.toggle('on', y === x)); if (isNew) { months = new Set(kind === 'invest' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [3, 6, 9, 12]); sync(); } });
+      const sm = () => { b.querySelector('#evOne').hidden = mode !== 'one'; b.querySelector('#evRep').hidden = mode !== 'rep'; b.querySelectorAll('#evMode button').forEach(y => y.classList.toggle('on', y.dataset.k === mode)); const r = b.querySelector('#evAct [data-k=r]'); if (r) { r.hidden = mode !== 'one'; if (mode !== 'one' && state === 'r') { state = 'p'; b.querySelectorAll('#evAct button').forEach(y => y.classList.toggle('on', y.dataset.k === state)); } } };
+      sm();
+      b.querySelector('#evMode').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; mode = x.dataset.k; if (mode === 'one') { const pd = b.querySelector('[name=pd]'); if (!pd.value) pd.value = today(); } sm(); });
+      b.querySelector('#evKind').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; kind = x.dataset.k; b.querySelectorAll('#evKind button').forEach(y => y.classList.toggle('on', y === x)); if (isNew && mode === 'rep') { months = new Set(kind === 'invest' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [3, 6, 9, 12]); sync(); } });
       b.querySelector('#evMonths').addEventListener('click', ev => { const x = ev.target.closest('[data-m]'); if (!x) return; const n = Number(x.dataset.m); months.has(n) ? months.delete(n) : months.add(n); sync(); });
       b.querySelectorAll('[data-pre]').forEach(x => x.addEventListener('click', () => { months = new Set(x.dataset.pre.split(',').map(Number)); sync(); }));
       const a = b.querySelector('[name=amt]'); a.addEventListener('input', () => { const d = a.value.replace(/[^\d]/g, ''); a.value = d ? Number(d).toLocaleString('ko-KR') : ''; });
-      const ac = b.querySelector('#evAct'); if (ac) ac.addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; active = x.dataset.k === '1'; ac.querySelectorAll('button').forEach(y => y.classList.toggle('on', y === x)); });
+      const ac = b.querySelector('#evAct'); if (ac) ac.addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; state = x.dataset.k; ac.querySelectorAll('button').forEach(y => y.classList.toggle('on', y === x)); });
       setTimeout(() => b.querySelector('[name=t]').focus(), 50);
     },
     async onSave(b) {
-      const title = b.querySelector('[name=t]').value.trim(), day = lfNum(b.querySelector('[name=day]').value), amt = lfNum(b.querySelector('[name=amt]').value);
+      const title = b.querySelector('[name=t]').value.trim(), day = lfNum(b.querySelector('[name=day]').value), amt = lfNum(b.querySelector('[name=amt]').value), pd = b.querySelector('[name=pd]').value;
       if (!title) throw new Error('이름을 입력해 주세요');
-      if (!months.size) throw new Error('해당하는 달을 하나 이상 골라 주세요');
-      if (day != null && (day < 1 || day > 31)) throw new Error('날짜는 1~31 사이로 입력해 주세요');
-      if (kind === 'invest' && day == null) throw new Error('적립은 날짜(일)를 입력해 주세요');
-      const row = { kind, title, months: Array.from(months).sort((x, y) => x - y), day: day == null ? null : Math.round(day), amount: amt, account: b.querySelector('[name=acc]').value.trim() || null, active };
+      if (mode === 'one') { if (!pd) throw new Error('날짜를 선택해 주세요'); }
+      else {
+        if (!months.size) throw new Error('해당하는 달을 하나 이상 골라 주세요');
+        if (day != null && (day < 1 || day > 31)) throw new Error('날짜는 1~31 사이로 입력해 주세요');
+        if (kind === 'invest' && day == null) throw new Error('적립은 날짜(일)를 입력해 주세요');
+      }
+      const row = { kind, title, months: mode === 'rep' ? Array.from(months).sort((x, y) => x - y) : [], day: mode === 'rep' && day != null ? Math.round(day) : null, pay_date: mode === 'one' ? pd : null, amount: amt, account: b.querySelector('[name=acc]').value.trim() || null, active: state !== 'x', received: mode === 'one' && state === 'r' };
       let data;
       if (e.id) { const r = await sb.from('fin_events').update(row).eq('id', e.id).select().single(); if (r.error) throw new Error(r.error.message); data = r.data; FIN.events = FIN.events.map(x => x.id === e.id ? data : x); }
       else { const r = await sb.from('fin_events').insert(row).select().single(); if (r.error) throw new Error(r.error.message); data = r.data; FIN.events.push(data); }
+      if (data.pay_date) CAL.ym = String(data.pay_date).slice(0, 7);
       closeFinModal(); renderCalendar(); toast('저장했어요');
     },
     onDelete: isNew ? null : async () => { const r = await sb.from('fin_events').delete().eq('id', e.id); if (r.error) throw new Error(r.error.message); FIN.events = FIN.events.filter(x => x.id !== e.id); closeFinModal(); renderCalendar(); toast('삭제했어요'); }
