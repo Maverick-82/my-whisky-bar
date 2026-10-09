@@ -986,6 +986,21 @@ body[data-tab="home"] .fab{display:none!important}
   .hb-card,.gl-card{padding:14px}
 }
 .auth-card[hidden],.auth-wait[hidden],.auth-links button[hidden],.auth-card input[hidden]{display:none!important}
+.card.sx-card{padding:18px 20px;margin-bottom:14px}
+.sx-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.sx-h h3{margin:0;font-size:13.5px;color:var(--ink)}
+.sx-tot{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:8px}
+.sx-tot div{display:flex;flex-direction:column;gap:2px}.sx-tot span{font-size:11.5px;color:var(--ink3);font-weight:600}.sx-tot b{font-size:20px;color:var(--ink);font-variant-numeric:tabular-nums}.sx-tot b.acc{color:var(--tc)}
+.sx-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;text-align:left;background:transparent;border:0;border-top:1px solid var(--line);padding:11px 0;color:var(--ink);cursor:pointer}
+.sx-n{display:flex;flex-direction:column;gap:2px;min-width:0}.sx-n b{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sx-n small{font-size:11.5px;color:var(--ink3)}
+.sx-a{display:flex;flex-direction:column;align-items:flex-end;gap:2px}.sx-a b{font-size:14px;font-variant-numeric:tabular-nums}.sx-a b em{font-style:normal;font-size:11px;color:var(--ink3);font-weight:600;margin-left:1px}
+.sx-dd{font-style:normal;font-size:11px;font-weight:700;color:var(--ink3)}.sx-dd.soon{color:var(--tc)}.sx-dd.tdy{color:#fff;background:var(--tc);border-radius:99px;padding:1px 7px}
+.sx-row.muted .sx-n b,.sx-row.muted .sx-a b{color:var(--ink3)}
+.sx-tag{display:inline-block;font-size:10.5px;font-weight:700;border-radius:99px;padding:1px 7px;margin-left:6px;background:var(--soft);border:1px solid var(--line);color:var(--ink3);vertical-align:1px}
+.sx-sec{margin:12px 0 2px;font-size:11.5px;font-weight:700;color:var(--ink3)}
+.sx-sug{border-top:1px dashed var(--line2);margin-top:10px;padding-top:4px}
+.sx-sug .sx-row{border-top:1px dashed var(--line)}.sx-sug .btn{padding:5px 10px;font-size:12px}
+.sx-empty{color:var(--ink3);font-size:13px;padding:14px 0 4px}
+@media (max-width:640px){.card.sx-card{padding:16px 14px}.sx-tot b{font-size:17px}}
 </style>
 <script>
 (function(){
@@ -1018,7 +1033,7 @@ body[data-tab="home"] .fab{display:none!important}
 <div class="wrap" id="app">
   <div class="top">
     <div class="titleblock">
-      <h1><svg viewBox="0 0 24 24" width="30" height="30" style="color:var(--s1);flex:none" aria-hidden="true"><use href="#jetIcon"/></svg> Maverick</h1>
+      <h1><svg viewBox="0 0 24 24" width="30" height="30" style="color:var(--s1);flex:none;transform:rotate(60deg)" aria-hidden="true"><use href="#jetIcon"/></svg> Maverick</h1>
       <div class="titlesub">Personal Dashboard<span class="verbadge" id="appVersion"></span></div>
     </div>
     <span class="sync hide-m" id="sync"></span>
@@ -1357,7 +1372,7 @@ body[data-tab="home"] .fab{display:none!important}
 <div class="auth-gate" id="authGate">
   <div class="auth-wait" id="authWait">확인 중…</div>
   <form class="card auth-card" id="authForm" hidden>
-    <div class="auth-logo"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><use href="#jetIcon"/></svg> Maverick</div>
+    <div class="auth-logo"><svg viewBox="0 0 24 24" width="30" height="30" style="transform:rotate(60deg)" aria-hidden="true"><use href="#jetIcon"/></svg> Maverick</div>
     <p class="auth-msg" id="authMsg">로그인해 주세요</p>
     <input class="in" type="email" id="authEmail" autocomplete="username" placeholder="이메일" required>
     <input class="in" type="password" id="authPw" autocomplete="current-password" placeholder="비밀번호" required>
@@ -1404,7 +1419,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.9.1';
+const APP_VERSION = 'v1.10.2';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -2065,7 +2080,7 @@ $('#btnDel').addEventListener('click', async () => {
 
 /* ---------- 투자(Portfolio) · 가계부(Ledger) ---------- */
 const FIN = {
-  holdings: [], ledger: [], snaps: [], rules: {}, fx: { usdkrw: 1354.83, at: '' },
+  holdings: [], ledger: [], snaps: [], subs: null, rules: {}, fx: { usdkrw: 1354.83, at: '' },
   loaded: false, loading: false, updating: false,
   broker: store.get('finBroker', 'all'), month: today().slice(0,7), errors: {}, failed: []
 };
@@ -2099,14 +2114,17 @@ async function loadFin(){
   if (FIN.loading) return;
   FIN.loading = true;
   try {
-    const [h, l, s, m, ru] = await Promise.all([
+    const [h, l, s, m, ru, sx] = await Promise.all([
       sb.from('fin_holdings').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: true }),
       sb.from('fin_ledger').select('*').order('entry_date', { ascending: false }).order('created_at', { ascending: false }),
       sb.from('fin_snapshots').select('*').order('snap_date', { ascending: true }).limit(800),
       sb.from('fin_meta').select('*'),
-      sb.from('fin_merchant_rules').select('*')
+      sb.from('fin_merchant_rules').select('*'),
+      sb.from('fin_subs').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: true })
     ]);
     const bad = [h, l, s, m, ru].find(r => r.error);
+    FIN.subs = sx.error ? (FIN.subs || []) : (sx.data || []);
+    if (sx.error) toast('구독 목록을 불러오지 못했어요: ' + sx.error.message, true);
     if (bad) throw new Error(bad.error.message);
     FIN.holdings = h.data || []; FIN.ledger = l.data || []; FIN.snaps = s.data || [];
     FIN.rules = {}; (ru.data || []).forEach(r => { FIN.rules[r.merchant_key] = r.category; });
@@ -2564,6 +2582,7 @@ function renderLedger(){
         <div class="ld-bars">${ye.map((v, i) => { const m = yr + '-' + String(i + 1).padStart(2, '0'); return `<button class="ld-b ${m === ym ? 'on' : ''}" data-ym="${m}" title="${i + 1}월 ${won(v)}"><i style="height:${v > 0 ? Math.max(4, v / ymax * 100) : 0}%"></i><span>${i + 1}</span></button>`; }).join('')}</div>
       </section>
     </div>
+    ${sxHTML()}
     ${analysisHTML(ym)}
     <section class="card ld-list">
       ${dayKeys.length ? dayKeys.map(d => { const dt = new Date(d + 'T00:00:00'); const sum = days[d].reduce((s, e) => s + (e.kind === '지출' ? -e.amt : e.amt), 0);
@@ -3043,8 +3062,115 @@ function analysisHTML(ym){
       ${A.cards.length ? `<div class="an-b an-wide"><h4>카드별 지출</h4><div class="an-cards">${A.cards.map(([c, v]) => `<div class="an-card"><span>${esc(c)}</span><b class="money">${won(v)}</b></div>`).join('')}</div></div>` : ''}
     </div></section>`;
 }
+/* ===== 정기결제 · 구독 (Ledger) ===== */
+const sxAlias = n => { const k = mKey(n); const a = [k]; if (/claude|클로드/.test(k)) a.push('anthropic', 'claude'); if (/쿠팡|coupang/.test(k)) a.push('쿠팡', 'coupang'); if (/youtube|유튜브/.test(k)) a.push('youtube', '유튜브', 'google'); if (/netflix|넷플릭스/.test(k)) a.push('netflix', '넷플릭스'); return a.filter(Boolean); };
+function sxMatch(s, text){ const t = mKey(text); return !!t && sxAlias(s.name).some(a => t.indexOf(a) >= 0 || (a.length >= 3 && a.indexOf(t) >= 0)); }
+function sxNext(s){
+  if (!s.bill_day) return null;
+  const t = today(), y = Number(t.slice(0, 4)), m = Number(t.slice(5, 7));
+  const mk = (yy, mm) => { const last = new Date(yy, mm, 0).getDate(); return yy + '-' + String(mm).padStart(2, '0') + '-' + String(Math.min(s.bill_day, last)).padStart(2, '0'); };
+  if (s.cycle === '연') { if (!s.bill_month) return null; let d = mk(y, s.bill_month); if (d < t) d = mk(y + 1, s.bill_month); return d; }
+  let d = mk(y, m); if (d < t) d = m === 12 ? mk(y + 1, 1) : mk(y, m + 1); return d;
+}
+const sxDiff = d => Math.round((new Date(d + 'T00:00:00') - new Date(today() + 'T00:00:00')) / 864e5);
+const sxMonthly = s => s.cycle === '연' ? fnum(s.amount) / 12 : fnum(s.amount);
+function sxWhen(s){
+  if (s.bundled && !fnum(s.amount)) return '별도 결제 없음';
+  const p = [];
+  if (s.cycle === '연') p.push(s.bill_month && s.bill_day ? '매년 ' + s.bill_month + '월 ' + s.bill_day + '일' : '연 결제');
+  else p.push(s.bill_day ? '매월 ' + s.bill_day + '일' : '매월');
+  if (s.card) p.push(s.card);
+  return p.join(' · ');
+}
+function sxSugs(){
+  if (!FIN.subs) return [];
+  const A = analyzeLedger(FIN.month);
+  return A.rec.filter(r => !FIN.subs.some(s => sxMatch(s, r.name))).slice(0, 5);
+}
+function sxHTML(){
+  const subs = FIN.subs || [];
+  const live = subs.filter(s => s.active && !(s.bundled && !fnum(s.amount)));
+  const free = subs.filter(s => s.active && s.bundled && !fnum(s.amount));
+  const off = subs.filter(s => !s.active);
+  const mon = live.reduce((a, s) => a + sxMonthly(s), 0);
+  live.sort((a, b) => { const x = sxNext(a), y = sxNext(b); return x && y ? (x < y ? -1 : x > y ? 1 : 0) : x ? -1 : y ? 1 : 0; });
+  const row = (s, muted) => {
+    const nx = s.active ? sxNext(s) : null, n = nx ? sxDiff(nx) : null;
+    const dd = n == null ? '' : `<i class="sx-dd ${n === 0 ? 'tdy' : n <= 3 ? 'soon' : ''}">${n === 0 ? '오늘' : 'D-' + n}${n > 3 ? ' · ' + nx.slice(5).replace('-', '/') : ''}</i>`;
+    const amt = s.bundled && !fnum(s.amount) ? '<b>제휴</b>' : `<b class="money">${won(s.amount)}<em>/${s.cycle === '연' ? '년' : '월'}</em></b>`;
+    return `<button class="sx-row ${muted ? 'muted' : ''}" data-sid="${esc(s.id)}"><span class="sx-n"><b>${esc(s.name)}${!s.active ? '<span class="sx-tag">해지</span>' : ''}</b><small>${esc(sxWhen(s))}${s.memo ? ' · ' + esc(s.memo) : ''}</small></span><span class="sx-a">${amt}${dd}</span></button>`;
+  };
+  const sug = sxSugs();
+  return `<section class="card sx-card">
+    <div class="sx-h"><h3>정기결제 · 구독</h3><button class="btn" id="sxAdd">+ 추가</button></div>
+    ${subs.length ? `<div class="sx-tot"><div><span>월 환산</span><b class="money acc">${won(mon)}</b></div><div><span>1년이면</span><b class="money">${won(mon * 12)}</b></div><div><span>사용 중</span><b>${live.length + free.length}개</b></div></div>` : ''}
+    ${live.map(s => row(s)).join('')}
+    ${free.length ? `<div class="sx-sec">카드 · 통신사 제휴</div>${free.map(s => row(s, true)).join('')}` : ''}
+    ${off.length ? `<div class="sx-sec">해지한 구독</div>${off.map(s => row(s, true)).join('')}` : ''}
+    ${!subs.length ? '<div class="sx-empty">아직 등록한 구독이 없어요. “+ 추가”로 쿠팡 와우, Claude 같은 정기결제를 넣어 보세요.</div>' : ''}
+    ${sug.length ? `<div class="sx-sug"><div class="sx-sec">등록 안 된 반복 결제 (명세서에서 찾았어요)</div>${sug.map((r, i) => `<div class="sx-row" style="cursor:default"><span class="sx-n"><b>${esc(r.name)}</b><small>${esc(r.cat)} · 최근 ${r.n}개월 반복</small></span><span class="sx-a"><b class="money">${won(r.amt)}<em>/월</em></b><button class="btn" data-sxsug="${i}">등록</button></span></div>`).join('')}</div>` : ''}
+  </section>`;
+}
+function openSub(s, pre){
+  const isNew = !s;
+  s = s || Object.assign({ name: '', amount: '', cycle: '월', bill_day: '', bill_month: '', card: '', category: '문화·여가', bundled: false, active: true, memo: '' }, pre || {});
+  let cycle = s.cycle, bundled = !!s.bundled, active = s.active !== false;
+  const cards = Array.from(new Set(FIN.ledger.map(r => r.card).filter(Boolean).concat((FIN.subs || []).map(x => x.card).filter(Boolean))));
+  const seg = (id, items) => `<div class="seg" id="${id}">${items.map(([k, l, on]) => `<button type="button" data-k="${k}" class="${on ? 'on' : ''}">${l}</button>`).join('')}</div>`;
+  openFinModal({
+    title: isNew ? '구독 추가' : '구독 수정',
+    html: `<datalist id="dlSxCard">${cards.map(c => `<option value="${esc(c)}">`).join('')}</datalist>
+      ${fld('이름', `<input class="in" name="name" value="${esc(s.name)}" placeholder="예: 쿠팡 와우">`)}
+      <div class="row2">${fld('결제 주기', seg('sxCycle', [['월', '매월', cycle === '월'], ['연', '매년', cycle === '연']]))}${fld('금액(원)', `<input class="in" name="amt" inputmode="numeric" value="${s.amount === '' ? '' : Number(s.amount).toLocaleString('ko-KR')}" placeholder="0">`)}</div>
+      <div class="row2">${fld('결제일 (일)', `<input class="in" name="bill_day" inputmode="numeric" value="${esc(s.bill_day || '')}" placeholder="1~31">`)}${fld('결제 월 (매년일 때)', `<input class="in" name="bill_month" inputmode="numeric" value="${esc(s.bill_month || '')}" placeholder="1~12" ${cycle === '연' ? '' : 'disabled'}>`)}</div>
+      <div class="row2">${fld('결제 카드', `<input class="in" name="card" list="dlSxCard" value="${esc(s.card || '')}" placeholder="예: 삼성카드">`)}${fld('카테고리', `<select class="in" name="category">${EXP_CATS.map(c => `<option ${c === s.category ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select>`)}</div>
+      <div class="row2">${fld('종류', seg('sxBun', [['0', '직접 결제', !bundled], ['1', '제휴 · 무료', bundled]]))}${fld('상태', seg('sxAct', [['1', '사용 중', active], ['0', '해지', !active]]))}</div>
+      ${fld('메모', `<input class="in" name="memo" value="${esc(s.memo || '')}" placeholder="예: 로켓와우, Pro 플랜">`)}`,
+    onOpen(body){
+      const bind = (id, fn) => body.querySelector('#' + id).addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; fn(b.dataset.k); body.querySelectorAll('#' + id + ' button').forEach(x => x.classList.toggle('on', x === b)); });
+      bind('sxCycle', k => { cycle = k; body.querySelector('[name=bill_month]').disabled = k !== '연'; });
+      bind('sxBun', k => { bundled = k === '1'; });
+      bind('sxAct', k => { active = k === '1'; });
+      const a = body.querySelector('[name=amt]');
+      a.addEventListener('input', () => { const d = a.value.replace(/[^\d]/g, ''); a.value = d ? Number(d).toLocaleString('ko-KR') : ''; });
+      setTimeout(() => body.querySelector('[name=' + (isNew ? 'name' : 'amt') + ']').focus(), 50);
+    },
+    async onSave(body){
+      const g = n => body.querySelector('[name=' + n + ']').value.trim();
+      const name = g('name'); if (!name) throw new Error('이름을 입력해 주세요');
+      const amt = Number(g('amt').replace(/[^\d]/g, '')) || 0;
+      if (!amt && !bundled) throw new Error('금액을 입력해 주세요 (무료 제휴면 “제휴 · 무료”를 선택)');
+      const dayN = g('bill_day') === '' ? null : Number(g('bill_day')), monN = g('bill_month') === '' ? null : Number(g('bill_month'));
+      if (dayN != null && !(dayN >= 1 && dayN <= 31)) throw new Error('결제일은 1~31 사이로 입력해 주세요');
+      if (cycle === '연' && monN != null && !(monN >= 1 && monN <= 12)) throw new Error('결제 월은 1~12 사이로 입력해 주세요');
+      const row = { name, amount: bundled ? 0 : amt, cycle, bill_day: dayN, bill_month: cycle === '연' ? monN : null, card: g('card'), category: g('category'), bundled, active, memo: g('memo') };
+      if (isNew) {
+        row.sort_order = (FIN.subs || []).reduce((m, x) => Math.max(m, x.sort_order || 0), 0) + 1;
+        if (APP.uid) row.user_id = APP.uid;
+        const { data, error } = await sb.from('fin_subs').insert(row).select().single();
+        if (error) throw new Error(error.message);
+        (FIN.subs = FIN.subs || []).push(data);
+      } else {
+        const { data, error } = await sb.from('fin_subs').update(row).eq('id', s.id).select().single();
+        if (error) throw new Error(error.message);
+        const i = FIN.subs.findIndex(x => x.id === s.id); if (i >= 0) FIN.subs[i] = data;
+      }
+      closeFinModal(); renderLedger(); toast('저장했어요');
+    },
+    onDelete: isNew ? null : async () => {
+      const { error } = await sb.from('fin_subs').delete().eq('id', s.id);
+      if (error) throw new Error(error.message);
+      FIN.subs = FIN.subs.filter(x => x.id !== s.id);
+      closeFinModal(); renderLedger(); toast('삭제했어요');
+    }
+  });
+}
+
 document.addEventListener('click', ev => {
   if (S.tab !== 'ledger') return;
+  if (ev.target.closest('#sxAdd')) { openSub(null); return; }
+  const sg = ev.target.closest('[data-sxsug]'); if (sg) { const r = sxSugs()[Number(sg.dataset.sxsug)]; if (r) openSub(null, { name: r.name, amount: Math.round(r.amt), category: r.cat }); return; }
+  const sr = ev.target.closest('.sx-row[data-sid]'); if (sr) { const x = (FIN.subs || []).find(y => y.id === sr.dataset.sid); if (x) openSub(x); return; }
   if (ev.target.closest('#ldAdd')) { openLedgerForm(null); return; }
   if (ev.target.closest('#ldImport')) { openImport(); return; }
   if (ev.target.closest('#ldPrev')) { FIN.month = shiftMonth(FIN.month, -1); renderLedger(); return; }
