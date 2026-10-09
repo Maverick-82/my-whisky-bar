@@ -1404,7 +1404,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.9.0';
+const APP_VERSION = 'v1.9.1';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -4366,7 +4366,7 @@ function openGoal(g) {
     onDelete: isNew ? null : async () => { await lfDel('life_goals', 'goals', g.id); lfDone('삭제했어요'); }
   });
 }
-function goalCard(g) {
+function lifeGoalCard(g) {
   const p = goalProg(g), n = g.due_date ? lfDiff(g.due_date, today()) : null;
   return `<button type="button" class="card gl-card ${g.done ? 'done' : ''}" data-goal-edit="${esc(g.id)}"><div class="gl-h"><div><b><span class="gl-cat">${esc(g.category)}</span>${esc(g.title)}</b><small>${g.done ? '달성 완료' : g.due_date ? (n < 0 ? '기한 ' + (-n) + '일 지남' : n === 0 ? '오늘까지' : lfMD(g.due_date) + ' 까지 · ' + lfDday(g.due_date)) : '기한 없음'}</small></div><b style="font-size:18px">${p.pct == null ? '-' : Math.round(p.pct * 100) + '%'}</b></div>
     <div class="lf-bar ${p.pct >= 1 ? 'done' : ''}"><i style="width:${p.pct == null ? 0 : Math.round(p.pct * 100)}%"></i></div>
@@ -4375,7 +4375,7 @@ function goalCard(g) {
 function goalsListHTML() {
   if (!LIFE.goals.length) return lfEmpty('아직 목표가 없어요.<br>체중, 자산, 자격증처럼 올해 이루고 싶은 것을 적어보세요. 체중이나 자산 목표는 기록에서 진행률을 자동으로 계산해요.', '+ 목표 만들기');
   const act = LIFE.goals.filter(g => !g.done).sort((a, b) => (a.due_date || '9999') < (b.due_date || '9999') ? -1 : 1), dn = LIFE.goals.filter(g => g.done);
-  return act.map(goalCard).join('') + (dn.length ? `<div class="fin-sec"><h3>달성한 목표</h3><span>${dn.length}개</span></div>${dn.map(goalCard).join('')}` : '');
+  return act.map(lifeGoalCard).join('') + (dn.length ? `<div class="fin-sec"><h3>달성한 목표</h3><span>${dn.length}개</span></div>${dn.map(lifeGoalCard).join('')}` : '');
 }
 function goalsHTML() {
   const opts = [['habit', '습관'], ['todo', '할 일'], ['goal', '목표']];
