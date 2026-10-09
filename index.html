@@ -1025,6 +1025,11 @@ body[data-tab="home"] .fab{display:none!important}
 .hx-kv{display:grid;grid-template-columns:90px minmax(0,1fr);gap:4px 12px;padding:6px 16px 12px;font-size:13px}.hx-kv span{color:var(--ink3)}
 .card.hx-card{padding:0;overflow:hidden;margin-bottom:14px}
 @media (max-width:640px){.hx-r{grid-template-columns:minmax(0,1fr) auto;row-gap:2px}.hx-r .rf{grid-column:1/2;grid-row:2}.hx-r .v{text-align:right}.hx-r .tg{grid-column:2;grid-row:2;text-align:right}.hx-judge{font-size:26px}}
+.hk-ins{padding:14px 16px;margin-bottom:14px}.hk-ins h4{margin:0 0 8px;font-size:13px;color:var(--ink)}.hk-ins h4 small{font-weight:600;color:var(--ink3);margin-left:6px;font-size:11.5px}
+.hk-ins ul{margin:0;padding-left:18px;font-size:13px;line-height:1.7;color:var(--ink2)}.hk-ins li b{color:var(--ink)}
+.hk-sec{display:flex;align-items:center;justify-content:space-between;margin:20px 2px 10px}.hk-sec b{font-size:13.5px;color:var(--ink)}.hk-sec small{font-weight:600;color:var(--ink3);margin-left:6px;font-size:11.5px}
+.hk-sec .btn{padding:6px 12px;font-size:12.5px}
+.lf-row .m small.hk-d{display:block;margin:2px 0 0}
 </style>
 <script>
 (function(){
@@ -1443,7 +1448,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.11.0';
+const APP_VERSION = 'v1.12.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -4288,6 +4293,94 @@ function bodyHTML() {
   const rows = list.map(r => `<button type="button" class="lf-row" data-edit="body:${esc(r.id)}"><span class="d">${lfMD(r.measured_on)}<em>${lfDow(r.measured_on)}</em></span><span class="m">${[r.weight != null ? `체중 <b>${lfFix(r.weight)}</b>kg` : '', r.body_fat != null ? `체지방 ${lfFix(r.body_fat)}%` : '', r.muscle != null ? `근육 ${lfFix(r.muscle)}kg` : ''].filter(Boolean).join(' · ')}${r.memo ? `<small>${esc(r.memo)}</small>` : ''}</span><span class="r">${r.measured_on.slice(0, 4) === today().slice(0, 4) ? '' : r.measured_on.slice(0, 4)}</span></button>`).join('');
   return `<div class="lf-tiles">${tiles}</div>${goal}${chart}<section class="card lf-list">${rows}${lfMoreBtn('body', recs.length, shown)}</section>`;
 }
+/* ===== 등산 기록 ===== */
+const hkIs = r => /등산|하이킹/.test(r.kind || '');
+const hkList = () => LIFE.workout.filter(hkIs);
+const hkMaxHr = () => 220 - (Number(today().slice(0, 4)) - (Number(hm().birth_year) || 1982));
+function hkParseDur(s) {
+  s = String(s == null ? '' : s).trim(); if (!s) return null;
+  if (/^\d+(\.\d+)?$/.test(s)) return Math.round(Number(s));
+  const p = s.split(':').map(Number); if (p.some(x => !isFinite(x))) return null;
+  if (p.length === 3) return Math.round(p[0] * 60 + p[1] + p[2] / 60);
+  if (p.length === 2) return Math.round(p[0] * 60 + p[1]);
+  return null;
+}
+const hkDurTxt = m => m == null ? '-' : (m >= 60 ? Math.floor(m / 60) + '시간 ' + (m % 60 ? (m % 60) + '분' : '') : m + '분');
+const hkNz = v => v != null && v !== '';
+function hkInsight(r, all) {
+  const out = [], mx = hkMaxHr();
+  if (r.avg_hr) {
+    const p = r.avg_hr / mx * 100;
+    out.push(`평균 심박 <b>${r.avg_hr}</b>은 예상 최대 심박(${mx})의 <b>${Math.round(p)}%</b>예요. ${p < 60 ? '가벼운 강도였어요.' : p < 70 ? '지방을 태우기 좋은 편한 유산소 강도예요.' : p < 80 ? '심폐를 키우는 중간 이상의 유산소 강도예요.' : '꽤 힘든 고강도였어요.'}`);
+  }
+  if (r.max_hr) {
+    const p = r.max_hr / mx * 100;
+    out.push(`최고 심박 <b>${r.max_hr}</b>(${Math.round(p)}%)${p >= 90 ? ' — 오르막에서 최대치에 가까워졌어요. 고지혈증·혈압이 경계인 상태라 숨이 차면 쉬어 가면서 올라가는 쪽이 안전해요.' : '으로 무리 없는 범위였어요.'}`);
+  }
+  if (r.ascent_m && r.minutes) out.push(`시간당 상승 <b>${Math.round(r.ascent_m / (r.minutes / 60))}m</b> · ${r.distance_km ? '1km당 평균 ' + lfFix(r.minutes / r.distance_km, 1) + '분' : ''}`);
+  if (r.extra && r.extra.note) out.push(esc(r.extra.note));
+  const prev = r.course ? all.filter(x => x.course === r.course && x.done_on < r.done_on)[0] : null;
+  if (prev && prev.minutes && r.minutes) {
+    const dt = r.minutes - prev.minutes, dh = (r.avg_hr && prev.avg_hr) ? r.avg_hr - prev.avg_hr : null;
+    let msg = `같은 코스 지난번(${lfMD(prev.done_on)}) 대비 시간 <b>${dt === 0 ? '같음' : (dt < 0 ? '' : '+') + dt + '분'}</b>${dh != null ? `, 평균 심박 <b>${dh === 0 ? '같음' : (dh < 0 ? '' : '+') + dh + 'bpm'}</b>` : ''}.`;
+    if (dh != null) msg += dt <= 0 && dh <= 0 ? ' 더 빠르거나 같은데 심박은 낮아서 체력이 좋아진 신호예요.' : dt <= 0 && dh > 0 ? ' 더 빠르게 갔지만 그만큼 심박도 올랐어요.' : dt > 0 && dh <= 0 ? ' 천천히 편하게 간 날이에요.' : ' 오래 걸렸는데 심박도 높았다면 컨디션(수면·음주)을 의심해볼 만해요.';
+    out.push(msg);
+  }
+  return out;
+}
+function hkHTML() {
+  const hk = hkList(), t = today(), ym = t.slice(0, 7), yr = t.slice(0, 4);
+  const head = `<div class="hk-sec"><b>등산 기록<small>삼성헬스 같은 앱의 기록을 옮겨 담아요</small></b><button type="button" class="btn primary" data-hk="new">+ 등산 기록</button></div>`;
+  if (!hk.length) return head + `<div class="lf-empty">아직 등산 기록이 없어요.<br>거리·시간·심박·상승고도를 남기면 월·연 누적과 코스 비교가 만들어져요.</div>`;
+  const sum = (a, k) => a.reduce((s, r) => s + (Number(r[k]) || 0), 0);
+  const mo = hk.filter(r => r.done_on.slice(0, 7) === ym), yy = hk.filter(r => r.done_on.slice(0, 4) === yr);
+  const last5 = hk.filter(r => r.avg_hr).slice(0, 5), ah = last5.length ? Math.round(sum(last5, 'avg_hr') / last5.length) : null;
+  let tiles = lfTile('이번 달', `${mo.length}<small>회</small>`, `<small>${lfFix(sum(mo, 'distance_km'), 1)}km · 상승 ${lfFix(sum(mo, 'ascent_m'), 0)}m</small>`);
+  tiles += lfTile(`${yr}년 누적 거리`, `${lfFix(sum(yy, 'distance_km'), 1)}<small>km</small>`, `<small>${yy.length}회</small>`);
+  tiles += lfTile(`${yr}년 누적 상승`, `${lfFix(sum(yy, 'ascent_m'), 0)}<small>m</small>`, `<small>소모 ${lfFix(sum(yy, 'kcal'), 0)}kcal</small>`);
+  tiles += lfTile('평균 심박 (최근 5회)', ah == null ? '-' : `${ah}<small>bpm</small>`, ah == null ? '<small>심박 기록 없음</small>' : `<small>예상 최대의 ${Math.round(ah / hkMaxHr() * 100)}%</small>`);
+  const r0 = hk[0], ins = hkInsight(r0, hk);
+  const insBox = ins.length ? `<section class="card hk-ins"><h4>최근 등산 분석<small>${lfMD(r0.done_on)}${r0.course ? ' · ' + esc(r0.course) : ''}</small></h4><ul>${ins.map(x => `<li>${x}</li>`).join('')}</ul></section>` : '';
+  const last = hk.slice(0, 10).reverse();
+  LFQ.push(() => {
+    drawBars($('#hkAscChart'), { items: last.map((r, i) => ({ v: Number(r.ascent_m) || 0, txt: r.ascent_m || '', label: lfMD(r.done_on), on: i === last.length - 1, tip: `${lfMD(r.done_on)} ${esc(r.course || '등산')}<br><b>상승 ${r.ascent_m || 0}m · ${r.distance_km || 0}km</b>` })), min: 100, color: 'var(--s2)', label: '등산 상승 고도', empty: '기록이 없어요.' });
+    drawLine($('#hkHrChart'), { pts: hk.filter(r => r.avg_hr).slice(0, 12).map(r => ({ d: r.done_on, v: [r.avg_hr, r.max_hr || null] })).reverse(), names: ['평균', '최고'], colors: ['var(--s1)', 'var(--up)'], fmt: v => Math.round(v) + 'bpm', axis: v => Math.round(v), label: '등산 심박 추이', single: '심박 기록이 2회 이상 쌓이면 추이가 나타나요. 같은 코스에서 평균 심박이 내려가면 체력이 좋아지는 신호예요.' });
+  });
+  const charts = `<div class="card lf-chart-card"><div class="lf-ch"><b>회차별 상승 고도 (최근 10회)</b></div>${lfChartBox('hkAscChart')}</div><div class="card lf-chart-card"><div class="lf-ch"><b>등산 심박 추이</b></div>${lfChartBox('hkHrChart')}</div>`;
+  const shown = lfShown('hk', 6), rows = hk.slice(0, shown).map(r => `<button type="button" class="lf-row" data-edit="workout:${esc(r.id)}"><span class="d">${lfMD(r.done_on)}<em>${lfDow(r.done_on)}</em></span><span class="m"><b>${esc(r.course || '등산')}</b>${r.distance_km ? ` · ${lfFix(r.distance_km, 2)}km` : ''}${r.minutes ? ` · ${hkDurTxt(r.minutes)}` : ''}<small class="hk-d">${[r.ascent_m ? '상승 ' + r.ascent_m + 'm' : '', r.avg_hr ? '심박 ' + r.avg_hr + (r.max_hr ? '/' + r.max_hr : '') : '', r.kcal ? r.kcal + 'kcal' : ''].filter(Boolean).join(' · ')}</small></span><span class="r">${r.done_on.slice(0, 4) === yr ? '' : r.done_on.slice(0, 4)}</span></button>`).join('');
+  return head + `<div class="lf-tiles">${tiles}</div>${insBox}${charts}<section class="card lf-list">${rows}${lfMoreBtn('hk', hk.length, shown)}</section>`;
+}
+function openHike(r) {
+  const isNew = !r; r = r || { done_on: today(), kind: '등산' };
+  const courses = Array.from(new Set(hkList().map(x => x.course).filter(Boolean)));
+  const last = hkList()[0];
+  openFinModal({
+    title: isNew ? '등산 기록' : '등산 수정', wide: true,
+    html: `<datalist id="dlHkC">${courses.map(c => `<option value="${esc(c)}">`).join('')}</datalist>${lfDateField(r.done_on)}
+      ${fld('코스', `<input class="in" name="course" list="dlHkC" value="${esc(r.course || '')}" placeholder="${last && last.course ? esc(last.course) : '예: 용마산~아차산 능선'}">`)}
+      <div class="row3">${fld('거리(km)', `<input class="in" name="km" inputmode="decimal" value="${r.distance_km ?? ''}" placeholder="5.01">`)}${fld('운동 시간', `<input class="in" name="dur" value="${r.minutes != null ? (r.extra && r.extra.sec ? (() => { const s = r.extra.sec; return Math.floor(s / 3600) + ':' + String(Math.floor(s % 3600 / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); })() : r.minutes) : ''}" placeholder="1:24:11 또는 84 (분)">`)}${fld('소모 칼로리(kcal)', `<input class="in" name="kcal" inputmode="numeric" value="${r.kcal ?? ''}" placeholder="869">`)}</div>
+      <div class="row3">${fld('평균 심박(bpm)', `<input class="in" name="ahr" inputmode="numeric" value="${r.avg_hr ?? ''}" placeholder="130">`)}${fld('최고 심박(bpm)', `<input class="in" name="mhr" inputmode="numeric" value="${r.max_hr ?? ''}" placeholder="168">`)}${fld('상승 고도(m)', `<input class="in" name="asc" inputmode="numeric" value="${r.ascent_m ?? ''}" placeholder="346">`)}</div>
+      <div class="row2">${fld('최고 고도(m, 선택)', `<input class="in" name="alt" inputmode="numeric" value="${r.max_alt ?? ''}" placeholder="346">`)}${fld('메모', `<input class="in" name="m" value="${esc(r.memo || '')}" placeholder="예: 날씨, 컨디션, 같이 간 사람">`)}</div>
+      <div class="hint faint" style="font-size:11.5px">삼성헬스 운동 상세 화면의 숫자를 그대로 옮기면 돼요. 모르는 칸은 비워도 돼요.</div>`,
+    onOpen(b) { setTimeout(() => b.querySelector('[name=km]').focus(), 50); },
+    async onSave(b) {
+      const g = n => b.querySelector('[name=' + n + ']').value.trim(), nn = n => lfNum(g(n));
+      const d = g('d'); if (!d) throw new Error('날짜를 선택해 주세요');
+      const km = nn('km'), min = hkParseDur(g('dur')), kcal = nn('kcal'), ahr = nn('ahr'), mhr = nn('mhr'), asc = nn('asc'), alt = nn('alt');
+      if (km == null && min == null) throw new Error('거리나 운동 시간 중 하나는 입력해 주세요');
+      if (km != null && (km < 0 || km > 100)) throw new Error('거리 값을 확인해 주세요');
+      if (min != null && (min < 1 || min > 1440)) throw new Error('운동 시간을 확인해 주세요 (예: 1:24:11 또는 84)');
+      if ((ahr != null && (ahr < 40 || ahr > 220)) || (mhr != null && (mhr < 40 || mhr > 230))) throw new Error('심박 값을 확인해 주세요');
+      if (ahr != null && mhr != null && mhr < ahr) throw new Error('최고 심박이 평균보다 낮아요');
+      const pct = ahr ? ahr / hkMaxHr() : null, extra = Object.assign({}, r.extra || {});
+      const raw = g('dur'); if (/:/.test(raw) && raw.split(':').length === 3) { const p = raw.split(':').map(Number); extra.sec = p[0] * 3600 + p[1] * 60 + p[2]; } else delete extra.sec;
+      const row = { done_on: d, kind: '등산', minutes: min, intensity: pct == null ? (r.intensity || 3) : pct < 0.6 ? 2 : pct < 0.7 ? 3 : pct < 0.8 ? 4 : 5, distance_km: km, memo: g('m') || null, avg_hr: ahr == null ? null : Math.round(ahr), max_hr: mhr == null ? null : Math.round(mhr), kcal: kcal == null ? null : Math.round(kcal), ascent_m: asc == null ? null : Math.round(asc), max_alt: alt == null ? null : Math.round(alt), course: g('course') || null, extra };
+      await lfSave('health_workout', 'workout', 'done_on', row, r.id);
+      lfDone();
+    },
+    onDelete: isNew ? null : async () => { await lfDel('health_workout', 'workout', r.id); lfDone('삭제했어요'); }
+  });
+}
 function workoutHTML() {
   const h = hm(), recs = LIFE.workout;
   if (!recs.length) return lfEmpty('아직 운동 기록이 없어요.<br>한 번만 남겨도 주간 통계가 만들어져요.', '+ 첫 운동 기록하기');
@@ -4307,7 +4400,7 @@ function workoutHTML() {
   const chart = `<div class="card lf-chart-card"><div class="lf-ch"><b>주간 운동 횟수 (최근 10주)</b></div>${lfChartBox('lfWoChart')}${kinds ? `<div class="lf-kinds">${kinds}</div><div class="lf-note" style="margin:6px 0 0">최근 30일 종목별 횟수</div>` : ''}</div>`;
   const shown = lfShown('wo', 12), list = recs.slice(0, shown);
   const rows = list.map(r => `<button type="button" class="lf-row" data-edit="workout:${esc(r.id)}"><span class="d">${lfMD(r.done_on)}<em>${lfDow(r.done_on)}</em></span><span class="m"><b>${esc(r.kind)}</b>${r.minutes ? ` · ${r.minutes}분` : ''}${r.distance_km ? ` · ${lfFix(r.distance_km, 2)}km` : ''}${r.memo ? `<small>${esc(r.memo)}</small>` : ''}</span><span class="r">${r.intensity ? '강도 ' + r.intensity : ''}</span></button>`).join('');
-  return `<div class="lf-tiles">${tiles}</div>${chart}<section class="card lf-list">${rows}${lfMoreBtn('wo', recs.length, shown)}</section>`;
+  return `<div class="lf-tiles">${tiles}</div>${chart}${hkHTML()}<div class="hk-sec"><b>전체 운동 기록</b></div><section class="card lf-list">${rows}${lfMoreBtn('wo', recs.length, shown)}</section>`;
 }
 function sleepHTML() {
   const h = hm(), recs = LIFE.sleep;
@@ -4773,6 +4866,7 @@ $('#lifeView').addEventListener('click', e => {
   const t = e.target;
   let x;
   if ((x = t.closest('[data-s]'))) { LIFE.sub = x.dataset.s; store.set('lifeSub', LIFE.sub); renderLife(); return; }
+  if ((x = t.closest('[data-hk]'))) { if (x.dataset.hk === 'new') openHike(); return; }
   if ((x = t.closest('[data-hx]'))) { hxAct(x.dataset.hx); return; }
   if ((x = t.closest('[data-h]'))) { LIFE.hsub = x.dataset.h; store.set('lifeH', LIFE.hsub); renderLife(); return; }
   if ((x = t.closest('[data-g]'))) { LIFE.gsub = x.dataset.g; store.set('lifeG', LIFE.gsub); renderLife(); return; }
@@ -4782,7 +4876,7 @@ $('#lifeView').addEventListener('click', e => {
   if ((x = t.closest('[data-more]'))) { LIFE.more[x.dataset.more] = true; renderLife(); return; }
   if ((x = t.closest('[data-act]'))) { if (x.dataset.act === 'add') lifeAdd(); else if (x.dataset.act === 'hset') openHealthSettings(); return; }
   if ((x = t.closest('[data-edit]'))) {
-    const [k, id] = x.dataset.edit.split(':'), map = { body: [LIFE.body, openWeight], workout: [LIFE.workout, openWorkout], sleep: [LIFE.sleep, openSleep], check: [LIFE.check, openCheck] }[k];
+    const [k, id] = x.dataset.edit.split(':'), map = { body: [LIFE.body, openWeight], workout: [LIFE.workout, r => hkIs(r) ? openHike(r) : openWorkout(r)], sleep: [LIFE.sleep, openSleep], check: [LIFE.check, openCheck] }[k];
     const r = map && map[0].find(y => y.id === id); if (r) map[1](r); return;
   }
   if ((x = t.closest('[data-hlog]'))) { const [hid, d] = x.dataset.hlog.split('|'); toggleHabit(hid, d); return; }
