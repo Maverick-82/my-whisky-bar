@@ -834,6 +834,158 @@ body[data-tab="portfolio"] #btnAdd,body[data-tab="ledger"] #btnAdd{display:none}
   .ld-row{grid-template-columns:78px minmax(0,1fr) auto;padding:11px 16px;gap:8px}.ld-dh{padding:8px 16px}
   .ld-month b{min-width:100px}
 }
+
+/* ===================== Home · Life · Auth (v1.9.0) ===================== */
+:root{--c-home:#4f8fe6;--c-life:#e5566d}
+.tabs button[data-tab="home"]{--tc:var(--c-home)}
+.tabs button[data-tab="life"]{--tc:var(--c-life)}
+#homeView{--tc:var(--c-home)}#lifeView{--tc:var(--c-life)}
+body[data-tab="home"] #btnAdd,body[data-tab="life"] #btnAdd{display:none}
+body[data-tab="home"] .fab{display:none!important}
+
+/* 로그인 화면 */
+.auth-gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--bg);overflow:auto}
+.auth-gate::before{content:"";position:absolute;inset:0;background:var(--bgfx);pointer-events:none}
+.auth-gate[hidden]{display:none}
+.auth-card{position:relative;width:100%;max-width:380px;padding:30px 26px 24px;display:flex;flex-direction:column;gap:12px}
+.auth-logo{display:flex;align-items:center;justify-content:center;gap:9px;font-size:27px;font-weight:800;letter-spacing:-.5px;margin-bottom:2px;color:var(--ink)}
+.auth-logo svg{color:var(--s1)}
+.auth-msg{margin:0 0 4px;text-align:center;font-size:13px;color:var(--ink3);line-height:1.6}
+.auth-card .in{padding:12px 14px}
+.auth-card .btn.primary{justify-content:center;height:44px;font-size:14px}
+.auth-links{display:flex;justify-content:space-between;gap:10px;margin-top:2px}
+.auth-links button{background:none;border:0;padding:4px 2px;font-size:12px;color:var(--ink3);text-decoration:underline;text-underline-offset:3px}
+.auth-links button:hover{color:var(--ink)}
+.auth-err{min-height:18px;text-align:center;font-size:12.5px;color:var(--up);line-height:1.5}
+.auth-err.ok{color:var(--inc)}
+.auth-wait{text-align:center;color:var(--ink3);font-size:13px;padding:12px 0}
+
+/* 홈 */
+.hm-hello{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:2px 2px 16px}
+.hm-hello h2{font-family:'Cormorant Garamond',Georgia,'NanumSquareRound','SUIT Variable',serif;font-size:34px;font-weight:600;margin:0;line-height:1.05;color:var(--ink)}
+.hm-hello h2::after{content:"";display:block;width:38px;height:4px;border-radius:4px;margin-top:9px;background:linear-gradient(90deg,var(--tc),color-mix(in srgb,var(--tc) 35%,#fff))}
+.hm-hello p{font-size:12px;color:var(--ink3);margin:7px 0 0}
+.hm-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:14px}
+.hm-card{padding:18px 20px;text-align:left;display:flex;flex-direction:column;gap:8px;min-width:0;color:var(--ink)}
+.hm-card[data-go]{cursor:pointer;transition:border-color .15s,transform .12s}
+.hm-card[data-go]:hover{border-color:var(--tc,var(--accent-line));transform:translateY(-1px)}
+.hm-card.w2{grid-column:span 2}
+.hm-t{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:800;color:var(--tc,var(--ink3));letter-spacing:.02em}
+.hm-t em{font-style:normal;font-weight:600;font-size:11px;color:var(--ink3)}
+.hm-big{font-family:'Gowun Dodum','NanumSquareRound','SUIT Variable',sans-serif;font-size:30px;line-height:1.1;color:var(--ink);letter-spacing:-.01em}
+.hm-big small{font-size:14px;color:var(--ink3);margin-left:3px}
+.hm-sub{font-size:12.5px;color:var(--ink3);line-height:1.6}.hm-sub b{color:var(--ink)}
+.hm-list{display:flex;flex-direction:column}
+.hm-li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line2);font-size:13px;min-width:0}
+.hm-li:last-child{border-bottom:0}
+.hm-li .tx{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hm-li .rt{font-size:11.5px;color:var(--ink3);flex:none}
+.hm-empty{font-size:12.5px;color:var(--ink3);line-height:1.6;padding:2px 0}
+.hm-pg{height:7px;border-radius:4px;background:var(--soft);overflow:hidden}.hm-pg i{display:block;height:100%;border-radius:4px;background:var(--tc,var(--s1))}
+.hm-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11.5px;color:var(--ink3);margin:8px 4px 28px}
+.hm-foot button{background:none;border:0;color:var(--ink3);text-decoration:underline;text-underline-offset:3px;font-size:11.5px;padding:4px}
+.hm-foot button:hover{color:var(--ink)}
+
+/* 체크 버튼 / 습관 */
+.ck{flex:none;width:24px;height:24px;border-radius:8px;border:1.6px solid var(--line2);background:var(--card);display:inline-flex;align-items:center;justify-content:center;padding:0;color:transparent}
+.ck svg{width:14px;height:14px}
+.ck.on{background:var(--c-life);border-color:var(--c-life);color:#fff}
+.ck:hover{border-color:var(--c-life)}
+.hb-chips{display:flex;flex-wrap:wrap;gap:8px}
+.hb-chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line2);background:var(--card);border-radius:999px;padding:6px 12px 6px 8px;font-size:12.5px;font-weight:700;color:var(--ink2)}
+.hb-chip.on{background:color-mix(in srgb,var(--c-life) 14%,var(--card));border-color:var(--c-life);color:var(--ink)}
+
+/* 라이프 */
+.lf-top{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
+.lf-top .seg{flex:none}
+.lf-sec{margin:0 0 14px}
+.lf-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.lf-tile{padding:14px 16px;display:flex;flex-direction:column;gap:5px;min-width:0}
+.lf-tile>span{font-size:12px;color:var(--ink3);font-weight:700}
+.lf-tile>b{font-family:'Gowun Dodum','NanumSquareRound','SUIT Variable',sans-serif;font-weight:400;font-size:26px;color:var(--ink);letter-spacing:-.01em;line-height:1.15}
+.lf-tile>b small{font-size:13px;color:var(--ink3);margin-left:2px}
+.lf-tile>small{font-size:12px;font-weight:700;color:var(--ink3)}
+.lf-tile>small.up{color:var(--up)}.lf-tile>small.down{color:var(--down)}.lf-tile>small.ok{color:var(--inc)}
+.lf-tiles.one{grid-template-columns:minmax(150px,280px)}
+.lf-tag{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:2px 7px;margin-left:6px;vertical-align:middle;background:color-mix(in srgb,var(--tg,var(--ink3)) 16%,var(--card));color:color-mix(in srgb,var(--tg,var(--ink3)) 70%,var(--ink));border:1px solid color-mix(in srgb,var(--tg,var(--ink3)) 45%,var(--line))}
+.card.lf-chart-card{padding:16px 20px 12px;margin-bottom:14px}
+.lf-ch{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.lf-ch b{font-size:13px;color:var(--ink)}
+.lf-ch .seg button{padding:5px 9px}
+.lf-chart{position:relative}
+.lf-chart svg{width:100%;height:auto;display:block;touch-action:pan-y;overflow:visible}
+.lf-chart text{font-family:inherit;fill:var(--ink3);font-size:11px}
+.lf-chart .gl{stroke:var(--line);stroke-width:1}
+.lf-leg{display:flex;gap:14px;font-size:11.5px;color:var(--ink3);margin-top:4px;flex-wrap:wrap}
+.lf-leg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.lf-pg{margin-top:10px}
+.lf-pg .row{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);margin-bottom:6px}.lf-pg .row b{color:var(--ink)}
+.lf-bar{height:9px;border-radius:5px;background:var(--soft);overflow:hidden}.lf-bar i{display:block;height:100%;border-radius:5px;background:var(--c-life)}
+.lf-bar.done i{background:var(--inc)}
+.card.lf-list{padding:6px 0;margin-bottom:28px}
+.lf-row{display:grid;grid-template-columns:78px minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;text-align:left;background:transparent;border:0;border-bottom:1px solid var(--line);padding:11px 20px;color:var(--ink);cursor:pointer}
+.lf-row:last-child{border-bottom:0}.lf-row:hover{background:var(--soft)}
+.lf-row .d{font-size:12px;color:var(--ink3);font-variant-numeric:tabular-nums}.lf-row .d em{font-style:normal;margin-left:3px}
+.lf-row .m{font-size:13.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lf-row .m small{color:var(--ink3);margin-left:6px}
+.lf-row .r{font-size:12px;color:var(--ink3);text-align:right}
+.lf-more{display:block;width:100%;padding:12px;border:0;background:transparent;color:var(--ink3);font-size:12.5px;font-weight:700;border-top:1px solid var(--line)}
+.lf-more:hover{color:var(--ink);background:var(--soft)}
+.lf-empty{border:1.5px dashed var(--line2);border-radius:16px;padding:26px 18px;text-align:center;color:var(--ink3);font-size:12.5px;line-height:1.7;margin-bottom:14px}
+.lf-empty .btn{margin-top:10px}
+.lf-note{font-size:11.5px;color:var(--ink3);margin:-4px 4px 14px;line-height:1.6}
+.lf-kinds{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.lf-kinds span{font-size:11.5px;font-weight:700;border:1px solid var(--line);background:var(--card2);border-radius:999px;padding:3px 10px;color:var(--ink2)}
+
+/* 습관 · 할 일 · 목표 */
+.hb-card{padding:16px 18px;margin-bottom:12px}
+.hb-h{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}
+.hb-h button.nm{background:none;border:0;padding:0;text-align:left;color:var(--ink);font-size:15px;font-weight:800}
+.hb-h small{display:block;font-size:11.5px;color:var(--ink3);margin-top:3px;font-weight:600}
+.hb-st{font-size:12px;font-weight:800;color:var(--c-life);white-space:nowrap}
+.hb-week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.hb-d{display:flex;flex-direction:column;align-items:center;gap:2px;border:1.5px solid var(--line);background:var(--card2);border-radius:12px;padding:7px 0 8px;color:var(--ink3);font-size:11px;font-weight:700}
+.hb-d b{font-size:14px;color:var(--ink2)}
+.hb-d.on{background:var(--c-life);border-color:var(--c-life);color:#fff}.hb-d.on b{color:#fff}
+.hb-d.today:not(.on){border-color:var(--c-life)}
+.hb-d.fut{opacity:.4;pointer-events:none}
+.hb-foot{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);margin-top:10px}.hb-foot b{color:var(--ink)}
+.td-add{display:grid;grid-template-columns:minmax(0,1fr) 140px auto;gap:8px;margin-bottom:12px}
+.td-add .btn{justify-content:center}
+.td-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 20px;border-bottom:1px solid var(--line)}
+.td-row:last-child{border-bottom:0}
+.td-row .tt{background:none;border:0;padding:0;text-align:left;color:var(--ink);font-size:14px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.td-row.done .tt{color:var(--ink3);text-decoration:line-through}
+.td-row .tt{line-height:24px}
+.td-row .pr{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;background:var(--line2);vertical-align:middle}
+.td-row .pr.p1{background:var(--up)}.td-row .pr.p3{background:var(--ink3);opacity:.5}
+.dd{font-size:11.5px;font-weight:800;border-radius:7px;padding:2px 8px;border:1px solid var(--line);color:var(--ink3);white-space:nowrap}
+.dd.od{color:var(--up);border-color:color-mix(in srgb,var(--up) 50%,var(--line));background:color-mix(in srgb,var(--up) 10%,var(--card))}
+.dd.tdy{color:var(--c-life);border-color:var(--c-life)}
+.td-done{margin-top:6px}.td-done summary{cursor:pointer;font-size:12.5px;color:var(--ink3);font-weight:700;padding:6px 4px}
+.gl-card{padding:16px 18px;margin-bottom:12px;display:block;width:100%;text-align:left;color:var(--ink);cursor:pointer}
+.gl-card:hover{border-color:var(--c-life)}
+.gl-card.done{opacity:.7}
+.gl-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
+.gl-h b{font-size:15px}.gl-h small{display:block;font-size:11.5px;color:var(--ink3);margin-top:3px;font-weight:600}
+.gl-cat{font-size:10.5px;font-weight:800;border-radius:6px;padding:2px 7px;background:var(--soft);color:var(--ink2);border:1px solid var(--line);margin-right:6px}
+.gl-nums{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink3);margin-top:8px}.gl-nums b{color:var(--ink)}
+.f .hint{font-size:11.5px;color:var(--ink3);margin-top:5px;line-height:1.5}
+.lf-chips{display:flex;flex-wrap:wrap;gap:7px}
+
+@media (max-width:760px){
+  #lifeView .fin-act [data-act=add]{display:none}
+  .hm-grid{grid-template-columns:1fr}.hm-card.w2{grid-column:auto}
+  .hm-hello h2{font-size:30px}
+  .lf-row{grid-template-columns:62px minmax(0,1fr) auto;padding:11px 16px;gap:8px}
+  .lf-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lf-tile>b{font-size:22px}
+  .card.lf-chart-card{padding:14px 14px 10px}
+  .td-add{grid-template-columns:1fr 1fr}.td-add input:first-child{grid-column:1/-1}.td-add .btn{grid-column:1/-1;height:42px}
+  .td-row{padding:11px 16px}
+  .hb-card,.gl-card{padding:14px}
+}
+.auth-card[hidden],.auth-wait[hidden],.auth-links button[hidden],.auth-card input[hidden]{display:none!important}
 </style>
 <script>
 (function(){
@@ -845,7 +997,7 @@ body[data-tab="portfolio"] #btnAdd,body[data-tab="ledger"] #btnAdd{display:none}
 })();
 </script>
 </head>
-<body data-tab="bar">
+<body data-tab="home">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <path id="glencairnBody" d="M6.62,1.00 C6.56,1.32 6.37,2.30 6.28,2.95 C6.19,3.60 6.16,4.26 6.09,4.91 C6.02,5.56 5.94,6.21 5.84,6.86 C5.74,7.51 5.65,8.17 5.50,8.82 C5.35,9.47 5.14,10.12 4.96,10.77 C4.78,11.42 4.61,12.08 4.43,12.73 C4.25,13.38 4.01,14.03 3.89,14.68 C3.77,15.33 3.67,15.99 3.69,16.64 C3.71,17.29 3.80,17.94 4.03,18.59 C4.26,19.24 4.55,19.90 5.06,20.55 C5.57,21.20 6.65,22.01 7.11,22.50 C7.58,22.99 7.76,23.15 7.85,23.48 C7.94,23.81 7.77,24.14 7.65,24.46 C7.54,24.79 7.31,25.11 7.16,25.43 C7.01,25.75 6.92,26.08 6.77,26.41 C6.61,26.74 6.40,27.07 6.23,27.39 C6.06,27.71 5.79,28.09 5.75,28.36 C5.71,28.63 5.95,28.89 5.99,29.00 L17.91,29.00 C17.94,28.89 18.16,28.63 18.11,28.36 C18.06,28.09 17.78,27.71 17.62,27.39 C17.46,27.07 17.34,26.74 17.18,26.41 C17.02,26.08 16.85,25.75 16.69,25.43 C16.53,25.11 16.30,24.79 16.20,24.46 C16.10,24.14 16.01,23.81 16.10,23.48 C16.19,23.15 16.28,22.99 16.74,22.50 C17.20,22.01 18.31,21.20 18.84,20.55 C19.37,19.90 19.68,19.24 19.92,18.59 C20.17,17.94 20.26,17.29 20.31,16.64 C20.36,15.99 20.32,15.33 20.21,14.68 C20.10,14.03 19.86,13.38 19.67,12.73 C19.48,12.08 19.28,11.42 19.09,10.77 C18.90,10.12 18.70,9.47 18.55,8.82 C18.40,8.17 18.31,7.51 18.21,6.86 C18.11,6.21 18.03,5.56 17.96,4.91 C17.89,4.26 17.92,3.60 17.82,2.95 C17.72,2.30 17.45,1.32 17.38,1.00 Z"/>
@@ -881,16 +1033,18 @@ body[data-tab="portfolio"] #btnAdd,body[data-tab="ledger"] #btnAdd{display:none}
   </div>
 
   <nav class="tabs" id="tabs">
+    <button data-tab="home" class="on"><svg class="tabi" viewBox="0 0 24 24"><path d="M3.5 11 12 4l8.5 7"/><path d="M6 9.8V20h12V9.8"/><path d="M10 20v-5.5h4V20"/></svg>Home</button>
     <button data-tab="portfolio"><svg class="tabi" viewBox="0 0 24 24"><path d="M3 17l5.5-5.5 4 4L21 7"/><path d="M15 7h6v6"/></svg>Portfolio</button>
-    <button data-tab="bar" class="on"><svg viewBox="0 0 24 30" width="14" height="17.5" style="vertical-align:-3px;color:currentColor"><use href="#glencairnIcon"/></svg> My Bar</button>
+    <button data-tab="bar"><svg viewBox="0 0 24 30" width="14" height="17.5" style="vertical-align:-3px;color:currentColor"><use href="#glencairnIcon"/></svg> My Bar</button>
     <button data-tab="yt"><svg class="tabi" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9.2 4.6 2.8-4.6 2.8z"/></svg>YouTube</button>
     <button data-tab="goal"><svg class="tabi" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.6 14 7 22l5-3 5 3-1.6-8"/></svg>Collection</button>
     <button data-tab="journal"><svg class="tabi" viewBox="0 0 24 24"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2z"/><path d="M9 9h6M9 13h4"/></svg>Tasting Notes</button>
     <button data-tab="ledger"><svg class="tabi" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10.5h18"/><circle cx="16.5" cy="14.8" r="1.1"/></svg>Ledger</button>
+    <button data-tab="life"><svg class="tabi" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.9c0 5.6-7.5 10-7.5 10z"/><path d="M7.5 12.5h2.6l1.4-2.4 2 4 1.2-1.6h1.8"/></svg>Life</button>
     <button data-tab="wdb"><svg class="tabi" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="8" ry="2.5"/><path d="M4 5.5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/><path d="M4 11.5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/></svg>Library</button>
   </nav>
 
-  <div id="barView">
+  <div id="barView" hidden>
   <section class="card summary" id="summary"></section>
 
   <section class="card controls">
@@ -932,6 +1086,8 @@ body[data-tab="portfolio"] #btnAdd,body[data-tab="ledger"] #btnAdd{display:none}
   <div id="goalView" hidden></div>
   <div id="journalView" hidden></div>
   <div id="ytView" hidden></div>
+  <div id="homeView"></div>
+  <div id="lifeView" hidden></div>
   <div id="portfolioView" hidden></div>
   <div id="ledgerView" hidden></div>
   <div id="soonView" hidden></div>
@@ -1198,6 +1354,19 @@ body[data-tab="portfolio"] #btnAdd,body[data-tab="ledger"] #btnAdd{display:none}
 <datalist id="dlStyles"></datalist>
 <datalist id="dlStores"></datalist>
 <div class="toast" id="toast"></div>
+<div class="auth-gate" id="authGate">
+  <div class="auth-wait" id="authWait">확인 중…</div>
+  <form class="card auth-card" id="authForm" hidden>
+    <div class="auth-logo"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><use href="#jetIcon"/></svg> Maverick</div>
+    <p class="auth-msg" id="authMsg">로그인해 주세요</p>
+    <input class="in" type="email" id="authEmail" autocomplete="username" placeholder="이메일" required>
+    <input class="in" type="password" id="authPw" autocomplete="current-password" placeholder="비밀번호" required>
+    <button type="submit" class="btn primary" id="authSubmit">로그인</button>
+    <div class="auth-links"><button type="button" id="authToggle">처음이면 계정 만들기</button><button type="button" id="authReset">비밀번호를 잊었어요</button></div>
+    <div class="auth-err" id="authErr" role="alert"></div>
+  </form>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -1235,7 +1404,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.8.0';
+const APP_VERSION = 'v1.9.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -1261,7 +1430,7 @@ const S = {
   sort: store.get('sort','sheet'),
   hidePrice: store.get('hidePrice', false),
   q: '', status: '', style: '', cs: false, peat: false,
-  lastSync: 0, tab: 'bar'
+  lastSync: 0, tab: 'home'
 };
 const WDB = { q: '', distId: '' };
 const DIST = { q: '', country: '' };
@@ -1677,11 +1846,12 @@ $('#viewSeg').addEventListener('click', e => { const b = e.target.closest('butto
 $('#sort').addEventListener('change', e => { S.sort = e.target.value; store.set('sort', S.sort); renderContent(); });
 let qT; $('#q').addEventListener('input', e => { clearTimeout(qT); qT = setTimeout(()=>{ S.q = e.target.value; renderContent(); }, 120); });
 $('#btnPrice').addEventListener('click', () => { S.hidePrice = !S.hidePrice; store.set('hidePrice', S.hidePrice); renderAll(); });
-$('#btnRefresh').addEventListener('click', () => refresh());
+$('#btnRefresh').addEventListener('click', () => { refresh(); if (S.tab === 'home' || S.tab === 'life') { Promise.all([loadLife(), loadFin()]).then(() => { lifeRerender(); }); } });
 $('#btnAdd').addEventListener('click', () => openForm(null));
-$('#fab').addEventListener('click', () => { if (S.tab === 'portfolio') openHolding(null); else if (S.tab === 'ledger') openLedgerForm(null); else openForm(null); });
+$('#fab').addEventListener('click', () => { if (S.tab === 'home') return; if (S.tab === 'life') lifeAdd(); else if (S.tab === 'portfolio') openHolding(null); else if (S.tab === 'ledger') openLedgerForm(null); else openForm(null); });
 
 async function refresh(silent){
+  if (!APP.started) return;
   const b = $('#btnRefresh'); b.disabled = true;
   try { applyData(await getData()); if (silent !== true) toast('최신 내용을 불러왔어요'); }
   catch(err){ if (silent !== true) toast(err.message, true); }
@@ -2894,6 +3064,8 @@ const SOON_LABEL = {};
 function switchTab(tab){
   S.tab = tab;
   $$('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+  $('#homeView').hidden = tab !== 'home';
+  $('#lifeView').hidden = tab !== 'life';
   $('#barView').hidden = tab !== 'bar';
   $('#wdbView').hidden = tab !== 'wdb';
   $('#distView').hidden = tab !== 'dist';
@@ -2904,7 +3076,9 @@ function switchTab(tab){
   $('#ledgerView').hidden = tab !== 'ledger';
   $('#soonView').hidden = !(tab in SOON_LABEL);
   document.body.dataset.tab = tab;
-  if (tab === 'portfolio') renderPortfolioTab();
+  if (tab === 'home') renderHomeTab();
+  else if (tab === 'life') renderLifeTab();
+  else if (tab === 'portfolio') renderPortfolioTab();
   else if (tab === 'ledger') renderLedgerTab();
   else if (tab === 'wdb') renderWdbTab();
   else if (tab === 'dist') renderDistTab();
@@ -3589,17 +3763,865 @@ function closeYtPlayer(){ $('#ytPlayer').innerHTML = ''; $('#ytModalBg').classLi
 $('#ytPClose').addEventListener('click', closeYtPlayer);
 $('#ytModalBg').addEventListener('mousedown', e => { if (e.target.id === 'ytModalBg') closeYtPlayer(); });
 
+/* ===================== Life · Home · Auth (v1.9.0) ===================== */
+const APP = { started: false, uid: null, email: '' };
+const lfPad = n => String(n).padStart(2, '0');
+const lfFmt = d => d.getFullYear() + '-' + lfPad(d.getMonth() + 1) + '-' + lfPad(d.getDate());
+const lfParse = s => { const a = String(s).slice(0, 10).split('-').map(Number); return new Date(a[0], a[1] - 1, a[2]); };
+const lfAdd = (s, n) => { const d = lfParse(s); d.setDate(d.getDate() + n); return lfFmt(d); };
+const lfDiff = (a, b) => Math.round((lfParse(a) - lfParse(b)) / 864e5);
+const lfWeek = s => { const d = lfParse(s); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return lfFmt(d); };
+const lfMD = s => Number(String(s).slice(5, 7)) + '/' + Number(String(s).slice(8, 10));
+const lfDow = s => DOW[lfParse(s).getDay()];
+const lfNum = v => { if (v == null) return null; const t = String(v).replace(/,/g, '').trim(); if (t === '') return null; const n = Number(t); return isFinite(n) ? n : null; };
+const lfFix = (n, d) => n == null ? '-' : Number(n).toLocaleString('ko-KR', { minimumFractionDigits: 0, maximumFractionDigits: d == null ? 1 : d });
+const lfDday = s => { const n = lfDiff(s, today()); return n === 0 ? 'D-Day' : n > 0 ? 'D-' + n : 'D+' + (-n); };
+const lfDelta = (cur, prev, unit, dec) => {
+  if (cur == null || prev == null) return '';
+  const d = Math.round((cur - prev) * 100) / 100;
+  if (d === 0) return '<small>변화 없음</small>';
+  return `<small class="${d > 0 ? 'up' : 'down'}">${d > 0 ? '▲' : '▼'} ${lfFix(Math.abs(d), dec == null ? 1 : dec)}${unit || ''}</small>`;
+};
+const CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+const LIFE = {
+  loaded: false, loading: false,
+  sub: store.get('lifeSub', 'health'), hsub: store.get('lifeH', 'body'), gsub: store.get('lifeG', 'habit'),
+  bm: 'weight', rng: '90', ck: '혈압',
+  more: {}, showDone: false,
+  body: [], workout: [], sleep: [], check: [], goals: [], habits: [], logs: [], todos: [], meta: {}, logSet: new Set()
+};
+const HM_DEF = { height: null, target_weight: null, start_weight: null, sleep_goal: 7, workout_goal: 3 };
+const hm = () => Object.assign({}, HM_DEF, LIFE.meta.health || {});
+
+function lfSortDesc(arr, k) { arr.sort((a, b) => a[k] < b[k] ? 1 : a[k] > b[k] ? -1 : (String(a.created_at) < String(b.created_at) ? 1 : -1)); }
+function lfRebuildLogs() { LIFE.logSet = new Set(LIFE.logs.map(l => l.habit_id + '|' + String(l.log_date).slice(0, 10))); }
+
+async function loadLife() {
+  if (LIFE.loading) return;
+  LIFE.loading = true;
+  try {
+    const since = lfAdd(today(), -150);
+    const [b, w, s, c, g, h, l, t, m] = await Promise.all([
+      sb.from('health_body').select('*').order('measured_on', { ascending: false }).limit(1000),
+      sb.from('health_workout').select('*').order('done_on', { ascending: false }).limit(1000),
+      sb.from('health_sleep').select('*').order('sleep_date', { ascending: false }).limit(1000),
+      sb.from('health_checkup').select('*').order('measured_on', { ascending: false }).limit(1000),
+      sb.from('life_goals').select('*').order('created_at', { ascending: true }),
+      sb.from('life_habits').select('*').order('sort', { ascending: true }).order('created_at', { ascending: true }),
+      sb.from('life_habit_logs').select('habit_id,log_date').gte('log_date', since).limit(1000),
+      sb.from('life_todos').select('*').order('created_at', { ascending: false }).limit(1000),
+      sb.from('life_meta').select('*')
+    ]);
+    const bad = [b, w, s, c, g, h, l, t, m].find(r => r.error);
+    if (bad) throw new Error(bad.error.message);
+    LIFE.body = b.data || []; LIFE.workout = w.data || []; LIFE.sleep = s.data || []; LIFE.check = c.data || [];
+    LIFE.goals = g.data || []; LIFE.habits = h.data || []; LIFE.logs = l.data || []; LIFE.todos = t.data || [];
+    LIFE.meta = {}; (m.data || []).forEach(r => { LIFE.meta[r.key] = r.value; });
+    lfRebuildLogs();
+    LIFE.loaded = true; LIFE.at = Date.now();
+  } catch (e) { toast('라이프 데이터를 불러오지 못했어요: ' + e.message, true); }
+  finally { LIFE.loading = false; }
+}
+function lifeEnsure(render) {
+  if (LIFE.loaded) { render(); return; }
+  render();
+  loadLife().then(() => { if (LIFE.loaded) render(); });
+}
+function lifeRerender() { if (S.tab === 'life') renderLife(); else if (S.tab === 'home') renderHome(); }
+
+/* ---------- DB 저장 공통 ---------- */
+async function lfSave(table, list, dateKey, row, id) {
+  let data;
+  if (id) {
+    const r = await sb.from(table).update(row).eq('id', id).select().single();
+    if (r.error) throw new Error(r.error.message);
+    data = r.data; const i = LIFE[list].findIndex(x => x.id === id); if (i >= 0) LIFE[list][i] = data; else LIFE[list].push(data);
+  } else {
+    const r = await sb.from(table).insert(row).select().single();
+    if (r.error) throw new Error(r.error.message);
+    data = r.data; LIFE[list].push(data);
+  }
+  if (dateKey) lfSortDesc(LIFE[list], dateKey);
+  return data;
+}
+async function lfDel(table, list, id) {
+  const { error } = await sb.from(table).delete().eq('id', id);
+  if (error) throw new Error(error.message);
+  LIFE[list] = LIFE[list].filter(x => x.id !== id);
+}
+function lfDone(msg) { closeFinModal(); lifeRerender(); toast(msg || '저장했어요'); }
+async function saveHealthMeta(patch) {
+  const v = Object.assign({}, hm(), patch);
+  const { error } = await sb.from('life_meta').upsert(Object.assign({ key: 'health', value: v, updated_at: new Date().toISOString() }, APP.uid ? { user_id: APP.uid } : {}), { onConflict: 'user_id,key' });
+  if (error) throw new Error(error.message);
+  LIFE.meta.health = v;
+}
+
+/* ---------- 차트 (SVG, 폭 실측) ---------- */
+let lfTip = null;
+function lfTipEl(box) {
+  let t = box.querySelector('.tr-tip');
+  if (!t) { t = document.createElement('div'); t.className = 'tr-tip'; t.hidden = true; box.appendChild(t); }
+  return t;
+}
+function drawLine(box, cfg) {
+  const pts = cfg.pts || [];
+  if (!pts.length) { box.innerHTML = `<div class="tr-empty">${cfg.empty || '기록이 아직 없어요.'}</div>`; return; }
+  if (pts.length < 2) { box.innerHTML = `<div class="tr-empty">${cfg.single || '기록이 2개 이상 쌓이면 추이 그래프가 나타나요.'}</div>`; return; }
+  const W = Math.max(280, Math.round(box.clientWidth || 640)), H = cfg.h || 170, pl = 40, pr = 12, pt = 14, pb = 24;
+  const all = []; pts.forEach(p => p.v.forEach(v => { if (v != null) all.push(v); })); if (cfg.goal != null) all.push(cfg.goal);
+  const mn = Math.min.apply(null, all), mx = Math.max.apply(null, all);
+  const span = (mx - mn) || Math.abs(mx) * 0.05 || 1, lo = mn - span * 0.18, hi = mx + span * 0.18;
+  const t0 = lfParse(pts[0].d).getTime(), t1 = lfParse(pts[pts.length - 1].d).getTime(), ts = (t1 - t0) || 1;
+  const X = p => pl + (W - pl - pr) * ((lfParse(p.d).getTime() - t0) / ts);
+  const Y = v => pt + (H - pt - pb) * (1 - (v - lo) / (hi - lo));
+  const fa = cfg.axis || (v => lfFix(v, 1));
+  let grid = '';
+  for (let i = 0; i < 3; i++) { const v = lo + (hi - lo) * (i / 2 * 0.8 + 0.1); const y = Y(v); grid += `<line class="gl" x1="${pl}" x2="${W - pr}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}"/><text x="${pl - 6}" y="${(y + 4).toFixed(1)}" text-anchor="end">${fa(v)}</text>`; }
+  const colors = cfg.colors || ['var(--c-life)', 'var(--s1)'];
+  let paths = '';
+  (cfg.names || ['']).forEach((_, j) => {
+    const seg = pts.filter(p => p.v[j] != null);
+    if (!seg.length) return;
+    const d = seg.map((p, i) => (i ? 'L' : 'M') + X(p).toFixed(1) + ' ' + Y(p.v[j]).toFixed(1)).join(' ');
+    paths += `<path d="${d}" fill="none" stroke="${colors[j]}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    if (seg.length <= 45) paths += seg.map(p => `<circle cx="${X(p).toFixed(1)}" cy="${Y(p.v[j]).toFixed(1)}" r="3" fill="${colors[j]}"/>`).join('');
+  });
+  let goal = '';
+  if (cfg.goal != null) { const y = Y(cfg.goal); goal = `<line x1="${pl}" x2="${W - pr}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--inc)" stroke-width="1.4" stroke-dasharray="5 4"/><text x="${W - pr}" y="${(y - 5).toFixed(1)}" text-anchor="end" style="fill:var(--inc);font-weight:700">목표 ${fa(cfg.goal)}</text>`; }
+  const xl = `<text x="${pl}" y="${H - 5}">${lfMD(pts[0].d)}</text><text x="${W - pr}" y="${H - 5}" text-anchor="end">${lfMD(pts[pts.length - 1].d)}</text>`;
+  const leg = (cfg.names && cfg.names.length > 1) ? `<div class="lf-leg">${cfg.names.map((n, j) => `<span><i style="background:${colors[j]}"></i>${n}</span>`).join('')}</div>` : '';
+  box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(cfg.label || '추이')}">${grid}${goal}${paths}<line id="lfHl" y1="${pt}" y2="${H - pb}" stroke="var(--ink3)" stroke-width="1" style="display:none"/>${xl}</svg>${leg}`;
+  const tip = lfTipEl(box), svg = box.querySelector('svg'), hl = box.querySelector('#lfHl');
+  function show(ev) {
+    const r = svg.getBoundingClientRect(); const cx = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
+    const x = cx / r.width * W; let bi = 0, bd = 1e9;
+    pts.forEach((p, i) => { const d = Math.abs(X(p) - x); if (d < bd) { bd = d; bi = i; } });
+    const p = pts[bi];
+    hl.style.display = ''; hl.setAttribute('x1', X(p)); hl.setAttribute('x2', X(p));
+    tip.hidden = false;
+    tip.innerHTML = esc(p.d) + ' (' + lfDow(p.d) + ')<br>' + p.v.map((v, j) => v == null ? '' : `<b>${(cfg.names && cfg.names[j] ? cfg.names[j] + ' ' : '')}${(cfg.fmt || (q => lfFix(q, 1)))(v)}</b>`).filter(Boolean).join(' · ');
+    const px = X(p) / W * r.width;
+    tip.style.left = Math.max(4, Math.min(r.width - 150, px - 60)) + 'px'; tip.style.top = '-6px';
+  }
+  function hide() { hl.style.display = 'none'; tip.hidden = true; }
+  svg.addEventListener('mousemove', show); svg.addEventListener('touchmove', show, { passive: true }); svg.addEventListener('touchstart', show, { passive: true });
+  svg.addEventListener('mouseleave', hide); svg.addEventListener('touchend', hide);
+}
+function drawBars(box, cfg) {
+  const it = cfg.items || [];
+  if (!it.length) { box.innerHTML = `<div class="tr-empty">${cfg.empty || '기록이 아직 없어요.'}</div>`; return; }
+  const W = Math.max(280, Math.round(box.clientWidth || 640)), H = cfg.h || 150, pl = 8, pr = 8, pt = 16, pb = 24;
+  const max = Math.max.apply(null, it.map(x => x.v).concat([cfg.goal || 0, cfg.min || 1]));
+  const n = it.length, slot = (W - pl - pr) / n, bw = Math.min(34, slot * 0.62);
+  const Y = v => pt + (H - pt - pb) * (1 - v / max);
+  let g = '';
+  it.forEach((x, i) => {
+    const cx = pl + slot * (i + 0.5), y = Y(x.v), h = Math.max(x.v > 0 ? 3 : 0, H - pb - y);
+    g += `<rect data-i="${i}" x="${(cx - bw / 2).toFixed(1)}" y="${(H - pb - h).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="5" fill="${x.on ? (cfg.color || 'var(--c-life)') : 'color-mix(in srgb,' + (cfg.color || 'var(--c-life)') + ' 45%,var(--card))'}"/>`;
+    if (x.v > 0 && n <= 14) g += `<text x="${cx.toFixed(1)}" y="${(H - pb - h - 4).toFixed(1)}" text-anchor="middle" style="fill:var(--ink2);font-weight:700">${x.txt != null ? x.txt : lfFix(x.v, 1)}</text>`;
+    g += `<text x="${cx.toFixed(1)}" y="${H - 7}" text-anchor="middle">${x.label}</text>`;
+    g += `<rect data-i="${i}" x="${(cx - slot / 2).toFixed(1)}" y="0" width="${slot.toFixed(1)}" height="${H - pb}" fill="transparent"/>`;
+  });
+  let goal = '';
+  if (cfg.goal) { const y = Y(cfg.goal); goal = `<line x1="${pl}" x2="${W - pr}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--inc)" stroke-width="1.4" stroke-dasharray="5 4"/><text x="${W - pr}" y="${(y - 4).toFixed(1)}" text-anchor="end" style="fill:var(--inc);font-weight:700">${cfg.goalLabel || '목표'}</text>`; }
+  box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(cfg.label || '통계')}"><line class="gl" x1="${pl}" x2="${W - pr}" y1="${H - pb}" y2="${H - pb}"/>${g}${goal}</svg>`;
+  const tip = lfTipEl(box), svg = box.querySelector('svg');
+  svg.addEventListener('mousemove', ev => {
+    const r = ev.target.closest && ev.target.closest('[data-i]'); if (!r) { tip.hidden = true; return; }
+    const i = Number(r.dataset.i), rect = svg.getBoundingClientRect(), cx = (pl + slot * (i + 0.5)) / W * rect.width;
+    tip.hidden = false; tip.innerHTML = it[i].tip || ''; tip.style.left = Math.max(4, Math.min(rect.width - 150, cx - 55)) + 'px'; tip.style.top = '-6px';
+  });
+  svg.addEventListener('mouseleave', () => { tip.hidden = true; });
+}
+let LFQ = [];
+function lfRunQueue() { const q = LFQ; LFQ = []; q.forEach(f => { try { f(); } catch (e) { console.error(e); } }); }
+function lfChartBox(id) { return `<div class="lf-chart" id="${id}"></div>`; }
+const lfTile = (label, big, sub) => `<div class="card lf-tile"><span>${label}</span><b>${big}</b>${sub || ''}</div>`;
+const lfTag = (txt, color) => `<span class="lf-tag" style="--tg:${color}">${esc(txt)}</span>`;
+const lfEmpty = (msg, btn) => `<div class="lf-empty">${msg}${btn ? `<br><button type="button" class="btn primary" data-act="add">${btn}</button>` : ''}</div>`;
+const lfMoreBtn = (key, total, shown) => total > shown ? `<button type="button" class="lf-more" data-more="${key}">더 보기 (${total - shown}건 더)</button>` : '';
+const lfShown = (key, def) => LIFE.more[key] ? 1e9 : def;
+const lfLast = (arr, k) => arr.find(r => r[k] != null);
+const lfDateField = (v) => fld('날짜', `<input class="in" type="date" name="d" value="${esc(v)}">`);
+const lfChips = (name, opts, cur) => `<div class="lf-chips" data-chips="${name}">${opts.map(o => `<button type="button" class="chip ${String(o.v) === String(cur) ? 'on' : ''}" data-v="${esc(o.v)}">${esc(o.t)}</button>`).join('')}</div>`;
+function lfChipsBind(body, name, onPick) {
+  const w = body.querySelector(`[data-chips="${name}"]`); if (!w) return;
+  w.addEventListener('click', ev => { const b = ev.target.closest('[data-v]'); if (!b) return; w.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c === b)); onPick(b.dataset.v); });
+}
+
+/* ===== 건강: 입력 모달 ===== */
+function openBody(r) {
+  const isNew = !r; r = r || { measured_on: today() };
+  openFinModal({
+    title: isNew ? '체성분 기록' : '체성분 수정',
+    html: `${lfDateField(r.measured_on)}
+      <div class="row3">${fld('체중(kg)', `<input class="in" name="w" inputmode="decimal" value="${r.weight ?? ''}" placeholder="0.0">`)}${fld('체지방(%)', `<input class="in" name="f" inputmode="decimal" value="${r.body_fat ?? ''}" placeholder="0.0">`)}${fld('근육량(kg)', `<input class="in" name="mu" inputmode="decimal" value="${r.muscle ?? ''}" placeholder="0.0">`)}</div>
+      ${fld('메모', `<input class="in" name="m" value="${esc(r.memo || '')}" placeholder="예: 아침 공복">`)}
+      <div class="hint faint" style="font-size:11.5px">모르는 항목은 비워도 돼요. 같은 날짜에 다시 저장하면 그날 기록이 갱신돼요.</div>`,
+    onOpen(b) { setTimeout(() => b.querySelector('[name=w]').focus(), 50); },
+    async onSave(b) {
+      const d = b.querySelector('[name=d]').value, w = lfNum(b.querySelector('[name=w]').value), f = lfNum(b.querySelector('[name=f]').value), mu = lfNum(b.querySelector('[name=mu]').value);
+      if (!d) throw new Error('날짜를 선택해 주세요');
+      if (w == null && f == null && mu == null) throw new Error('체중·체지방·근육량 중 하나는 입력해 주세요');
+      if (w != null && (w < 20 || w > 300)) throw new Error('체중 값을 확인해 주세요');
+      if (f != null && (f < 1 || f > 70)) throw new Error('체지방률 값을 확인해 주세요');
+      if (mu != null && (mu < 5 || mu > 150)) throw new Error('근육량 값을 확인해 주세요');
+      let id = r.id; if (!id) { const ex = LIFE.body.find(x => x.measured_on === d); if (ex) id = ex.id; }
+      await lfSave('health_body', 'body', 'measured_on', { measured_on: d, weight: w, body_fat: f, muscle: mu, memo: b.querySelector('[name=m]').value.trim() || null }, id);
+      lfDone();
+    },
+    onDelete: isNew ? null : async () => { await lfDel('health_body', 'body', r.id); lfDone('삭제했어요'); }
+  });
+}
+const WO_KINDS = ['러닝', '걷기', '웨이트', '자전거', '수영', '등산', '요가·필라테스', '구기', '기타'];
+function openWorkout(r) {
+  const isNew = !r; r = r || { done_on: today(), kind: '웨이트', intensity: 3 };
+  let inten = r.intensity || 3;
+  openFinModal({
+    title: isNew ? '운동 기록' : '운동 수정',
+    html: `${lfDateField(r.done_on)}
+      ${fld('종목', `<div class="lf-chips" id="woKinds">${WO_KINDS.map(k => `<button type="button" class="chip ${k === r.kind ? 'on' : ''}" data-k="${esc(k)}">${esc(k)}</button>`).join('')}</div><input class="in" name="k" value="${esc(r.kind || '')}" placeholder="직접 입력도 돼요" style="margin-top:8px">`)}
+      <div class="row2">${fld('시간(분)', `<input class="in" name="min" inputmode="numeric" value="${r.minutes ?? ''}" placeholder="예: 60">`)}${fld('거리(km, 선택)', `<input class="in" name="km" inputmode="decimal" value="${r.distance_km ?? ''}" placeholder="예: 5.2">`)}</div>
+      ${fld('강도', lfChips('int', [1, 2, 3, 4, 5].map(n => ({ v: n, t: ['가벼움', '편함', '보통', '힘듦', '매우 힘듦'][n - 1] })), inten))}
+      ${fld('메모', `<input class="in" name="m" value="${esc(r.memo || '')}" placeholder="예: 상체 루틴, 5km 러닝">`)}`,
+    onOpen(b) {
+      b.querySelector('#woKinds').addEventListener('click', ev => { const x = ev.target.closest('[data-k]'); if (!x) return; b.querySelector('[name=k]').value = x.dataset.k; b.querySelectorAll('#woKinds .chip').forEach(c => c.classList.toggle('on', c === x)); });
+      b.querySelector('[name=k]').addEventListener('input', ev => { b.querySelectorAll('#woKinds .chip').forEach(c => c.classList.toggle('on', c.dataset.k === ev.target.value.trim())); });
+      lfChipsBind(b, 'int', v => { inten = Number(v); });
+    },
+    async onSave(b) {
+      const d = b.querySelector('[name=d]').value, k = b.querySelector('[name=k]').value.trim(), min = lfNum(b.querySelector('[name=min]').value), km = lfNum(b.querySelector('[name=km]').value);
+      if (!d) throw new Error('날짜를 선택해 주세요');
+      if (!k) throw new Error('종목을 선택하거나 입력해 주세요');
+      if (min != null && (min < 0 || min > 1440)) throw new Error('시간 값을 확인해 주세요');
+      await lfSave('health_workout', 'workout', 'done_on', { done_on: d, kind: k, minutes: min == null ? null : Math.round(min), intensity: inten, distance_km: km, memo: b.querySelector('[name=m]').value.trim() || null }, r.id);
+      lfDone();
+    },
+    onDelete: isNew ? null : async () => { await lfDel('health_workout', 'workout', r.id); lfDone('삭제했어요'); }
+  });
+}
+function lfSleepHours(bed, wake) {
+  if (!bed || !wake) return null;
+  const a = bed.split(':').map(Number), c = wake.split(':').map(Number);
+  let m = (c[0] * 60 + c[1]) - (a[0] * 60 + a[1]); if (m <= 0) m += 1440;
+  return Math.round(m / 60 * 100) / 100;
+}
+function openSleep(r) {
+  const isNew = !r; r = r || { sleep_date: today(), quality: 3 };
+  let q = r.quality || 3, manual = !isNew;
+  openFinModal({
+    title: isNew ? '수면 기록' : '수면 수정',
+    html: `${fld('기상한 날짜', `<input class="in" type="date" name="d" value="${esc(r.sleep_date)}">`)}
+      <div class="row2">${fld('취침 시각', `<input class="in" type="time" name="bed" value="${esc(r.bed_time || '')}">`)}${fld('기상 시각', `<input class="in" type="time" name="wake" value="${esc(r.wake_time || '')}">`)}</div>
+      ${fld('수면 시간(시간)', `<input class="in" name="h" inputmode="decimal" value="${r.hours ?? ''}" placeholder="취침·기상 시각을 넣으면 자동 계산돼요">`)}
+      ${fld('수면의 질', lfChips('q', [1, 2, 3, 4, 5].map(n => ({ v: n, t: ['나쁨', '별로', '보통', '좋음', '아주 좋음'][n - 1] })), q))}
+      ${fld('메모', `<input class="in" name="m" value="${esc(r.memo || '')}" placeholder="예: 중간에 깼음">`)}`,
+    onOpen(b) {
+      const upd = () => { if (manual) return; const h = lfSleepHours(b.querySelector('[name=bed]').value, b.querySelector('[name=wake]').value); if (h != null) b.querySelector('[name=h]').value = h; };
+      b.querySelector('[name=bed]').addEventListener('input', upd); b.querySelector('[name=wake]').addEventListener('input', upd);
+      b.querySelector('[name=h]').addEventListener('input', () => { manual = true; });
+      lfChipsBind(b, 'q', v => { q = Number(v); });
+    },
+    async onSave(b) {
+      const d = b.querySelector('[name=d]').value; let h = lfNum(b.querySelector('[name=h]').value);
+      const bed = b.querySelector('[name=bed]').value || null, wake = b.querySelector('[name=wake]').value || null;
+      if (h == null) h = lfSleepHours(bed, wake);
+      if (!d) throw new Error('날짜를 선택해 주세요');
+      if (h == null || h <= 0 || h > 24) throw new Error('수면 시간을 입력해 주세요');
+      let id = r.id; if (!id) { const ex = LIFE.sleep.find(x => x.sleep_date === d); if (ex) id = ex.id; }
+      await lfSave('health_sleep', 'sleep', 'sleep_date', { sleep_date: d, bed_time: bed, wake_time: wake, hours: h, quality: q, memo: b.querySelector('[name=m]').value.trim() || null }, id);
+      lfDone();
+    },
+    onDelete: isNew ? null : async () => { await lfDel('health_sleep', 'sleep', r.id); lfDone('삭제했어요'); }
+  });
+}
+function bpClass(s, d) {
+  if (s >= 140 || d >= 90) return ['고혈압 범위', 'var(--up)'];
+  if (s >= 130 || d >= 80) return ['고혈압 전단계', '#eb6834'];
+  if (s >= 120) return ['주의', '#eda100'];
+  return ['정상', 'var(--inc)'];
+}
+function glClass(g, ctx) {
+  if (ctx === '공복') return g >= 126 ? ['높음', 'var(--up)'] : g >= 100 ? ['주의', '#eda100'] : ['정상', 'var(--inc)'];
+  return g >= 200 ? ['높음', 'var(--up)'] : g >= 140 ? ['주의', '#eda100'] : ['정상', 'var(--inc)'];
+}
+function openCheck(r, preKind) {
+  const isNew = !r; r = r || { measured_on: today(), kind: preKind || LIFE.ck };
+  let kind = r.kind, ctx = r.glucose_ctx || '공복';
+  const grp = (k, inner) => `<div data-grp="${k}" ${kind === k ? '' : 'hidden'}>${inner}</div>`;
+  openFinModal({
+    title: isNew ? '검진·혈압·혈당 기록' : '기록 수정',
+    html: `${isNew ? fld('종류', `<div class="seg" id="ckKind">${['혈압', '혈당', '검진'].map(k => `<button type="button" data-k="${k}" class="${k === kind ? 'on' : ''}">${k}</button>`).join('')}</div>`) : ''}
+      ${lfDateField(r.measured_on)}
+      ${grp('혈압', `<div class="row3">${fld('수축기(높은 값)', `<input class="in" name="sys" inputmode="numeric" value="${r.sys ?? ''}" placeholder="120">`)}${fld('이완기(낮은 값)', `<input class="in" name="dia" inputmode="numeric" value="${r.dia ?? ''}" placeholder="80">`)}${fld('맥박(선택)', `<input class="in" name="pulse" inputmode="numeric" value="${r.pulse ?? ''}" placeholder="70">`)}</div>`)}
+      ${grp('혈당', `${fld('혈당(mg/dL)', `<input class="in" name="glu" inputmode="numeric" value="${r.glucose ?? ''}" placeholder="95">`)}${fld('측정 시점', lfChips('ctx', ['공복', '식후 2시간', '임의'].map(v => ({ v, t: v })), ctx))}`)}
+      ${grp('검진', `${fld('검진명', `<input class="in" name="title" value="${esc(r.title || '')}" placeholder="예: 국가건강검진, 치과 스케일링">`)}${fld('결과 요약', `<textarea class="in" name="note" placeholder="주요 수치나 의사 소견을 적어두세요">${esc(r.note || '')}</textarea>`)}${fld('다음 검진 예정일(선택)', `<input class="in" type="date" name="due" value="${esc(r.next_due || '')}">`)}`)}`,
+    onOpen(b) {
+      const sync = () => { b.querySelectorAll('[data-grp]').forEach(g => { g.hidden = g.dataset.grp !== kind; }); b.querySelectorAll('#ckKind button').forEach(x => x.classList.toggle('on', x.dataset.k === kind)); };
+      const kk = b.querySelector('#ckKind'); if (kk) kk.addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; kind = x.dataset.k; sync(); });
+      lfChipsBind(b, 'ctx', v => { ctx = v; });
+      sync();
+    },
+    async onSave(b) {
+      const d = b.querySelector('[name=d]').value; if (!d) throw new Error('날짜를 선택해 주세요');
+      const row = { measured_on: d, kind, sys: null, dia: null, pulse: null, glucose: null, glucose_ctx: null, title: null, note: null, next_due: null };
+      if (kind === '혈압') {
+        const s = lfNum(b.querySelector('[name=sys]').value), di = lfNum(b.querySelector('[name=dia]').value), p = lfNum(b.querySelector('[name=pulse]').value);
+        if (s == null || di == null) throw new Error('수축기·이완기 혈압을 입력해 주세요');
+        if (s < 60 || s > 260 || di < 30 || di > 160 || di >= s) throw new Error('혈압 값을 확인해 주세요');
+        row.sys = Math.round(s); row.dia = Math.round(di); row.pulse = p == null ? null : Math.round(p);
+      } else if (kind === '혈당') {
+        const g = lfNum(b.querySelector('[name=glu]').value);
+        if (g == null || g < 20 || g > 700) throw new Error('혈당 값을 확인해 주세요');
+        row.glucose = Math.round(g); row.glucose_ctx = ctx;
+      } else {
+        const t = b.querySelector('[name=title]').value.trim(); if (!t) throw new Error('검진명을 입력해 주세요');
+        row.title = t; row.note = b.querySelector('[name=note]').value.trim() || null; row.next_due = b.querySelector('[name=due]').value || null;
+      }
+      await lfSave('health_checkup', 'check', 'measured_on', row, r.id);
+      LIFE.ck = kind; lfDone();
+    },
+    onDelete: isNew ? null : async () => { await lfDel('health_checkup', 'check', r.id); lfDone('삭제했어요'); }
+  });
+}
+function openHealthSettings() {
+  const h = hm();
+  openFinModal({
+    title: '키 · 목표 설정',
+    html: `<div class="row2">${fld('키(cm)', `<input class="in" name="ht" inputmode="decimal" value="${h.height ?? ''}" placeholder="예: 175">`)}${fld('목표 체중(kg)', `<input class="in" name="tw" inputmode="decimal" value="${h.target_weight ?? ''}" placeholder="예: 70">`)}</div>
+      <div class="row2">${fld('시작 체중(kg)', `<input class="in" name="sw" inputmode="decimal" value="${h.start_weight ?? ''}" placeholder="비우면 첫 기록 기준">`)}${fld('수면 목표(시간)', `<input class="in" name="sg" inputmode="decimal" value="${h.sleep_goal ?? 7}">`)}</div>
+      ${fld('주간 운동 목표(회)', `<input class="in" name="wg" inputmode="numeric" value="${h.workout_goal ?? 3}">`)}
+      <div class="hint faint" style="font-size:11.5px">BMI는 키를 입력하면 계산돼요. 목표 체중까지의 진행률은 시작 체중과 현재 체중으로 계산해요.</div>`,
+    async onSave(b) {
+      const g = n => lfNum(b.querySelector(`[name=${n}]`).value);
+      const ht = g('ht'), tw = g('tw'), sw = g('sw'), sg = g('sg'), wg = g('wg');
+      if (ht != null && (ht < 100 || ht > 230)) throw new Error('키 값을 확인해 주세요');
+      if (sg != null && (sg < 3 || sg > 14)) throw new Error('수면 목표를 확인해 주세요');
+      if (wg != null && (wg < 1 || wg > 14)) throw new Error('주간 운동 목표를 확인해 주세요');
+      await saveHealthMeta({ height: ht, target_weight: tw, start_weight: sw, sleep_goal: sg == null ? 7 : sg, workout_goal: wg == null ? 3 : Math.round(wg) });
+      lfDone();
+    }
+  });
+}
+
+/* ===== 건강: 화면 ===== */
+function bodyHTML() {
+  const h = hm(), recs = LIFE.body;
+  if (!recs.length) return lfEmpty('아직 체성분 기록이 없어요.<br>체중부터 시작해 보세요. 체지방과 근육량은 나중에 추가해도 돼요.', '+ 첫 기록 남기기');
+  const wRecs = recs.filter(r => r.weight != null), w0 = wRecs[0], w1 = wRecs[1];
+  const f0 = recs.filter(r => r.body_fat != null), m0 = recs.filter(r => r.muscle != null);
+  const bmi = (h.height && w0) ? Number(w0.weight) / Math.pow(h.height / 100, 2) : null;
+  const bmiC = bmi == null ? null : bmi < 18.5 ? ['저체중', '#2f6fe0'] : bmi < 23 ? ['정상', 'var(--inc)'] : bmi < 25 ? ['과체중', '#eda100'] : ['비만', 'var(--up)'];
+  let tiles = lfTile('체중', w0 ? `${lfFix(w0.weight)}<small>kg</small>` : '-', w0 ? lfDelta(Number(w0.weight), w1 ? Number(w1.weight) : null, 'kg') + (w1 ? '' : '<small>이전 기록 없음</small>') : '');
+  tiles += lfTile('체지방률', f0[0] ? `${lfFix(f0[0].body_fat)}<small>%</small>` : '-', f0[0] ? lfDelta(Number(f0[0].body_fat), f0[1] ? Number(f0[1].body_fat) : null, '%p') : '<small>기록 없음</small>');
+  tiles += lfTile('근육량', m0[0] ? `${lfFix(m0[0].muscle)}<small>kg</small>` : '-', m0[0] ? lfDelta(Number(m0[0].muscle), m0[1] ? Number(m0[1].muscle) : null, 'kg') : '<small>기록 없음</small>');
+  tiles += lfTile('BMI', bmi == null ? '-' : lfFix(bmi, 1) + (bmiC ? lfTag(bmiC[0], bmiC[1]) : ''), bmi == null ? '<small>키를 설정하면 계산돼요</small>' : '<small>참고용 (아시아 기준)</small>');
+  let goal = '';
+  if (h.target_weight && w0) {
+    const start = h.start_weight != null ? Number(h.start_weight) : Number(wRecs[wRecs.length - 1].weight), cur = Number(w0.weight), tg = Number(h.target_weight);
+    let pct = start === tg ? (cur === tg ? 1 : 0) : (cur - start) / (tg - start);
+    pct = Math.max(0, Math.min(1, pct));
+    const rem = cur - tg;
+    goal = `<div class="card lf-chart-card lf-pg"><div class="row"><span>목표 체중 ${lfFix(tg)}kg 까지</span><b>${rem === 0 ? '달성!' : lfFix(Math.abs(rem)) + 'kg ' + (rem > 0 ? '감량 필요' : '증량 필요')}</b></div><div class="lf-bar ${pct >= 1 ? 'done' : ''}"><i style="width:${(pct * 100).toFixed(0)}%"></i></div><div class="row" style="margin:6px 0 0"><span>시작 ${lfFix(start)}kg</span><span>${(pct * 100).toFixed(0)}%</span></div></div>`;
+  }
+  const bmOpts = [['weight', '체중'], ['body_fat', '체지방'], ['muscle', '근육량']];
+  const rngOpts = [['30', '1개월'], ['90', '3개월'], ['365', '1년'], ['all', '전체']];
+  const chart = `<div class="card lf-chart-card"><div class="lf-ch"><div class="seg" id="lfBm">${bmOpts.map(o => `<button type="button" data-bm="${o[0]}" class="${LIFE.bm === o[0] ? 'on' : ''}">${o[1]}</button>`).join('')}</div><div class="seg" id="lfRng">${rngOpts.map(o => `<button type="button" data-rng="${o[0]}" class="${LIFE.rng === o[0] ? 'on' : ''}">${o[1]}</button>`).join('')}</div></div>${lfChartBox('lfBodyChart')}</div>`;
+  LFQ.push(() => {
+    const m = LIFE.bm, unit = m === 'body_fat' ? '%' : 'kg', lim = LIFE.rng === 'all' ? '0000-00-00' : lfAdd(today(), -Number(LIFE.rng));
+    const pts = recs.filter(r => r[m] != null && r.measured_on >= lim).map(r => ({ d: r.measured_on, v: [Number(r[m])] })).reverse();
+    drawLine($('#lfBodyChart'), { pts, names: [''], fmt: v => lfFix(v, 1) + unit, axis: v => lfFix(v, 1), goal: (m === 'weight' && h.target_weight) ? Number(h.target_weight) : null, label: '체성분 추이', empty: '이 기간에는 기록이 없어요.' });
+  });
+  const shown = lfShown('body', 12), list = recs.slice(0, shown);
+  const rows = list.map(r => `<button type="button" class="lf-row" data-edit="body:${esc(r.id)}"><span class="d">${lfMD(r.measured_on)}<em>${lfDow(r.measured_on)}</em></span><span class="m">${[r.weight != null ? `체중 <b>${lfFix(r.weight)}</b>kg` : '', r.body_fat != null ? `체지방 ${lfFix(r.body_fat)}%` : '', r.muscle != null ? `근육 ${lfFix(r.muscle)}kg` : ''].filter(Boolean).join(' · ')}${r.memo ? `<small>${esc(r.memo)}</small>` : ''}</span><span class="r">${r.measured_on.slice(0, 4) === today().slice(0, 4) ? '' : r.measured_on.slice(0, 4)}</span></button>`).join('');
+  return `<div class="lf-tiles">${tiles}</div>${goal}${chart}<section class="card lf-list">${rows}${lfMoreBtn('body', recs.length, shown)}</section>`;
+}
+function workoutHTML() {
+  const h = hm(), recs = LIFE.workout;
+  if (!recs.length) return lfEmpty('아직 운동 기록이 없어요.<br>한 번만 남겨도 주간 통계가 만들어져요.', '+ 첫 운동 기록하기');
+  const t = today(), ws = lfWeek(t), ms = t.slice(0, 7);
+  const inWeek = recs.filter(r => r.done_on >= ws), inMonth = recs.filter(r => r.done_on.slice(0, 7) === ms);
+  const sum = a => a.reduce((s, r) => s + (r.minutes || 0), 0);
+  const goal = h.workout_goal || 3;
+  let tiles = lfTile('이번 주', `${inWeek.length}<small>/ ${goal}회</small>`, `<small>${inWeek.length >= goal ? '목표 달성' : (goal - inWeek.length) + '회 남음'}</small>`);
+  tiles += lfTile('이번 주 운동 시간', `${lfFix(sum(inWeek) / 60, 1)}<small>시간</small>`, `<small>${sum(inWeek)}분</small>`);
+  tiles += lfTile('이번 달', `${inMonth.length}<small>회</small>`, `<small>${lfFix(sum(inMonth) / 60, 1)}시간</small>`);
+  const lastD = recs[0].done_on, gap = lfDiff(t, lastD);
+  tiles += lfTile('마지막 운동', gap === 0 ? '오늘' : gap + '<small>일 전</small>', `<small>${esc(recs[0].kind)}</small>`);
+  const weeks = []; for (let i = 9; i >= 0; i--) { const s = lfAdd(ws, -7 * i), e = lfAdd(s, 6); const a = recs.filter(r => r.done_on >= s && r.done_on <= e); weeks.push({ s, n: a.length, min: sum(a) }); }
+  const cats = {}; recs.filter(r => r.done_on >= lfAdd(t, -29)).forEach(r => { cats[r.kind] = (cats[r.kind] || 0) + 1; });
+  const kinds = Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([k, n]) => `<span>${esc(k)} ${n}회</span>`).join('');
+  LFQ.push(() => drawBars($('#lfWoChart'), { items: weeks.map((w, i) => ({ v: w.n, txt: w.n, label: lfMD(w.s), on: i === weeks.length - 1, tip: `${lfMD(w.s)} 주<br><b>${w.n}회 · ${w.min}분</b>` })), goal, goalLabel: '주 ' + goal + '회', min: 3, label: '주간 운동 횟수' }));
+  const chart = `<div class="card lf-chart-card"><div class="lf-ch"><b>주간 운동 횟수 (최근 10주)</b></div>${lfChartBox('lfWoChart')}${kinds ? `<div class="lf-kinds">${kinds}</div><div class="lf-note" style="margin:6px 0 0">최근 30일 종목별 횟수</div>` : ''}</div>`;
+  const shown = lfShown('wo', 12), list = recs.slice(0, shown);
+  const rows = list.map(r => `<button type="button" class="lf-row" data-edit="workout:${esc(r.id)}"><span class="d">${lfMD(r.done_on)}<em>${lfDow(r.done_on)}</em></span><span class="m"><b>${esc(r.kind)}</b>${r.minutes ? ` · ${r.minutes}분` : ''}${r.distance_km ? ` · ${lfFix(r.distance_km, 2)}km` : ''}${r.memo ? `<small>${esc(r.memo)}</small>` : ''}</span><span class="r">${r.intensity ? '강도 ' + r.intensity : ''}</span></button>`).join('');
+  return `<div class="lf-tiles">${tiles}</div>${chart}<section class="card lf-list">${rows}${lfMoreBtn('wo', recs.length, shown)}</section>`;
+}
+function sleepHTML() {
+  const h = hm(), recs = LIFE.sleep;
+  if (!recs.length) return lfEmpty('아직 수면 기록이 없어요.<br>취침·기상 시각만 넣으면 수면 시간은 자동으로 계산돼요.', '+ 첫 수면 기록하기');
+  const t = today(), r7 = recs.filter(r => r.sleep_date > lfAdd(t, -7));
+  const avg = a => a.length ? a.reduce((s, r) => s + Number(r.hours), 0) / a.length : null;
+  const a7 = avg(r7), a30 = avg(recs.filter(r => r.sleep_date > lfAdd(t, -30))), goal = Number(h.sleep_goal) || 7;
+  const q7 = r7.filter(r => r.quality); const qa = q7.length ? q7.reduce((s, r) => s + r.quality, 0) / q7.length : null;
+  let tiles = lfTile('최근 기록', `${lfFix(recs[0].hours, 1)}<small>시간</small>`, `<small>${lfMD(recs[0].sleep_date)} 기상${recs[0].bed_time ? ' · ' + recs[0].bed_time + ' → ' + recs[0].wake_time : ''}</small>`);
+  tiles += lfTile('7일 평균', a7 == null ? '-' : `${lfFix(a7, 1)}<small>시간</small>`, a7 == null ? '' : `<small class="${a7 >= goal ? 'ok' : 'up'}">목표 ${goal}시간 ${a7 >= goal ? '이상' : '미만 (' + lfFix(goal - a7, 1) + '시간 부족)'}</small>`);
+  tiles += lfTile('30일 평균', a30 == null ? '-' : `${lfFix(a30, 1)}<small>시간</small>`, `<small>${recs.filter(r => r.sleep_date > lfAdd(t, -30)).length}일 기록</small>`);
+  tiles += lfTile('수면의 질 (7일)', qa == null ? '-' : `${lfFix(qa, 1)}<small>/ 5</small>`, '');
+  const days = []; for (let i = 13; i >= 0; i--) { const d = lfAdd(t, -i), r = recs.find(x => x.sleep_date === d); days.push({ d, v: r ? Number(r.hours) : 0, r }); }
+  LFQ.push(() => drawBars($('#lfSlChart'), { items: days.map((x, i) => ({ v: x.v, txt: lfFix(x.v, 1), label: Number(x.d.slice(8)), on: x.v >= goal, tip: `${lfMD(x.d)} (${lfDow(x.d)})<br><b>${x.r ? lfFix(x.v, 1) + '시간' : '기록 없음'}</b>` })), goal, goalLabel: goal + '시간', min: 8, color: 'var(--s7)', label: '최근 14일 수면' }));
+  const chart = `<div class="card lf-chart-card"><div class="lf-ch"><b>최근 14일 수면 시간</b><span class="faint" style="font-size:11.5px">진한 막대는 목표 달성</span></div>${lfChartBox('lfSlChart')}</div>`;
+  const shown = lfShown('sl', 12), list = recs.slice(0, shown);
+  const rows = list.map(r => `<button type="button" class="lf-row" data-edit="sleep:${esc(r.id)}"><span class="d">${lfMD(r.sleep_date)}<em>${lfDow(r.sleep_date)}</em></span><span class="m"><b>${lfFix(r.hours, 1)}</b>시간${r.bed_time ? ` <small>${esc(r.bed_time)} → ${esc(r.wake_time || '')}</small>` : ''}${r.memo ? `<small>${esc(r.memo)}</small>` : ''}</span><span class="r">${r.quality ? '질 ' + r.quality + '/5' : ''}</span></button>`).join('');
+  return `<div class="lf-tiles">${tiles}</div>${chart}<section class="card lf-list">${rows}${lfMoreBtn('sl', recs.length, shown)}</section>`;
+}
+function checkHTML() {
+  const kind = LIFE.ck, recs = LIFE.check.filter(r => r.kind === kind);
+  const nav = `<div class="lf-top" style="margin-top:-2px"><div class="seg" id="lfCk">${['혈압', '혈당', '검진'].map(k => `<button type="button" data-ck="${k}" class="${k === kind ? 'on' : ''}">${k === '검진' ? '건강검진' : k}</button>`).join('')}</div></div>`;
+  const due = LIFE.check.filter(r => r.next_due && lfDiff(r.next_due, today()) >= -30).sort((a, b) => a.next_due < b.next_due ? -1 : 1);
+  const dueBox = (kind === '검진' && due.length) ? `<div class="card lf-chart-card"><div class="lf-ch"><b>다음 검진 일정</b></div>${due.slice(0, 4).map(r => `<div class="hm-li"><span class="tx">${esc(r.title || '검진')}</span><span class="dd ${lfDiff(r.next_due, today()) < 0 ? 'od' : lfDiff(r.next_due, today()) === 0 ? 'tdy' : ''}">${lfDday(r.next_due)}</span><span class="rt">${esc(r.next_due)}</span></div>`).join('')}</div>` : '';
+  if (!recs.length) return nav + dueBox + lfEmpty(kind === '혈압' ? '아직 혈압 기록이 없어요.' : kind === '혈당' ? '아직 혈당 기록이 없어요.' : '아직 건강검진 기록이 없어요.<br>검진 결과와 다음 예정일을 남겨두면 홈 화면에서 알려줘요.', '+ 기록 남기기');
+  let body = '';
+  if (kind === '혈압') {
+    const r0 = recs[0], c = bpClass(r0.sys, r0.dia), r7 = recs.slice(0, 7);
+    const as = r7.reduce((s, r) => s + r.sys, 0) / r7.length, ad = r7.reduce((s, r) => s + r.dia, 0) / r7.length, ac = bpClass(as, ad);
+    body += `<div class="lf-tiles">${lfTile('최근 혈압', `${r0.sys}/${r0.dia}${lfTag(c[0], c[1])}`, `<small>${lfMD(r0.measured_on)}${r0.pulse ? ' · 맥박 ' + r0.pulse : ''}</small>`)}${lfTile(`최근 ${r7.length}회 평균`, `${Math.round(as)}/${Math.round(ad)}${lfTag(ac[0], ac[1])}`, '')}</div><div class="lf-note">분류는 대한고혈압학회 기준을 참고한 것이고 진단이 아니에요. 걱정되는 수치는 의료진과 상의하세요.</div>`;
+    LFQ.push(() => drawLine($('#lfCkChart'), { pts: recs.slice().reverse().map(r => ({ d: r.measured_on, v: [r.sys, r.dia] })), names: ['수축기', '이완기'], colors: ['var(--up)', 'var(--down)'], fmt: v => Math.round(v), axis: v => Math.round(v), label: '혈압 추이' }));
+    body += `<div class="card lf-chart-card"><div class="lf-ch"><b>혈압 추이</b></div>${lfChartBox('lfCkChart')}</div>`;
+    body += `<section class="card lf-list">${recs.slice(0, lfShown('ck', 12)).map(r => { const cc = bpClass(r.sys, r.dia); return `<button type="button" class="lf-row" data-edit="check:${esc(r.id)}"><span class="d">${lfMD(r.measured_on)}<em>${lfDow(r.measured_on)}</em></span><span class="m"><b>${r.sys}/${r.dia}</b>${r.pulse ? ` <small>맥박 ${r.pulse}</small>` : ''}</span><span class="r">${lfTag(cc[0], cc[1])}</span></button>`; }).join('')}${lfMoreBtn('ck', recs.length, lfShown('ck', 12))}</section>`;
+  } else if (kind === '혈당') {
+    const r0 = recs[0], c = glClass(r0.glucose, r0.glucose_ctx);
+    const fast = recs.filter(r => r.glucose_ctx === '공복').slice(0, 7), fa = fast.length ? fast.reduce((s, r) => s + r.glucose, 0) / fast.length : null;
+    body += `<div class="lf-tiles">${lfTile('최근 혈당', `${r0.glucose}<small>mg/dL</small>${lfTag(c[0], c[1])}`, `<small>${lfMD(r0.measured_on)} · ${esc(r0.glucose_ctx || '')}</small>`)}${lfTile('공복 평균 (최근 7회)', fa == null ? '-' : `${Math.round(fa)}<small>mg/dL</small>`, fa == null ? '<small>공복 기록 없음</small>' : '')}</div><div class="lf-note">공복 100 미만, 식후 2시간 140 미만을 정상 범위로 표시해요. 진단이 아니라 참고용이에요.</div>`;
+    LFQ.push(() => drawLine($('#lfCkChart'), { pts: recs.slice().reverse().map(r => ({ d: r.measured_on, v: [r.glucose] })), names: [''], fmt: v => Math.round(v) + 'mg/dL', axis: v => Math.round(v), label: '혈당 추이' }));
+    body += `<div class="card lf-chart-card"><div class="lf-ch"><b>혈당 추이</b></div>${lfChartBox('lfCkChart')}</div>`;
+    body += `<section class="card lf-list">${recs.slice(0, lfShown('ck', 12)).map(r => { const cc = glClass(r.glucose, r.glucose_ctx); return `<button type="button" class="lf-row" data-edit="check:${esc(r.id)}"><span class="d">${lfMD(r.measured_on)}<em>${lfDow(r.measured_on)}</em></span><span class="m"><b>${r.glucose}</b>mg/dL <small>${esc(r.glucose_ctx || '')}</small></span><span class="r">${lfTag(cc[0], cc[1])}</span></button>`; }).join('')}${lfMoreBtn('ck', recs.length, lfShown('ck', 12))}</section>`;
+  } else {
+    body += `<section class="card lf-list">${recs.slice(0, lfShown('ck', 12)).map(r => `<button type="button" class="lf-row" data-edit="check:${esc(r.id)}"><span class="d">${esc(r.measured_on.slice(2).replace(/-/g, '.'))}</span><span class="m"><b>${esc(r.title || '검진')}</b>${r.note ? `<small>${esc(r.note.length > 60 ? r.note.slice(0, 60) + '…' : r.note)}</small>` : ''}</span><span class="r">${r.next_due ? '다음 ' + esc(r.next_due.slice(2).replace(/-/g, '.')) : ''}</span></button>`).join('')}${lfMoreBtn('ck', recs.length, lfShown('ck', 12))}</section>`;
+  }
+  return nav + dueBox + body;
+}
+function healthHTML() {
+  const opts = [['body', '체성분'], ['workout', '운동'], ['sleep', '수면'], ['check', '검진·혈압·혈당']];
+  const nav = `<div class="fin-chips" id="lfH">${opts.map(o => `<button type="button" class="chip ${LIFE.hsub === o[0] ? 'on' : ''}" data-h="${o[0]}">${o[1]}</button>`).join('')}</div>`;
+  return nav + (LIFE.hsub === 'body' ? bodyHTML() : LIFE.hsub === 'workout' ? workoutHTML() : LIFE.hsub === 'sleep' ? sleepHTML() : checkHTML());
+}
+
+/* ===== 습관 ===== */
+function openHabit(h) {
+  const isNew = !h; h = h || { name: '', per_week: 7 };
+  let pw = h.per_week;
+  openFinModal({
+    title: isNew ? '습관 추가' : '습관 수정',
+    html: `${fld('습관 이름', `<input class="in" name="n" value="${esc(h.name)}" placeholder="예: 물 2L 마시기, 스트레칭, 독서 30분">`)}
+      ${fld('목표 빈도', lfChips('pw', [[7, '매일'], [6, '주 6회'], [5, '주 5회'], [4, '주 4회'], [3, '주 3회'], [2, '주 2회'], [1, '주 1회']].map(o => ({ v: o[0], t: o[1] })), pw))}`,
+    onOpen(b) { lfChipsBind(b, 'pw', v => { pw = Number(v); }); setTimeout(() => b.querySelector('[name=n]').focus(), 50); },
+    async onSave(b) {
+      const n = b.querySelector('[name=n]').value.trim(); if (!n) throw new Error('습관 이름을 입력해 주세요');
+      await lfSave('life_habits', 'habits', null, isNew ? { name: n, per_week: pw, sort: LIFE.habits.length } : { name: n, per_week: pw }, h.id);
+      lfDone();
+    },
+    onDelete: isNew ? null : async () => { await lfDel('life_habits', 'habits', h.id); LIFE.logs = LIFE.logs.filter(l => l.habit_id !== h.id); lfRebuildLogs(); lfDone('삭제했어요'); }
+  });
+}
+async function toggleHabit(hid, d) {
+  const k = hid + '|' + d, had = LIFE.logSet.has(k);
+  if (had) { LIFE.logSet.delete(k); LIFE.logs = LIFE.logs.filter(l => !(l.habit_id === hid && String(l.log_date).slice(0, 10) === d)); }
+  else { LIFE.logSet.add(k); LIFE.logs.push({ habit_id: hid, log_date: d }); }
+  lifeRerender();
+  const r = had ? await sb.from('life_habit_logs').delete().eq('habit_id', hid).eq('log_date', d)
+    : await sb.from('life_habit_logs').insert(Object.assign({ habit_id: hid, log_date: d }, APP.uid ? { user_id: APP.uid } : {}));
+  if (r.error) {
+    if (had) { LIFE.logSet.add(k); LIFE.logs.push({ habit_id: hid, log_date: d }); } else { LIFE.logSet.delete(k); LIFE.logs = LIFE.logs.filter(l => !(l.habit_id === hid && String(l.log_date).slice(0, 10) === d)); }
+    lifeRerender(); toast('저장하지 못했어요: ' + r.error.message, true);
+  }
+}
+function habitStreak(h) {
+  const set = LIFE.logSet, t = today(); let n = 0;
+  if (h.per_week >= 7) {
+    let d = set.has(h.id + '|' + t) ? t : lfAdd(t, -1);
+    while (set.has(h.id + '|' + d) && n < 400) { n++; d = lfAdd(d, -1); }
+    return { n, unit: '일' };
+  }
+  const cnt = w => { let c = 0; for (let i = 0; i < 7; i++) if (set.has(h.id + '|' + lfAdd(w, i))) c++; return c; };
+  let ws = lfWeek(t); if (cnt(ws) >= h.per_week) n++; ws = lfAdd(ws, -7);
+  while (cnt(ws) >= h.per_week && n < 200) { n++; ws = lfAdd(ws, -7); }
+  return { n, unit: '주' };
+}
+function habitWeekCount(h) { const ws = lfWeek(today()); let c = 0; for (let i = 0; i < 7; i++) if (LIFE.logSet.has(h.id + '|' + lfAdd(ws, i))) c++; return c; }
+function habitRate(h) { let c = 0; for (let i = 0; i < 28; i++) if (LIFE.logSet.has(h.id + '|' + lfAdd(today(), -i))) c++; return Math.min(100, Math.round(c / (h.per_week * 4) * 100)); }
+function habitsHTML() {
+  const hs = LIFE.habits.filter(h => !h.archived);
+  if (!hs.length) return lfEmpty('아직 등록한 습관이 없어요.<br>물 마시기, 스트레칭, 독서처럼 매일 체크하고 싶은 것부터 하나 만들어 보세요.', '+ 습관 만들기');
+  const ws = lfWeek(today()), t = today(), days = []; for (let i = 0; i < 7; i++) days.push(lfAdd(ws, i));
+  const totalDone = hs.reduce((s, h) => s + (LIFE.logSet.has(h.id + '|' + t) ? 1 : 0), 0);
+  const head = `<div class="lf-tiles one">${lfTile('오늘', `${totalDone}<small>/ ${hs.length}개</small>`, `<small>${totalDone === hs.length ? '오늘 습관 모두 완료' : (hs.length - totalDone) + '개 남음'}</small>`)}</div>`;
+  return head + hs.map(h => {
+    const st = habitStreak(h), wc = habitWeekCount(h);
+    return `<div class="card hb-card"><div class="hb-h"><div><button type="button" class="nm" data-habit-edit="${esc(h.id)}">${esc(h.name)}</button><small>${h.per_week >= 7 ? '매일' : '주 ' + h.per_week + '회'} · 최근 4주 달성률 ${habitRate(h)}%</small></div><span class="hb-st">${st.n > 0 ? '연속 ' + st.n + st.unit : ''}</span></div>
+      <div class="hb-week">${days.map((d, i) => { const on = LIFE.logSet.has(h.id + '|' + d); return `<button type="button" class="hb-d ${on ? 'on' : ''} ${d === t ? 'today' : ''} ${d > t ? 'fut' : ''}" data-hlog="${esc(h.id)}|${d}" aria-label="${d} ${on ? '완료' : '미완료'}"><span>${DOW[(i + 1) % 7]}</span><b>${Number(d.slice(8))}</b></button>`; }).join('')}</div>
+      <div class="hb-foot"><span>이번 주 <b>${wc}</b> / ${h.per_week}회</span><span>${wc >= h.per_week ? '이번 주 목표 달성' : ''}</span></div></div>`;
+  }).join('');
+}
+
+/* ===== 할 일 ===== */
+function openTodo(t) {
+  const isNew = !t; t = t || { title: '', due_date: '', priority: 2 };
+  let pr = t.priority || 2;
+  openFinModal({
+    title: isNew ? '할 일 추가' : '할 일 수정',
+    html: `${fld('할 일', `<input class="in" name="t" value="${esc(t.title)}" placeholder="예: 자동차 보험 갱신 알아보기">`)}
+      ${fld('마감일(선택)', `<input class="in" type="date" name="due" value="${esc(t.due_date || '')}">`)}
+      ${fld('중요도', lfChips('pr', [{ v: 1, t: '높음' }, { v: 2, t: '보통' }, { v: 3, t: '낮음' }], pr))}`,
+    onOpen(b) { lfChipsBind(b, 'pr', v => { pr = Number(v); }); },
+    async onSave(b) {
+      const title = b.querySelector('[name=t]').value.trim(); if (!title) throw new Error('할 일을 입력해 주세요');
+      await lfSave('life_todos', 'todos', null, { title, due_date: b.querySelector('[name=due]').value || null, priority: pr }, t.id);
+      lfDone();
+    },
+    onDelete: isNew ? null : async () => { await lfDel('life_todos', 'todos', t.id); lfDone('삭제했어요'); }
+  });
+}
+async function toggleTodo(id) {
+  const t = LIFE.todos.find(x => x.id === id); if (!t) return;
+  const done = !t.done, row = { done, done_at: done ? new Date().toISOString() : null };
+  Object.assign(t, row); lifeRerender();
+  const r = await sb.from('life_todos').update(row).eq('id', id);
+  if (r.error) { t.done = !done; t.done_at = null; lifeRerender(); toast('저장하지 못했어요: ' + r.error.message, true); }
+}
+function todoSort(a, b) {
+  const da = a.due_date || '9999-12-31', db = b.due_date || '9999-12-31';
+  return da < db ? -1 : da > db ? 1 : (a.priority - b.priority) || (String(a.created_at) < String(b.created_at) ? 1 : -1);
+}
+function todoRow(t) {
+  const n = t.due_date ? lfDiff(t.due_date, today()) : null;
+  const dd = t.due_date && !t.done ? `<span class="dd ${n < 0 ? 'od' : n === 0 ? 'tdy' : ''}">${n < 0 ? (-n) + '일 지남' : n === 0 ? '오늘' : lfMD(t.due_date) + ' · ' + lfDday(t.due_date)}</span>` : '';
+  return `<div class="td-row ${t.done ? 'done' : ''}"><button type="button" class="ck ${t.done ? 'on' : ''}" data-tdone="${esc(t.id)}" aria-label="${t.done ? '완료 취소' : '완료'}">${CHECK_SVG}</button><button type="button" class="tt" data-todo-edit="${esc(t.id)}"><i class="pr p${t.priority}"></i>${esc(t.title)}</button>${dd}</div>`;
+}
+function todosHTML() {
+  const open = LIFE.todos.filter(t => !t.done).sort(todoSort), done = LIFE.todos.filter(t => t.done).sort((a, b) => String(b.done_at) < String(a.done_at) ? -1 : 1);
+  const add = `<div class="td-add"><input class="in" id="tdNew" placeholder="할 일을 입력하고 Enter" autocomplete="off"><input class="in" type="date" id="tdDue" aria-label="마감일"><button type="button" class="btn primary" id="tdAddBtn">추가</button></div>`;
+  const od = open.filter(t => t.due_date && t.due_date < today()).length;
+  const list = open.length ? `<section class="card lf-list">${open.map(todoRow).join('')}</section>` : lfEmpty('남은 할 일이 없어요. 깔끔하네요.');
+  const dn = done.length ? `<details class="td-done" ${LIFE.showDone ? 'open' : ''} id="tdDone"><summary>완료한 일 ${done.length}개</summary><section class="card lf-list">${done.slice(0, 30).map(todoRow).join('')}</section></details>` : '';
+  return `<div class="lf-tiles one">${lfTile('남은 할 일', `${open.length}<small>개</small>`, od ? `<small class="up">기한 지난 일 ${od}개</small>` : '<small>기한 지난 일 없음</small>')}</div>${add}${list}${dn}`;
+}
+
+/* ===== 목표 ===== */
+const GOAL_CATS = ['건강', '자산', '커리어', '위스키', '기타'];
+const GOAL_METRICS = { '': ['직접 입력', ''], weight: ['체중 (자동)', 'kg'], body_fat: ['체지방률 (자동)', '%'], muscle: ['근육량 (자동)', 'kg'], asset_total: ['포트폴리오 총 평가금액 (자동)', '원'] };
+function goalCurrent(g) {
+  if (g.metric === 'weight') { const r = lfLast(LIFE.body, 'weight'); return r ? Number(r.weight) : null; }
+  if (g.metric === 'body_fat') { const r = lfLast(LIFE.body, 'body_fat'); return r ? Number(r.body_fat) : null; }
+  if (g.metric === 'muscle') { const r = lfLast(LIFE.body, 'muscle'); return r ? Number(r.muscle) : null; }
+  if (g.metric === 'asset_total') return FIN.loaded ? finTotals(FIN.holdings).v : null;
+  return g.current_value == null ? null : Number(g.current_value);
+}
+function goalProg(g) {
+  const cur = goalCurrent(g), tg = g.target_value == null ? null : Number(g.target_value);
+  if (g.done) return { cur, pct: 1 };
+  if (cur == null || tg == null) return { cur, pct: null };
+  const st = g.start_value == null ? 0 : Number(g.start_value);
+  const pct = st === tg ? (cur === tg ? 1 : 0) : (cur - st) / (tg - st);
+  return { cur, pct: Math.max(0, Math.min(1, pct)) };
+}
+const goalVal = (g, v) => v == null ? '-' : (g.metric === 'asset_total' || g.unit === '원') ? `<span class="money">${won(v)}</span>` : lfFix(v, 1) + (g.unit || (GOAL_METRICS[g.metric] || [])[1] || '');
+function openGoal(g) {
+  const isNew = !g; g = g || { title: '', category: '건강', metric: '', done: false };
+  let cat = g.category || '기타', metric = g.metric || '';
+  const unitOf = () => metric ? GOAL_METRICS[metric][1] : '';
+  openFinModal({
+    title: isNew ? '목표 추가' : '목표 수정',
+    html: `${fld('목표', `<input class="in" name="t" value="${esc(g.title)}" placeholder="예: 체중 70kg 만들기, 올해 자산 1억">`)}
+      ${fld('분류', lfChips('cat', GOAL_CATS.map(c => ({ v: c, t: c })), cat))}
+      ${fld('진행률 계산', `<select class="in" name="metric">${Object.entries(GOAL_METRICS).map(([k, v]) => `<option value="${k}" ${k === metric ? 'selected' : ''}>${v[0]}</option>`).join('')}</select><div class="hint" id="gMetricHint"></div>`)}
+      <div class="row3">${fld('시작 값', `<input class="in" name="st" inputmode="decimal" value="${g.start_value ?? ''}" placeholder="0">`)}${fld('목표 값', `<input class="in" name="tg" inputmode="decimal" value="${g.target_value ?? ''}" placeholder="0">`)}${fld('현재 값', `<input class="in" name="cur" inputmode="decimal" value="${g.current_value ?? ''}" placeholder="0">`, 'gcur')}</div>
+      <div class="row2">${fld('단위', `<input class="in" name="unit" value="${esc(g.unit || '')}" placeholder="예: kg, 권, 원">`)}${fld('기한(선택)', `<input class="in" type="date" name="due" value="${esc(g.due_date || '')}">`)}</div>
+      ${fld('메모', `<input class="in" name="m" value="${esc(g.memo || '')}">`)}
+      ${isNew ? '' : fld('상태', lfChips('dn', [{ v: 0, t: '진행 중' }, { v: 1, t: '달성 완료' }], g.done ? 1 : 0))}`,
+    onOpen(b) {
+      let done = !!g.done;
+      const sync = () => {
+        const auto = !!metric;
+        b.querySelector('.gcur').style.display = auto ? 'none' : '';
+        b.querySelector('#gMetricHint').textContent = auto ? '현재 값은 앱의 기록에서 자동으로 가져와요. 시작 값과 목표 값만 입력하세요.' : '현재 값을 직접 수정하며 진행률을 관리해요.';
+        if (auto && !b.querySelector('[name=unit]').value) b.querySelector('[name=unit]').value = unitOf();
+      };
+      lfChipsBind(b, 'cat', v => { cat = v; });
+      lfChipsBind(b, 'dn', v => { done = v === '1'; b.dataset.done = done ? '1' : '0'; });
+      b.dataset.done = done ? '1' : '0';
+      b.querySelector('[name=metric]').addEventListener('change', ev => { metric = ev.target.value; sync(); });
+      sync();
+    },
+    async onSave(b) {
+      const title = b.querySelector('[name=t]').value.trim(); if (!title) throw new Error('목표를 입력해 주세요');
+      const gv = n => lfNum(b.querySelector(`[name=${n}]`).value);
+      const row = { title, category: cat, metric: metric || null, start_value: gv('st'), target_value: gv('tg'), current_value: metric ? null : gv('cur'), unit: b.querySelector('[name=unit]').value.trim() || null, due_date: b.querySelector('[name=due]').value || null, memo: b.querySelector('[name=m]').value.trim() || null };
+      if (!isNew) row.done = b.dataset.done === '1';
+      await lfSave('life_goals', 'goals', null, row, g.id);
+      lfDone();
+    },
+    onDelete: isNew ? null : async () => { await lfDel('life_goals', 'goals', g.id); lfDone('삭제했어요'); }
+  });
+}
+function goalCard(g) {
+  const p = goalProg(g), n = g.due_date ? lfDiff(g.due_date, today()) : null;
+  return `<button type="button" class="card gl-card ${g.done ? 'done' : ''}" data-goal-edit="${esc(g.id)}"><div class="gl-h"><div><b><span class="gl-cat">${esc(g.category)}</span>${esc(g.title)}</b><small>${g.done ? '달성 완료' : g.due_date ? (n < 0 ? '기한 ' + (-n) + '일 지남' : n === 0 ? '오늘까지' : lfMD(g.due_date) + ' 까지 · ' + lfDday(g.due_date)) : '기한 없음'}</small></div><b style="font-size:18px">${p.pct == null ? '-' : Math.round(p.pct * 100) + '%'}</b></div>
+    <div class="lf-bar ${p.pct >= 1 ? 'done' : ''}"><i style="width:${p.pct == null ? 0 : Math.round(p.pct * 100)}%"></i></div>
+    <div class="gl-nums"><span>현재 <b>${goalVal(g, p.cur)}</b></span><span>목표 <b>${goalVal(g, g.target_value == null ? null : Number(g.target_value))}</b></span></div></button>`;
+}
+function goalsListHTML() {
+  if (!LIFE.goals.length) return lfEmpty('아직 목표가 없어요.<br>체중, 자산, 자격증처럼 올해 이루고 싶은 것을 적어보세요. 체중이나 자산 목표는 기록에서 진행률을 자동으로 계산해요.', '+ 목표 만들기');
+  const act = LIFE.goals.filter(g => !g.done).sort((a, b) => (a.due_date || '9999') < (b.due_date || '9999') ? -1 : 1), dn = LIFE.goals.filter(g => g.done);
+  return act.map(goalCard).join('') + (dn.length ? `<div class="fin-sec"><h3>달성한 목표</h3><span>${dn.length}개</span></div>${dn.map(goalCard).join('')}` : '');
+}
+function goalsHTML() {
+  const opts = [['habit', '습관'], ['todo', '할 일'], ['goal', '목표']];
+  const nav = `<div class="fin-chips" id="lfG">${opts.map(o => `<button type="button" class="chip ${LIFE.gsub === o[0] ? 'on' : ''}" data-g="${o[0]}">${o[1]}</button>`).join('')}</div>`;
+  return nav + (LIFE.gsub === 'habit' ? habitsHTML() : LIFE.gsub === 'todo' ? todosHTML() : goalsListHTML());
+}
+
+/* ===== Life 탭 ===== */
+function renderLifeTab() { lifeEnsure(renderLife); }
+function renderLife() {
+  const el = $('#lifeView'); if (!el) return;
+  const hs = LIFE.sub === 'health';
+  const addLabel = hs ? '+ 기록' : LIFE.gsub === 'habit' ? '+ 습관' : LIFE.gsub === 'todo' ? '+ 할 일' : '+ 목표';
+  LFQ = [];
+  const scroll = window.scrollY;
+  el.innerHTML = `<div class="fin-head"><div><h2>Life</h2><p>건강과 습관, 목표를 한곳에서 관리해요</p></div><div class="fin-act">${hs ? '<button type="button" class="btn" data-act="hset">키·목표</button>' : ''}<button type="button" class="btn primary" data-act="add">${addLabel}</button></div></div>
+    <div class="lf-top"><div class="seg" id="lfSub"><button type="button" data-s="health" class="${hs ? 'on' : ''}">건강</button><button type="button" data-s="goals" class="${hs ? '' : 'on'}">목표 · 습관</button></div></div>
+    ${LIFE.loaded ? (hs ? healthHTML() : goalsHTML()) : '<div class="lf-empty">불러오는 중…</div>'}`;
+  lfRunQueue();
+  if (Math.abs(window.scrollY - scroll) > 2) window.scrollTo(0, scroll);
+}
+function lifeAdd() {
+  if (LIFE.sub === 'health') { ({ body: openBody, workout: openWorkout, sleep: openSleep, check: () => openCheck(null) })[LIFE.hsub](); }
+  else { ({ habit: openHabit, todo: openTodo, goal: openGoal })[LIFE.gsub](); }
+}
+async function addTodoQuick() {
+  const inp = $('#tdNew'); if (!inp) return; const title = inp.value.trim(); if (!title) return;
+  const due = ($('#tdDue') || {}).value || null; const btn = $('#tdAddBtn'); if (btn) btn.disabled = true;
+  try { await lfSave('life_todos', 'todos', null, { title, due_date: due, priority: 2 }); renderLife(); const n = $('#tdNew'); if (n) n.focus(); }
+  catch (e) { toast(e.message, true); if (btn) btn.disabled = false; }
+}
+$('#lifeView').addEventListener('click', e => {
+  const t = e.target;
+  let x;
+  if ((x = t.closest('[data-s]'))) { LIFE.sub = x.dataset.s; store.set('lifeSub', LIFE.sub); renderLife(); return; }
+  if ((x = t.closest('[data-h]'))) { LIFE.hsub = x.dataset.h; store.set('lifeH', LIFE.hsub); renderLife(); return; }
+  if ((x = t.closest('[data-g]'))) { LIFE.gsub = x.dataset.g; store.set('lifeG', LIFE.gsub); renderLife(); return; }
+  if ((x = t.closest('[data-bm]'))) { LIFE.bm = x.dataset.bm; renderLife(); return; }
+  if ((x = t.closest('[data-rng]'))) { LIFE.rng = x.dataset.rng; renderLife(); return; }
+  if ((x = t.closest('[data-ck]'))) { LIFE.ck = x.dataset.ck; renderLife(); return; }
+  if ((x = t.closest('[data-more]'))) { LIFE.more[x.dataset.more] = true; renderLife(); return; }
+  if ((x = t.closest('[data-act]'))) { if (x.dataset.act === 'add') lifeAdd(); else if (x.dataset.act === 'hset') openHealthSettings(); return; }
+  if ((x = t.closest('[data-edit]'))) {
+    const [k, id] = x.dataset.edit.split(':'), map = { body: [LIFE.body, openBody], workout: [LIFE.workout, openWorkout], sleep: [LIFE.sleep, openSleep], check: [LIFE.check, openCheck] }[k];
+    const r = map && map[0].find(y => y.id === id); if (r) map[1](r); return;
+  }
+  if ((x = t.closest('[data-hlog]'))) { const [hid, d] = x.dataset.hlog.split('|'); toggleHabit(hid, d); return; }
+  if ((x = t.closest('[data-habit-edit]'))) { const h = LIFE.habits.find(y => y.id === x.dataset.habitEdit); if (h) openHabit(h); return; }
+  if ((x = t.closest('[data-tdone]'))) { toggleTodo(x.dataset.tdone); return; }
+  if ((x = t.closest('[data-todo-edit]'))) { const td = LIFE.todos.find(y => y.id === x.dataset.todoEdit); if (td) openTodo(td); return; }
+  if ((x = t.closest('[data-goal-edit]'))) { const g = LIFE.goals.find(y => y.id === x.dataset.goalEdit); if (g) openGoal(g); return; }
+  if (t.closest('#tdAddBtn')) { addTodoQuick(); return; }
+});
+$('#lifeView').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'tdNew') { e.preventDefault(); addTodoQuick(); } });
+$('#lifeView').addEventListener('toggle', e => { if (e.target.id === 'tdDone') LIFE.showDone = e.target.open; }, true);
+let lfRT; window.addEventListener('resize', () => { clearTimeout(lfRT); lfRT = setTimeout(() => { const ae = document.activeElement; if (S.tab === 'life' && LIFE.loaded && !$('#finModalBg').classList.contains('show') && !(ae && ae.matches && ae.matches('input,textarea,select') && ae.closest('#lifeView'))) renderLife(); }, 250); });
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'visible' || !APP.started || !LIFE.loaded || Date.now() - (LIFE.at || 0) < 60000 || $('#finModalBg').classList.contains('show')) return;
+  const ae = document.activeElement; if (ae && ae.matches && ae.matches('input,textarea,select') && ae.closest('#lifeView')) return;
+  loadLife().then(() => { if (LIFE.loaded) lifeRerender(); });
+});
+
+/* ===== Home ===== */
+function finReady() { return FIN.loaded ? Promise.resolve() : (FIN._p || (FIN._p = loadFin().then(() => { FIN._p = null; }, () => { FIN._p = null; }))); }
+function lifeReady() { return LIFE.loaded ? Promise.resolve() : (LIFE._p || (LIFE._p = loadLife().then(() => { LIFE._p = null; }, () => { LIFE._p = null; }))); }
+function renderHomeTab() {
+  renderHome();
+  if (!FIN.loaded) finReady().then(() => { if (S.tab === 'home') renderHome(); });
+  if (!LIFE.loaded) lifeReady().then(() => { if (S.tab === 'home') renderHome(); });
+}
+function hmCard(go, tc, title, extra, inner, cls) {
+  return `<section class="card hm-card ${cls || ''}" ${go ? `data-go="${go}"` : ''} style="--tc:${tc}"><div class="hm-t"><span>${title}</span>${extra ? `<em>${extra}</em>` : ''}</div>${inner}</section>`;
+}
+function renderHome() {
+  const el = $('#homeView'); if (!el) return;
+  const t = today(), d = lfParse(t), ym = t.slice(0, 7);
+  const wait = '<div class="hm-empty">불러오는 중…</div>';
+
+  /* 자산 */
+  let asset = wait;
+  if (FIN.loaded) {
+    const tt = finTotals(FIN.holdings), prev = FIN.snaps.slice().reverse().find(s => s.snap_date < t), dl = prev ? tt.v - fnum(prev.total_value) : null;
+    asset = FIN.holdings.length ? `<div class="hm-big money">${won(tt.v)}</div><div class="hm-sub">투자 손익 <b class="${pnCls(tt.pnl)} money">${tt.pnl > 0 ? '+' : tt.pnl < 0 ? '-' : ''}${won(Math.abs(tt.pnl))}</b> (${pctTxt(tt.pct)})${dl != null ? `<br>직전 기록 대비 <b class="${pnCls(dl)} money">${dl > 0 ? '+' : dl < 0 ? '-' : ''}${won(Math.abs(dl))}</b>` : ''}</div>` : '<div class="hm-empty">Portfolio에서 종목이나 자산을 등록해 보세요.</div>';
+  }
+  /* 지출 */
+  let spend = wait;
+  if (FIN.loaded) {
+    const es = monthEntries(ym), exp = es.filter(e => e.kind === '지출').reduce((s, e) => s + e.amt, 0), inc = es.filter(e => e.kind === '수입').reduce((s, e) => s + e.amt, 0);
+    const pe = monthEntries(shiftMonth(ym, -1)).filter(e => e.kind === '지출').reduce((s, e) => s + e.amt, 0);
+    spend = `<div class="hm-big money">${won(exp)}</div><div class="hm-sub">${d.getMonth() + 1}월 지출${inc ? ` · 수입 <b class="money">${won(inc)}</b>` : ''}<br>${pe ? `지난달 전체 <b class="money">${won(pe)}</b>` : '지난달 기록 없음'}</div>`;
+  }
+  /* 건강 */
+  let health = wait;
+  if (LIFE.loaded) {
+    const h = hm(), w0 = lfLast(LIFE.body, 'weight'), w1 = LIFE.body.filter(r => r.weight != null)[1];
+    const wk = LIFE.workout.filter(r => r.done_on >= lfWeek(t)).length, sl = LIFE.sleep[0];
+    const nx = LIFE.check.filter(r => r.next_due && r.next_due >= t).sort((a, b) => a.next_due < b.next_due ? -1 : 1)[0];
+    health = `<div class="hm-big">${w0 ? lfFix(w0.weight) + '<small>kg</small>' : '<span style="font-size:18px;color:var(--ink3)">체중 기록 없음</span>'}</div>
+      <div class="hm-sub">${w0 && w1 ? lfDelta(Number(w0.weight), Number(w1.weight), 'kg').replace('<small', '<b').replace('</small>', '</b>') + ' · ' : ''}이번 주 운동 <b>${wk}</b> / ${h.workout_goal}회${sl ? `<br>최근 수면 <b>${lfFix(sl.hours, 1)}</b>시간 (${lfMD(sl.sleep_date)})` : ''}${nx ? `<br>다음 검진 <b>${esc(nx.title || '검진')}</b> ${lfDday(nx.next_due)}` : ''}</div>`;
+  }
+  /* 습관 */
+  let habits = wait;
+  if (LIFE.loaded) {
+    const hs = LIFE.habits.filter(x => !x.archived), dn = hs.filter(x => LIFE.logSet.has(x.id + '|' + t)).length;
+    habits = hs.length ? `<div class="hb-chips">${hs.map(x => { const on = LIFE.logSet.has(x.id + '|' + t); return `<button type="button" class="hb-chip ${on ? 'on' : ''}" data-hlog="${esc(x.id)}|${t}"><span class="ck ${on ? 'on' : ''}" style="width:20px;height:20px;border-radius:7px">${CHECK_SVG}</span>${esc(x.name)}</button>`; }).join('')}</div>` : '<div class="hm-empty">Life 탭에서 매일 체크할 습관을 만들어 보세요.</div>';
+    habits = { html: habits, extra: hs.length ? `${dn} / ${hs.length}` : '' };
+  }
+  /* 할 일 */
+  let todos = wait;
+  if (LIFE.loaded) {
+    const open = LIFE.todos.filter(x => !x.done).sort(todoSort), od = open.filter(x => x.due_date && x.due_date < t).length;
+    todos = { html: open.length ? `<div class="hm-list">${open.slice(0, 5).map(x => { const n = x.due_date ? lfDiff(x.due_date, t) : null; return `<div class="hm-li"><button type="button" class="ck" data-tdone="${esc(x.id)}" aria-label="완료">${CHECK_SVG}</button><span class="tx">${esc(x.title)}</span>${x.due_date ? `<span class="dd ${n < 0 ? 'od' : n === 0 ? 'tdy' : ''}">${n < 0 ? (-n) + '일 지남' : n === 0 ? '오늘' : lfDday(x.due_date)}</span>` : ''}</div>`; }).join('')}</div>${open.length > 5 ? `<div class="hm-sub">외 ${open.length - 5}개</div>` : ''}` : '<div class="hm-empty">남은 할 일이 없어요.</div>', extra: open.length ? `${open.length}개${od ? ` · 지남 ${od}` : ''}` : '' };
+  }
+  /* 목표 */
+  let goals = wait;
+  if (LIFE.loaded) {
+    const act = LIFE.goals.filter(g => !g.done).sort((a, b) => (a.due_date || '9999') < (b.due_date || '9999') ? -1 : 1).slice(0, 3);
+    goals = act.length ? act.map(g => { const p = goalProg(g); return `<div style="margin-bottom:10px"><div class="hm-li" style="border:0;padding:0 0 5px"><span class="tx"><b>${esc(g.title)}</b></span><span class="rt">${p.pct == null ? '-' : Math.round(p.pct * 100) + '%'}</span></div><div class="hm-pg"><i style="width:${p.pct == null ? 0 : Math.round(p.pct * 100)}%;background:var(--c-life)"></i></div></div>`; }).join('') : '<div class="hm-empty">Life 탭에서 올해 목표를 적어 보세요.</div>';
+  }
+  /* 다가오는 일정 */
+  let soon = wait;
+  if (LIFE.loaded) {
+    const it = [];
+    LIFE.todos.filter(x => !x.done && x.due_date && lfDiff(x.due_date, t) <= 7).forEach(x => it.push({ d: x.due_date, k: '할 일', n: x.title }));
+    LIFE.check.filter(x => x.next_due && lfDiff(x.next_due, t) >= -7 && lfDiff(x.next_due, t) <= 60).forEach(x => it.push({ d: x.next_due, k: '검진', n: x.title || '검진' }));
+    LIFE.goals.filter(x => !x.done && x.due_date && lfDiff(x.due_date, t) >= -7 && lfDiff(x.due_date, t) <= 45).forEach(x => it.push({ d: x.due_date, k: '목표', n: x.title }));
+    it.sort((a, b) => a.d < b.d ? -1 : 1);
+    soon = it.length ? `<div class="hm-list">${it.slice(0, 6).map(x => { const n = lfDiff(x.d, t); return `<div class="hm-li"><span class="gl-cat" style="margin:0">${x.k}</span><span class="tx">${esc(x.n)}</span><span class="dd ${n < 0 ? 'od' : n === 0 ? 'tdy' : ''}">${lfDday(x.d)}</span><span class="rt">${lfMD(x.d)}</span></div>`; }).join('')}</div>` : '<div class="hm-empty">앞으로 일주일 안에 마감되는 일, 두 달 안의 검진 일정이 여기에 모여요.</div>';
+  }
+  /* My Bar */
+  const cnt = { '미개봉': 0, '개봉': 0, '소진': 0 }; S.items.forEach(i => { if (cnt[i.status] != null) cnt[i.status]++; });
+  const bar = S.items.length ? `<div class="hm-big">${cnt['미개봉'] + cnt['개봉']}<small>병 보유</small></div><div class="hm-sub">미개봉 <b>${cnt['미개봉']}</b> · 개봉 <b>${cnt['개봉']}</b> · 소진 <b>${cnt['소진']}</b></div>` : wait;
+
+  const H = x => (typeof x === 'string' ? { html: x, extra: '' } : x);
+  const hb = H(habits), td = H(todos);
+  el.innerHTML = `<div class="hm-hello"><div><h2>Today</h2><p>${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일</p></div></div>
+    <div class="hm-grid">
+      ${hmCard('portfolio', 'var(--c-pf)', '총 자산', 'Portfolio', asset)}
+      ${hmCard('ledger', 'var(--c-ld)', '이번 달 지출', 'Ledger', spend)}
+      ${hmCard('life:health', 'var(--c-life)', '건강', 'Life', health)}
+      ${hmCard('life:goals:habit', 'var(--c-life)', '오늘의 습관', hb.extra, hb.html)}
+      ${hmCard('life:goals:todo', 'var(--c-life)', '할 일', td.extra, td.html)}
+      ${hmCard('life:goals:goal', 'var(--c-life)', '목표 진행', 'Life', goals)}
+      ${hmCard('life:goals:todo', 'var(--c-home)', '다가오는 일정', '', soon, 'w2')}
+      ${hmCard('bar', 'var(--c-bar)', 'My Bar', '', bar)}
+    </div>
+    <div class="hm-foot"><span>${esc(APP.email || '')}</span><button type="button" id="hmLogout">로그아웃</button></div>`;
+}
+$('#homeView').addEventListener('click', e => {
+  let x;
+  if ((x = e.target.closest('[data-hlog]'))) { const [hid, dd] = x.dataset.hlog.split('|'); toggleHabit(hid, dd); return; }
+  if ((x = e.target.closest('[data-tdone]'))) { toggleTodo(x.dataset.tdone); return; }
+  if (e.target.closest('#hmLogout')) { if (confirm('로그아웃할까요?')) sb.auth.signOut().then(() => location.reload()); return; }
+  if ((x = e.target.closest('[data-go]'))) {
+    const p = x.dataset.go.split(':');
+    if (p[0] === 'life') { LIFE.sub = p[1] || 'health'; if (p[2]) LIFE.gsub = p[2]; }
+    switchTab(p[0]);
+  }
+});
+
+/* ===== 로그인 ===== */
+const AUTH = { mode: 'in', recover: /type=recovery/.test(location.hash), busy: false };
+function authErrKo(m) {
+  m = String(m || '');
+  if (/Invalid login credentials/i.test(m)) return '이메일 또는 비밀번호가 맞지 않아요';
+  if (/Email not confirmed/i.test(m)) return '메일 인증을 먼저 해주세요 (가입 때 받은 메일의 링크)';
+  if (/already registered|already been registered/i.test(m)) return '이미 가입된 이메일이에요. 로그인해 주세요';
+  if (/rate limit|too many/i.test(m)) return '요청이 너무 많아요. 잠시 후 다시 시도해 주세요';
+  if (/Signups not allowed|signup.*disabled/i.test(m)) return '새 계정 만들기가 막혀 있어요';
+  if (/password.*(short|least|weak)/i.test(m)) return '비밀번호가 너무 짧거나 약해요 (6자 이상)';
+  if (/Failed to fetch|NetworkError/i.test(m)) return '네트워크에 연결할 수 없어요';
+  return m || '문제가 생겼어요';
+}
+function authShow(mode) {
+  AUTH.mode = mode; $('#authGate').hidden = false; $('#authWait').hidden = true; $('#authForm').hidden = false;
+  const isIn = mode === 'in', isUp = mode === 'up', isReset = mode === 'reset', isRec = mode === 'recover';
+  $('#authMsg').textContent = isIn ? '로그인해 주세요' : isUp ? '새 계정을 만들어요' : isReset ? '가입한 이메일로 비밀번호 재설정 링크를 보내드려요' : '새 비밀번호를 입력해 주세요';
+  $('#authEmail').hidden = isRec; $('#authEmail').required = !isRec;
+  $('#authPw').hidden = isReset; $('#authPw').required = !isReset;
+  $('#authPw').autocomplete = isIn ? 'current-password' : 'new-password';
+  $('#authPw').placeholder = isIn ? '비밀번호' : '비밀번호 (6자 이상)';
+  $('#authSubmit').textContent = isIn ? '로그인' : isUp ? '계정 만들기' : isReset ? '재설정 메일 보내기' : '비밀번호 변경';
+  $('#authToggle').textContent = isIn ? '처음이면 계정 만들기' : '로그인으로 돌아가기'; $('#authToggle').hidden = isRec;
+  $('#authReset').hidden = !isIn; $('#authErr').textContent = ''; $('#authErr').className = 'auth-err';
+}
+$('#authToggle').addEventListener('click', () => authShow(AUTH.mode === 'in' ? 'up' : 'in'));
+$('#authReset').addEventListener('click', () => authShow('reset'));
+$('#authForm').addEventListener('submit', async e => {
+  e.preventDefault(); if (AUTH.busy) return; AUTH.busy = true;
+  const btn = $('#authSubmit'); btn.disabled = true;
+  const msg = (t, ok) => { const el = $('#authErr'); el.textContent = t; el.className = 'auth-err' + (ok ? ' ok' : ''); };
+  const email = $('#authEmail').value.trim(), pw = $('#authPw').value, back = location.origin + location.pathname;
+  try {
+    if (AUTH.mode === 'in') {
+      const { data, error } = await sb.auth.signInWithPassword({ email, password: pw }); if (error) throw error;
+      if (data && data.session) { APP.uid = data.session.user.id; APP.email = data.session.user.email || ''; }
+      startApp();
+    } else if (AUTH.mode === 'up') {
+      if (pw.length < 6) throw new Error('비밀번호는 6자 이상이어야 해요');
+      const { data, error } = await sb.auth.signUp({ email, password: pw, options: { emailRedirectTo: back } }); if (error) throw error;
+      if (data && data.session) { APP.uid = data.session.user.id; APP.email = data.session.user.email || ''; startApp(); }
+      else msg('인증 메일을 보냈어요. 메일의 링크를 누른 뒤 로그인해 주세요.', true);
+    } else if (AUTH.mode === 'reset') {
+      const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: back }); if (error) throw error;
+      msg('재설정 메일을 보냈어요. 메일의 링크를 눌러 주세요.', true);
+    } else {
+      if (pw.length < 6) throw new Error('비밀번호는 6자 이상이어야 해요');
+      const { error } = await sb.auth.updateUser({ password: pw }); if (error) throw error;
+      AUTH.recover = false; try { history.replaceState(null, '', location.pathname); } catch (x) {}
+      startApp();
+    }
+  } catch (err) { msg(authErrKo(err.message)); }
+  finally { AUTH.busy = false; btn.disabled = false; }
+});
+
 /* ---------- 시작 ---------- */
-(async function init(){
+async function startApp() {
+  if (APP.started || AUTH.recover) return;
+  APP.started = true;
+  try { const { data } = await sb.auth.getSession(); if (data && data.session) { APP.uid = data.session.user.id; APP.email = data.session.user.email || ''; } } catch (e) {}
+  $('#authGate').hidden = true;
+  switchTab(S.tab);
   try {
     await ensureRate();
     const [items] = await Promise.all([ getData(), loadProducts(), loadDistilleries(), loadGoals(), loadJournal(), loadYtChannels(), loadYtVideos() ]);
     applyData(items);
-  } catch(err){
-    $('#content').innerHTML = `<div class="empty">불러오지 못했어요: ${esc(err.message||'')}</div>`;
+    if (S.tab === 'home') renderHome();
+  } catch (err) {
+    $('#content').innerHTML = `<div class="empty">불러오지 못했어요: ${esc(err.message || '')}</div>`;
     toast(err.message || '불러오지 못했어요', true);
   }
+}
+(async function boot() {
+  try {
+    const { data } = await sb.auth.getSession();
+    if (AUTH.recover) authShow('recover');
+    else if (data && data.session) { APP.uid = data.session.user.id; APP.email = data.session.user.email || ''; startApp(); }
+    else authShow('in');
+  } catch (e) { authShow('in'); }
+  sb.auth.onAuthStateChange((ev, sess) => {
+    if (ev === 'PASSWORD_RECOVERY') { AUTH.recover = true; setTimeout(() => authShow('recover'), 0); }
+    else if (ev === 'SIGNED_IN' && sess && !APP.started && !AUTH.recover) { APP.uid = sess.user.id; APP.email = sess.user.email || ''; setTimeout(startApp, 0); }
+    else if (ev === 'SIGNED_OUT') { setTimeout(() => { if (APP.started) location.reload(); else authShow('in'); }, 0); }
+  });
 })();
+
 })();
 </script>
 </body>
