@@ -1001,6 +1001,30 @@ body[data-tab="home"] .fab{display:none!important}
 .sx-sug .sx-row{border-top:1px dashed var(--line)}.sx-sug .btn{padding:5px 10px;font-size:12px}
 .sx-empty{color:var(--ink3);font-size:13px;padding:14px 0 4px}
 @media (max-width:640px){.card.sx-card{padding:16px 14px}.sx-tot b{font-size:17px}}
+.hx-hero{padding:18px 20px;margin-bottom:14px}
+.hx-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.hx-top b{font-size:13.5px;color:var(--ink)}.hx-top small{display:block;font-size:11.5px;color:var(--ink3);margin-top:2px}
+.hx-judge{font-family:'Gowun Dodum','NanumSquareRound','SUIT Variable',sans-serif;font-size:30px;line-height:1.15;margin:12px 0 8px;color:var(--tg)}
+.hx-chips{display:flex;flex-wrap:wrap;gap:6px}.hx-chips span{font-size:11.5px;font-weight:700;border:1px solid var(--line2);border-radius:99px;padding:3px 10px;color:var(--ink2);background:var(--soft)}
+.hx-cnt{margin-top:10px;font-size:12.5px;color:var(--ink3)}.hx-cnt b{color:var(--ink)}
+.hx-warn{margin-top:14px;border-radius:12px;padding:12px 14px;border:1px solid color-mix(in srgb,var(--tg) 45%,var(--line));background:color-mix(in srgb,var(--tg) 9%,var(--card));font-size:13px;line-height:1.55}
+.hx-warn b{color:var(--ink)}.hx-warn .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.hx-sec{margin:20px 2px 10px;font-size:13.5px;font-weight:800;color:var(--ink)}.hx-sec small{font-weight:600;color:var(--ink3);margin-left:6px;font-size:11.5px}
+.hx-plan{display:grid;gap:10px}
+.hx-p{padding:14px 16px;border-left:4px solid var(--tg)}
+.hx-ph{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.hx-ph b{font-size:14px}
+.hx-pn{font-size:12px;color:var(--ink3);font-weight:700;margin-bottom:6px}
+.hx-pt{font-size:13px;line-height:1.65;color:var(--ink2)}
+.hx-p ul{margin:8px 0 0;padding-left:18px;font-size:12.5px;line-height:1.65;color:var(--ink2)}
+.hx-p .btn{margin-top:10px;padding:6px 12px;font-size:12.5px}
+.hx-g{margin:14px 16px 4px;font-size:11.5px;font-weight:800;color:var(--ink3)}
+.hx-r{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 16px;border-top:1px solid var(--line);font-size:13px}
+.hx-r .l{font-weight:700;color:var(--ink)}.hx-r .v{font-variant-numeric:tabular-nums;font-weight:800}.hx-r .v small{font-weight:600;color:var(--ink3);margin-left:3px;font-size:11px}
+.hx-r .rf{font-size:11.5px;color:var(--ink3)}.hx-r .dl{font-size:11px;font-weight:700;margin-left:4px;color:var(--ink3)}
+.hx-r .lf-tag{margin-left:0}
+.hx-kv{display:grid;grid-template-columns:90px minmax(0,1fr);gap:4px 12px;padding:6px 16px 12px;font-size:13px}.hx-kv span{color:var(--ink3)}
+.card.hx-card{padding:0;overflow:hidden;margin-bottom:14px}
+@media (max-width:640px){.hx-r{grid-template-columns:minmax(0,1fr) auto;row-gap:2px}.hx-r .rf{grid-column:1/2;grid-row:2}.hx-r .v{text-align:right}.hx-r .tg{grid-column:2;grid-row:2;text-align:right}.hx-judge{font-size:26px}}
 </style>
 <script>
 (function(){
@@ -1419,7 +1443,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.10.2';
+const APP_VERSION = 'v1.11.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -3912,10 +3936,10 @@ const CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
 
 const LIFE = {
   loaded: false, loading: false,
-  sub: store.get('lifeSub', 'health'), hsub: store.get('lifeH', 'body'), gsub: store.get('lifeG', 'habit'),
+  sub: store.get('lifeSub', 'health'), hsub: (v => (v === 'body' || v === 'sleep') ? 'status' : v)(store.get('lifeH', 'status')), gsub: store.get('lifeG', 'habit'),
   bm: 'weight', rng: '90', ck: '혈압',
   more: {}, showDone: false,
-  body: [], workout: [], sleep: [], check: [], goals: [], habits: [], logs: [], todos: [], meta: {}, logSet: new Set()
+  body: [], workout: [], sleep: [], check: [], exam: [], goals: [], habits: [], logs: [], todos: [], meta: {}, logSet: new Set()
 };
 const HM_DEF = { height: null, target_weight: null, start_weight: null, sleep_goal: 7, workout_goal: 3 };
 const hm = () => Object.assign({}, HM_DEF, LIFE.meta.health || {});
@@ -3928,7 +3952,7 @@ async function loadLife() {
   LIFE.loading = true;
   try {
     const since = lfAdd(today(), -150);
-    const [b, w, s, c, g, h, l, t, m] = await Promise.all([
+    const [b, w, s, c, g, h, l, t, m, xm] = await Promise.all([
       sb.from('health_body').select('*').order('measured_on', { ascending: false }).limit(1000),
       sb.from('health_workout').select('*').order('done_on', { ascending: false }).limit(1000),
       sb.from('health_sleep').select('*').order('sleep_date', { ascending: false }).limit(1000),
@@ -3937,11 +3961,13 @@ async function loadLife() {
       sb.from('life_habits').select('*').order('sort', { ascending: true }).order('created_at', { ascending: true }),
       sb.from('life_habit_logs').select('habit_id,log_date').gte('log_date', since).limit(1000),
       sb.from('life_todos').select('*').order('created_at', { ascending: false }).limit(1000),
-      sb.from('life_meta').select('*')
+      sb.from('life_meta').select('*'),
+      sb.from('health_exam').select('*').order('exam_date', { ascending: false })
     ]);
     const bad = [b, w, s, c, g, h, l, t, m].find(r => r.error);
     if (bad) throw new Error(bad.error.message);
     LIFE.body = b.data || []; LIFE.workout = w.data || []; LIFE.sleep = s.data || []; LIFE.check = c.data || [];
+    LIFE.exam = xm.error ? (LIFE.exam || []) : (xm.data || []);
     LIFE.goals = g.data || []; LIFE.habits = h.data || []; LIFE.logs = l.data || []; LIFE.todos = t.data || [];
     LIFE.meta = {}; (m.data || []).forEach(r => { LIFE.meta[r.key] = r.value; });
     lfRebuildLogs();
@@ -4217,16 +4243,14 @@ function openHealthSettings() {
   openFinModal({
     title: '키 · 목표 설정',
     html: `<div class="row2">${fld('키(cm)', `<input class="in" name="ht" inputmode="decimal" value="${h.height ?? ''}" placeholder="예: 175">`)}${fld('목표 체중(kg)', `<input class="in" name="tw" inputmode="decimal" value="${h.target_weight ?? ''}" placeholder="예: 70">`)}</div>
-      <div class="row2">${fld('시작 체중(kg)', `<input class="in" name="sw" inputmode="decimal" value="${h.start_weight ?? ''}" placeholder="비우면 첫 기록 기준">`)}${fld('수면 목표(시간)', `<input class="in" name="sg" inputmode="decimal" value="${h.sleep_goal ?? 7}">`)}</div>
-      ${fld('주간 운동 목표(회)', `<input class="in" name="wg" inputmode="numeric" value="${h.workout_goal ?? 3}">`)}
+      <div class="row2">${fld('시작 체중(kg)', `<input class="in" name="sw" inputmode="decimal" value="${h.start_weight ?? ''}" placeholder="비우면 첫 기록 기준">`)}${fld('주간 운동 목표(회)', `<input class="in" name="wg" inputmode="numeric" value="${h.workout_goal ?? 3}">`)}</div>
       <div class="hint faint" style="font-size:11.5px">BMI는 키를 입력하면 계산돼요. 목표 체중까지의 진행률은 시작 체중과 현재 체중으로 계산해요.</div>`,
     async onSave(b) {
       const g = n => lfNum(b.querySelector(`[name=${n}]`).value);
-      const ht = g('ht'), tw = g('tw'), sw = g('sw'), sg = g('sg'), wg = g('wg');
+      const ht = g('ht'), tw = g('tw'), sw = g('sw'), wg = g('wg');
       if (ht != null && (ht < 100 || ht > 230)) throw new Error('키 값을 확인해 주세요');
-      if (sg != null && (sg < 3 || sg > 14)) throw new Error('수면 목표를 확인해 주세요');
       if (wg != null && (wg < 1 || wg > 14)) throw new Error('주간 운동 목표를 확인해 주세요');
-      await saveHealthMeta({ height: ht, target_weight: tw, start_weight: sw, sleep_goal: sg == null ? 7 : sg, workout_goal: wg == null ? 3 : Math.round(wg) });
+      await saveHealthMeta({ height: ht, target_weight: tw, start_weight: sw, workout_goal: wg == null ? 3 : Math.round(wg) });
       lfDone();
     }
   });
@@ -4329,10 +4353,222 @@ function checkHTML() {
   }
   return nav + dueBox + body;
 }
+/* ===== 건강 상태 (검진 분석) ===== */
+const HX_C = ['var(--inc)', '#e29a00', 'var(--up)'];
+const hxL = (n, t) => ({ n, t, c: HX_C[n] });
+const HX_DEF = [
+  { k: 'bmi', g: '체형', l: 'BMI', u: 'kg/㎡', ref: '18.5 ~ 24.9', dec: 1, f: v => v < 18.5 ? hxL(1, '저체중') : v < 25 ? hxL(0, '정상') : v < 30 ? hxL(1, '과체중') : hxL(2, '비만') },
+  { k: 'waist', g: '체형', l: '허리둘레', u: 'cm', ref: '90 미만', dec: 0, f: v => v < 90 ? hxL(0, '정상') : hxL(1, '복부비만') },
+  { k: 'bp', g: '혈압 · 혈당', l: '혈압', u: 'mmHg', ref: '120/80 미만', f: (s, d) => (s >= 140 || d >= 90) ? hxL(2, '고혈압 의심') : (s >= 120 || d >= 80) ? hxL(1, '고혈압 전단계') : hxL(0, '정상') },
+  { k: 'glu', g: '혈압 · 혈당', l: '공복혈당', u: 'mg/dL', ref: '100 미만', dec: 0, f: v => v >= 126 ? hxL(2, '당뇨 의심') : v >= 100 ? hxL(1, '공복혈당장애') : hxL(0, '정상') },
+  { k: 'tc', g: '콜레스테롤', l: '총콜레스테롤', u: 'mg/dL', ref: '200 미만', dec: 0, f: v => v >= 240 ? hxL(2, '높음') : v >= 200 ? hxL(1, '경계') : hxL(0, '정상') },
+  { k: 'ldl', g: '콜레스테롤', l: 'LDL 콜레스테롤', u: 'mg/dL', ref: '130 미만', dec: 0, f: v => v >= 190 ? hxL(2, '매우 높음') : v >= 160 ? hxL(2, '높음') : v >= 130 ? hxL(1, '경계') : hxL(0, '정상') },
+  { k: 'hdl', g: '콜레스테롤', l: 'HDL 콜레스테롤', u: 'mg/dL', ref: '40 이상 (60↑ 좋음)', dec: 0, f: v => v < 40 ? hxL(1, '낮음') : hxL(0, v >= 60 ? '좋음' : '정상') },
+  { k: 'tg', g: '콜레스테롤', l: '중성지방', u: 'mg/dL', ref: '150 미만', dec: 0, f: v => v >= 200 ? hxL(2, '높음') : v >= 150 ? hxL(1, '경계') : hxL(0, '정상') },
+  { k: 'ast', g: '간 · 신장 · 혈액', l: 'AST (간)', u: 'IU/L', ref: '40 이하', dec: 0, f: v => v > 80 ? hxL(2, '높음') : v > 40 ? hxL(1, '약간 높음') : hxL(0, '정상') },
+  { k: 'alt', g: '간 · 신장 · 혈액', l: 'ALT (간)', u: 'IU/L', ref: '35 이하', dec: 0, f: v => v > 70 ? hxL(2, '높음') : v > 35 ? hxL(1, '약간 높음') : hxL(0, '정상') },
+  { k: 'ggt', g: '간 · 신장 · 혈액', l: '감마GTP', u: 'IU/L', ref: '63 이하', dec: 0, f: v => v > 126 ? hxL(2, '높음') : v > 63 ? hxL(1, '약간 높음') : hxL(0, '정상') },
+  { k: 'cr', g: '간 · 신장 · 혈액', l: '크레아티닌', u: 'mg/dL', ref: '1.5 이하', dec: 2, f: v => v > 1.5 ? hxL(1, '높음') : hxL(0, '정상') },
+  { k: 'egfr', g: '간 · 신장 · 혈액', l: '신사구체여과율', u: 'mL/min', ref: '60 이상', dec: 0, f: v => v < 60 ? hxL(1, '낮음') : hxL(0, '정상') },
+  { k: 'hb', g: '간 · 신장 · 혈액', l: '혈색소', u: 'g/dL', ref: '13.0 ~ 16.5', dec: 1, f: v => (v < 13 || v > 16.5) ? hxL(1, '확인 필요') : hxL(0, '정상') }
+];
+function hxRows(v, p) {
+  p = p || {};
+  return HX_DEF.map(d => {
+    if (d.k === 'bp') { if (v.sys == null || v.dia == null) return null; return Object.assign({}, d, { val: v.sys + ' / ' + v.dia, lv: d.f(Number(v.sys), Number(v.dia)), d: p.sys != null ? Number(v.sys) - Number(p.sys) : null }); }
+    if (v[d.k] == null) return null;
+    return Object.assign({}, d, { val: lfFix(v[d.k], d.dec), lv: d.f(Number(v[d.k])), d: p[d.k] != null ? Number(v[d.k]) - Number(p[d.k]) : null });
+  }).filter(Boolean);
+}
+const hxJudgeColor = j => /정상\s*A/.test(j || '') ? HX_C[0] : /정상\s*B|경계/.test(j || '') ? HX_C[1] : HX_C[2];
+const hxExams = () => (LIFE.exam || []).slice();
+function hxSummary() {
+  const ex = hxExams()[0]; if (!ex) return null;
+  const rows = hxRows(ex.vals || {}, null);
+  return { ex, judge: (ex.summary || {}).judge || '', warn: rows.filter(r => r.lv.n >= 1).length, ok: rows.filter(r => r.lv.n === 0).length };
+}
+function hxPlan(ex) {
+  const v = ex.vals || {}, S = ex.summary || {}, P = [], t = today();
+  const h = Number(v.height) || Number(hm().height) || 175, w = Number(v.weight);
+  const ideal = Math.round(25 * Math.pow(h / 100, 2) * 10) / 10;
+  const advice = (S.advice || []).join(' ');
+  if (v.ldl != null && (v.ldl >= 130 || (v.tc || 0) >= 200)) {
+    const lv = v.ldl >= 160 ? 2 : 1;
+    P.push({ rank: 1, lv, title: '콜레스테롤', now: `LDL ${v.ldl} (기준 130 미만) · 총 ${v.tc}`,
+      text: `LDL이 기준보다 ${Math.max(0, v.ldl - 130)} 높아요.${v.ldl >= 190 ? ' 190 이상이면 식사·운동만으로 내리기 어려운 경우가 많아서, 약이 필요한지는 병원에서 먼저 정하는 게 순서예요. 가족 중에 고지혈증이나 심근경색이 있으면 진료 때 꼭 알려주세요.' : ''}${(v.tg != null && v.tg < 150 && v.hdl != null && v.hdl >= 40) ? ` 중성지방(${v.tg})과 HDL(${v.hdl})은 괜찮아서 'LDL만 높은' 유형이에요.` : ''}`,
+      tips: ['병원에서 재검과 치료 필요 여부 상담', '포화지방 줄이기: 삼겹살·곱창·튀김·가공육, 버터·크림', '귀리·채소·등푸른생선·견과류는 늘리기'], act: { t: 'todo', label: '할 일에 담기', title: '이상지질혈증(LDL) 진료·재검 상담', days: 7 } });
+  }
+  if ((v.bmi != null && v.bmi >= 25) || (v.waist != null && v.waist >= 90)) {
+    const tw = Number(hm().target_weight) || ideal, five = Math.round(w * 0.05 * 10) / 10, mo = Math.max(1, Math.round((w - tw) / 1.5));
+    P.push({ rank: 2, lv: (v.bmi >= 30 || v.waist >= 100) ? 2 : 1, title: '체중 · 복부비만', now: `${w}kg · BMI ${v.bmi} · 허리 ${v.waist}cm`,
+      text: `BMI 25 기준 체중은 ${ideal}kg, 허리는 90cm 미만이 목표예요. 먼저 5%(${lfFix(five, 1)}kg → ${lfFix(w - five, 1)}kg)만 빼도 간수치·혈압·혈당·콜레스테롤이 같이 좋아지는 경우가 많아서, 이번 검진 결과 대부분을 한꺼번에 움직이는 가장 큰 레버예요. 월 1~2kg 속도면 ${mo}개월 안팎이에요.`,
+      tips: ['한 번에 크게 빼지 말고 월 1~2kg 속도로', '전신 근력운동 주 2회 이상 + 걷기·유산소로 허리둘레 줄이기', '체중·허리는 2주에 한 번 정도 기록해서 추이 보기'], act: { t: 'weight', label: '체중·허리 기록' } });
+  }
+  if (v.alt != null && v.alt > 35) {
+    const only = (v.ast == null || v.ast <= 40) && (v.ggt == null || v.ggt <= 63);
+    P.push({ rank: 3, lv: v.alt > 70 ? 2 : 1, title: '간 수치', now: `ALT ${v.alt} (기준 35 이하) · AST ${v.ast} · 감마GTP ${v.ggt}`,
+      text: only ? `ALT만 높고 AST와 감마GTP는 정상 범위예요. 이런 패턴은 체중과 관련된 지방간에서 흔하지만,${/음주/.test(advice) ? ' 문진에서 위험음주로 나왔기 때문에' : ''} 술의 영향도 배제할 수는 없어요. 복부 초음파 같은 확인은 병원에서 판단해요.` : `간 수치가 기준을 넘었어요. 원인 확인은 병원에서 해야 해요.`,
+      tips: ['체중 감량과 절주가 가장 직접적인 해법', '진료 때 복용 중인 약·영양제·건강기능식품 알리기', '재검에서 ALT가 내려오는지 확인'] });
+  }
+  if (/음주/.test(advice)) {
+    P.push({ rank: 4, lv: 1, title: '음주', now: '문진 결과 위험음주 상태 · 절주 권고',
+      text: `위스키 한 잔(30ml)에 알코올이 약 10g 들어 있어서 소주 한 잔보다 조금 많은 양이에요. 간 수치·체중·혈압·위염 모두 술의 영향을 받는 항목이라, 완전히 끊지 않더라도 '마시는 날 수와 한 번에 마시는 양'을 정해두는 게 현실적인 첫걸음이에요.`,
+      tips: ['일주일에 2~3일은 안 마시는 날로 정하고 습관으로 체크', '마신 날은 잔 수를 세기', '재검 전에 ALT·LDL이 내려가는지 보면 효과가 눈에 보여요'], act: { t: 'habit', label: '습관에 추가', title: '술 안 마신 날', per: 3 } });
+  }
+  if (v.glu != null && v.glu >= 100) {
+    P.push({ rank: 5, lv: v.glu >= 126 ? 2 : 1, title: '공복혈당', now: `${v.glu} mg/dL (정상 100 미만)`,
+      text: `정상(100 미만)과 당뇨 기준(126) 사이인 '공복혈당장애(당뇨 전단계)' 구간이에요. 지금 치료 대상은 아니지만 체중을 줄이고 운동하면 되돌리기 쉬운 단계이고, 그대로 두면 당뇨로 넘어갈 수 있어서 재검이 중요해요.`,
+      tips: ['진료 때 당화혈색소(HbA1c) 검사도 같이 받아보기', '식후 15~20분 걷기', '재검은 적어도 1년에 한 번'], act: { t: 'go', label: '혈당 기록하러 가기', h: 'check', ck: '혈당' } });
+  }
+  if (v.sys != null && (v.sys >= 120 || v.dia >= 80)) {
+    P.push({ rank: 6, lv: (v.sys >= 140 || v.dia >= 90) ? 2 : 1, title: '혈압', now: `${v.sys}/${v.dia} mmHg (정상 120/80 미만)`,
+      text: `정상 상한을 살짝 넘은 '고혈압 전단계'예요. 검진에서도 정기적인 혈압 측정을 권고했어요. 검진 때만 재면 긴장 때문에 다르게 나올 수 있어서, 집에서 같은 조건으로 재서 평균을 보는 게 정확해요.`,
+      tips: ['아침 기상 후와 저녁, 앉아서 5분 쉰 뒤 측정', '몇 번 모아서 평균으로 판단 (혈압 탭에서 자동 계산)', '짠 국물·가공식품·술은 혈압을 올려요'], act: { t: 'go', label: '혈압 기록하러 가기', h: 'check', ck: '혈압' } });
+  }
+  if (/근력/.test(advice)) {
+    const n = LIFE.workout.filter(r => r.done_on >= lfWeek(t) && /웨이트|근력/.test(r.kind || '')).length;
+    P.push({ rank: 7, lv: 0, title: '근력운동', now: `이번 주 웨이트 ${n}회 / 권고 주 2일 이상`,
+      text: `검진에서 일주일에 2일 이상, 신체 각 부위를 모두 포함하는 근력운동을 권고했어요. 근육이 늘면 같은 체중이어도 혈당·콜레스테롤 관리가 쉬워져요.`, tips: [], act: { t: 'go', label: '운동 기록하러 가기', h: 'workout' } });
+  }
+  const en = S.endo;
+  if (en) P.push({ rank: 8, lv: 0, title: '위내시경 · 위염', now: `${en.date} · ${en.finding}`,
+    text: `조직검사 결과 ${en.biopsy}, 헬리코박터균은 ${en.hp}이에요. 속쓰림·소화불량 같은 증상이 있으면 진료를 받고, 없으면 정기검사만 받으면 돼요. 술·진통소염제·자극적인 식사는 위염을 악화시켜요. 40세 이상은 2년마다 검사하라고 권고해서 다음은 ${en.next} 무렵이에요.`, tips: [] });
+  return P.sort((a, b) => b.lv - a.lv || a.rank - b.rank);
+}
+let HXC = { plan: [], ex: null };
+function hxStatusHTML() {
+  const exams = hxExams();
+  if (!exams.length) return `<div class="lf-empty">아직 건강검진 결과가 없어요.<br><button type="button" class="btn primary" data-hx="newexam">+ 검진 결과 입력</button></div>`;
+  const ex = exams[0], v = ex.vals || {}, S = ex.summary || {}, t = today(), prev = exams[1] ? exams[1].vals : null;
+  HXC.ex = ex; HXC.plan = hxPlan(ex);
+  const rows = hxRows(v, prev), warn = rows.filter(r => r.lv.n >= 1).length;
+  const jc = hxJudgeColor(S.judge), days = lfDiff(t, ex.exam_date);
+  const fol = (LIFE.meta.exam_follow || {})[ex.exam_date];
+  let visit = '';
+  if (S.visit_days) {
+    const due = lfAdd(ex.exam_date, S.visit_days), left = lfDiff(due, t);
+    if (fol) visit = `<div class="hx-warn" style="--tg:${HX_C[0]}"><b>병원 진료 완료</b> · ${esc(fol)} 다녀왔다고 기록했어요.<div class="acts"><button type="button" class="btn" data-hx="unvisit">기록 취소</button></div></div>`;
+    else visit = `<div class="hx-warn" style="--tg:${left < 0 ? HX_C[2] : HX_C[1]}"><b>검진 결과통보서의 권고</b>: 이상지질혈증·간질환 의심 → ${S.visit_days}일 이내 가까운 병·의원 진료.<br>${left < 0 ? `검진일로부터 ${days}일이 지났어요 (권고 기한 ${lfMD(due)}). 아직 안 가셨다면 이게 가장 먼저예요.` : `${lfMD(due)}까지 (${left}일 남음).`}<div class="acts"><button type="button" class="btn primary" data-hx="visit">이미 다녀왔어요</button><button type="button" class="btn" data-hx="todo:visit">할 일에 담기</button></div></div>`;
+  }
+  const hero = `<section class="card hx-hero" style="--tg:${jc}"><div class="hx-top"><div><b>${ex.exam_date.slice(0, 4)}년 건강검진</b><small>${esc(ex.exam_date.replace(/-/g, '.'))} · ${esc(ex.org || '')} · ${days}일 전</small></div><button type="button" class="btn" data-hx="exam">수정</button></div>
+    <div class="hx-judge">${esc(S.judge || '판정 없음')}</div>
+    <div class="hx-chips">${(S.suspect || []).map(x => `<span>${esc(x)} 의심</span>`).join('')}</div>
+    <div class="hx-cnt">수치 ${rows.length}개 중 <b>주의 ${warn}</b> · 정상 <b>${rows.length - warn}</b></div>${visit}</section>`;
+  const w0 = lfLast(LIFE.body, 'weight'), w1 = LIFE.body.filter(r => r.weight != null)[1], wa = lfLast(LIFE.body, 'waist');
+  const bp = LIFE.check.find(r => r.kind === '혈압'), gl = LIFE.check.find(r => r.kind === '혈당');
+  const hh = hm(), tw = Number(hh.target_weight) || null;
+  let tiles = lfTile('체중', w0 ? `${lfFix(w0.weight)}<small>kg</small>` : '-', w0 ? (w1 ? lfDelta(Number(w0.weight), Number(w1.weight), 'kg') : '') + (tw ? `<small>목표 ${lfFix(tw)}kg</small>` : '') : '<small>기록 없음</small>');
+  tiles += lfTile('허리둘레', wa ? `${lfFix(wa.waist)}<small>cm</small>` : '-', `<small>목표 90 미만</small>`);
+  tiles += lfTile('최근 혈압', bp ? `${bp.sys}/${bp.dia}${lfTag(bpClass(bp.sys, bp.dia)[0], bpClass(bp.sys, bp.dia)[1])}` : '-', bp ? `<small>${lfMD(bp.measured_on)}</small>` : '<small>기록 없음</small>');
+  tiles += lfTile('최근 혈당', gl ? `${gl.glucose}<small>mg/dL</small>` : '-', gl ? `<small>${lfMD(gl.measured_on)} · ${esc(gl.glucose_ctx || '')}</small>` : '<small>기록 없음</small>');
+  const plan = HXC.plan.map((p, i) => `<section class="card hx-p" style="--tg:${HX_C[p.lv]}"><div class="hx-ph"><b>${esc(p.title)}</b>${p.lv ? lfTag(p.lv === 2 ? '우선' : '주의', HX_C[p.lv]) : lfTag('참고', HX_C[0])}</div><div class="hx-pn">${esc(p.now)}</div><div class="hx-pt">${esc(p.text)}</div>${p.tips.length ? `<ul>${p.tips.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${p.act ? `<button type="button" class="btn" data-hx="act:${i}">${esc(p.act.label)}</button>` : ''}</section>`).join('');
+  const groups = []; rows.forEach(r => { let g = groups.find(x => x.g === r.g); if (!g) groups.push(g = { g: r.g, rows: [] }); g.rows.push(r); });
+  const tbl = groups.map(g => `<div class="hx-g">${esc(g.g)}</div>${g.rows.map(r => `<div class="hx-r"><span class="l">${esc(r.l)}</span><span class="v">${esc(r.val)}<small>${esc(r.u)}</small>${r.d != null && r.d !== 0 ? `<span class="dl">${r.d > 0 ? '▲' : '▼'}${lfFix(Math.abs(r.d), 1)}</span>` : ''}</span><span class="rf">기준 ${esc(r.ref)}</span><span class="tg">${lfTag(r.lv.t, r.lv.c)}</span></div>`).join('')}`).join('');
+  const qual = [['소변 단백', v.urine], ['흉부 X선', v.chest], ['우울증 선별', v.depress], ['시력 (좌/우)', v.vision], ['청력 (좌/우)', v.hearing]].filter(x => x[1]);
+  const exam = `<section class="card hx-card"><div style="padding-bottom:6px">${tbl}</div>${qual.length ? `<div class="hx-g">그 외 검사</div><div class="hx-kv">${qual.map(x => `<span>${esc(x[0])}</span><b>${esc(x[1])}</b>`).join('')}</div>` : ''}</section>`;
+  const wRecs = LIFE.body.filter(r => r.weight != null);
+  let goal = '';
+  if (tw && w0) {
+    const start = hh.start_weight != null ? Number(hh.start_weight) : Number(wRecs[wRecs.length - 1].weight), cur = Number(w0.weight);
+    let pct = start === tw ? (cur === tw ? 1 : 0) : (cur - start) / (tw - start); pct = Math.max(0, Math.min(1, pct)); const rem = cur - tw;
+    goal = `<div class="lf-pg"><div class="row"><span>목표 체중 ${lfFix(tw)}kg 까지</span><b>${rem <= 0 ? '달성!' : lfFix(rem) + 'kg 감량 필요'}</b></div><div class="lf-bar ${pct >= 1 ? 'done' : ''}"><i style="width:${(pct * 100).toFixed(0)}%"></i></div><div class="row" style="margin:6px 0 0"><span>시작 ${lfFix(start)}kg</span><span>${(pct * 100).toFixed(0)}%</span></div></div>`;
+  }
+  LFQ.push(() => drawLine($('#hxWChart'), { pts: wRecs.filter(r => r.measured_on >= lfAdd(t, -365)).map(r => ({ d: r.measured_on, v: [Number(r.weight)] })).reverse(), names: [''], fmt: q => lfFix(q, 1) + 'kg', axis: q => lfFix(q, 1), goal: tw, label: '체중 추이', single: '체중 기록이 2개 이상 쌓이면 추이 그래프가 나타나요. 위의 “+ 체중·허리” 버튼으로 기록해 보세요.' }));
+  const shown = lfShown('body', 6), list = wRecs.slice(0, shown);
+  const wrows = list.map(r => `<button type="button" class="lf-row" data-edit="body:${esc(r.id)}"><span class="d">${lfMD(r.measured_on)}<em>${lfDow(r.measured_on)}</em></span><span class="m">체중 <b>${lfFix(r.weight)}</b>kg${r.waist != null ? ` · 허리 ${lfFix(r.waist)}cm` : ''}${r.memo ? `<small>${esc(r.memo)}</small>` : ''}</span><span class="r">${r.measured_on.slice(0, 4) === t.slice(0, 4) ? '' : r.measured_on.slice(0, 4)}</span></button>`).join('');
+  return `${hero}<div class="lf-tiles">${tiles}</div>
+    <div class="hx-sec">관리 우선순위<small>검진 수치로 정리한 참고용이에요</small></div><div class="hx-plan">${plan}</div>
+    <div class="hx-sec">체중 · 허리 변화</div><div class="card lf-chart-card">${goal}${lfChartBox('hxWChart')}</div>${wrows ? `<section class="card lf-list">${wrows}${lfMoreBtn('body', wRecs.length, shown)}</section>` : ''}
+    <div class="hx-sec">검진 수치 전체<small>${esc(ex.exam_date.replace(/-/g, '.'))} 기준${prev ? ' · ▲▼는 직전 검진 대비' : ''}</small></div>${exam}
+    <div class="lf-note">검진 결과를 정리해서 보여주는 참고용 화면이에요. 진단이나 치료 판단이 아니고, 약이나 치료가 필요한지는 의료진과 상의하세요.<button type="button" class="lf-more" style="display:inline;width:auto;padding:0 0 0 6px" data-hx="newexam">새 검진 결과 입력</button></div>`;
+}
+async function hxSaveMeta(key, value) {
+  const { error } = await sb.from('life_meta').upsert(Object.assign({ key, value, updated_at: new Date().toISOString() }, APP.uid ? { user_id: APP.uid } : {}), { onConflict: 'user_id,key' });
+  if (error) throw new Error(error.message);
+  LIFE.meta[key] = value;
+}
+async function hxAddTodo(title, days) {
+  if (LIFE.todos.some(x => !x.done && x.title === title)) { toast('이미 할 일에 있어요'); return; }
+  await lfSave('life_todos', 'todos', null, { title, due_date: days == null ? null : lfAdd(today(), days), priority: 1 });
+  toast('할 일에 담았어요');
+}
+async function hxAct(a) {
+  try {
+    const ex = HXC.ex;
+    if (a === 'weight') return openWeight();
+    if (a === 'exam') return openExam(ex);
+    if (a === 'newexam') return openExam(null);
+    if (a === 'visit') { await hxSaveMeta('exam_follow', Object.assign({}, LIFE.meta.exam_follow || {}, { [ex.exam_date]: today() })); toast('기록했어요'); return renderLife(); }
+    if (a === 'unvisit') { const f = Object.assign({}, LIFE.meta.exam_follow || {}); delete f[ex.exam_date]; await hxSaveMeta('exam_follow', f); return renderLife(); }
+    if (a === 'todo:visit') { await hxAddTodo('내과 진료 — 검진 결과(이상지질혈증·간수치) 상담', 3); return renderLife(); }
+    if (a.indexOf('act:') === 0) {
+      const p = HXC.plan[Number(a.slice(4))]; if (!p || !p.act) return; const c = p.act;
+      if (c.t === 'weight') return openWeight();
+      if (c.t === 'todo') { await hxAddTodo(c.title, c.days); return renderLife(); }
+      if (c.t === 'habit') {
+        if (LIFE.habits.some(x => !x.archived && x.name === c.title)) { toast('이미 습관에 있어요'); return; }
+        await lfSave('life_habits', 'habits', null, { name: c.title, per_week: c.per, sort: LIFE.habits.reduce((m, x) => Math.max(m, x.sort || 0), 0) + 1 });
+        toast('습관에 추가했어요 (목표 · 습관 탭)'); return renderLife();
+      }
+      if (c.t === 'go') { LIFE.hsub = c.h; if (c.ck) LIFE.ck = c.ck; store.set('lifeH', LIFE.hsub); return renderLife(); }
+    }
+  } catch (e) { toast(e.message || '처리하지 못했어요', true); }
+}
+function openWeight(r) {
+  const isNew = !r; r = r || { measured_on: today() };
+  const last = lfLast(LIFE.body, 'waist');
+  openFinModal({
+    title: isNew ? '체중 · 허리 기록' : '체중 · 허리 수정',
+    html: `${lfDateField(r.measured_on)}
+      <div class="row2">${fld('체중(kg)', `<input class="in" name="w" inputmode="decimal" value="${r.weight ?? ''}" placeholder="0.0">`)}${fld('허리둘레(cm, 선택)', `<input class="in" name="wa" inputmode="decimal" value="${r.waist ?? ''}" placeholder="${last ? lfFix(last.waist) : '0.0'}">`)}</div>
+      ${fld('메모', `<input class="in" name="m" value="${esc(r.memo || '')}" placeholder="예: 아침 공복">`)}
+      <div class="hint faint" style="font-size:11.5px">허리는 배꼽 높이에서 숨을 내쉰 상태로 재요. 같은 날짜에 다시 저장하면 그날 기록이 갱신돼요.</div>`,
+    onOpen(b) { setTimeout(() => b.querySelector('[name=w]').focus(), 50); },
+    async onSave(b) {
+      const d = b.querySelector('[name=d]').value, w = lfNum(b.querySelector('[name=w]').value), wa = lfNum(b.querySelector('[name=wa]').value);
+      if (!d) throw new Error('날짜를 선택해 주세요');
+      if (w == null) throw new Error('체중을 입력해 주세요');
+      if (w < 20 || w > 300) throw new Error('체중 값을 확인해 주세요');
+      if (wa != null && (wa < 40 || wa > 200)) throw new Error('허리둘레 값을 확인해 주세요');
+      let id = r.id; if (!id) { const ex = LIFE.body.find(x => x.measured_on === d); if (ex) id = ex.id; }
+      await lfSave('health_body', 'body', 'measured_on', { measured_on: d, weight: w, waist: wa, memo: b.querySelector('[name=m]').value.trim() || null }, id);
+      lfDone();
+    },
+    onDelete: isNew ? null : async () => { await lfDel('health_body', 'body', r.id); lfDone('삭제했어요'); }
+  });
+}
+const HX_FIELDS = [['height', '키(cm)'], ['weight', '체중(kg)'], ['waist', '허리(cm)'], ['sys', '수축기'], ['dia', '이완기'], ['glu', '공복혈당'], ['tc', '총콜레스테롤'], ['ldl', 'LDL'], ['hdl', 'HDL'], ['tg', '중성지방'], ['ast', 'AST'], ['alt', 'ALT'], ['ggt', '감마GTP'], ['cr', '크레아티닌'], ['egfr', 'eGFR'], ['hb', '혈색소']];
+function openExam(ex) {
+  const isNew = !ex, v = isNew ? {} : (ex.vals || {}), S = isNew ? {} : (ex.summary || {});
+  ex = ex || { exam_date: today(), org: '' };
+  openFinModal({
+    title: isNew ? '건강검진 결과 입력' : '건강검진 결과 수정', wide: true,
+    html: `<div class="row2">${fld('검진일', `<input class="in" type="date" name="d" value="${esc(ex.exam_date)}">`)}${fld('검진기관', `<input class="in" name="org" value="${esc(ex.org || '')}" placeholder="예: 시원누리내과의원">`)}</div>
+      <div class="row2">${fld('종합 판정', `<input class="in" name="judge" value="${esc(S.judge || '')}" placeholder="예: 정상B(경계)">`)}${fld('의심 질환 (쉼표로 구분)', `<input class="in" name="suspect" value="${esc((S.suspect || []).join(', '))}" placeholder="예: 이상지질혈증, 간질환">`)}</div>
+      <div class="row3">${HX_FIELDS.map(f => fld(f[1], `<input class="in" name="v_${f[0]}" inputmode="decimal" value="${v[f[0]] ?? ''}">`)).join('')}</div>
+      ${fld('의사 권고사항 (한 줄에 하나)', `<textarea class="in" name="advice" rows="3" placeholder="예: 절주 또는 금주가 필요합니다">${esc((S.advice || []).join('\n'))}</textarea>`)}
+      <div class="hint faint" style="font-size:11.5px">BMI는 키와 체중으로 자동 계산돼요. 모르는 칸은 비워도 돼요. 같은 검진일에 다시 저장하면 그 검진 기록이 갱신돼요.</div>`,
+    async onSave(b) {
+      const d = b.querySelector('[name=d]').value; if (!d) throw new Error('검진일을 선택해 주세요');
+      const nv = Object.assign({}, v);
+      HX_FIELDS.forEach(f => { const x = lfNum(b.querySelector('[name=v_' + f[0] + ']').value); if (x == null) delete nv[f[0]]; else nv[f[0]] = x; });
+      if (nv.height && nv.weight) nv.bmi = Math.round(nv.weight / Math.pow(nv.height / 100, 2) * 10) / 10; else delete nv.bmi;
+      const sum = Object.assign({}, S, { judge: b.querySelector('[name=judge]').value.trim(), suspect: b.querySelector('[name=suspect]').value.split(',').map(x => x.trim()).filter(Boolean), advice: b.querySelector('[name=advice]').value.split('\n').map(x => x.trim()).filter(Boolean) });
+      if (sum.visit_days == null && /의심/.test((sum.suspect || []).join(''))) sum.visit_days = 30;
+      const row = { exam_date: d, org: b.querySelector('[name=org]').value.trim(), vals: nv, summary: sum };
+      let id = ex.id; if (!id) { const o = LIFE.exam.find(x => x.exam_date === d); if (o) id = o.id; }
+      if (!id && APP.uid) row.user_id = APP.uid;
+      await lfSave('health_exam', 'exam', 'exam_date', row, id);
+      lfDone();
+    },
+    onDelete: isNew ? null : async () => { await lfDel('health_exam', 'exam', ex.id); lfDone('삭제했어요'); }
+  });
+}
 function healthHTML() {
-  const opts = [['body', '체성분'], ['workout', '운동'], ['sleep', '수면'], ['check', '검진·혈압·혈당']];
+  const opts = [['status', '건강 상태'], ['workout', '운동'], ['check', '검진·혈압·혈당']];
+  if (!opts.some(o => o[0] === LIFE.hsub)) LIFE.hsub = 'status';
   const nav = `<div class="fin-chips" id="lfH">${opts.map(o => `<button type="button" class="chip ${LIFE.hsub === o[0] ? 'on' : ''}" data-h="${o[0]}">${o[1]}</button>`).join('')}</div>`;
-  return nav + (LIFE.hsub === 'body' ? bodyHTML() : LIFE.hsub === 'workout' ? workoutHTML() : LIFE.hsub === 'sleep' ? sleepHTML() : checkHTML());
+  return nav + (LIFE.hsub === 'status' ? hxStatusHTML() : LIFE.hsub === 'workout' ? workoutHTML() : checkHTML());
 }
 
 /* ===== 습관 ===== */
@@ -4514,7 +4750,7 @@ function renderLifeTab() { lifeEnsure(renderLife); }
 function renderLife() {
   const el = $('#lifeView'); if (!el) return;
   const hs = LIFE.sub === 'health';
-  const addLabel = hs ? '+ 기록' : LIFE.gsub === 'habit' ? '+ 습관' : LIFE.gsub === 'todo' ? '+ 할 일' : '+ 목표';
+  const addLabel = hs ? (LIFE.hsub === 'status' ? '+ 체중·허리' : LIFE.hsub === 'workout' ? '+ 운동' : '+ 기록') : LIFE.gsub === 'habit' ? '+ 습관' : LIFE.gsub === 'todo' ? '+ 할 일' : '+ 목표';
   LFQ = [];
   const scroll = window.scrollY;
   el.innerHTML = `<div class="fin-head"><div><h2>Life</h2><p>건강과 습관, 목표를 한곳에서 관리해요</p></div><div class="fin-act">${hs ? '<button type="button" class="btn" data-act="hset">키·목표</button>' : ''}<button type="button" class="btn primary" data-act="add">${addLabel}</button></div></div>
@@ -4524,7 +4760,7 @@ function renderLife() {
   if (Math.abs(window.scrollY - scroll) > 2) window.scrollTo(0, scroll);
 }
 function lifeAdd() {
-  if (LIFE.sub === 'health') { ({ body: openBody, workout: openWorkout, sleep: openSleep, check: () => openCheck(null) })[LIFE.hsub](); }
+  if (LIFE.sub === 'health') { ({ status: () => openWeight(), workout: () => openWorkout(), check: () => openCheck(null) })[LIFE.hsub](); }
   else { ({ habit: openHabit, todo: openTodo, goal: openGoal })[LIFE.gsub](); }
 }
 async function addTodoQuick() {
@@ -4537,6 +4773,7 @@ $('#lifeView').addEventListener('click', e => {
   const t = e.target;
   let x;
   if ((x = t.closest('[data-s]'))) { LIFE.sub = x.dataset.s; store.set('lifeSub', LIFE.sub); renderLife(); return; }
+  if ((x = t.closest('[data-hx]'))) { hxAct(x.dataset.hx); return; }
   if ((x = t.closest('[data-h]'))) { LIFE.hsub = x.dataset.h; store.set('lifeH', LIFE.hsub); renderLife(); return; }
   if ((x = t.closest('[data-g]'))) { LIFE.gsub = x.dataset.g; store.set('lifeG', LIFE.gsub); renderLife(); return; }
   if ((x = t.closest('[data-bm]'))) { LIFE.bm = x.dataset.bm; renderLife(); return; }
@@ -4545,7 +4782,7 @@ $('#lifeView').addEventListener('click', e => {
   if ((x = t.closest('[data-more]'))) { LIFE.more[x.dataset.more] = true; renderLife(); return; }
   if ((x = t.closest('[data-act]'))) { if (x.dataset.act === 'add') lifeAdd(); else if (x.dataset.act === 'hset') openHealthSettings(); return; }
   if ((x = t.closest('[data-edit]'))) {
-    const [k, id] = x.dataset.edit.split(':'), map = { body: [LIFE.body, openBody], workout: [LIFE.workout, openWorkout], sleep: [LIFE.sleep, openSleep], check: [LIFE.check, openCheck] }[k];
+    const [k, id] = x.dataset.edit.split(':'), map = { body: [LIFE.body, openWeight], workout: [LIFE.workout, openWorkout], sleep: [LIFE.sleep, openSleep], check: [LIFE.check, openCheck] }[k];
     const r = map && map[0].find(y => y.id === id); if (r) map[1](r); return;
   }
   if ((x = t.closest('[data-hlog]'))) { const [hid, d] = x.dataset.hlog.split('|'); toggleHabit(hid, d); return; }
@@ -4597,10 +4834,10 @@ function renderHome() {
   let health = wait;
   if (LIFE.loaded) {
     const h = hm(), w0 = lfLast(LIFE.body, 'weight'), w1 = LIFE.body.filter(r => r.weight != null)[1];
-    const wk = LIFE.workout.filter(r => r.done_on >= lfWeek(t)).length, sl = LIFE.sleep[0];
+    const wk = LIFE.workout.filter(r => r.done_on >= lfWeek(t)).length, xs = hxSummary();
     const nx = LIFE.check.filter(r => r.next_due && r.next_due >= t).sort((a, b) => a.next_due < b.next_due ? -1 : 1)[0];
     health = `<div class="hm-big">${w0 ? lfFix(w0.weight) + '<small>kg</small>' : '<span style="font-size:18px;color:var(--ink3)">체중 기록 없음</span>'}</div>
-      <div class="hm-sub">${w0 && w1 ? lfDelta(Number(w0.weight), Number(w1.weight), 'kg').replace('<small', '<b').replace('</small>', '</b>') + ' · ' : ''}이번 주 운동 <b>${wk}</b> / ${h.workout_goal}회${sl ? `<br>최근 수면 <b>${lfFix(sl.hours, 1)}</b>시간 (${lfMD(sl.sleep_date)})` : ''}${nx ? `<br>다음 검진 <b>${esc(nx.title || '검진')}</b> ${lfDday(nx.next_due)}` : ''}</div>`;
+      <div class="hm-sub">${w0 && w1 ? lfDelta(Number(w0.weight), Number(w1.weight), 'kg').replace('<small', '<b').replace('</small>', '</b>') + ' · ' : ''}이번 주 운동 <b>${wk}</b> / ${h.workout_goal}회${xs ? `<br>${xs.ex.exam_date.slice(0, 4)} 검진 <b>${esc(xs.judge || '결과')}</b> · 주의 ${xs.warn}항목` : ''}${nx ? `<br>다음 검진 <b>${esc(nx.title || '검진')}</b> ${lfDday(nx.next_due)}` : ''}</div>`;
   }
   /* 습관 */
   let habits = wait;
