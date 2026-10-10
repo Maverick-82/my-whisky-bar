@@ -1488,6 +1488,39 @@ details.rt-notes>ul{margin:0;padding:0 18px 18px 36px}
   .rt-pr.rt-it.off .v{display:none}
   .rt-pr.rt-it.off{padding:10px 8px}
 }
+
+/* ===== v1.17.4 holdings table (stock-app style) ===== */
+.fh-wrap{position:relative}
+.fh-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.fh-tbl{min-width:520px}
+.fh-head,.fh-row.tr{display:grid;grid-template-columns:minmax(170px,1fr) repeat(3,minmax(116px,1fr));gap:0;align-items:stretch}
+.fh-head{background:var(--card2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.fh-head span{display:flex;flex-direction:column;gap:2px;text-align:right;padding:9px 16px;font-size:11.5px;color:var(--ink3)}
+.fh-head span b{font-weight:700;color:var(--ink2);font-size:12px}.fh-head span i{font-style:normal;font-weight:600}
+.fh-head .fh-hn{text-align:left;padding-left:20px;align-items:flex-start}
+.fh-head .fh-hn,.fh-row.tr .fh-n{position:sticky;left:0;z-index:2}
+.fh-head .fh-hn{background:var(--card2)}
+.fh-row.tr{padding:0;gap:0;cursor:pointer}
+.fh-row.tr .fh-n{background:var(--card);padding:12px 8px 12px 20px;display:flex;flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:center;gap:3px;border-right:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.fh-row.tr:hover{background:var(--soft)}.fh-row.tr:hover .fh-n{background:var(--soft)}
+.fh-row.tr .fh-n b{font-size:13.5px;font-weight:700;line-height:1.3;word-break:keep-all}
+.fh-row.tr .fh-n small{flex-basis:auto;max-width:100%}
+.fh-row.tr .fh-w,.fh-row.tr .fh-t{align-self:flex-start}
+.fh-c{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:3px;padding:12px 16px;font-variant-numeric:tabular-nums}
+.fh-c b{font-size:13.5px;font-weight:700}.fh-c small{font-size:12px;color:var(--ink3);font-weight:600;min-height:15px}
+.fh-c.up b,.fh-c.up small{color:var(--up)}.fh-c.down b,.fh-c.down small{color:var(--down)}
+.fh-row.tr:last-child{border-bottom:0}
+@media(max-width:640px){
+  .fh-tbl{min-width:500px}
+  .fh-head,.fh-row.tr{grid-template-columns:minmax(118px,1.2fr) repeat(3,minmax(96px,1fr))}
+  .fh-row.tr{padding:0}
+  .fh-head span{padding:8px 12px}.fh-head .fh-hn{padding-left:14px}
+  .fh-row.tr .fh-n{padding:11px 6px 11px 14px}
+  .fh-row.tr .fh-n b{font-size:13px}
+  .fh-c{padding:11px 12px}.fh-c b{font-size:13px}.fh-c small{font-size:11.5px}
+  .fh-wrap::after{content:"›";position:absolute;right:0;top:0;bottom:0;width:30px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--ink3);background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--card) 92%,transparent) 70%);pointer-events:none;z-index:3;transition:opacity .2s}
+  .fh-wrap.end::after{opacity:0}
+}
 </style>
 <script>
 (function(){
@@ -1915,7 +1948,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.17.3';
+const APP_VERSION = 'v1.17.4';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -2717,7 +2750,7 @@ function renderPortfolio(){
           <div><div class="fg-t">${esc(g.broker)} <em>${esc(g.account)}</em></div><div class="fg-s">${stocks.length}종목${cashV ? ' · 예수금 포함' : ''} · 비중 ${(gt.v / (T.v || 1) * 100).toFixed(1)}%</div></div>
           <div class="fg-r"><b class="money">${won(gt.v)}</b>${stocks.length ? `<span class="pn ${pnCls(gt.pnl)}"><span class="money">${arrow(gt.pnl)} ${won(Math.abs(gt.pnl))}</span> ${pctTxt(gt.pct)}</span>` : ''}</div>
         </header>
-        <div class="fh-rows">${stocks.map(holdRow).join('')}</div>
+        ${stocks.length ? `<div class="fh-wrap"><div class="fh-scroll"><div class="fh-tbl"><div class="fh-head"><span class="fh-hn"><b>종목명</b><i>보유수량</i></span><span><b>평가손익</b><i>수익률(%)</i></span><span><b>평가금액</b><i>매입금액</i></span><span><b>현재가</b><i>평균단가</i></span></div>${stocks.map(holdRow).join('')}</div></div></div>` : ''}
         ${cashRow}
       </section>`;
     }).join('')}
@@ -2737,16 +2770,19 @@ function renderPortfolio(){
   renderTrend(T.v);
 }
 function holdRow(h){
-  const val = hValue(h), cost = hCost(h);
-  const pnl = val == null ? 0 : val - cost, pct = val != null && cost > 0 ? pnl / cost * 100 : 0;
+  const val = hValue(h), cost = hCost(h), nf = n => Math.round(n).toLocaleString('ko-KR');
+  const pnl = val == null ? 0 : val - cost, pct = val != null && cost > 0 ? pnl / cost * 100 : 0, cl = val == null ? '' : pnCls(pnl);
   const warn = FIN.errors[h.id] ? `<span class="fh-w" title="${esc(FIN.errors[h.id])}">시세 오류</span>` : (hNeedsSymbol(h) ? '<span class="fh-w">코드 필요</span>' : '');
   const approx = h.market === 'GOLD' ? '<span class="fh-t">근사</span>' : '';
-  return `<button class="fh-row" data-hid="${esc(h.id)}">
-    <span class="fh-n"><b>${esc(h.name)}</b>${warn}${approx}<small>${fmtQty(h.qty)}${esc(h.unit)} · 평균 ${h.market === 'CASH' ? '-' : fmtPrice(h, h.avg_price)}${h.memo ? ' · ' + esc(h.memo) : ''}</small></span>
-    <span class="fh-p">${fmtPrice(h, h.last_price)}</span>
-    <span class="fh-v"><b class="money">${val == null ? '-' : won(val)}</b>${h.market === 'CASH' ? '' : `<small class="pn ${pnCls(pnl)}">${val == null ? '' : arrow(pnl) + ' ' + pctTxt(pct)}</small>`}</span>
+  const sg = n => (n > 0 ? '+' : '') + nf(n);
+  return `<button class="fh-row tr" data-hid="${esc(h.id)}">
+    <span class="fh-n"><b>${esc(h.name)}</b>${warn}${approx}<small>${fmtQty(h.qty)}${esc(h.unit)}${h.memo ? ' · ' + esc(h.memo) : ''}</small></span>
+    <span class="fh-c ${cl}"><b class="money">${val == null || h.market === 'CASH' ? '-' : sg(pnl)}</b><small>${val == null || h.market === 'CASH' ? '' : (pct > 0 ? '+' : '') + pct.toFixed(2)}</small></span>
+    <span class="fh-c"><b class="money">${val == null ? '-' : nf(val)}</b><small class="money">${h.market === 'CASH' ? '' : nf(cost)}</small></span>
+    <span class="fh-c"><b>${fmtPrice(h, h.last_price)}</b><small>${h.market === 'CASH' ? '' : fmtPrice(h, h.avg_price)}</small></span>
   </button>`;
 }
+document.addEventListener('scroll', e => { const t = e.target; if (t && t.classList && t.classList.contains('fh-scroll') && t.parentElement) t.parentElement.classList.toggle('end', t.scrollLeft + t.clientWidth >= t.scrollWidth - 6); }, true);
 function assetRow(h){
   const val = hValue(h);
   const sub = [h.market === 'BANK' ? '통장·예금' : '기타', h.currency === 'USD' ? usd(h.qty) : '', h.memo].filter(Boolean).join(' · ');
