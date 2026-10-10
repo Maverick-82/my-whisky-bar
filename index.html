@@ -884,6 +884,17 @@ body[data-tab="home"] .fab{display:none!important}
 .hm-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11.5px;color:var(--ink3);margin:8px 4px 28px}
 .hm-foot button{background:none;border:0;color:var(--ink3);text-decoration:underline;text-underline-offset:3px;font-size:11.5px;padding:4px}
 .hm-foot button:hover{color:var(--ink)}
+.hm-foot span{display:flex;gap:6px;align-items:center}
+.hm-bk{display:flex;margin-bottom:12px;justify-content:space-between;align-items:center;gap:10px;width:100%;margin-top:0;padding:11px 14px;border:1px solid color-mix(in srgb,#eda100 45%,var(--line));background:color-mix(in srgb,#eda100 10%,var(--card));border-radius:12px;color:var(--ink);font:inherit;font-size:12.5px;cursor:pointer;text-align:left}
+.hm-bk span{color:var(--ink3);font-size:12px;white-space:nowrap}
+.bk-sec{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.bk-h{font-weight:700;font-size:14px;margin-bottom:4px}
+.bk-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.bk-st{margin-top:8px;font-size:12.5px;color:var(--ink3);min-height:1em;word-break:break-all}
+.bk-st.ok{color:var(--inc)}.bk-st.err{color:var(--up)}
+.bk .in[type=file]{width:100%;margin-top:8px;font-size:12.5px}
+.bk-foot{margin:0 2px}
+
 
 /* 체크 버튼 / 습관 */
 .ck{flex:none;width:24px;height:24px;border-radius:8px;border:1.6px solid var(--line2);background:var(--card);display:inline-flex;align-items:center;justify-content:center;padding:0;color:transparent}
@@ -1949,7 +1960,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.17.6';
+const APP_VERSION = 'v1.18.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -6189,6 +6200,7 @@ function renderHome() {
   const H = x => (typeof x === 'string' ? { html: x, extra: '' } : x);
   const hb = H(habits), td = H(todos);
   el.innerHTML = `<div class="hm-hello"><div><h2>Today</h2><p>${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일</p></div></div>
+    ${bkBanner()}
     <div class="hm-grid">
       ${rvHTML()}
       ${hmCard('portfolio', 'var(--c-pf)', '총 자산', 'Portfolio', asset)}
@@ -6200,13 +6212,169 @@ function renderHome() {
       ${hmCard('life:goals:todo', 'var(--c-home)', '다가오는 일정', '', soon, 'w2')}
       ${hmCard('bar', 'var(--c-bar)', 'My Bar', '', bar)}
     </div>
-    <div class="hm-foot"><span>${esc(APP.email || '')}</span><button type="button" id="hmLogout">로그아웃</button></div>`;
+    <div class="hm-foot"><span>${esc(APP.email || '')}</span><span><button type="button" id="hmBackup">백업·복원</button><button type="button" id="hmLogout">로그아웃</button></span></div>`;
+}
+/* ===== 백업 / 복원 ===== */
+const BK_TABLES = [
+  ['fin_holdings', 'id'], ['fin_ledger', 'id'], ['fin_snapshots', 'snap_date'], ['fin_meta', 'key'], ['fin_merchant_rules', 'merchant_key'], ['fin_subs', 'id'], ['fin_events', 'id'],
+  ['health_body', 'id'], ['health_workout', 'id'], ['health_sleep', 'id'], ['health_checkup', 'id'], ['health_exam', 'id'], ['health_drink', 'id'],
+  ['life_meta', 'user_id,key'], ['life_goals', 'id'], ['life_habits', 'id'], ['life_habit_logs', 'habit_id,log_date'], ['life_todos', 'id'],
+  ['whisky_my_bar', 'id'], ['whisky_journal', 'id'], ['whisky_yt_channels', 'id'], ['whisky_yt_videos', 'id'],
+  ['whisky_products', 'id', 1], ['whisky_distilleries', 'id', 1], ['whisky_goals', 'id', 1]
+];
+function bkLast() {
+  const a = store.get('lastBackup', null);
+  const b = LIFE && LIFE.meta && LIFE.meta.backup && LIFE.meta.backup.at;
+  const t = [a, b].filter(Boolean).sort().pop();
+  return t || null;
+}
+function bkDays() {
+  const t = bkLast(); if (!t) return null;
+  return Math.max(0, Math.floor((Date.now() - new Date(t).getTime()) / 864e5));
+}
+function bkBanner() {
+  if (!FIN.loaded || !LIFE.loaded) return '';
+  const d = bkDays();
+  if (d != null && d < 7) return '';
+  return `<button type="button" class="hm-bk" id="hmBackup2"><b>${d == null ? '아직 백업한 적이 없어요' : '마지막 백업이 ' + d + '일 전이에요'}</b><span>지금 백업하기 ›</span></button>`;
+}
+async function bkFetch(t, pk) {
+  const out = [], cols = pk.split(',');
+  for (let from = 0; ; from += 1000) {
+    let q = sb.from(t).select('*');
+    cols.forEach(c => { q = q.order(c); });
+    const { data, error } = await q.range(from, from + 999);
+    if (error) throw new Error(t + ' · ' + error.message);
+    out.push(...data);
+    if (data.length < 1000) break;
+  }
+  return out;
+}
+async function bkExport(onProg) {
+  const tables = {}, counts = {};
+  for (const [t, pk] of BK_TABLES) {
+    onProg && onProg(t);
+    tables[t] = await bkFetch(t, pk);
+    counts[t] = tables[t].length;
+  }
+  return { obj: { app: 'maverick', format: 1, version: APP_VERSION, exported_at: new Date().toISOString(), uid: APP.uid, tables }, counts };
+}
+async function bkRestore(obj, onProg) {
+  const res = { ok: 0, fail: 0, skip: 0 };
+  for (const [t, pk, ro] of BK_TABLES) {
+    const rows = obj.tables && obj.tables[t];
+    if (!Array.isArray(rows) || !rows.length) continue;
+    if (ro) { res.skip += rows.length; continue; }
+    onProg && onProg(t);
+    for (let i = 0; i < rows.length; i += 200) {
+      const chunk = rows.slice(i, i + 200);
+      const { error } = await sb.from(t).upsert(chunk, { onConflict: pk });
+      if (!error) { res.ok += chunk.length; continue; }
+      for (const r of chunk) {
+        const { error: e2 } = await sb.from(t).upsert(r, { onConflict: pk });
+        if (e2) res.fail++; else res.ok++;
+      }
+    }
+  }
+  return res;
+}
+function bkFile(obj) {
+  const name = 'maverick-backup-' + today().replace(/-/g, '') + '.json';
+  return new File([JSON.stringify(obj)], name, { type: 'application/json' });
+}
+function openBackup() {
+  const d = bkDays(), last = bkLast();
+  const lastTxt = last ? `${d === 0 ? '오늘' : d + '일 전'} (${last.slice(0, 10)})` : '없음';
+  const canShare = !!(navigator.canShare && navigator.canShare({ files: [new File(['{}'], 'a.json', { type: 'application/json' })] }));
+  let file = null, restoreObj = null;
+  openFinModal({
+    title: '백업 · 복원', saveLabel: '닫기',
+    html: `<div class="bk">
+      <div class="bk-sec"><div class="bk-h">백업하기</div>
+        <p class="hint">마지막 백업: <b>${lastTxt}</b><br>보유 종목, 가계부, 일정, 배당 설정, 건강·습관·할 일, 마이바·테이스팅 노트까지 내 데이터를 파일 하나로 저장해요.</p>
+        <div class="bk-row"><button type="button" class="btn primary" id="bkGo">백업 파일 만들기</button>${canShare ? '<button type="button" class="btn" id="bkShare">공유로 보내기</button>' : ''}</div>
+        <div class="bk-st" id="bkSt1"></div></div>
+      <div class="bk-sec"><div class="bk-h">복원하기</div>
+        <p class="hint">백업 파일을 고르면 지금 데이터에 <b>합쳐서</b> 넣어요. 같은 항목은 백업 값으로 덮어쓰고, 지금 있는 다른 항목은 지우지 않아요. 지운 기록은 되살아날 수 있어요.</p>
+        <input type="file" id="bkFile" accept=".json,application/json" class="in">
+        <div class="bk-row"><button type="button" class="btn" id="bkRestore" disabled>복원하기</button></div>
+        <div class="bk-st" id="bkSt2"></div></div>
+      <p class="hint bk-foot">위스키 제품·증류소·컬렉션 목표는 읽기 전용 자료라 백업 파일에는 담기지만 앱에서 복원하지는 않아요. 사진은 주소만 저장돼요.</p></div>`,
+    onOpen(body) {
+      const st1 = body.querySelector('#bkSt1'), st2 = body.querySelector('#bkSt2');
+      const go = body.querySelector('#bkGo'), sh = body.querySelector('#bkShare');
+      const mark = async () => {
+        const at = new Date().toISOString();
+        store.set('lastBackup', at);
+        try { await saveLifeMeta('backup', { at }); } catch (e) {}
+        try { renderHome(); } catch (e) {}
+      };
+      const make = async () => {
+        st1.className = 'bk-st'; st1.textContent = '데이터를 읽는 중…';
+        const { obj, counts } = await bkExport(t => { st1.textContent = '읽는 중 · ' + t; });
+        file = bkFile(obj);
+        const total = Object.entries(counts).filter(([t]) => !BK_TABLES.find(x => x[0] === t)[2]).reduce((s, [, n]) => s + n, 0);
+        st1.className = 'bk-st ok';
+        st1.textContent = `완료 · 내 기록 ${total.toLocaleString()}건 (${Math.round(file.size / 1024).toLocaleString()}KB)`;
+        return file;
+      };
+      go.addEventListener('click', async () => {
+        go.disabled = true;
+        try {
+          const f = await make();
+          const url = URL.createObjectURL(f), a = document.createElement('a');
+          a.href = url; a.download = f.name; document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(() => URL.revokeObjectURL(url), 4000);
+          await mark(); toast('백업 파일을 저장했어요');
+        } catch (e) { st1.className = 'bk-st err'; st1.textContent = '백업하지 못했어요 · ' + (e.message || e); }
+        go.disabled = false;
+      });
+      if (sh) sh.addEventListener('click', async () => {
+        sh.disabled = true;
+        try {
+          const f = file || await make();
+          await navigator.share({ files: [f], title: 'Maverick 백업' });
+          await mark(); toast('백업을 보냈어요');
+        } catch (e) { if (e && e.name !== 'AbortError') { st1.className = 'bk-st err'; st1.textContent = '보내지 못했어요 · ' + (e.message || e); } }
+        sh.disabled = false;
+      });
+      const inp = body.querySelector('#bkFile'), rb = body.querySelector('#bkRestore');
+      inp.addEventListener('change', async () => {
+        restoreObj = null; rb.disabled = true; rb.classList.remove('armed'); rb.textContent = '복원하기';
+        const f = inp.files[0]; if (!f) return;
+        try {
+          const o = JSON.parse(await f.text());
+          if (o.app !== 'maverick' || !o.tables) throw new Error('Maverick 백업 파일이 아니에요');
+          if (o.uid && APP.uid && o.uid !== APP.uid) throw new Error('다른 계정의 백업 파일이에요');
+          restoreObj = o;
+          const n = BK_TABLES.filter(x => !x[2]).reduce((s, x) => s + ((o.tables[x[0]] || []).length), 0);
+          st2.className = 'bk-st'; st2.textContent = `${(o.exported_at || '').slice(0, 10)} 백업 · ${o.version || ''} · 내 기록 ${n.toLocaleString()}건`;
+          rb.disabled = false;
+        } catch (e) { st2.className = 'bk-st err'; st2.textContent = e.message || '파일을 읽지 못했어요'; }
+      });
+      rb.addEventListener('click', async () => {
+        if (!restoreObj) return;
+        if (!rb.classList.contains('armed')) { rb.classList.add('armed'); rb.textContent = '한 번 더 누르면 복원'; return; }
+        rb.disabled = true; inp.disabled = true;
+        try {
+          const r = await bkRestore(restoreObj, t => { st2.className = 'bk-st'; st2.textContent = '복원 중 · ' + t; });
+          st2.className = r.fail ? 'bk-st err' : 'bk-st ok';
+          st2.textContent = `복원 완료 · ${r.ok.toLocaleString()}건 반영${r.fail ? ' · ' + r.fail + '건 실패' : ''}`;
+          $('#finSave').textContent = '새로고침';
+          finModalCtx.onSave = async () => { location.reload(); };
+        } catch (e) { st2.className = 'bk-st err'; st2.textContent = '복원하지 못했어요 · ' + (e.message || e); rb.disabled = false; inp.disabled = false; }
+        rb.classList.remove('armed'); rb.textContent = '복원하기';
+      });
+    },
+    onSave() { closeFinModal(); }
+  });
 }
 $('#homeView').addEventListener('click', e => {
   let x;
   if ((x = e.target.closest('[data-rv]'))) { RV.mode = x.dataset.rv; store.set('rvMode', RV.mode); renderHome(); return; }
   if ((x = e.target.closest('[data-hlog]'))) { const [hid, dd] = x.dataset.hlog.split('|'); toggleHabit(hid, dd); return; }
   if ((x = e.target.closest('[data-tdone]'))) { toggleTodo(x.dataset.tdone); return; }
+  if (e.target.closest('#hmBackup, #hmBackup2')) { openBackup(); return; }
   if (e.target.closest('#hmLogout')) { if (confirm('로그아웃할까요?')) sb.auth.signOut().then(() => location.reload()); return; }
   if ((x = e.target.closest('[data-go]'))) {
     const p = x.dataset.go.split(':');
