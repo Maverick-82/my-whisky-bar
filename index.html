@@ -1413,6 +1413,8 @@ body[data-tab="div"] #btnAdd,body[data-tab="div"] .fab{display:none!important}
 .rt-gpre .chip{cursor:pointer}
 .rt-gpre .chip.on{background:var(--c-div);border-color:transparent;color:#fff}
 @media(max-width:560px){.rt-gcs{grid-template-columns:1fr}}
+.rt-cs{display:block;font-size:11.5px;font-weight:500;color:var(--ink3);line-height:1.45;margin-top:2px;white-space:normal}
+.rt-cr.out{color:var(--ink2)}.rt-cr.out b{color:var(--ink2)}
 </style>
 <script>
 (function(){
@@ -1840,7 +1842,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.17.1';
+const APP_VERSION = 'v1.17.2';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -5680,7 +5682,7 @@ $('#ledgerView').addEventListener('click', ev => { if (ev.target.closest('[data-
 
 /* ===== v1.17 Dividend · 노후 배당·연금 ===== */
 const RT_ASOF = '2026-10-10';
-const RT_DEF = { birth: 1982, retire_year: 2041, pen_annual: 9000000, pen_month: 10, pen_paid: 0, isa_month: 400000, isa_lump: 12000000, sub_month: 100000, pen_rate: 5, draw_rate: 4, infl: 2.5, npension: 0, need: 1500000, kr_tax: 5, us_tax: 15, price_g: 0, div_g: 0, w_mac: 35, w_hy: 35, w_kb: 30 };
+const RT_DEF = { birth: 1982, retire_year: 2041, pen_annual: 9000000, pen_month: 10, pen_paid: 0, isa_month: 400000, isa_lump: 12000000, sub_month: 100000, pen_rate: 4, draw_rate: 4, infl: 2.5, npension: 0, need: 1500000, kr_tax: 5, us_tax: 15, price_g: 0, div_g: 0, w_mac: 35, w_hy: 35, w_kb: 30 };
 const RT_STK0 = [
   { id: 'mac', name: '맥쿼리인프라', sym: '088980', cur: 'KRW', px: 9800, dps: 730, pay: [2, 8], wk: 'w_mac' },
   { id: 'hy', name: '현대차2우B', sym: '005387', cur: 'KRW', px: 170500, dps: 10100, pay: [4, 6, 9, 12], wk: 'w_hy' },
@@ -5826,6 +5828,18 @@ function rtHTML() {
   const gcard = `<section class="card rt-gcard"><div class="rt-gct"><b>성장 가정</b><small>숫자를 바꾸면 바로 계산이 다시 돼요 · 연 기준, 빠지면 마이너스</small></div>
     <div class="rt-gcs">${gCtl('price_g', '주가 상승률', c.price_g)}${gCtl('div_g', '배당 성장률', c.div_g)}</div>
     <div class="rt-gpre"><span>한 번에</span>${[['하락', -2], ['보수', 0], ['완만', 2], ['낙관', 4]].map(([l, v]) => `<button type="button" class="chip ${gOn(v)}" data-rt="gp:${v}">${l} ${rtSg(v)}%</button>`).join('')}</div></section>`;
+  const syms = new Set(IT.map(x => String(x.sym).toUpperCase()).filter(Boolean));
+  const hv = h => { const v = hValue(h); return v == null ? hCost(h) : v; };
+  const othH = FIN.holdings.filter(h => (h.market === 'KR' || h.market === 'US') && !PEN_RE.test(h.account || '') && !syms.has(String(h.symbol || '').toUpperCase()));
+  const othV = othH.reduce((a, h) => a + hv(h), 0), planV = IT.reduce((a, x) => a + x.qty * x.px, 0);
+  const crow = (l, v, sm, cls) => `<div class="rt-cr ${cls || ''}"><span>${l}${sm ? `<small class="rt-cs">${sm}</small>` : ''}</span><b class="money">${v}</b></div>`;
+  const cover = `<div class="fin-sec"><h3>계산에 들어간 자산</h3><span>지금 기준</span></div><section class="card rt-cash">
+    ${crow('배당 종목 보유분', rtMan(planV), IT.filter(x => x.qty > 0).map(x => esc(x.name) + ' ' + x.qty + '주').join(' · ') || '보유 없음')}
+    ${crow('연금계좌 (연금저축·퇴직연금)', rtMan(B.pen0), '연 ' + rtMan(c.pen_annual) + '씩 더 넣고 연 ' + c.pen_rate + '%로 불어난다고 계산')}
+    ${crow('ISA 예수금 투입분', rtMan(c.isa_lump), '위 종목들에 비중대로 사는 걸로 계산')}
+    <div class="rt-cr tot"><span>계산에 들어간 합계</span><b class="money">${rtMan(planV + B.pen0 + c.isa_lump)}</b></div>
+    ${crow('계산 밖: 그 외 보유 주식', rtMan(othV), othH.length + '종목 · ISA·종합·해외 계좌의 배당 종목이 아닌 주식. 팔아서 배당 종목에 넣으면 그만큼 소득이 늘어요', 'out')}
+    <div class="rt-cn faint">코인·예금·금·청약통장은 배당 계산에 넣지 않았어요. 위 합계에 없는 돈은 지금 월 소득과 은퇴 소득 모두에 0으로 잡혀 있어요.</div></section>`;
   const penDone = !!c.pen_paid;
   const planRows = IT.map(x => {
     const on = x.wf > 0;
@@ -5874,7 +5888,7 @@ function rtHTML() {
     <li>은퇴 후 물가 상승과 회사 퇴직금·퇴직연금 적립분, 국민연금은 별도예요. 국민연금${c.npension > 0 ? '은 입력한 금액을 반영했어요' : '은 아직 입력하지 않았어요 — 국민연금공단 "내 연금"에서 예상 월액을 확인해 설정에 넣어 주세요'}.</li>
     <li>지금 ${age}세(세는나이), 은퇴 ${retAge}세까지 ${yrsLeft.toFixed(1)}년이에요. 투자 자문이 아니라 가정에 따른 시뮬레이션이에요.</li></ul></section>`;
   return `<div class="fin-head"><div><h2>Dividend</h2><p>노후 배당·연금 플랜 · ${c.retire_year}년 은퇴까지 ${rtDur(R.n)}</p></div><div class="fin-act"><button type="button" class="btn" data-rt="set">설정</button></div></div>
-    ${hero}${tiles}${gcard}${plan}${cashHTML}
+    ${hero}${tiles}${gcard}${plan}${cover}${cashHTML}
     <div class="fin-sec"><h3>자산이 자라는 모습</h3></div>${divChart}${penChart}
     <div class="fin-sec"><h3>배당 달력 · 보유 종목</h3></div>${calChart}
     ${scenHTML}${notes}`;
