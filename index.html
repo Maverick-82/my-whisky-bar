@@ -1399,6 +1399,20 @@ body[data-tab="div"] #btnAdd,body[data-tab="div"] .fab{display:none!important}
 .rt-mcs{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}
 .rt-mc{min-width:46px;text-align:center}
 .rt-mc.on{background:var(--c-div);border-color:transparent;color:#fff}
+.rt-gcard{padding:14px 18px 14px;margin-bottom:14px}
+.rt-gct{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.rt-gct b{font-size:14.5px;font-weight:800}.rt-gct small{font-size:11.5px;color:var(--ink3)}
+.rt-gcs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rt-gc1{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:700;color:var(--ink2)}
+.rt-st{display:flex;align-items:center;gap:6px}
+.rt-st button{flex:none;width:34px;height:36px;border-radius:11px;border:1px solid var(--line2);background:color-mix(in srgb,var(--card) 70%,transparent);color:var(--ink);font-size:17px;font-weight:700;cursor:pointer;line-height:1}
+.rt-st button:hover{border-color:var(--c-div)}
+.rt-st input{min-width:0;width:100%;text-align:center;font-weight:800;font-variant-numeric:tabular-nums;padding:8px 4px}
+.rt-st em{font-style:normal;color:var(--ink3);font-weight:700;margin-left:-2px}
+.rt-gpre{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px;font-size:12px;color:var(--ink3)}
+.rt-gpre .chip{cursor:pointer}
+.rt-gpre .chip.on{background:var(--c-div);border-color:transparent;color:#fff}
+@media(max-width:560px){.rt-gcs{grid-template-columns:1fr}}
 </style>
 <script>
 (function(){
@@ -1826,7 +1840,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.17.0';
+const APP_VERSION = 'v1.17.1';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -5666,7 +5680,7 @@ $('#ledgerView').addEventListener('click', ev => { if (ev.target.closest('[data-
 
 /* ===== v1.17 Dividend · 노후 배당·연금 ===== */
 const RT_ASOF = '2026-10-10';
-const RT_DEF = { birth: 1982, retire_year: 2041, pen_annual: 9000000, pen_month: 10, pen_paid: 0, isa_month: 400000, isa_lump: 12000000, sub_month: 100000, pen_rate: 5, draw_rate: 4, infl: 2.5, npension: 0, need: 1500000, kr_tax: 5, us_tax: 15, price_g: 2, div_g: 2, w_mac: 35, w_hy: 35, w_kb: 30 };
+const RT_DEF = { birth: 1982, retire_year: 2041, pen_annual: 9000000, pen_month: 10, pen_paid: 0, isa_month: 400000, isa_lump: 12000000, sub_month: 100000, pen_rate: 5, draw_rate: 4, infl: 2.5, npension: 0, need: 1500000, kr_tax: 5, us_tax: 15, price_g: 0, div_g: 0, w_mac: 35, w_hy: 35, w_kb: 30 };
 const RT_STK0 = [
   { id: 'mac', name: '맥쿼리인프라', sym: '088980', cur: 'KRW', px: 9800, dps: 730, pay: [2, 8], wk: 'w_mac' },
   { id: 'hy', name: '현대차2우B', sym: '005387', cur: 'KRW', px: 170500, dps: 10100, pay: [4, 6, 9, 12], wk: 'w_hy' },
@@ -5770,7 +5784,7 @@ function rtDur(t) { const y = Math.floor(t / 12), m = t % 12; return (y ? y + '�
 function rtHTML() {
   const c = rtCfg(), R = rtResult(c), now = new Date(), curY = now.getFullYear();
   const B = R.S.B, IT = rtItems(c), cash = rtCash(c), f = fzCfg();
-  const SC = [['하락', { penR: c.pen_rate - 2, pg: -2, dg: -2 }], ['보수', { penR: c.pen_rate - 1, pg: 0, dg: 0 }], ['기본', {}], ['낙관', { penR: c.pen_rate + 1, pg: c.price_g + 2, dg: c.div_g + 2 }]];
+  const SC = [['하락', { penR: c.pen_rate - 2, pg: c.price_g - 2, dg: c.div_g - 2 }], ['기본', {}], ['성장', { pg: c.price_g + 2, dg: c.div_g + 2 }], ['낙관', { penR: c.pen_rate + 1, pg: c.price_g + 4, dg: c.div_g + 4 }]];
   const scen = SC.map(([nm, o]) => Object.assign({ nm, pr: o.penR != null ? o.penR : c.pen_rate, pg: o.pg != null ? o.pg : c.price_g, dg: o.dg != null ? o.dg : c.div_g }, rtResult(c, o)));
   const yrsLeft = R.n / 12, age = curY - c.birth + 1, retAge = c.retire_year - c.birth + 1, npStart = c.birth + 65, penOpen = c.birth + 55;
   const need = c.need, pct = need > 0 ? R.pvGap / need * 100 : null, extra = rtNeedExtra(c);
@@ -5807,6 +5821,11 @@ function rtHTML() {
   const wIT = IT.filter(x => x.wf > 0 && x.px > 0);
   const mixY = wIT.reduce((s, x) => s + x.wf * x.yld, 0) * 100, mixN = wIT.reduce((s, x) => s + x.wf * x.yn, 0) * 100;
   const tiles = `<div class="lf-tiles rt-tiles">${lfTile('ISA 월 배당', `<span class="money">${rtMan(R.isaDiv)}</span>`, `<small>${rtMan(R.L.K)} 자산 · 배당률 세후 ${mixN.toFixed(1)}%</small>`)}${lfTile('연금계좌 자산', `<span class="money">${rtMan(R.L.P)}</span>`, `<small>원금 ${rtMan(R.L.prin)} · 수익 ${rtMan(R.L.P - R.L.prin)}</small>`)}${lfTile('연금 월 인출', `<span class="money">${rtMan(R.penDraw)}</span>`, `<small>연 ${c.draw_rate}% 인출 · 연금소득세 5.5%</small>`)}${lfTile('지금 월 배당', `<span class="money">${rtMan(R.S.rows[0].div)}</span>`, `<small>예수금 투입 후 · 세후 추정</small>`)}</div>`;
+  const gCtl = (k, label, v) => `<div class="rt-gc1"><span>${label}</span><div class="rt-st"><button type="button" data-rt="g:${k}:-0.5" aria-label="내리기">−</button><input class="in" data-gk="${k}" inputmode="decimal" value="${v}" aria-label="${label}"><em>%</em><button type="button" data-rt="g:${k}:0.5" aria-label="올리기">+</button></div></div>`;
+  const gOn = v => c.price_g === v && c.div_g === v ? 'on' : '';
+  const gcard = `<section class="card rt-gcard"><div class="rt-gct"><b>성장 가정</b><small>숫자를 바꾸면 바로 계산이 다시 돼요 · 연 기준, 빠지면 마이너스</small></div>
+    <div class="rt-gcs">${gCtl('price_g', '주가 상승률', c.price_g)}${gCtl('div_g', '배당 성장률', c.div_g)}</div>
+    <div class="rt-gpre"><span>한 번에</span>${[['하락', -2], ['보수', 0], ['완만', 2], ['낙관', 4]].map(([l, v]) => `<button type="button" class="chip ${gOn(v)}" data-rt="gp:${v}">${l} ${rtSg(v)}%</button>`).join('')}</div></section>`;
   const penDone = !!c.pen_paid;
   const planRows = IT.map(x => {
     const on = x.wf > 0;
@@ -5847,15 +5866,15 @@ function rtHTML() {
     <div class="rt-sl">${stkRows}</div>
     <div class="lf-note" style="margin:8px 0 0">지급월과 주당 배당금은 종목마다 고칠 수 있어요. 처음 넣어 둔 5종목은 ${RT_ASOF} 기준 최근 12개월 실적이에요(출처: etfshopping, knowingasset). 분기·월 배당은 연간 금액을 지급월 수로 똑같이 나눠서 계산해요.</div></div>`;
   const scenHTML = `<div class="card rt-scen"><div class="lf-ch"><b>시나리오 비교</b><span class="dk-sub">은퇴 시점 · 지금 가치</span></div><div class="rt-sg"><div class="h"></div><div class="h">연금 수익률 · 주가 · 배당 (연)</div><div class="h">월 소득</div><div class="h">ISA 자산</div>${scen.map(s => `<div class="r ${s.nm === '기본' ? 'b' : ''}">${s.nm}</div><div>${s.pr}% · ${rtSg(s.pg)}% · ${rtSg(s.dg)}%</div><div><b class="money">${rtMan(s.pvGap)}</b></div><div class="money">${rtMan(s.L.K)}</div>`).join('')}</div>
-    <div class="lf-note" style="margin:10px 0 0">하락은 주가·배당이 해마다 2%씩 빠지는 경우예요. 배당을 줄이는 해가 오면 그 시점부터 소득이 같이 줄어요.</div></div>`;
+    <div class="lf-note" style="margin:10px 0 0">기본은 위 "성장 가정"에서 정한 값이에요. 하락은 기본보다 주가·배당이 해마다 2%p씩 덜 오르고(또는 더 빠지고) 연금 수익률도 2%p 낮은 경우, 성장은 둘 다 2%p 더 오르는 경우, 낙관은 4%p 더 오르고 연금 수익률도 1%p 높은 경우예요.</div></div>`;
   const notes = `<section class="card rt-notes"><b>이 계산의 가정</b><ul>
-    <li>주가는 해마다 ${rtSg(c.price_g)}%, 배당은 해마다 ${rtSg(c.div_g)}% 변한다고 봤어요(설정에서 바꿔요). 배당 성장은 물가(${c.infl}%)보다 낮게 잡는 게 보수적이에요. 배당은 전부 같은 종목에 다시 사는 걸로 계산했고, 실제로는 오를 수도 빠질 수도 있어서 위 시나리오 표의 하락·보수 행도 같이 봐 주세요.</li>
+    <li>주가는 해마다 ${rtSg(c.price_g)}%, 배당은 해마다 ${rtSg(c.div_g)}% 변한다고 봤어요(설정에서 바꿔요). 0%면 지금 그대로라고 보는 가장 보수적인 계산이에요(물가는 ${c.infl}%). 배당은 전부 같은 종목에 다시 사는 걸로 계산했고, 실제로는 오를 수도 빠질 수도 있어서 시나리오 표의 하락·성장 행도 같이 봐 주세요.</li>
     <li>ISA 안 배당은 계좌 안에서 재투자돼요. 일반적으로 인출은 납입 원금 범위까지만 되고 수익금은 해지(3년 만기) 때 나와서, 은퇴 후 월급처럼 받으려면 만기 시점 계획이 필요해요. 비과세 한도(일반형 200만 원 · 서민형 400만 원)를 넘는 수익은 9.9%예요. 배당 세금은 설정의 국내 ${c.kr_tax}% · 미국 ${c.us_tax}%로 뺐어요.</li>
     <li>연금계좌는 만 55세부터 연금으로 받을 수 있고, 연금소득세 3.3~5.5%(여기선 5.5%)가 붙어요. 연 ${c.draw_rate}%씩 꺼낸다고 봤어요.</li>
     <li>은퇴 후 물가 상승과 회사 퇴직금·퇴직연금 적립분, 국민연금은 별도예요. 국민연금${c.npension > 0 ? '은 입력한 금액을 반영했어요' : '은 아직 입력하지 않았어요 — 국민연금공단 "내 연금"에서 예상 월액을 확인해 설정에 넣어 주세요'}.</li>
     <li>지금 ${age}세(세는나이), 은퇴 ${retAge}세까지 ${yrsLeft.toFixed(1)}년이에요. 투자 자문이 아니라 가정에 따른 시뮬레이션이에요.</li></ul></section>`;
   return `<div class="fin-head"><div><h2>Dividend</h2><p>노후 배당·연금 플랜 · ${c.retire_year}년 은퇴까지 ${rtDur(R.n)}</p></div><div class="fin-act"><button type="button" class="btn" data-rt="set">설정</button></div></div>
-    ${hero}${tiles}${plan}${cashHTML}
+    ${hero}${tiles}${gcard}${plan}${cashHTML}
     <div class="fin-sec"><h3>자산이 자라는 모습</h3></div>${divChart}${penChart}
     <div class="fin-sec"><h3>배당 달력 · 보유 종목</h3></div>${calChart}
     ${scenHTML}${notes}`;
@@ -5940,10 +5959,21 @@ function openRtStock(id) {
     }
   });
 }
+function rtSetG(patch) {
+  const v = {}; Object.keys(patch).forEach(k => { const x = Math.round(Number(patch[k]) * 10) / 10; v[k] = Math.max(-30, Math.min(30, isFinite(x) ? x : 0)); });
+  return saveLifeMeta('retire', v).then(() => renderDividend()).catch(e => { toast(e.message || '저장하지 못했어요', true); renderDividend(); });
+}
+$('#divView').addEventListener('change', ev => {
+  const i = ev.target.closest('[data-gk]'); if (!i) return;
+  const n = lfNum(String(i.value).replace('−', '-').replace('%', ''));
+  rtSetG({ [i.dataset.gk]: n == null ? rtCfg()[i.dataset.gk] : n });
+});
 $('#divView').addEventListener('click', ev => {
   const x = ev.target.closest('[data-rt]'); if (!x) return; const a = x.dataset.rt;
   if (a === 'set') return openRetirePlan();
   if (a === 'fin') return lifeReady().then(openFinPlan);
+  if (a.indexOf('g:') === 0) { const q = a.split(':'), k = q[1], c = rtCfg(); return rtSetG({ [k]: c[k] + Number(q[2]) }); }
+  if (a.indexOf('gp:') === 0) { const v = Number(a.slice(3)); return rtSetG({ price_g: v, div_g: v }); }
   if (a === 'add') return openRtStock(null);
   if (a.indexOf('edit:') === 0) return openRtStock(a.slice(5));
   if (a === 'defaults') { const c = rtCfg(); const d = RT_STK0.map(s => ({ id: s.id, name: s.name, sym: s.sym, cur: s.cur, px: s.px, dps: s.dps, pay: s.pay.slice(), w: s.wk ? (c[s.wk] || 0) : 0 })); return saveLifeMeta('retire', { plan: d }).then(() => renderDividend()).catch(e => toast(e.message || '저장하지 못했어요', true)); }
