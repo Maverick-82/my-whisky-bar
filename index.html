@@ -1633,6 +1633,43 @@ body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!importan
 .cu-note{font-size:12px;color:var(--ink3);margin:0 0 10px}
 .hm-shelf{display:flex;gap:7px;margin:2px 0 10px}
 .hm-shelf img{width:36px;height:52px;object-fit:cover;border-radius:6px;background:var(--soft)}
+/* ===== v2.4.2 Today 정리 ===== */
+#homeView .hm-card{background:var(--card);border-color:var(--line);box-shadow:none}
+#homeView .hm-card[data-go]:hover{border-color:var(--tc);box-shadow:none;transform:none}
+#homeView .hm-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#homeView .hm-card,#homeView .hm-card.h3,#homeView .hm-card.w2{grid-column:auto}
+#homeView .hm-card{gap:12px;padding:18px 20px}
+#homeView .hm-t{font-size:13.5px;color:var(--ink);font-weight:800}
+#homeView .hm-t>span{display:inline-flex;align-items:center;gap:8px}
+#homeView .hm-t>span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--tc)}
+#homeView .hm-t em{font-size:11px;color:var(--ink3)}
+#homeView .hm-big{font-size:26px}
+#homeView .hm-empty{font-size:13px;padding:10px 0 4px}
+.hm-kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:6px;margin-bottom:14px}
+.hm-k{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border:0;background:none;text-align:left;cursor:pointer;color:inherit;font:inherit;border-radius:16px;min-width:0}
+.hm-k{position:relative}
+.hm-k+.hm-k::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:1px;background:var(--line)}
+.hm-k:hover{background:var(--soft)}
+.hm-k>span{font-size:12.5px;font-weight:700;color:var(--ink3)}
+.hm-k>b{font-family:var(--f);font-size:clamp(19px,2.1vw,25px);font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.15}
+.hm-k>b small{font-size:13px;color:var(--ink3);margin-left:3px;font-weight:600}
+.hm-k>small{font-size:12px;color:var(--ink3);line-height:1.5;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.hm-k>small i{font-style:normal;font-weight:700}.hm-k>small b{color:var(--ink)}
+.hm-rvd{margin:4px 0 14px}
+.hm-rvd>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:12px 6px;font-size:13.5px;font-weight:800;color:var(--ink2)}
+.hm-rvd>summary::-webkit-details-marker{display:none}
+.hm-rvd>summary::after{content:"펼치기 ›";font-size:11.5px;font-weight:600;color:var(--ink3)}
+.hm-rvd[open]>summary::after{content:"접기 ⌃"}
+.hm-rvd>.card{margin-top:4px}
+@media (max-width:760px){
+  #homeView .hm-grid{grid-template-columns:1fr}
+  .hm-kpi{grid-template-columns:1fr 1fr}
+  .hm-k>b{font-size:19px}
+  .hm-k+.hm-k::before{display:none}
+  .hm-k:nth-child(even)::before{display:block}
+  .hm-k:nth-child(n+3)::after{content:"";position:absolute;top:0;left:16px;right:16px;height:1px;background:var(--line)}
+}
+}
 </style>
 <script>
 (function(){
@@ -2064,7 +2101,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.4.1';
+const APP_VERSION = 'v2.4.2';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -6830,27 +6867,27 @@ function renderHome() {
   const t = today(), d = lfParse(t), ym = t.slice(0, 7);
   const wait = '<div class="hm-empty">불러오는 중…</div>';
 
-  /* 자산 */
-  let asset = wait;
+  /* 핵심 숫자 4개 — 자산 · 지출 · 배당 · 체중 */
+  const KP = (go, label, big, sub) => `<button type="button" class="hm-k" data-go="${go}"><span>${label}</span><b>${big}</b><small>${sub}</small></button>`;
+  const kLoad = (go, label) => KP(go, label, '…', '불러오는 중');
+  let kA = kLoad('portfolio', '총 자산'), kB = kLoad('ledger', '이번 달 지출'), kC = kLoad('div', '연 예상 배당'), kD = kLoad('life:health', '체중');
   if (FIN.loaded) {
     const tt = finTotals(FIN.holdings);
-    asset = FIN.holdings.length ? `<div class="hm-big money">${won(tt.v)}</div><div class="hm-sub">투자 손익 <b class="${pnCls(tt.pnl)} money">${tt.pnl > 0 ? '+' : tt.pnl < 0 ? '-' : ''}${won(Math.abs(tt.pnl))}</b> (${pctTxt(tt.pct)})</div>` : '<div class="hm-empty">Portfolio에서 종목이나 자산을 등록해 보세요.</div>';
+    kA = FIN.holdings.length ? KP('portfolio', '총 자산', `<span class="money">${won(tt.v)}</span>`, `손익 <i class="${pnCls(tt.pnl)} money">${tt.pnl > 0 ? '+' : tt.pnl < 0 ? '-' : ''}${won(Math.abs(tt.pnl))}</i> <i class="${pnCls(tt.pnl)}">${pctTxt(tt.pct)}</i>`) : KP('portfolio', '총 자산', '-', '종목이나 자산을 등록해 보세요');
+    const es = monthEntries(ym), exp = es.filter(e => e.kind === '지출').reduce((s, e) => s + e.amt, 0), pe = monthEntries(shiftMonth(ym, -1)).filter(e => e.kind === '지출').reduce((s, e) => s + e.amt, 0);
+    kB = KP('ledger', d.getMonth() + 1 + '월 지출', `<span class="money">${won(exp)}</span>`, pe ? `지난달 전체 <span class="money">${won(pe)}</span>` : '지난달 기록 없음');
   }
-  /* 지출 */
-  let spend = wait;
-  if (FIN.loaded) {
-    const es = monthEntries(ym), exp = es.filter(e => e.kind === '지출').reduce((s, e) => s + e.amt, 0), inc = es.filter(e => e.kind === '수입').reduce((s, e) => s + e.amt, 0);
-    const pe = monthEntries(shiftMonth(ym, -1)).filter(e => e.kind === '지출').reduce((s, e) => s + e.amt, 0);
-    spend = `<div class="hm-big money">${won(exp)}</div><div class="hm-sub">${d.getMonth() + 1}월 지출${inc ? ` · 수입 <b class="money">${won(inc)}</b>` : ''}<br>${pe ? `지난달 전체 <b class="money">${won(pe)}</b>` : '지난달 기록 없음'}</div>`;
+  if (FIN.loaded && LIFE.loaded) {
+    try {
+      const c = rtCfg(), MV = rtMonthly(c, 'now'), tot = MV.mon.reduce((a, b) => a + b, 0), cm = MV.mon[d.getMonth()];
+      const nx = evUpcoming(t, 60).filter(o => o.e.kind === 'dividend').sort((a, b) => a.d < b.d ? -1 : 1)[0];
+      kC = tot > 0 ? KP('div', '연 예상 배당', `<span class="money">${rtMan(tot)}</span>`, `이번 달 <span class="money">${rtMan(cm)}</span>${nx ? ' · 다음 ' + esc(nx.e.title) + ' ' + lfDday(nx.d) : ''}`) : KP('div', '연 예상 배당', '-', '배당 종목을 등록해 보세요');
+    } catch (e) { kC = KP('div', '연 예상 배당', '-', 'Dividend 탭에서 확인'); }
   }
-  /* 건강 */
-  let health = wait;
   if (LIFE.loaded) {
-    const h = hm(), w0 = lfLast(LIFE.body, 'weight'), w1 = LIFE.body.filter(r => r.weight != null)[1];
-    const wk = LIFE.workout.filter(r => r.done_on >= lfWeek(t)).length, xs = hxSummary();
+    const h = hm(), w0 = lfLast(LIFE.body, 'weight'), wk = LIFE.workout.filter(r => r.done_on >= lfWeek(t)).length;
     const nx = LIFE.check.filter(r => r.next_due && r.next_due >= t).sort((a, b) => a.next_due < b.next_due ? -1 : 1)[0];
-    health = `<div class="hm-big">${w0 ? lfFix(w0.weight) + '<small>kg</small>' : '<span style="font-size:18px;color:var(--ink3)">체중 기록 없음</span>'}</div>
-      <div class="hm-sub">${w0 && w1 ? lfDelta(Number(w0.weight), Number(w1.weight), 'kg').replace('<small', '<b').replace('</small>', '</b>') + ' · ' : ''}이번 주 운동 <b>${wk}</b> / ${h.workout_goal}회${xs ? `<br>${xs.ex.exam_date.slice(0, 4)} 검진 <b>${esc(xs.judge || '결과')}</b> · 주의 ${xs.warn}항목` : ''}${nx ? `<br>다음 검진 <b>${esc(nx.title || '검진')}</b> ${lfDday(nx.next_due)}` : ''}${dkHomeLine()}</div>`;
+    kD = KP('life:health', '체중', w0 ? `${lfFix(w0.weight)}<small>kg</small>` : '-', `이번 주 운동 <b>${wk}</b>/${h.workout_goal}회${nx ? ' · ' + esc(nx.title || '검진') + ' ' + lfDday(nx.next_due) : ''}`);
   }
   /* 습관 */
   let habits = wait;
@@ -6875,7 +6912,7 @@ function renderHome() {
   let soon = wait;
   if (LIFE.loaded) {
     const it = scUpcoming(t, 30);
-    soon = it.length ? `<div class="hm-list">${it.slice(0, 5).map(o => { const n = lfDiff(o.d, t), r = o.r; return `<div class="hm-li"><span class="gl-cat" style="margin:0">${esc(r.category)}</span><span class="tx">${r.start_time ? esc(String(r.start_time).slice(0, 5)) + ' ' : ''}${esc(r.title)}</span><span class="dd ${n === 0 ? 'tdy' : ''}">${lfDday(o.d)}</span><span class="rt">${lfMD(o.d)}</span></div>`; }).join('')}</div>${it.length > 5 ? `<div class="hm-sub">외 ${it.length - 5}건</div>` : ''}` : '<div class="hm-empty">Schedule 탭에 약속·여행·병원 일정을 넣으면 여기에 나와요.</div>';
+    soon = it.length ? `<div class="hm-list">${it.slice(0, 5).map(o => { const n = lfDiff(o.d, t), r = o.r; return `<div class="hm-li"><span class="gl-cat" style="margin:0">${esc(r.category)}</span><span class="tx">${r.start_time ? esc(String(r.start_time).slice(0, 5)) + ' ' : ''}${esc(r.title)}</span><span class="dd ${n === 0 ? 'tdy' : ''}">${lfDday(o.d)}</span><span class="rt">${lfMD(o.d)}</span></div>`; }).join('')}</div>${it.length > 5 ? `<div class="hm-sub">외 ${it.length - 5}건</div>` : ''}` : `<div class="hm-empty">${(LIFE.schedule || []).length ? '앞으로 30일 안에 일정이 없어요.' : 'Schedule 탭에서 일정을 추가해 보세요.'}</div>`;
   }
   /* 독서 · 영화 */
   let cult = wait;
@@ -6888,16 +6925,6 @@ function renderHome() {
     const line = doing.length ? `${doing[0].kind === 'film' ? '보는 중' : '읽는 중'} <b>${esc(doing[0].title)}</b>${doing.length > 1 ? ' 외 ' + (doing.length - 1) : ''}` : recent.length ? `최근 <b>${esc(recent[0].title)}</b>${recent[0].rating ? ' ' + '★'.repeat(recent[0].rating) : ''}` : '';
     cult = cu.length ? `${bar1('독서', nB, G.book, '권', 'var(--s1)')}${bar1('영화', nF, G.film, '편', 'var(--s2)')}${shelf.length ? `<div class="hm-shelf">${shelf.map(r => `<img src="${esc(r.cover)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`).join('')}</div>` : ''}${line ? `<div class="hm-sub">${line}</div>` : ''}` : '<div class="hm-empty">읽은 책, 본 영화를 기록해 보세요.</div>';
   }
-  /* 배당 */
-  let divc = wait;
-  if (FIN.loaded && LIFE.loaded) {
-    try {
-      const c = rtCfg(), MV = rtMonthly(c, 'now'), tot = MV.mon.reduce((a, b) => a + b, 0), cm = MV.mon[d.getMonth()];
-      const nx = evUpcoming(t, 60).filter(o => o.e.kind === 'dividend').sort((a, b) => a.d < b.d ? -1 : 1)[0];
-      const got = (FIN.events || []).filter(e => e.kind === 'dividend' && e.received && e.pay_date && String(e.pay_date).slice(0, 4) === t.slice(0, 4)).reduce((a, e) => a + (Number(e.amount) || 0), 0);
-      divc = tot > 0 ? `<div class="hm-big money">${rtMan(tot)}</div><div class="hm-sub">지금 보유 종목 기준 연 예상 배당 (세전)<br>이번 달 <b class="money">${rtMan(cm)}</b>${got ? ` · 올해 받은 배당 <b class="money">${rtMan(got)}</b>` : ''}${nx ? `<br>다음 <b>${esc(nx.e.title)}</b> ${lfDday(nx.d)}` : ''}</div>` : '<div class="hm-empty">Dividend 탭에서 배당 종목을 등록해 보세요.</div>';
-    } catch (e) { divc = '<div class="hm-empty">Dividend 탭에서 확인해 주세요.</div>'; }
-  }
   /* My Bar */
   const cnt = { '미개봉': 0, '개봉': 0, '소진': 0 }; S.items.forEach(i => { if (cnt[i.status] != null) cnt[i.status]++; });
   const bar = S.items.length ? `<div class="hm-big">${cnt['미개봉'] + cnt['개봉']}<small>병 보유</small></div><div class="hm-sub">미개봉 <b>${cnt['미개봉']}</b> · 개봉 <b>${cnt['개봉']}</b> · 소진 <b>${cnt['소진']}</b></div>` : wait;
@@ -6906,19 +6933,16 @@ function renderHome() {
   const hb = H(habits), td = H(todos);
   el.innerHTML = `<div class="hm-hello"><div><h2>Today</h2><p>${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일</p></div></div>
     ${bkBanner()}
+    <section class="card hm-kpi">${kA}${kB}${kC}${kD}</section>
     <div class="hm-grid">
-      ${rvHTML()}
-      ${hmCard('portfolio', 'var(--c-pf)', '총 자산', 'Portfolio', asset)}
-      ${hmCard('ledger', 'var(--c-ld)', '이번 달 지출', 'Ledger', spend)}
-      ${hmCard('div', 'var(--c-div)', '배당', 'Dividend', divc)}
-      ${hmCard('sched', 'var(--c-home)', '다가오는 일정', 'Schedule', soon, 'h3')}
-      ${hmCard('life:goals:todo', 'var(--c-life)', '할 일', td.extra, td.html, 'h3')}
-      ${hmCard('life:health', 'var(--c-life)', '건강', 'Health', health)}
+      ${hmCard('sched', 'var(--c-home)', '다가오는 일정', 'Schedule', soon)}
+      ${hmCard('life:goals:todo', 'var(--c-life)', '할 일', td.extra, td.html)}
       ${hmCard('life:goals:habit', 'var(--c-life)', '오늘의 습관', hb.extra, hb.html)}
+      ${hmCard('bar', 'var(--c-bar)', 'My Bar', '', bar)}
       ${hmCard('cult', 'var(--c-goal)', '독서 · 영화', 'Books & Film', cult)}
-      ${hmCard('life:goals:goal', 'var(--c-life)', '목표 진행', 'Goals', goals, 'h3')}
-      ${hmCard('bar', 'var(--c-bar)', 'My Bar', '', bar, 'h3')}
+      ${hmCard('life:goals:goal', 'var(--c-life)', '목표 진행', 'Goals', goals)}
     </div>
+    <details class="hm-rvd" ${store.get('rvOpen', 0) ? 'open' : ''}><summary>${RV.mode === 'month' ? '이번 달 리뷰' : '이번 주 리뷰'}</summary>${rvHTML()}</details>
     <div class="hm-foot"><span>${esc(APP.email || '')}</span><span><button type="button" id="hmImport">가져오기</button><button type="button" id="hmBackup">백업·복원</button><button type="button" id="hmLogout">로그아웃</button></span></div>`;
 }
 /* ===== 백업 / 복원 ===== */
@@ -7078,6 +7102,7 @@ function openBackup() {
 }
 $('#homeView').addEventListener('click', e => {
   let x;
+  if ((x = e.target.closest('.hm-rvd > summary'))) { store.set('rvOpen', x.parentNode.open ? 0 : 1); return; }
   if ((x = e.target.closest('[data-rv]'))) { RV.mode = x.dataset.rv; store.set('rvMode', RV.mode); renderHome(); return; }
   if ((x = e.target.closest('[data-hlog]'))) { const [hid, dd] = x.dataset.hlog.split('|'); toggleHabit(hid, dd); return; }
   if ((x = e.target.closest('[data-tdone]'))) { toggleTodo(x.dataset.tdone); return; }
