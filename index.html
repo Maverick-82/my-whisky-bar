@@ -1509,6 +1509,7 @@ details.rt-notes>ul{margin:0;padding:0 18px 18px 36px}
 .fh-c{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:3px;padding:12px 16px;font-variant-numeric:tabular-nums}
 .fh-c b{font-size:13.5px;font-weight:700}.fh-c small{font-size:12px;color:var(--ink3);font-weight:600;min-height:15px}
 .fh-c.up b,.fh-c.up small{color:var(--up)}.fh-c.down b,.fh-c.down small{color:var(--down)}
+.fh-c.up:last-child small,.fh-c.down:last-child small{color:var(--ink3)}
 .fh-row.tr:last-child{border-bottom:0}
 @media(max-width:640px){
   .fh-tbl{min-width:500px}
@@ -1948,7 +1949,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.17.4';
+const APP_VERSION = 'v1.17.5';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -2775,11 +2776,13 @@ function holdRow(h){
   const warn = FIN.errors[h.id] ? `<span class="fh-w" title="${esc(FIN.errors[h.id])}">시세 오류</span>` : (hNeedsSymbol(h) ? '<span class="fh-w">코드 필요</span>' : '');
   const approx = h.market === 'GOLD' ? '<span class="fh-t">근사</span>' : '';
   const sg = n => (n > 0 ? '+' : '') + nf(n);
+  const pv = fnum(h.prev_close), lp = fnum(h.last_price), hasD = h.last_price != null && h.prev_close != null && pv > 0, dd = hasD ? lp - pv : 0;
+  const dCl = hasD ? pnCls(dd) : '', dTip = hasD ? `전일 종가 ${fmtPrice(h, pv)} · ${dd > 0 ? '+' : ''}${(dd / pv * 100).toFixed(2)}%` : '';
   return `<button class="fh-row tr" data-hid="${esc(h.id)}">
     <span class="fh-n"><b>${esc(h.name)}</b>${warn}${approx}<small>${fmtQty(h.qty)}${esc(h.unit)}${h.memo ? ' · ' + esc(h.memo) : ''}</small></span>
     <span class="fh-c ${cl}"><b class="money">${val == null || h.market === 'CASH' ? '-' : sg(pnl)}</b><small>${val == null || h.market === 'CASH' ? '' : (pct > 0 ? '+' : '') + pct.toFixed(2)}</small></span>
     <span class="fh-c"><b class="money">${val == null ? '-' : nf(val)}</b><small class="money">${h.market === 'CASH' ? '' : nf(cost)}</small></span>
-    <span class="fh-c"><b>${fmtPrice(h, h.last_price)}</b><small>${h.market === 'CASH' ? '' : fmtPrice(h, h.avg_price)}</small></span>
+    <span class="fh-c ${dCl}" ${dTip ? `title="${esc(dTip)}"` : ''}><b>${fmtPrice(h, h.last_price)}</b><small>${h.market === 'CASH' ? '' : fmtPrice(h, h.avg_price)}</small></span>
   </button>`;
 }
 document.addEventListener('scroll', e => { const t = e.target; if (t && t.classList && t.classList.contains('fh-scroll') && t.parentElement) t.parentElement.classList.toggle('end', t.scrollLeft + t.clientWidth >= t.scrollWidth - 6); }, true);
@@ -2882,6 +2885,7 @@ async function refreshPrices(){
       const p = prices[k];
       if (p && p.price > 0) {
         h.last_price = p.price; h.last_price_at = nowIso;
+        if (p.prev > 0) h.prev_close = p.prev;
         if (p.name && h.market !== 'COIN' && h.market !== 'GOLD') h.quote_name = p.name;
         rowsToSave.set(h.id, h); ok++;
       } else { FIN.errors[h.id] = errs[k] || '시세를 가져오지 못했어요'; FIN.failed.push(h.name); }
@@ -2889,7 +2893,7 @@ async function refreshPrices(){
     if (rowsToSave.size) {
       const payload = Array.from(rowsToSave.values()).map(h => ({
         id: h.id, broker: h.broker, account: h.account, name: h.name, market: h.market, symbol: h.symbol, currency: h.currency,
-        qty: h.qty, avg_price: h.avg_price, last_price: h.last_price, last_price_at: h.last_price_at, quote_name: h.quote_name || null,
+        qty: h.qty, avg_price: h.avg_price, last_price: h.last_price, last_price_at: h.last_price_at, prev_close: h.prev_close == null ? null : h.prev_close, quote_name: h.quote_name || null,
         unit: h.unit, memo: h.memo, sort_order: h.sort_order
       }));
       const { error } = await sb.from('fin_holdings').upsert(payload);
