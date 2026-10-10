@@ -1949,7 +1949,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.17.5';
+const APP_VERSION = 'v1.17.6';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -2662,7 +2662,7 @@ async function loadFin(){
     if (bad) throw new Error(bad.error.message);
     FIN.holdings = h.data || []; FIN.ledger = l.data || []; FIN.snaps = s.data || [];
     FIN.rules = {}; (ru.data || []).forEach(r => { FIN.rules[r.merchant_key] = r.category; });
-    (m.data || []).forEach(r => { if (r.key === 'fx' && r.value && r.value.usdkrw) FIN.fx = r.value; });
+    (m.data || []).forEach(r => { if (r.key === 'fx' && r.value && r.value.usdkrw) FIN.fx = r.value; if (r.key === 'gold_adj' && r.value && Number(r.value.v) > 0) FIN.goldAdj = Number(r.value.v); });
     FIN.loaded = true;
   } catch (e) { toast('투자·가계부 데이터를 불러오지 못했어요: ' + e.message, true); }
   finally { FIN.loading = false; }
@@ -2767,14 +2767,14 @@ function renderPortfolio(){
       </section>`;
     }).join('')}
     ${!assetGroups.length && FIN.broker === 'all' ? `<div class="asset-empty">월급통장, 비상금 통장, 적금, 부동산 보증금처럼<br>시세가 없는 자산도 직접 금액을 넣어 총 자산에 합칠 수 있어요.<br><button class="btn primary" id="pfAsset2">+ 자산 추가</button></div>` : ''}
-    <div class="fin-foot">예수금·통장·기타 자산은 직접 입력한 금액이에요(빚은 마이너스로 입력). 해외주식 매입금액은 현재 환율로 환산해서 환차손익은 반영되지 않고, 금 시세는 국제 금값 환산 근사치예요.</div>`;
+    <div class="fin-foot">예수금·통장·기타 자산은 직접 입력한 금액이에요(빚은 마이너스로 입력). 해외주식 매입금액은 현재 환율로 환산해서 환차손익은 반영되지 않고, 금 시세는 국제 금값을 환산한 뒤 증권앱 시세에 맞춰 보정한 근사치예요.</div>`;
   renderTrend(T.v);
 }
 function holdRow(h){
   const val = hValue(h), cost = hCost(h), nf = n => Math.round(n).toLocaleString('ko-KR');
   const pnl = val == null ? 0 : val - cost, pct = val != null && cost > 0 ? pnl / cost * 100 : 0, cl = val == null ? '' : pnCls(pnl);
   const warn = FIN.errors[h.id] ? `<span class="fh-w" title="${esc(FIN.errors[h.id])}">시세 오류</span>` : (hNeedsSymbol(h) ? '<span class="fh-w">코드 필요</span>' : '');
-  const approx = h.market === 'GOLD' ? '<span class="fh-t">근사</span>' : '';
+  const approx = h.market === 'GOLD' ? `<span class="fh-t">${FIN.goldAdj > 0 ? '보정' : '근사'}</span>` : '';
   const sg = n => (n > 0 ? '+' : '') + nf(n);
   const pv = fnum(h.prev_close), lp = fnum(h.last_price), hasD = h.last_price != null && h.prev_close != null && pv > 0, dd = hasD ? lp - pv : 0;
   const dCl = hasD ? pnCls(dd) : '', dTip = hasD ? `전일 종가 ${fmtPrice(h, pv)} · ${dd > 0 ? '+' : ''}${(dd / pv * 100).toFixed(2)}%` : '';
@@ -2882,7 +2882,8 @@ async function refreshPrices(){
       else if (h.market === 'COIN' && h.symbol) k = 'COIN:' + h.symbol;
       else if (h.market === 'GOLD') k = 'GOLD';
       if (!k) { if (h.market === 'KR' || h.market === 'US' || h.market === 'COIN') FIN.failed.push(h.name); return; }
-      const p = prices[k];
+      let p = prices[k];
+      if (k === 'GOLD' && p && FIN.goldAdj > 0) p = Object.assign({}, p, { price: Math.round(p.price * FIN.goldAdj), prev: p.prev > 0 ? p.prev * FIN.goldAdj : p.prev });
       if (p && p.price > 0) {
         h.last_price = p.price; h.last_price_at = nowIso;
         if (p.prev > 0) h.prev_close = p.prev;
