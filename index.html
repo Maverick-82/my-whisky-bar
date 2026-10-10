@@ -1179,7 +1179,7 @@ body{font-size:14px;letter-spacing:-.012em;-webkit-font-smoothing:antialiased;fo
 .auth-card{border-radius:28px}
 
 @media (max-width:760px){
-  .top h1{font-size:26px}.titlesub{margin-left:34px}
+  .top h1{font-size:26px}.titlesub{margin-left:34px;white-space:nowrap;letter-spacing:.12em;gap:8px}
   .fin-head h2,.hm-hello h2,.cl-head h2,.cat-head h2,.jv-head h2,.yt-head h2{font-size:26px}
   .tabs button{padding:9px 13px}
 }
@@ -1557,6 +1557,30 @@ details.rt-notes>ul{margin:0;padding:0 18px 18px 36px}
   .fh-wrap::after{content:"›";position:absolute;right:0;top:0;bottom:0;width:30px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--ink3);background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--card) 92%,transparent) 70%);pointer-events:none;z-index:3;transition:opacity .2s}
   .fh-wrap.end::after{opacity:0}
 }
+/* ===== Books & Film ===== */
+.tabs button[data-tab="cult"]{--tc:var(--c-goal)}
+body[data-tab="cult"] #btnAdd,body[data-tab="cult"] .fab{display:none!important}
+#cultView .card{border-radius:22px}
+.cu-bar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:0 0 14px}
+.cu-yr{display:inline-flex;align-items:center;gap:6px}.cu-yr b{min-width:44px;text-align:center;font-size:14px}
+.cu-yr button{width:30px;height:30px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink2);cursor:pointer}
+.cu-sec{margin:22px 2px 8px;display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;color:var(--ink3);font-weight:700}
+.cu-sec b{color:var(--ink);font-size:15px;letter-spacing:-.02em}
+.cu-list{padding:6px 10px}
+.cu-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:11px 6px;cursor:pointer;color:inherit;font:inherit}
+.cu-row:first-child{border-top:0}
+.cu-row:hover{background:var(--soft);border-radius:12px}
+.cu-k{font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;color:var(--k);background:color-mix(in srgb,var(--k) 14%,transparent);white-space:nowrap}
+.cu-m b{display:block;font-size:14.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cu-m small{display:block;font-size:12px;color:var(--ink3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}
+.cu-m em{display:block;font-style:normal;font-size:12px;color:var(--ink2);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cu-r{text-align:right;font-size:12.5px;color:#f0b232;letter-spacing:1px;white-space:nowrap}
+.cu-r i{font-style:normal;color:var(--line2)}
+.cu-r small{display:block;letter-spacing:0;color:var(--ink3);font-size:11.5px;margin-top:2px}
+.cu-badge{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--ink2);letter-spacing:0}
+.cu-stars{display:flex;gap:2px}.cu-stars button{font-size:28px;line-height:1;background:none;border:0;color:var(--line2);cursor:pointer;padding:0 3px}.cu-stars button.on{color:#f0b232}
+.cu-goalb{display:block;height:6px;border-radius:4px;background:var(--soft);margin-top:7px;overflow:hidden}.cu-goalb i{display:block;height:100%;border-radius:4px;background:var(--k)}
+@media (max-width:640px){.cu-row{gap:9px}.cu-m b{font-size:14px}}
 </style>
 <script>
 (function(){
@@ -1590,7 +1614,7 @@ details.rt-notes>ul{margin:0;padding:0 18px 18px 36px}
   <div class="top">
     <div class="titleblock">
       <h1><svg viewBox="0 0 24 24" width="30" height="30" style="color:var(--s1);flex:none;transform:rotate(60deg)" aria-hidden="true"><use href="#jetIcon"/></svg> Maverick</h1>
-      <div class="titlesub">Life Hub<span class="verbadge" id="appVersion"></span></div>
+      <div class="titlesub">Private Office<span class="verbadge" id="appVersion"></span></div>
     </div>
     <span class="sync hide-m" id="sync"></span>
     <button class="btn" id="btnTheme" title="테마 전환"></button>
@@ -1619,6 +1643,7 @@ details.rt-notes>ul{margin:0;padding:0 18px 18px 36px}
     <button data-tab="cal" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/><path d="M8 14h2M12 14h2M8 17h2"/></svg>Calendar</button>
     <button data-tab="div" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8 9.5l1.6 5.2 2.4-5.2 2.4 5.2L16 9.5"/><path d="M8.2 12.4h7.6"/></svg>Dividend</button>
     <button data-tab="life" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.9c0 5.6-7.5 10-7.5 10z"/><path d="M7.5 12.5h2.6l1.4-2.4 2 4 1.2-1.6h1.8"/></svg>Life</button>
+    <button data-tab="cult" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M4 6.2c0-.7.5-1.2 1.2-1.2H11v14H5.5A1.5 1.5 0 0 1 4 17.5z"/><path d="M20 6.2c0-.7-.5-1.2-1.2-1.2H13v14h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>Books &amp; Film</button>
   </nav>
 
   <div id="barView" hidden>
@@ -1669,6 +1694,7 @@ details.rt-notes>ul{margin:0;padding:0 18px 18px 36px}
   <div id="ledgerView" hidden></div>
   <div id="calView" hidden></div>
   <div id="divView" hidden></div>
+  <div id="cultView" hidden></div>
   <div id="soonView" hidden></div>
 </div>
 
@@ -1984,7 +2010,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.1.0';
+const APP_VERSION = 'v2.3.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -2428,7 +2454,7 @@ $('#viewSeg').addEventListener('click', e => { const b = e.target.closest('butto
 $('#sort').addEventListener('change', e => { S.sort = e.target.value; store.set('sort', S.sort); renderContent(); });
 let qT; $('#q').addEventListener('input', e => { clearTimeout(qT); qT = setTimeout(()=>{ S.q = e.target.value; renderContent(); }, 120); });
 $('#btnPrice').addEventListener('click', () => { S.hidePrice = !S.hidePrice; store.set('hidePrice', S.hidePrice); renderAll(); });
-$('#btnRefresh').addEventListener('click', () => { refresh(); if (S.tab === 'home' || S.tab === 'life') { Promise.all([loadLife(), loadFin()]).then(() => { lifeRerender(); }); } });
+$('#btnRefresh').addEventListener('click', () => { refresh(); if (S.tab === 'home' || S.tab === 'life' || S.tab === 'cult') { Promise.all([loadLife(), loadFin()]).then(() => { lifeRerender(); }); } });
 $('#btnAdd').addEventListener('click', () => openForm(null));
 $('#fab').addEventListener('click', () => { if (S.tab === 'home') return; if (S.tab === 'life') lifeAdd(); else if (S.tab === 'portfolio') openHolding(null); else if (S.tab === 'ledger') openLedgerForm(null); else if (S.tab === 'cal') openEvent(null); else openForm(null); });
 
@@ -3816,7 +3842,7 @@ document.addEventListener('click', ev => {
 
 /* ---------- 탭 전환 ---------- */
 const SOON_LABEL = {};
-const TAB_GRP = { home:'h', bar:'w', yt:'w', goal:'w', journal:'w', wdb:'w', portfolio:'m', ledger:'m', cal:'m', div:'m', life:'m' };
+const TAB_GRP = { home:'h', bar:'w', yt:'w', goal:'w', journal:'w', wdb:'w', portfolio:'m', ledger:'m', cal:'m', div:'m', life:'m', cult:'m' };
 const GRP_LAST = { h:'home', w:'bar', m:'portfolio' };
 function switchTab(tab){
   S.tab = tab;
@@ -3836,6 +3862,7 @@ function switchTab(tab){
   $('#ledgerView').hidden = tab !== 'ledger';
   $('#calView').hidden = tab !== 'cal';
   $('#divView').hidden = tab !== 'div';
+  $('#cultView').hidden = tab !== 'cult';
   $('#soonView').hidden = !(tab in SOON_LABEL);
   document.body.dataset.tab = tab;
   if (tab === 'home') renderHomeTab();
@@ -3844,6 +3871,7 @@ function switchTab(tab){
   else if (tab === 'ledger') renderLedgerTab();
   else if (tab === 'cal') renderCalTab();
   else if (tab === 'div') renderDivTab();
+  else if (tab === 'cult') renderCultTab();
   else if (tab === 'wdb') renderWdbTab();
   else if (tab === 'dist') renderDistTab();
   else if (tab === 'goal') renderGoalTab();
@@ -4562,7 +4590,7 @@ const LIFE = {
   sub: store.get('lifeSub', 'health'), hsub: (v => (v === 'body' || v === 'sleep') ? 'status' : v)(store.get('lifeH', 'status')), gsub: store.get('lifeG', 'habit'),
   bm: 'weight', rng: '90', ck: '혈압',
   more: {}, showDone: false,
-  body: [], workout: [], sleep: [], check: [], exam: [], drinks: [], goals: [], habits: [], logs: [], todos: [], meta: {}, logSet: new Set()
+  body: [], workout: [], sleep: [], check: [], exam: [], drinks: [], culture: [], goals: [], habits: [], logs: [], todos: [], meta: {}, logSet: new Set()
 };
 const HM_DEF = { height: null, target_weight: null, start_weight: null, sleep_goal: 7, workout_goal: 3 };
 const hm = () => Object.assign({}, HM_DEF, LIFE.meta.health || {});
@@ -4575,7 +4603,7 @@ async function loadLife() {
   LIFE.loading = true;
   try {
     const since = lfAdd(today(), -150);
-    const [b, w, s, c, g, h, l, t, m, xm, dk] = await Promise.all([
+    const [b, w, s, c, g, h, l, t, m, xm, dk, cu] = await Promise.all([
       sb.from('health_body').select('*').order('measured_on', { ascending: false }).limit(1000),
       sb.from('health_workout').select('*').order('done_on', { ascending: false }).limit(1000),
       sb.from('health_sleep').select('*').order('sleep_date', { ascending: false }).limit(1000),
@@ -4586,13 +4614,15 @@ async function loadLife() {
       sb.from('life_todos').select('*').order('created_at', { ascending: false }).limit(1000),
       sb.from('life_meta').select('*'),
       sb.from('health_exam').select('*').order('exam_date', { ascending: false }),
-      sb.from('health_drink').select('*').order('drink_date', { ascending: false }).limit(3000)
+      sb.from('health_drink').select('*').order('drink_date', { ascending: false }).limit(3000),
+      sb.from('life_culture').select('*').order('created_at', { ascending: false }).limit(3000)
     ]);
     const bad = [b, w, s, c, g, h, l, t, m].find(r => r.error);
     if (bad) throw new Error(bad.error.message);
     LIFE.body = b.data || []; LIFE.workout = w.data || []; LIFE.sleep = s.data || []; LIFE.check = c.data || [];
     LIFE.exam = xm.error ? (LIFE.exam || []) : (xm.data || []);
     LIFE.drinks = dk.error ? (LIFE.drinks || []) : (dk.data || []);
+    LIFE.culture = cu.error ? (LIFE.culture || []) : (cu.data || []);
     LIFE.goals = g.data || []; LIFE.habits = h.data || []; LIFE.logs = l.data || []; LIFE.todos = t.data || [];
     LIFE.meta = {}; (m.data || []).forEach(r => { LIFE.meta[r.key] = r.value; });
     lfRebuildLogs();
@@ -4605,7 +4635,7 @@ function lifeEnsure(render) {
   render();
   loadLife().then(() => { if (LIFE.loaded) render(); });
 }
-function lifeRerender() { if (S.tab === 'life') renderLife(); else if (S.tab === 'home') renderHome(); }
+function lifeRerender() { if (S.tab === 'life') renderLife(); else if (S.tab === 'home') renderHome(); else if (S.tab === 'cult') renderCult(); }
 
 /* ---------- DB 저장 공통 ---------- */
 async function lfSave(table, list, dateKey, row, id) {
@@ -6048,7 +6078,7 @@ $('#ledgerView').addEventListener('click', ev => { if (ev.target.closest('[data-
 
 /* ===== v1.17 Dividend · 노후 배당·연금 ===== */
 const RT_ASOF = '2026-10-10';
-const RT_DEF = { birth: 1982, retire_year: 2041, pen_annual: 9000000, pen_month: 10, pen_paid: 0, isa_month: 400000, isa_lump: 12000000, sub_month: 100000, pen_rate: 4, draw_rate: 4, infl: 2.5, npension: 0, need: 1500000, kr_tax: 5, kr_gen: 15.4, isa_low: 0, us_tax: 15, price_g: 0, div_g: 0, w_mac: 35, w_hy: 35, w_kb: 30 };
+const RT_DEF = { birth: 1982, retire_year: 2041, pen_annual: 9000000, pen_month: 10, pen_paid: 0, isa_month: 400000, isa_lump: 12000000, sub_month: 100000, pen_rate: 4, draw_rate: 4, infl: 2.5, npension: 0, need: 1500000, kr_tax: 5, kr_gen: 15.4, isa_low: 1, isa_cycle: 1, isa_oy: 2026, isa_om: 1, us_tax: 15, price_g: 0, div_g: 0, w_mac: 35, w_hy: 35, w_kb: 30 };
 const RT_STK0 = [
   { id: 'mac', name: '맥쿼리인프라', sym: '088980', cur: 'KRW', px: 9800, dps: 730, pay: [2, 8], wk: 'w_mac' },
   { id: 'hy', name: '현대차2우B', sym: '005387', cur: 'KRW', px: 170500, dps: 10100, pay: [4, 6, 9, 12], wk: 'w_hy' },
@@ -6057,7 +6087,7 @@ const RT_STK0 = [
   { id: 'o', name: '리얼티인컴', sym: 'O', cur: 'USD', px: 54.18, dps: 3.245, pay: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
 ];
 const RT = { view: 'now' };
-const RT_NUM = ['birth', 'retire_year', 'pen_annual', 'pen_month', 'pen_paid', 'isa_month', 'isa_lump', 'sub_month', 'pen_rate', 'draw_rate', 'infl', 'npension', 'need', 'kr_gen', 'isa_low', 'us_tax', 'price_g', 'div_g', 'w_mac', 'w_hy', 'w_kb'];
+const RT_NUM = ['birth', 'retire_year', 'pen_annual', 'pen_month', 'pen_paid', 'isa_month', 'isa_lump', 'sub_month', 'pen_rate', 'draw_rate', 'infl', 'npension', 'need', 'kr_gen', 'isa_low', 'isa_cycle', 'isa_oy', 'isa_om', 'us_tax', 'price_g', 'div_g', 'w_mac', 'w_hy', 'w_kb'];
 const PEN_RE = /연금|퇴직|IRP/i;
 const RTC = ['#f2a45e', '#5aa0ee', '#4fbf8f', '#e784ad', '#9d89e6', '#ecc04c', '#4cc2cc'], rtColor = i => RTC[i % RTC.length];
 const RT_SCC = { 하락: 'var(--up)', 기본: 'var(--c-div)', 성장: 'var(--inc)', 낙관: 'var(--c-cal)' };
@@ -6099,17 +6129,28 @@ const RT_ISA = 0.099;
 function rtSim(c, o) {
   o = o || {};
   const IT = rtItems(c).filter(x => x.px > 0), penR = (o.penR != null ? o.penR : c.pen_rate) / 100, pg = (o.pg != null ? o.pg : c.price_g) / 100, dg = (o.dg != null ? o.dg : c.div_g) / 100, extra = o.extra || 0;
+  const cyc = o.cycle != null ? o.cycle : c.isa_cycle;
   const now = new Date(); let y = now.getFullYear(), m = now.getMonth() + 1, t = 0;
   const pen0 = rtPen0(); let P = pen0, prin = pen0;
   /* 원화 종목은 ISA 안(배당 세금 없이 재투자, 해지 때 9.9%), 그 외 계좌·미국 주식은 계좌 세금을 바로 뺀다 */
   const sI = IT.map(x => x.usd ? 0 : x.qIsa + x.lump / x.px), sG = IT.map(x => x.usd ? x.qty + x.lump / x.px : x.qGen);
   let basis = IT.reduce((a, x) => a + (x.usd ? 0 : x.costIsa + x.lump), 0);
   const lim = c.isa_low ? 4e6 : 2e6, penM = Math.pow(1 + penR, 1 / 12);
+  const nowIdx = y * 12 + (m - 1); let mat = c.isa_oy * 12 + (c.isa_om - 1) + 36; while (mat <= nowIdx) mat += 36;
+  const ev = []; let taxPaid = 0;
   const snap = tt => {
     const f = Math.pow(1 + pg, tt / 12), g = Math.pow(1 + dg, tt / 12); let KI = 0, KG = 0, dI = 0, dG = 0;
     IT.forEach((x, i) => { KI += sI[i] * x.px * f; KG += sG[i] * x.px * f; dI += sI[i] * x.dps * g / 12; dG += sG[i] * x.dps * g * (1 - x.tax) / 12; });
     const gain = KI - basis, isaTax = Math.max(0, gain - lim) * RT_ISA, eff = gain > 0 ? isaTax / gain : 0;
     return { K: KI + KG, KI, gain, basis, isaTax, eff, dI, dG, div: dI * (1 - eff) + dG };
+  };
+  /* 3년 만기: 해지하고(수익 − 비과세 한도)에 9.9% → 새 ISA에 연 납입한도만큼 다시 넣고, 나머지는 일반계좌로 */
+  const cycle = (f) => {
+    let KI = 0; IT.forEach((x, i) => { KI += sI[i] * x.px * f; });
+    const gain = KI - basis, tax = Math.max(0, gain - lim) * RT_ISA, net = KI - tax;
+    const cap = Math.max(0, 2e7 - c.isa_month * (12 - m)), D = Math.min(net, cap);
+    if (KI > 0) { const kD = D / KI, kR = (net - D) / KI; IT.forEach((x, i) => { const v = sI[i]; sI[i] = v * kD; sG[i] += v * kR; }); }
+    taxPaid += tax; ev.push({ y, m, t, KI, basis, gain, tax, re: D, out: net - D }); basis = D;
   };
   const rows = [], lastIdx = c.retire_year * 12 + 11;
   const pay = () => { P += c.pen_annual; prin += c.pen_annual; };
@@ -6124,9 +6165,11 @@ function rtSim(c, o) {
       if (x.usd) sG[i] += buy / (x.px * f); else { sI[i] += buy / (x.px * f); basis += buy; }
     });
     P *= penM; if (m === c.pen_month) pay();
+    const idx = y * 12 + (m - 1);
+    if (idx === mat) { mat += 36; if (cyc && idx < lastIdx) cycle(f); }
     rows.push(Object.assign({ t, y, m, P, prin }, snap(t)));
   }
-  return { rows, B: { pen0 } };
+  return { rows, B: { pen0, ev, taxPaid } };
 }
 const RT_PEN_LIM = 15000000;
 function rtResult(c, o) {
@@ -6135,7 +6178,7 @@ function rtResult(c, o) {
   const age = c.retire_year + 1 - c.birth, penAnnual = L.P * c.draw_rate / 100, penOver = penAnnual > RT_PEN_LIM;
   const penRate = penOver ? 0.165 : age < 70 ? 0.055 : age < 80 ? 0.044 : 0.033;
   const isaDiv = L.div, penDraw = penAnnual / 12 * (1 - penRate), gap = isaDiv + penDraw;
-  return { S, L, n, pvf, isaDiv, penDraw, penAnnual, penOver, penRate, penAge: age, gap, pvGap: gap * pvf, after: gap + (c.npension > 0 ? c.npension / pvf : 0), pvAfter: gap * pvf + c.npension };
+  return { S, L, n, pvf, ev: S.B.ev, taxPaid: S.B.taxPaid, isaDiv, penDraw, penAnnual, penOver, penRate, penAge: age, gap, pvGap: gap * pvf, after: gap + (c.npension > 0 ? c.npension / pvf : 0), pvAfter: gap * pvf + c.npension };
 }
 function rtNeedExtra(c) {
   if (!(c.need > 0)) return 0;
@@ -6227,15 +6270,21 @@ function rtHTML() {
     <div class="rt-cn faint">코인·예금·금·청약통장은 배당 계산에 넣지 않았어요. 위 합계에 없는 돈은 지금 월 소득과 은퇴 소득 모두에 0으로 잡혀 있어요.</div></section>`;
   const L0 = R.L, lim = c.isa_low ? 400 : 200, isaNet = L0.KI - L0.isaTax;
   const yr1 = c.isa_lump + c.isa_month * 12, y5 = c.isa_lump + c.isa_month * 60;
+  const alt = rtResult(c, { cycle: c.isa_cycle ? 0 : 1 }), A = c.isa_cycle ? R : alt, K0 = c.isa_cycle ? alt : R;
+  const taxAll = x => x.taxPaid + x.L.isaTax;
   const penWarn = R.penOver ? `<div class="rt-cn bad">연금 연 인출이 1,500만 원을 넘어요. 넘으면 전액 16.5% 분리과세(또는 종합과세)라서 세금이 확 늘어요. 연 인출률을 ${(RT_PEN_LIM / L0.P * 100).toFixed(1)}% 이하로 낮추면 ${(R.penAge < 70 ? 5.5 : R.penAge < 80 ? 4.4 : 3.3)}%로 줄어요.</div>` : '';
   const isaWarn = [yr1 > 20000000 ? '첫해 ISA 납입이 연 2,000만 원 한도를 넘어요. 예수금과 월 납입을 나눠서 넣어야 해요.' : '', y5 > 100000000 ? '5년 합계가 ISA 총 납입한도 1억 원을 넘어요.' : ''].filter(Boolean).map(t => `<div class="rt-cn bad">${t}</div>`).join('');
+  const evRows = R.ev.map(e => `<div class="rt-cr"><span>${e.y}년 ${e.m}월 만기 해지<small class="rt-cs">수익 ${rtMan(e.gain)} · 세금 ${rtMan(e.tax)} · 새 ISA ${rtMan(e.re)}${e.out > 0 ? ' · 일반계좌로 ' + rtMan(e.out) : ''}</small></span><b class="money">${rtMan(e.tax)}</b></div>`).join('');
+  const dm = (a, b) => { const d = Math.round((a - b) / 1e4); return d === 0 ? '비슷해요' : (d > 0 ? '+' : '−') + Math.abs(d).toLocaleString('ko-KR') + '만 원'; };
+  const cmp = `<div class="rt-cn"><b>${c.isa_cycle ? '3년마다 해지·재가입' : '은퇴까지 유지'}</b>${c.isa_cycle ? '으로' : '로'} 계산 중이에요. ${c.isa_cycle ? '은퇴까지 유지와' : '3년마다 해지·재가입과'} 비교하면 은퇴 후 월 소득(지금 가치)이 <b>${dm(R.pvGap, alt.pvGap)}</b>, ISA 세금 합계는 ${rtMan(taxAll(R))} 대 ${rtMan(taxAll(alt))}예요.</div>`;
   const taxHTML = `<div class="fin-sec" style="--sc:var(--c-inc, var(--c-pf))"><h3>세금 점검</h3><span>${c.retire_year}년 말 기준 추정</span></div><section class="card rt-cash">
-    ${crow('ISA 평가금액 (계획 종목)', rtMan(L0.KI), 'ISA 안 배당은 세금 없이 재투자되는 걸로 계산')}
-    ${crow('ISA 납입 원금', rtMan(L0.basis), '지금 보유 취득가 + 예수금 + 매달 납입')}
-    ${crow('ISA 수익', rtMan(L0.gain))}
+    ${R.ev.length ? `<div class="rt-cn faint" style="margin:0 0 4px">ISA ${c.isa_oy}년 ${c.isa_om}월 개설 · 3년 만기마다 해지 후 재가입 (${c.isa_low ? '서민형' : '일반형'} 비과세 ${lim}만 원이 새로 적용)</div>${evRows}` : ''}
+    ${crow('은퇴 시점 ISA 평가금액 (계획 종목)', rtMan(L0.KI), 'ISA 안 배당은 세금 없이 재투자되는 걸로 계산')}
+    ${crow('이번 계좌 납입 원금', rtMan(L0.basis), R.ev.length ? '마지막 재가입 때 넣은 돈 + 이후 매달 납입' : '지금 보유 취득가 + 예수금 + 매달 납입')}
+    ${crow('이번 계좌 수익', rtMan(L0.gain))}
     ${crow('비과세 한도 (' + (c.isa_low ? '서민형' : '일반형') + ')', '-' + rtMan(lim * 10000))}
-    <div class="rt-cr tot"><span>해지 때 세금 (초과분 9.9%)</span><b class="money">${rtMan(L0.isaTax)}</b></div>
-    ${L0.isaTax > 0 ? `<div class="rt-cn">수익의 ${(L0.eff * 100).toFixed(1)}%가 세금이고, 해지하고 나면 약 <b>${rtMan(isaNet)}</b>이 남아요. 월 배당에는 이 비율을 미리 빼서 보여줘요.</div>` : '<div class="rt-cn">수익이 비과세 한도 안이라 해지 세금이 없어요.</div>'}${isaWarn}
+    <div class="rt-cr tot"><span>은퇴 때 해지 세금 (초과분 9.9%)</span><b class="money">${rtMan(L0.isaTax)}</b></div>
+    ${L0.isaTax > 0 ? `<div class="rt-cn">수익의 ${(L0.eff * 100).toFixed(1)}%가 세금이고, 해지하고 나면 약 <b>${rtMan(isaNet)}</b>이 남아요. 월 배당에는 이 비율을 미리 빼서 보여줘요.</div>` : '<div class="rt-cn">수익이 비과세 한도 안이라 해지 세금이 없어요.</div>'}${isaWarn}${cmp}
     ${crow('연금 연 인출 (은퇴 첫해, 세전)', rtMan(R.penAnnual), '1,500만 원까지는 연금소득세만 · ' + R.penAge + '세 구간 ' + (R.penRate * 100).toFixed(1).replace(/\.0$/, '') + '%')}${penWarn}
     ${crow('일반계좌 국내 배당 세금', c.kr_gen + '%', '종합·해외 계좌의 원화 종목 · 미국 종목은 ' + c.us_tax + '%')}
     <div class="rt-cn faint">금융소득(이자·배당)이 일반계좌 기준 연 2,000만 원을 넘으면 종합과세 대상이라 세금이 달라져요. 지금은 한참 아래예요.</div></section>`;
@@ -6284,7 +6333,7 @@ function rtHTML() {
     <div class="lf-note" style="margin:10px 0 0">기본은 위 "성장 가정"에서 정한 값이에요. 하락은 기본보다 주가·배당이 해마다 2%p 덜 오르고 연금 수익률도 2%p 낮은 경우, 성장은 둘 다 2%p 더 오르는 경우, 낙관은 4%p 더 오르고 연금 수익률도 1%p 높은 경우예요.</div></div>`;
   const notes = `<details class="card rt-notes"><summary><b>이 계산의 가정</b><small>시뮬레이션 값이에요 · 눌러서 보기</small></summary><ul>
     <li>주가는 해마다 ${rtSg(c.price_g)}%, 배당은 해마다 ${rtSg(c.div_g)}% 변한다고 봤어요(설정에서 바꿔요). 0%면 지금 그대로라고 보는 가장 보수적인 계산이에요(물가는 ${c.infl}%). 배당은 전부 같은 종목에 다시 사는 걸로 계산했고, 실제로는 오를 수도 빠질 수도 있어서 시나리오 표의 하락·성장 행도 같이 봐 주세요.</li>
-    <li>ISA 안 원화 종목의 배당은 세금 없이 계좌 안에서 재투자돼요(원천징수 없음). 해지(3년 만기) 때 수익에서 비과세 한도(일반형 200만 원 · 서민형 400만 원)를 뺀 나머지에 9.9%가 붙는다고 보고, 그 비율을 월 배당에서 미리 뺐어요. 인출은 보통 납입 원금까지만 되고 수익금은 해지 때 나와서, 은퇴 후 월급처럼 받으려면 만기 시점 계획이 필요해요. ISA 수익은 계획 종목만 계산해요(다른 ISA 종목의 손익은 빠져 있어요).</li>
+    <li>ISA 안 원화 종목의 배당은 세금 없이 계좌 안에서 재투자돼요(원천징수 없음). 해지할 때 수익에서 비과세 한도(일반형 200만 원 · 서민형 400만 원)를 뺀 나머지에 9.9%가 붙는다고 보고, 그 비율을 월 배당에서 미리 뺐어요. 3년 만기 뒤 해지하고 다시 가입하면 비과세 한도와 납입한도가 새로 생겨서, 설정이 \"3년마다 해지·재가입\"이면 만기마다 세금을 내고 새 ISA에 연 납입한도(연 2,000만 원, 그해 남은 월 납입분 제외)만큼 다시 넣고 나머지는 일반계좌로 옮기는 걸로 계산해요(실물 이전은 안 돼서 팔고 다시 사는 값은 따로 안 봤어요). 만기 해지 자금을 60일 안에 연금계좌로 옮기면 이전 금액의 10%(최대 300만 원) 세액공제가 더 되지만 여기엔 넣지 않았어요. 서민형은 총급여 5,000만 원(종합소득 3,800만 원) 이하일 때만 가입돼요. 2026 세제개편안의 신설 ISA는 국회 통과 전이라 현행 기준으로만 계산해요. ISA 수익은 계획 종목만 계산해요(다른 ISA 종목의 손익은 빠져 있어요).</li>
     <li>종합·해외 계좌에 있는 종목은 원화 ${c.kr_gen}% · 미국 ${c.us_tax}%를 배당 때 바로 뺐고, 새로 사는 미국 종목도 같은 방식이에요.</li>
     <li>연금계좌는 만 55세부터 연금으로 받을 수 있고, 연금소득세는 55~69세 5.5%, 70~79세 4.4%, 80세 이상 3.3%예요. 연 ${c.draw_rate}%씩 꺼낸다고 봤고, 연 1,500만 원을 넘으면 전액 16.5%로 계산해요. 수익률은 실제 연 ${c.pen_rate}%가 되도록 월 단위로 환산했어요.</li>
     <li>은퇴 후 물가 상승과 회사 퇴직금·퇴직연금 적립분, 국민연금은 별도예요. 국민연금${c.npension > 0 ? '은 입력한 금액을 반영했어요' : '은 아직 입력하지 않았어요 — 국민연금공단 "내 연금"에서 예상 월액을 확인해 설정에 넣어 주세요'}.</li>
@@ -6314,9 +6363,11 @@ function openRetirePlan() {
       ${fld('ISA 월 납입 (원)', num('isa_month', c.isa_month))}${fld('ISA 예수금 투입 (원)', num('isa_lump', c.isa_lump))}
       ${fld('주가 상승률 (연 %, 빠지면 마이너스)', dec('price_g', c.price_g))}${fld('배당 성장률 (연 %, 줄면 마이너스)', dec('div_g', c.div_g))}
       ${fld('일반계좌 국내 배당 세금 (%)', dec('kr_gen', c.kr_gen))}${fld('미국 배당 세금 (%)', dec('us_tax', c.us_tax))}
-      ${fld('ISA 유형 (비과세 한도)', `<select class="in" name="isa_low"><option value="0" ${c.isa_low ? '' : 'selected'}>일반형 (200만 원)</option><option value="1" ${c.isa_low ? 'selected' : ''}>서민형 (400만 원)</option></select>`)}${fld('물가 상승률 (%)', dec('infl', c.infl))}
-      ${fld('연금계좌 수익률 (연 %)', dec('pen_rate', c.pen_rate))}${fld('연금 연 인출률 (%)', dec('draw_rate', c.draw_rate))}
-      ${fld('국민연금 예상 월액 (세후, 지금 가치, 원)', num('npension', c.npension))}${fld('노후 월 생활비 목표 (지금 가치, 원)', num('need', c.need))}</div>
+      ${fld('ISA 유형 (비과세 한도)', `<select class="in" name="isa_low"><option value="1" ${c.isa_low ? 'selected' : ''}>서민형 (400만 원)</option><option value="0" ${c.isa_low ? '' : 'selected'}>일반형 (200만 원)</option></select>`)}${fld('3년 만기가 되면', `<select class="in" name="isa_cycle"><option value="1" ${c.isa_cycle ? 'selected' : ''}>해지하고 다시 가입</option><option value="0" ${c.isa_cycle ? '' : 'selected'}>은퇴까지 그대로 유지</option></select>`)}
+      ${fld('ISA 개설 연도', dec('isa_oy', c.isa_oy))}${fld('ISA 개설 월 (1~12)', dec('isa_om', c.isa_om))}
+      ${fld('물가 상승률 (%)', dec('infl', c.infl))}${fld('연금계좌 수익률 (연 %)', dec('pen_rate', c.pen_rate))}
+      ${fld('연금 연 인출률 (%)', dec('draw_rate', c.draw_rate))}${fld('국민연금 예상 월액 (세후, 지금 가치, 원)', num('npension', c.npension))}
+      ${fld('노후 월 생활비 목표 (지금 가치, 원)', num('need', c.need))}</div>
       <div class="hint faint" style="font-size:11.5px">종목별 매수 비중·가격·배당은 "이번 달 실행" 표에서 종목을 눌러 고쳐요. 주가·배당 성장은 0으로 두면 변하지 않는다고 계산해요. 내 계정 DB에만 저장돼요.</div>`,
     onOpen(b) { b.querySelectorAll('input[inputmode=numeric]').forEach(a => a.addEventListener('input', () => { const d = a.value.replace(/[^\d]/g, ''); a.value = d ? Number(d).toLocaleString('ko-KR') : ''; })); },
     async onSave(b) {
@@ -6327,6 +6378,7 @@ function openRetirePlan() {
       if (v.pen_month < 1 || v.pen_month > 12) throw new Error('납입하는 달은 1~12예요');
       if (v.pen_rate < -20 || v.pen_rate > 30) throw new Error('수익률을 확인해 주세요');
       if (v.price_g < -30 || v.price_g > 30 || v.div_g < -30 || v.div_g > 30) throw new Error('주가·배당 증가율은 -30~30 사이로 넣어 주세요');
+      if (v.isa_oy < 2000 || v.isa_oy > 2100 || v.isa_om < 1 || v.isa_om > 12) throw new Error('ISA 개설 연도·월을 확인해 주세요');
       if (v.kr_gen < 0 || v.kr_gen > 50 || v.us_tax < 0 || v.us_tax > 50) throw new Error('세금은 0~50 사이로 넣어 주세요');
       await saveLifeMeta('retire', v);
       closeFinModal(); renderDividend(); toast('저장했어요');
@@ -6397,6 +6449,120 @@ $('#divView').addEventListener('click', ev => {
   if (a === 'paid') { const c = rtCfg(); saveLifeMeta('retire', { pen_paid: c.pen_paid ? 0 : 1 }).then(() => { renderDividend(); toast(c.pen_paid ? '납입 완료를 취소했어요' : '납입 완료로 표시했어요'); }).catch(e => toast(e.message || '저장하지 못했어요', true)); }
 });
 
+
+/* ===== v2.3 Books & Film · 독서와 영화 기록 ===== */
+const CU = { kind: 'all', st: 'all', yr: null };
+const CU_K = { book: { t: '독서', u: '권', by: '저자', am: '쪽', c: 'var(--s1)' }, film: { t: '영화', u: '편', by: '감독', am: '분', c: 'var(--s2)' } };
+const CU_ST = { want: '예정', doing: '진행 중', done: '완료' };
+const CU_GENRE = { book: ['소설', '에세이', '인문', '경제·투자', '자기계발', '과학', '역사', '만화', '기타'], film: ['드라마', '액션', 'SF', '스릴러', '코미디', '로맨스', '애니', '다큐', '공포', '기타'] };
+const cuStars = n => n ? '★'.repeat(n) + '<i>' + '★'.repeat(5 - n) + '</i>' : '';
+const cuDate = r => String(r.done_on || r.started_on || r.created_at || '').slice(0, 10);
+function cuGoal() { const g = (LIFE.meta && LIFE.meta.culture) || {}; return { book: Number(g.book_goal) > 0 ? Number(g.book_goal) : 12, film: Number(g.film_goal) > 0 ? Number(g.film_goal) : 24 }; }
+function renderCultTab() { lifeEnsure(renderCult); }
+function renderCult() {
+  const el = $('#cultView'); if (!el) return;
+  if (!LIFE.loaded) { el.innerHTML = '<div class="fin-head"><div><h2>Books &amp; Film</h2><p>불러오는 중…</p></div></div>'; return; }
+  const all = LIFE.culture || [], t = today(), curY = Number(t.slice(0, 4)), ym = t.slice(0, 7), G = cuGoal();
+  if (!CU.yr) CU.yr = curY;
+  const done = all.filter(r => r.status === 'done');
+  const cnt = (k, y) => done.filter(r => r.kind === k && cuDate(r).slice(0, 4) === String(y)).length;
+  const nB = cnt('book', curY), nF = cnt('film', curY);
+  const nMon = done.filter(r => cuDate(r).slice(0, 7) === ym).length;
+  const rated = done.filter(r => r.rating && cuDate(r).slice(0, 4) === String(curY)), avg = rated.length ? rated.reduce((a, r) => a + r.rating, 0) / rated.length : null;
+  const pg = done.filter(r => r.kind === 'book' && r.amount && cuDate(r).slice(0, 4) === String(curY)).reduce((a, r) => a + r.amount, 0);
+  const mn = done.filter(r => r.kind === 'film' && r.amount && cuDate(r).slice(0, 4) === String(curY)).reduce((a, r) => a + r.amount, 0);
+  const gt = (k, n, extra) => `<div class="card lf-tile" style="--k:${CU_K[k].c}"><span>${curY}년 ${CU_K[k].t}</span><b>${n}<small>/ ${G[k]}${CU_K[k].u}</small></b><small>${Math.round(n / G[k] * 100)}%${extra ? ' · ' + extra : ''}</small><u class="cu-goalb"><i style="width:${Math.min(100, n / G[k] * 100).toFixed(0)}%"></i></u></div>`;
+  const tiles = `<div class="lf-tiles">${gt('book', nB, pg ? pg.toLocaleString('ko-KR') + '쪽' : '')}${gt('film', nF, mn ? (Math.round(mn / 6) / 10) + '시간' : '')}${lfTile('이번 달', `${nMon}<small>건 완료</small>`, '')}${lfTile('평균 별점', avg == null ? '-' : `${avg.toFixed(1)}<small>★</small>`, `<small>${rated.length}건 평가</small>`)}</div>`;
+  const yr = CU.yr, kindSel = CU.kind;
+  const mon = Array.from({ length: 12 }, (_, i) => { const m = yr + '-' + String(i + 1).padStart(2, '0'); const mm = done.filter(r => cuDate(r).slice(0, 7) === m); return { b: mm.filter(r => r.kind === 'book').length, f: mm.filter(r => r.kind === 'film').length }; });
+  const items = mon.map((x, i) => { const v = kindSel === 'book' ? x.b : kindSel === 'film' ? x.f : x.b + x.f; return { v, txt: v ? String(v) : '', label: (i + 1) + '월', on: yr === curY && i + 1 === Number(ym.slice(5)), tip: `${yr}년 ${i + 1}월<br>독서 <b>${x.b}권</b> · 영화 <b>${x.f}편</b>` }; });
+  LFQ.push(() => { const b = $('#cuChart'); if (b) drawBars(b, { items, color: kindSel === 'film' ? 'var(--s2)' : kindSel === 'book' ? 'var(--s1)' : 'var(--c-goal)', min: 2, label: '월별 완료', h: 140 }); });
+  const list = all.filter(r => (kindSel === 'all' || r.kind === kindSel) && (CU.st === 'all' || r.status === CU.st));
+  const open = list.filter(r => r.status !== 'done').sort((a, b) => a.status === b.status ? (cuDate(b) < cuDate(a) ? -1 : 1) : (a.status === 'doing' ? -1 : 1));
+  const fin = list.filter(r => r.status === 'done').sort((a, b) => cuDate(a) < cuDate(b) ? 1 : cuDate(a) > cuDate(b) ? -1 : (String(a.created_at) < String(b.created_at) ? 1 : -1));
+  const row = r => { const K = CU_K[r.kind], meta = [r.creator, r.genre, r.amount ? r.amount.toLocaleString('ko-KR') + K.am : ''].filter(Boolean).map(esc).join(' · '), d = cuDate(r);
+    return `<button type="button" class="cu-row" data-cu="edit:${esc(r.id)}"><span class="cu-k" style="--k:${K.c}">${K.t}</span><span class="cu-m"><b>${esc(r.title)}</b>${meta ? `<small>${meta}</small>` : ''}${r.memo ? `<em>${esc(r.memo)}</em>` : ''}</span><span class="cu-r">${r.status === 'done' ? cuStars(r.rating) : `<span class="cu-badge">${CU_ST[r.status]}</span>`}<small>${r.status === 'want' ? '' : d ? Number(d.slice(5, 7)) + '/' + Number(d.slice(8, 10)) : ''}</small></span></button>`; };
+  let body = '';
+  if (open.length) body += `<div class="cu-sec"><b>진행 · 예정</b><span>${open.length}건</span></div><section class="card cu-list">${open.map(row).join('')}</section>`;
+  const byM = {}; fin.forEach(r => { const m = cuDate(r).slice(0, 7) || '날짜 없음'; (byM[m] = byM[m] || []).push(r); });
+  Object.keys(byM).sort().reverse().forEach(m => { body += `<div class="cu-sec"><b>${monthLabel2(m)}</b><span>${byM[m].length}건</span></div><section class="card cu-list">${byM[m].map(row).join('')}</section>`; });
+  if (!list.length) body = `<div class="lf-empty">${all.length ? '조건에 맞는 기록이 없어요.' : '읽은 책이나 본 영화를 하나씩 남겨 보세요.<br>별점과 한줄평까지 적어두면 나중에 다시 꺼내 보기 좋아요.'}<br><button type="button" class="btn primary" data-cu="new">+ 첫 기록 추가</button></div>`;
+  const kseg = `<div class="seg">${[['all', '전체'], ['book', '독서'], ['film', '영화']].map(([k, l]) => `<button type="button" data-cu="kind:${k}" class="${kindSel === k ? 'on' : ''}">${l}</button>`).join('')}</div>`;
+  const sch = [['all', '전체'], ['doing', '진행 중'], ['want', '예정'], ['done', '완료']].map(([k, l]) => `<button type="button" class="chip ${CU.st === k ? 'on' : ''}" data-cu="st:${k}">${l}</button>`).join('');
+  el.innerHTML = `<div class="fin-head"><div><h2>Books &amp; Film</h2><p>읽은 책과 본 영화를 기록하고 한 해를 돌아봐요</p></div><div class="fin-act"><button type="button" class="btn" data-cu="goal">목표</button><button type="button" class="btn primary" data-cu="new">+ 기록 추가</button></div></div>
+    ${tiles}
+    <div class="card lf-chart-card"><div class="lf-ch"><b>${yr}년 월별 완료</b><span class="cu-yr"><button type="button" data-cu="yr:-1" aria-label="이전 해">‹</button><b>${yr}</b><button type="button" data-cu="yr:1" aria-label="다음 해">›</button></span></div>${lfChartBox('cuChart')}</div>
+    <div class="cu-bar" style="margin-top:16px">${kseg}<div class="lf-chips">${sch}</div></div>
+    ${body}`;
+  lfRunQueue();
+}
+function openCultForm(r) {
+  const isNew = !r;
+  r = r || { kind: CU.kind === 'film' ? 'film' : 'book', title: '', creator: '', status: 'done', done_on: today(), started_on: null, rating: null, amount: null, genre: '', memo: '' };
+  let kind = r.kind, status = r.status, rating = r.rating || 0;
+  const seg = (id, items) => `<div class="seg" id="${id}">${items.map(([k, t, on]) => `<button type="button" data-k="${k}" class="${on ? 'on' : ''}">${t}</button>`).join('')}</div>`;
+  const d0 = status === 'done' ? r.done_on : status === 'doing' ? r.started_on : '';
+  openFinModal({
+    title: isNew ? '기록 추가' : '기록 수정',
+    html: `${fld('종류', seg('cuKind', [['book', '독서', kind === 'book'], ['film', '영화', kind === 'film']]))}
+      ${fld('제목', `<input class="in" name="t" value="${esc(r.title)}" placeholder="책이나 영화 제목">`)}
+      ${fld('<span id="cuByL"></span>', `<input class="in" name="c" value="${esc(r.creator || '')}" placeholder="선택">`)}
+      ${fld('상태', seg('cuSt', [['want', '예정', status === 'want'], ['doing', '진행 중', status === 'doing'], ['done', '완료', status === 'done']]))}
+      <div id="cuDateW">${fld('<span id="cuDL"></span>', `<input class="in" type="date" name="d" value="${esc(d0 ? String(d0).slice(0, 10) : today())}">`)}</div>
+      <div id="cuRateW">${fld('별점', `<div class="cu-stars" id="cuStars">${[1, 2, 3, 4, 5].map(n => `<button type="button" data-n="${n}" class="${n <= rating ? 'on' : ''}" aria-label="${n}점">★</button>`).join('')}</div>`)}</div>
+      <div class="row2">${fld('<span id="cuAL"></span>', `<input class="in" name="a" inputmode="numeric" value="${r.amount || ''}" placeholder="선택">`)}${fld('장르', `<input class="in" name="g" list="cuGl" value="${esc(r.genre || '')}" placeholder="선택"><datalist id="cuGl"></datalist>`)}</div>
+      ${fld('한줄평 · 메모', `<textarea class="in" name="m" rows="3" placeholder="기억하고 싶은 문장이나 느낌">${esc(r.memo || '')}</textarea>`)}`,
+    onOpen(b) {
+      const sync = () => {
+        const K = CU_K[kind];
+        b.querySelector('#cuByL').textContent = K.by + ' (선택)'; b.querySelector('#cuAL').textContent = (kind === 'book' ? '페이지 수' : '상영 시간(분)') + ' (선택)';
+        b.querySelector('#cuDL').textContent = status === 'done' ? (kind === 'book' ? '다 읽은 날' : '본 날') : '시작한 날';
+        b.querySelector('#cuDateW').hidden = status === 'want'; b.querySelector('#cuRateW').hidden = status !== 'done';
+        b.querySelector('#cuGl').innerHTML = CU_GENRE[kind].map(g => `<option value="${g}">`).join('');
+        b.querySelectorAll('#cuKind button').forEach(x => x.classList.toggle('on', x.dataset.k === kind)); b.querySelectorAll('#cuSt button').forEach(x => x.classList.toggle('on', x.dataset.k === status));
+        b.querySelectorAll('#cuStars button').forEach(x => x.classList.toggle('on', Number(x.dataset.n) <= rating));
+      };
+      sync();
+      b.querySelector('#cuKind').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; kind = x.dataset.k; sync(); });
+      b.querySelector('#cuSt').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; status = x.dataset.k; sync(); });
+      b.querySelector('#cuStars').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; const n = Number(x.dataset.n); rating = rating === n ? 0 : n; sync(); });
+      setTimeout(() => b.querySelector('[name=t]').focus(), 50);
+    },
+    async onSave(b) {
+      const g = n => b.querySelector(`[name=${n}]`).value.trim();
+      const title = g('t'); if (!title) throw new Error('제목을 입력해 주세요');
+      const d = g('d'), a = lfNum(g('a'));
+      if (status !== 'want' && !d) throw new Error('날짜를 선택해 주세요');
+      if (a != null && (a < 0 || a > 100000)) throw new Error('페이지·시간을 확인해 주세요');
+      const row = { kind, title, creator: g('c') || null, status, started_on: status === 'doing' ? d : (status === 'done' ? (r.started_on || null) : null), done_on: status === 'done' ? d : null, rating: status === 'done' && rating ? rating : null, amount: a == null ? null : Math.round(a), genre: g('g') || null, memo: g('m') || null };
+      await lfSave('life_culture', 'culture', null, row, isNew ? null : r.id);
+      lfDone('저장했어요');
+    },
+    onDelete: isNew ? null : async () => { await lfDel('life_culture', 'culture', r.id); lfDone('삭제했어요'); }
+  });
+}
+function openCultGoal() {
+  const G = cuGoal();
+  openFinModal({
+    title: '올해 목표', saveLabel: '저장',
+    html: `<div class="row2">${fld('독서 (권)', `<input class="in" name="b" inputmode="numeric" value="${G.book}">`)}${fld('영화 (편)', `<input class="in" name="f" inputmode="numeric" value="${G.film}">`)}</div><div class="hint faint" style="font-size:11.5px">매년 같은 목표로 진행률을 보여줘요.</div>`,
+    async onSave(b) {
+      const bk = lfNum(b.querySelector('[name=b]').value), fl = lfNum(b.querySelector('[name=f]').value);
+      if (!(bk > 0) || !(fl > 0) || bk > 1000 || fl > 1000) throw new Error('1 이상의 숫자로 넣어 주세요');
+      await saveLifeMeta('culture', { book_goal: Math.round(bk), film_goal: Math.round(fl) });
+      closeFinModal(); renderCult(); toast('저장했어요');
+    }
+  });
+}
+$('#cultView').addEventListener('click', ev => {
+  const x = ev.target.closest('[data-cu]'); if (!x) return; const a = x.dataset.cu;
+  if (a === 'new') return openCultForm(null);
+  if (a === 'goal') return openCultGoal();
+  if (a.indexOf('edit:') === 0) { const r = (LIFE.culture || []).find(y => y.id === a.slice(5)); if (r) openCultForm(r); return; }
+  if (a.indexOf('kind:') === 0) { CU.kind = a.slice(5); return renderCult(); }
+  if (a.indexOf('st:') === 0) { CU.st = a.slice(3); return renderCult(); }
+  if (a.indexOf('yr:') === 0) { CU.yr = (CU.yr || Number(today().slice(0, 4))) + Number(a.slice(3)); return renderCult(); }
+});
 
 /* ===== Home ===== */
 function finReady() { return FIN.loaded ? Promise.resolve() : (FIN._p || (FIN._p = loadFin().then(() => { FIN._p = null; }, () => { FIN._p = null; }))); }
@@ -6491,7 +6657,7 @@ function renderHome() {
 const BK_TABLES = [
   ['fin_holdings', 'id'], ['fin_ledger', 'id'], ['fin_snapshots', 'snap_date'], ['fin_meta', 'key'], ['fin_merchant_rules', 'merchant_key'], ['fin_subs', 'id'], ['fin_events', 'id'],
   ['health_body', 'id'], ['health_workout', 'id'], ['health_sleep', 'id'], ['health_checkup', 'id'], ['health_exam', 'id'], ['health_drink', 'id'],
-  ['life_meta', 'user_id,key'], ['life_goals', 'id'], ['life_habits', 'id'], ['life_habit_logs', 'habit_id,log_date'], ['life_todos', 'id'],
+  ['life_meta', 'user_id,key'], ['life_goals', 'id'], ['life_habits', 'id'], ['life_habit_logs', 'habit_id,log_date'], ['life_todos', 'id'], ['life_culture', 'id'],
   ['whisky_my_bar', 'id'], ['whisky_journal', 'id'], ['whisky_yt_channels', 'id'], ['whisky_yt_videos', 'id'],
   ['whisky_products', 'id', 1], ['whisky_distilleries', 'id', 1], ['whisky_goals', 'id', 1]
 ];
