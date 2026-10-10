@@ -735,6 +735,26 @@ body[data-tab="portfolio"] #btnAdd,body[data-tab="ledger"] #btnAdd{display:none}
 .fs-side div{display:flex;justify-content:space-between;gap:10px;font-size:13px;border-bottom:1px dashed var(--line2);padding-bottom:8px}
 .fs-side span{color:var(--ink3)}.fs-side b{color:var(--ink)}
 .fs-alloc{grid-column:1/-1}
+.al-wrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px 34px;align-items:center;padding-top:6px}
+.al-ring{position:relative;width:188px;height:188px;margin:0 auto}
+.al-ring svg{width:100%;height:100%;display:block}
+.al-bg{stroke:var(--soft)}
+.al-arc{transition:stroke-width .15s,opacity .15s;cursor:pointer;stroke-linecap:butt}
+.al-arc.s1{stroke:var(--s1)}.al-arc.s2{stroke:var(--s2)}.al-arc.s3{stroke:var(--s3)}.al-arc.s4{stroke:var(--s4)}.al-arc.s5{stroke:var(--s5)}.al-arc.s6{stroke:var(--s6)}.al-arc.s7{stroke:var(--s7)}
+.al-wrap.hov .al-arc{opacity:.3}.al-wrap.hov .al-arc.on{opacity:1;stroke-width:18}
+.al-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;padding:0 34px}
+.al-c small{font-size:11.5px;color:var(--ink3);line-height:1.25;font-weight:600}
+.al-c b{font-family:var(--f);font-size:27px;line-height:1.15;letter-spacing:-.03em;color:var(--ink);font-weight:800}
+.al-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 14px}
+.al-row{display:grid;grid-template-columns:10px minmax(0,1fr) auto;grid-template-areas:"d l p" ". m m";align-items:center;column-gap:8px;padding:8px 10px;border-radius:11px;font-size:13px;color:var(--ink2);cursor:pointer;transition:background .12s}
+.al-row .dot{grid-area:d;width:10px;height:10px}.al-row span{grid-area:l;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.al-row b{grid-area:p;color:var(--ink);font-variant-numeric:tabular-nums}.al-row em{grid-area:m;font-style:normal;font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.al-row:hover,.al-row.on{background:var(--soft)}
+.ih{display:grid;gap:10px}
+.ih-it{display:grid;gap:3px;text-align:left;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--card);cursor:pointer;font:inherit;color:var(--ink)}
+.ih-it b{font-size:15px}.ih-it span{font-size:12.5px;color:var(--ink3)}
+.ih-it:hover{border-color:var(--line2);background:var(--soft)}
+.ex-pdf{margin:0 0 12px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--inc) 12%,var(--card));font-size:12.5px;color:var(--ink2);line-height:1.5}
 .al-bar{display:flex;gap:2px;height:14px}
 .al-bar i{display:block;border-radius:4px;min-width:6px}
 .al-bar i.s1,.dot.s1{background:var(--s1)}.al-bar i.s2,.dot.s2{background:var(--s2)}.al-bar i.s3,.dot.s3{background:var(--s3)}.al-bar i.s4,.dot.s4{background:var(--s4)}.al-bar i.s5,.dot.s5{background:var(--s5)}.al-bar i.s6,.dot.s6{background:var(--s6)}.al-bar i.s7,.dot.s7{background:var(--s7)}
@@ -823,6 +843,8 @@ body[data-tab="portfolio"] #btnAdd,body[data-tab="ledger"] #btnAdd{display:none}
   .fin-head h2{font-size:30px}
   .card.fin-sum{grid-template-columns:1fr;padding:18px}
   .fs-big{font-size:34px}
+  .al-wrap{grid-template-columns:1fr;gap:14px}.al-ring{width:200px;height:200px}.al-list{grid-template-columns:1fr}
+  .al-row{grid-template-columns:10px minmax(0,1fr) auto auto;grid-template-areas:"d l p m"}.al-row em{font-size:12px}
   .fh-row{grid-template-columns:minmax(0,1fr) auto;padding:11px 16px}.fh-p{display:none}
   .fg-h{padding:14px 16px}
   .card.ld-sum{padding:16px 14px;gap:6px}.ld-t b{font-size:18px}
@@ -1960,7 +1982,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.18.0';
+const APP_VERSION = 'v1.19.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -2694,6 +2716,20 @@ function finTotals(list){
   });
   return { v, c, iv, ic, other: v - iv, pnl: iv - ic, pct: ic > 0 ? (iv - ic) / ic * 100 : 0, byMk };
 }
+/* ===== 자산 비중 도넛: 호버/탭 ===== */
+function alSet(w, k){
+  w.querySelectorAll('[data-al]').forEach(n => n.classList.toggle('on', !!k && n.dataset.al === k));
+  w.classList.toggle('hov', !!k);
+  const src = k ? w.querySelector('.al-row[data-al="' + k + '"]') : null, c = w.querySelector('.al-c');
+  if (c) c.innerHTML = '<small>' + esc(src ? src.dataset.lb : w.dataset.dl) + '</small><b>' + (src ? src.dataset.pc : w.dataset.dp) + '%</b>';
+}
+document.addEventListener('mouseover', e => { const t = e.target.closest && e.target.closest('.al-wrap [data-al]'); if (t) alSet(t.closest('.al-wrap'), t.dataset.al); });
+document.addEventListener('mouseout', e => { const w = e.target.closest && e.target.closest('.al-wrap'); if (w && !(e.relatedTarget && w.contains(e.relatedTarget))) alSet(w, null); });
+document.addEventListener('click', e => {
+  const t = e.target.closest && e.target.closest('.al-wrap [data-al]'); if (!t) return;
+  const w = t.closest('.al-wrap'), cur = w.querySelector('.al-row.on');
+  alSet(w, cur && cur.dataset.al === t.dataset.al ? null : t.dataset.al);
+});
 function renderPortfolioTab(){ finEnsure(renderPortfolio); }
 function renderPortfolio(){
   const el = $('#portfolioView');
@@ -2706,9 +2742,23 @@ function renderPortfolio(){
   const list = FIN.broker === 'all' ? all : all.filter(h => h.broker === FIN.broker);
 
   const segs = MK_ORDER.filter(k => T.byMk[k] > 0);
+  const alS = segs.slice().sort((a, b) => T.byMk[b] - T.byMk[a]);
+  const alC = 2 * Math.PI * 46;
+  let alOff = 0;
+  const alArcs = alS.map(k => {
+    const f = T.byMk[k] / T.v, len = Math.max(f * alC - (alS.length > 1 ? 2.2 : 0), 0.6);
+    const a = `<circle class="al-arc ${MK_SERIES[k]}" data-al="${k}" cx="60" cy="60" r="46" fill="none" stroke-width="15" stroke-dasharray="${len.toFixed(2)} ${(alC - len).toFixed(2)}" stroke-dashoffset="${(-alOff).toFixed(2)}"><title>${esc(MK_LABEL[k])} ${(f * 100).toFixed(1)}%</title></circle>`;
+    alOff += f * alC; return a;
+  }).join('');
+  const alTop = alS[0];
   const alloc = segs.length ? `
-    <div class="al-bar" role="img" aria-label="자산 비중">${segs.map(k => `<i class="${MK_SERIES[k]}" style="flex:${T.byMk[k]}" title="${esc(MK_LABEL[k])} ${(T.byMk[k]/T.v*100).toFixed(1)}%"></i>`).join('')}</div>
-    <div class="al-legend">${segs.map(k => `<div class="al-it"><i class="dot ${MK_SERIES[k]}"></i><span>${esc(MK_LABEL[k])}</span><b>${(T.byMk[k]/T.v*100).toFixed(1)}%</b><em class="money">${won(T.byMk[k])}</em></div>`).join('')}</div>` : '';
+    <div class="al-wrap" data-dl="${esc(MK_LABEL[alTop])}" data-dp="${(T.byMk[alTop] / T.v * 100).toFixed(1)}">
+      <div class="al-ring" role="img" aria-label="자산 비중 원형 차트">
+        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="46" fill="none" class="al-bg" stroke-width="15"/><g transform="rotate(-90 60 60)">${alArcs}</g></svg>
+        <div class="al-c"><small>${esc(MK_LABEL[alTop])}</small><b>${(T.byMk[alTop] / T.v * 100).toFixed(1)}%</b></div>
+      </div>
+      <div class="al-list">${alS.map(k => `<div class="al-row" data-al="${k}" data-lb="${esc(MK_LABEL[k])}" data-pc="${(T.byMk[k] / T.v * 100).toFixed(1)}"><i class="dot ${MK_SERIES[k]}"></i><span>${esc(MK_LABEL[k])}</span><b>${(T.byMk[k] / T.v * 100).toFixed(1)}%</b><em class="money">${won(T.byMk[k])}</em></div>`).join('')}</div>
+    </div>` : '';
 
   const groups = [];
   list.forEach(h => {
@@ -5075,7 +5125,7 @@ function hxPlan(ex) {
 let HXC = { plan: [], ex: null };
 function hxStatusHTML() {
   const exams = hxExams();
-  if (!exams.length) return `<div class="lf-empty">아직 건강검진 결과가 없어요.<br><button type="button" class="btn primary" data-hx="newexam">+ 검진 결과 입력</button></div>`;
+  if (!exams.length) return `<div class="lf-empty">아직 건강검진 결과가 없어요.<br><button type="button" class="btn primary" data-hx="newexam">+ 검진 결과 입력</button> <button type="button" class="btn" data-hx="exampdf">PDF로 가져오기</button></div>`;
   const ex = exams[0], v = ex.vals || {}, S = ex.summary || {}, t = today(), prev = exams[1] ? exams[1].vals : null;
   HXC.ex = ex; HXC.plan = hxPlan(ex);
   const rows = hxRows(v, prev), warn = rows.filter(r => r.lv.n >= 1).length;
@@ -5117,7 +5167,7 @@ function hxStatusHTML() {
     <div class="hx-sec">관리 우선순위<small>검진 수치로 정리한 참고용이에요</small></div><div class="hx-plan">${plan}</div>
     <div class="hx-sec">체중 · 허리 변화</div><div class="card lf-chart-card">${goal}${lfChartBox('hxWChart')}</div>${wrows ? `<section class="card lf-list">${wrows}${lfMoreBtn('body', wRecs.length, shown)}</section>` : ''}
     <div class="hx-sec">검진 수치 전체<small>${esc(ex.exam_date.replace(/-/g, '.'))} 기준${prev ? ' · ▲▼는 직전 검진 대비' : ''}</small></div>${exam}
-    <div class="lf-note">검진 결과를 정리해서 보여주는 참고용 화면이에요. 진단이나 치료 판단이 아니고, 약이나 치료가 필요한지는 의료진과 상의하세요.<button type="button" class="lf-more" style="display:inline;width:auto;padding:0 0 0 6px" data-hx="newexam">새 검진 결과 입력</button></div>`;
+    <div class="lf-note">검진 결과를 정리해서 보여주는 참고용 화면이에요. 진단이나 치료 판단이 아니고, 약이나 치료가 필요한지는 의료진과 상의하세요.<button type="button" class="lf-more" style="display:inline;width:auto;padding:0 0 0 6px" data-hx="newexam">새 검진 결과 입력</button><button type="button" class="lf-more" style="display:inline;width:auto;padding:0 0 0 10px" data-hx="exampdf">PDF로 가져오기</button></div>`;
 }
 async function hxSaveMeta(key, value) {
   const { error } = await sb.from('life_meta').upsert(Object.assign({ key, value, updated_at: new Date().toISOString() }, APP.uid ? { user_id: APP.uid } : {}), { onConflict: 'user_id,key' });
@@ -5135,6 +5185,7 @@ async function hxAct(a) {
     if (a === 'weight') return openWeight();
     if (a === 'exam') return openExam(ex);
     if (a === 'newexam') return openExam(null);
+    if (a === 'exampdf') return pickExamPdf();
     if (a === 'visit') { await hxSaveMeta('exam_follow', Object.assign({}, LIFE.meta.exam_follow || {}, { [ex.exam_date]: today() })); toast('기록했어요'); return renderLife(); }
     if (a === 'unvisit') { const f = Object.assign({}, LIFE.meta.exam_follow || {}); delete f[ex.exam_date]; await hxSaveMeta('exam_follow', f); return renderLife(); }
     if (a === 'todo:visit') { await hxAddTodo('내과 진료 — 검진 결과(이상지질혈증·간수치) 상담', 3); return renderLife(); }
@@ -5175,12 +5226,13 @@ function openWeight(r) {
   });
 }
 const HX_FIELDS = [['height', '키(cm)'], ['weight', '체중(kg)'], ['waist', '허리(cm)'], ['sys', '수축기'], ['dia', '이완기'], ['glu', '공복혈당'], ['tc', '총콜레스테롤'], ['ldl', 'LDL'], ['hdl', 'HDL'], ['tg', '중성지방'], ['ast', 'AST'], ['alt', 'ALT'], ['ggt', '감마GTP'], ['cr', '크레아티닌'], ['egfr', 'eGFR'], ['hb', '혈색소']];
-function openExam(ex) {
-  const isNew = !ex, v = isNew ? {} : (ex.vals || {}), S = isNew ? {} : (ex.summary || {});
+function openExam(ex, opt) {
+  const isNew = !ex || !ex.id, v = ex ? (ex.vals || {}) : {}, S = ex ? (ex.summary || {}) : {};
   ex = ex || { exam_date: today(), org: '' };
+  const pdfNote = opt && opt.pdf ? `<div class="ex-pdf">${opt.n ? `PDF에서 <b>${opt.n}개 수치</b>를 읽었어요.` : '위암검진(내시경) 결과를 읽었어요.'} 맞는지 확인하고 저장해 주세요.${opt.merged ? '<br>같은 날짜 검진 기록이 있어서 읽은 값으로 합쳐서 갱신돼요.' : ''}${opt.n && opt.n < 12 ? '<br>빠진 칸은 직접 채우거나 비워 두세요.' : ''}</div>` : '';
   openFinModal({
-    title: isNew ? '건강검진 결과 입력' : '건강검진 결과 수정', wide: true,
-    html: `<div class="row2">${fld('검진일', `<input class="in" type="date" name="d" value="${esc(ex.exam_date)}">`)}${fld('검진기관', `<input class="in" name="org" value="${esc(ex.org || '')}" placeholder="예: 시원누리내과의원">`)}</div>
+    title: opt && opt.pdf ? '검진 결과 확인 (PDF)' : isNew ? '건강검진 결과 입력' : '건강검진 결과 수정', wide: true,
+    html: pdfNote + `<div class="row2">${fld('검진일', `<input class="in" type="date" name="d" value="${esc(ex.exam_date)}">`)}${fld('검진기관', `<input class="in" name="org" value="${esc(ex.org || '')}" placeholder="예: 시원누리내과의원">`)}</div>
       <div class="row2">${fld('종합 판정', `<input class="in" name="judge" value="${esc(S.judge || '')}" placeholder="예: 정상B(경계)">`)}${fld('의심 질환 (쉼표로 구분)', `<input class="in" name="suspect" value="${esc((S.suspect || []).join(', '))}" placeholder="예: 이상지질혈증, 간질환">`)}</div>
       <div class="row3">${HX_FIELDS.map(f => fld(f[1], `<input class="in" name="v_${f[0]}" inputmode="decimal" value="${v[f[0]] ?? ''}">`)).join('')}</div>
       ${fld('의사 권고사항 (한 줄에 하나)', `<textarea class="in" name="advice" rows="3" placeholder="예: 절주 또는 금주가 필요합니다">${esc((S.advice || []).join('\n'))}</textarea>`)}
@@ -5199,6 +5251,169 @@ function openExam(ex) {
       lfDone();
     },
     onDelete: isNew ? null : async () => { await lfDel('health_exam', 'exam', ex.id); lfDone('삭제했어요'); }
+  });
+}
+/* ===== 건강검진 PDF 읽기 (공단 일반건강검진 결과통보서 · 위암검진 결과) ===== */
+function examLines(pages){
+  const out = [];
+  pages.forEach(items => {
+    const rows = [];
+    items.forEach(it => {
+      const s = String(it.str == null ? '' : it.str); if (!s.trim()) return;
+      const x = it.transform[4], y = it.transform[5];
+      let r = rows.find(r => Math.abs(r.y - y) <= 3);
+      if (!r) { r = { y, it: [] }; rows.push(r); }
+      r.it.push({ x, s });
+    });
+    rows.sort((a, b) => b.y - a.y).forEach(r => { r.it.sort((a, b) => a.x - b.x); out.push(r.it.map(i => i.s.trim()).join(' ').replace(/\s+/g, ' ').trim()); });
+  });
+  return out;
+}
+const exLab = s => s.split('').map(c => c.replace(/[.*+?^${}()|[\]\\\/]/g, '\\$&')).join('\\s*');
+function exNum(text, label){
+  const m = text.match(new RegExp(exLab(label) + '\\s*(\\d+(?:\\.\\d+)?)'));
+  return m ? Number(m[1]) : null;
+}
+function exDate(y, m, d){ return y + '-' + String(m).padStart(2, '0') + '-' + String(d).padStart(2, '0'); }
+function exSentences(t){
+  const s = String(t || '').replace(/\s+/g, ' ').trim();
+  return (s.match(/[^.。]+[.。]?/g) || []).map(x => x.trim()).filter(x => x.length > 1);
+}
+function parseExamPdf(lines){
+  const text = lines.join('\n'), flat = text.replace(/\s+/g, '');
+  /* 위암검진 결과 (내시경) */
+  if (/위암검진결과내역/.test(flat) || (/위내시경/.test(flat) && !/일반건강검진결과통보서/.test(flat))) {
+    const dm = text.match(/(\d{4})\.(\d{1,2})\.(\d{1,2})/);
+    if (!dm) return null;
+    const date = exDate(dm[1], dm[2], dm[3]);
+    const fm = lines.map(l => l.match(/^1\s+(.+?)\s+(정상[A-Za-z]?|이상소견없음|[가-힣]{2,8})$/)).find(Boolean);
+    const bm = text.match(/조직\s*진단\s+([^\n]+)/);
+    const hm = text.match(/헬리코박터[\s\S]{0,60}?(음성|양성)/);
+    const om = text.match(/검진기관명\s+(\S+)/);
+    const nd = new Date(date + 'T00:00:00'); nd.setFullYear(nd.getFullYear() + 2);
+    const endo = { date, finding: fm ? fm[1] : '', biopsy: bm ? bm[1].trim() : '', hp: hm ? hm[1] : '', judge: fm ? fm[2] : '', next: nd.getFullYear() + '-' + String(nd.getMonth() + 1).padStart(2, '0') };
+    return { kind: 'endo', exam_date: date, org: om ? om[1] : '', endo };
+  }
+  /* 일반건강검진 결과통보서 */
+  const dm = text.match(/검진일\s*(\d{4})[.\-/](\d{1,2})[.\-/](\d{1,2})/);
+  if (!dm || !/건강검진/.test(flat)) return null;
+  const vals = {};
+  const hw = text.match(new RegExp(exLab('키(cm)') + '\\s*및\\s*' + exLab('몸무게(kg)') + '\\s*(\\d+(?:\\.\\d+)?)\\s*/\\s*(\\d+(?:\\.\\d+)?)'));
+  if (hw) { vals.height = Number(hw[1]); vals.weight = Number(hw[2]); }
+  const put = (k, v) => { if (v != null && isFinite(v)) vals[k] = v; };
+  put('waist', exNum(text, '허리둘레(cm)'));
+  const bp = text.match(/(\d{2,3})\s*\/\s*(\d{2,3})\s*mmHg/); if (bp) { vals.sys = Number(bp[1]); vals.dia = Number(bp[2]); }
+  put('hb', exNum(text, '혈색소(g/dL)'));
+  put('glu', exNum(text, '공복혈당(mg/dL)'));
+  put('tc', exNum(text, '총콜레스테롤(mg/dL)'));
+  put('hdl', exNum(text, '고밀도콜레스테롤(mg/dL)') != null ? exNum(text, '고밀도콜레스테롤(mg/dL)') : exNum(text, '고밀도 콜레스테롤(mg/dL)'));
+  put('tg', exNum(text, '중성지방(mg/dL)'));
+  put('ldl', exNum(text, '저밀도콜레스테롤(mg/dL)') != null ? exNum(text, '저밀도콜레스테롤(mg/dL)') : exNum(text, '저밀도 콜레스테롤(mg/dL)'));
+  put('cr', exNum(text, '혈청크레아티닌(mg/dL)'));
+  put('ast', exNum(text, '(AST)(IU/L)'));
+  put('alt', exNum(text, '(ALT)(IU/L)'));
+  const gg = text.match(/GTP\)\s*\(IU\/L\)\s*(\d+(?:\.\d+)?)/); if (gg) vals.ggt = Number(gg[1]);
+  const gi = lines.findIndex(l => /GFR/i.test(l));
+  if (gi >= 0) {
+    for (let j = gi; j <= gi + 2 && j < lines.length; j++) {
+      const m = lines[j].match(/(\d+(?:\.\d+)?)\s+\d+(?:\.\d+)?\s*이상/) || lines[j].match(/GFR\)\s*(\d+(?:\.\d+)?)/);
+      if (m) { vals.egfr = Number(m[1]); break; }
+    }
+  }
+  if (vals.height && vals.weight) vals.bmi = Math.round(vals.weight / Math.pow(vals.height / 100, 2) * 10) / 10;
+  /* 종합 판정 */
+  const pl = lines.findIndex(l => /^판정\s*-/.test(l));
+  let judge = '';
+  if (pl >= 0) {
+    const m1 = lines[pl].match(/■\s*([^□■]+)/);
+    if (m1) judge = m1[1].trim();
+    else { const m2 = (lines[pl + 1] || '').match(/■\s*([^□■]+)/); if (m2) judge = m2[1].trim(); }
+  }
+  const sm = text.match(/의심\s*질환\s*:\s*([^\n]+)/);
+  const suspect = sm ? sm[1].split(/[,，、]/).map(x => x.trim()).filter(x => x && !/해당사항없음/.test(x.replace(/\s/g, ''))) : [];
+  const block = (a, b) => {
+    const i = lines.findIndex(l => a.test(l)); if (i < 0) return '';
+    const out = [];
+    for (let j = i + 1; j < lines.length; j++) { if (b.test(lines[j])) break; out.push(lines[j]); }
+    return out.join(' ');
+  };
+  const advice = exSentences(block(/^▷\s*생활습관\s*관리/, /^▷|^※/)).concat(exSentences(block(/^▷\s*기타/, /^▷|^※/)));
+  const vm = text.match(/(\d{1,3})\s*일\s*이내/);
+  const summary = { judge, suspect, advice };
+  if (vm) summary.visit_days = Number(vm[1]);
+  const om = text.match(/([가-힣A-Za-z0-9]+(?:의원|병원|센터|클리닉))\s+\d{6,}/);
+  return { kind: 'general', exam_date: exDate(dm[1], dm[2], dm[3]), org: om ? om[1] : '', vals, summary };
+}
+
+let _pdfjsP = null;
+function loadPDFJS(){
+  if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+  if (_pdfjsP) return _pdfjsP;
+  const bases = ['https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/', 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/'];
+  _pdfjsP = new Promise((res, rej) => {
+    const next = i => {
+      if (i >= bases.length) { _pdfjsP = null; rej(new Error('PDF 읽기 모듈을 불러오지 못했어요. 인터넷 연결을 확인해 주세요')); return; }
+      const sc = document.createElement('script'); sc.src = bases[i] + 'pdf.min.js';
+      sc.onload = async () => {
+        const L = window.pdfjsLib; if (!L) { next(i + 1); return; }
+        try { const r = await fetch(bases[i] + 'pdf.worker.min.js'); const b = await r.blob(); L.GlobalWorkerOptions.workerSrc = URL.createObjectURL(b); }
+        catch (e) { L.GlobalWorkerOptions.workerSrc = bases[i] + 'pdf.worker.min.js'; }
+        res(L);
+      };
+      sc.onerror = () => { sc.remove(); next(i + 1); };
+      document.head.appendChild(sc);
+    };
+    next(0);
+  });
+  return _pdfjsP;
+}
+async function readPdfPages(file){
+  const L = await loadPDFJS();
+  const buf = await file.arrayBuffer();
+  let doc;
+  try { doc = await L.getDocument({ data: new Uint8Array(buf) }).promise; }
+  catch (e) { throw new Error(e && e.name === 'PasswordException' ? '비밀번호가 걸린 PDF예요. 비밀번호를 푼 파일을 올려 주세요' : 'PDF를 열지 못했어요'); }
+  const pages = [];
+  for (let p = 1; p <= Math.min(doc.numPages, 8); p++) { const pg = await doc.getPage(p); const tc = await pg.getTextContent(); pages.push(tc.items); }
+  return pages;
+}
+async function importExamFiles(files){
+  toast('PDF를 읽는 중…');
+  const found = [];
+  try {
+    await lifeReady();
+    for (const f of files) found.push(parseExamPdf(examLines(await readPdfPages(f))));
+  } catch (e) { toast(e.message || 'PDF를 읽지 못했어요', true); return; }
+  const gen = found.find(r => r && r.kind === 'general'), endo = found.find(r => r && r.kind === 'endo');
+  if (!gen && !endo) { toast('읽을 수 있는 검진 결과가 아니에요. 공단 건강검진 결과통보서나 위암검진 PDF를 올려 주세요', true); return; }
+  let d;
+  if (gen) { d = { exam_date: gen.exam_date, org: gen.org, vals: gen.vals, summary: gen.summary }; if (endo) d.summary = Object.assign({}, d.summary, { endo: endo.endo }); }
+  else d = { exam_date: endo.exam_date, org: endo.org, vals: {}, summary: { endo: endo.endo } };
+  const nRead = Object.keys(d.vals).filter(k => k !== 'bmi').length;
+  const old = (LIFE.exam || []).find(x => x.exam_date === d.exam_date);
+  if (old) d = { id: old.id, exam_date: old.exam_date, org: d.org || old.org || '', vals: Object.assign({}, old.vals, d.vals), summary: Object.assign({}, old.summary, d.summary) };
+  openExam(d, { pdf: true, n: nRead, merged: !!old });
+}
+function pickExamPdf(){
+  const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.pdf,application/pdf'; inp.multiple = true; inp.style.display = 'none';
+  inp.addEventListener('change', () => { const fs = Array.from(inp.files || []); inp.remove(); if (fs.length) importExamFiles(fs); });
+  document.body.appendChild(inp); inp.click();
+}
+function openImportHub(){
+  openFinModal({
+    title: '가져오기', saveLabel: '닫기',
+    html: `<div class="ih">
+      <button type="button" class="ih-it" data-ih="card"><b>카드 명세서</b><span>카드사에서 받은 엑셀·CSV 파일 · 가계부에 넣고 가맹점별로 자동 분류해요</span></button>
+      <button type="button" class="ih-it" data-ih="exam"><b>건강검진 결과</b><span>공단 건강검진 결과통보서·위암검진 PDF (여러 개 같이 선택 가능) · 수치를 읽어서 확인 화면에 채워 줘요</span></button>
+      <p class="hint">파일은 이 기기에서만 읽어요. 확인하고 저장한 내용만 내 계정에 저장돼요.</p></div>`,
+    onOpen(b) {
+      b.addEventListener('click', async e => {
+        const t = e.target.closest('[data-ih]'); if (!t) return;
+        closeFinModal();
+        if (t.dataset.ih === 'exam') pickExamPdf(); else { await finReady(); openImport(); }
+      });
+    },
+    onSave() { closeFinModal(); }
   });
 }
 function healthHTML() {
@@ -6212,7 +6427,7 @@ function renderHome() {
       ${hmCard('life:goals:todo', 'var(--c-home)', '다가오는 일정', '', soon, 'w2')}
       ${hmCard('bar', 'var(--c-bar)', 'My Bar', '', bar)}
     </div>
-    <div class="hm-foot"><span>${esc(APP.email || '')}</span><span><button type="button" id="hmBackup">백업·복원</button><button type="button" id="hmLogout">로그아웃</button></span></div>`;
+    <div class="hm-foot"><span>${esc(APP.email || '')}</span><span><button type="button" id="hmImport">가져오기</button><button type="button" id="hmBackup">백업·복원</button><button type="button" id="hmLogout">로그아웃</button></span></div>`;
 }
 /* ===== 백업 / 복원 ===== */
 const BK_TABLES = [
@@ -6374,6 +6589,7 @@ $('#homeView').addEventListener('click', e => {
   if ((x = e.target.closest('[data-rv]'))) { RV.mode = x.dataset.rv; store.set('rvMode', RV.mode); renderHome(); return; }
   if ((x = e.target.closest('[data-hlog]'))) { const [hid, dd] = x.dataset.hlog.split('|'); toggleHabit(hid, dd); return; }
   if ((x = e.target.closest('[data-tdone]'))) { toggleTodo(x.dataset.tdone); return; }
+  if (e.target.closest('#hmImport')) { openImportHub(); return; }
   if (e.target.closest('#hmBackup, #hmBackup2')) { openBackup(); return; }
   if (e.target.closest('#hmLogout')) { if (confirm('로그아웃할까요?')) sb.auth.signOut().then(() => location.reload()); return; }
   if ((x = e.target.closest('[data-go]'))) {
