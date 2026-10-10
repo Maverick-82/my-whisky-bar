@@ -1415,6 +1415,79 @@ body[data-tab="div"] #btnAdd,body[data-tab="div"] .fab{display:none!important}
 @media(max-width:560px){.rt-gcs{grid-template-columns:1fr}}
 .rt-cs{display:block;font-size:11.5px;font-weight:500;color:var(--ink3);line-height:1.45;margin-top:2px;white-space:normal}
 .rt-cr.out{color:var(--ink2)}.rt-cr.out b{color:var(--ink2)}
+
+/* ===== v1.17.3 Dividend design ===== */
+#divView .fin-sec{margin-top:26px}
+#divView .fin-sec h3{display:flex;align-items:center;gap:9px;letter-spacing:-.03em}
+#divView .fin-sec h3::before{content:"";flex:none;width:7px;height:20px;border-radius:6px;background:linear-gradient(180deg,var(--sc,var(--c-div)),color-mix(in srgb,var(--sc,var(--c-div)) 40%,transparent))}
+#divView .card{border-radius:22px}
+.rt-hero{position:relative;overflow:hidden}
+.rt-hero::after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--c-div) 26%,transparent),transparent 70%);pointer-events:none}
+.rt-hero>*{position:relative;z-index:1}
+.rt-hl{flex-wrap:wrap}
+.rt-big{background:linear-gradient(100deg,var(--ink) 30%,color-mix(in srgb,var(--c-div) 70%,var(--ink)));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.rt-range{margin-top:14px}
+.rt-rg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.rt-rc{display:flex;flex-direction:column;gap:2px;padding:9px 11px;border-radius:14px;background:color-mix(in srgb,var(--k) 12%,var(--card));border:1px solid color-mix(in srgb,var(--k) 24%,var(--line));min-width:0}
+.rt-rc span{font-size:11.5px;font-weight:800;color:color-mix(in srgb,var(--k) 75%,var(--ink2))}
+.rt-rc b{font-size:15px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rt-rc.b{background:color-mix(in srgb,var(--k) 22%,var(--card));border-color:color-mix(in srgb,var(--k) 45%,var(--line))}
+.rt-range>small{display:block;margin-top:8px;font-size:11.5px;color:var(--ink3);line-height:1.5}
+.rt-gcard{background:linear-gradient(160deg,color-mix(in srgb,var(--c-cal) 9%,var(--card)),var(--card) 70%)}
+.rt-gpre{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
+.rt-gpre>span{grid-column:1/-1;font-size:11.5px;font-weight:700;color:var(--ink3)}
+.rt-gpre .chip{display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 4px;border-radius:13px}
+.rt-gpre .chip b{font-size:12.5px;font-weight:800}.rt-gpre .chip small{font-size:11.5px;font-weight:700;opacity:.8}
+.rt-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--k,var(--c-div));margin-right:7px;flex:none;vertical-align:1px}
+.rt-wp{font-style:normal;font-size:11px;font-weight:800;margin-left:7px;padding:1px 7px;border-radius:999px;background:color-mix(in srgb,var(--k) 18%,transparent);color:color-mix(in srgb,var(--k) 70%,var(--ink));vertical-align:1px}
+.rt-wb{display:block;height:4px;border-radius:4px;background:color-mix(in srgb,var(--k,var(--c-div)) 14%,transparent);margin-top:5px;overflow:hidden;text-decoration:none}
+.rt-wb i{display:block;height:100%;border-radius:4px;background:var(--k,var(--c-div))}
+.rt-pr .v::before{content:none}
+.rt-cr b.neg{color:color-mix(in srgb,var(--up) 80%,var(--ink))}
+.rt-cr:first-child b{color:var(--inc)}
+.rt-cr.out{margin:6px -10px 0;padding:11px 10px;border-radius:14px;border-top:0;background:color-mix(in srgb,var(--c-ld) 12%,transparent)}
+.rt-cr.out>span{font-weight:700;color:var(--ink)}
+.rt-sc{display:flex;flex-direction:column;gap:10px}
+.rt-si{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"p a m" "b b b";align-items:center;gap:6px 14px;padding:12px 14px;border-radius:16px;background:color-mix(in srgb,var(--k) 8%,var(--card));border:1px solid color-mix(in srgb,var(--k) 20%,var(--line))}
+.rt-si.b{background:color-mix(in srgb,var(--k) 16%,var(--card));border-color:color-mix(in srgb,var(--k) 42%,var(--line))}
+.rt-si .pill{grid-area:p;font-size:12.5px;font-weight:800;padding:5px 12px;border-radius:999px;background:color-mix(in srgb,var(--k) 22%,transparent);color:color-mix(in srgb,var(--k) 78%,var(--ink));min-width:52px;text-align:center}
+.rt-si .a{grid-area:a;display:flex;flex-direction:column;gap:2px;font-size:11.5px;color:var(--ink3);min-width:0}
+.rt-si .a b{color:var(--ink2);font-weight:700}
+.rt-si .m{grid-area:m;display:flex;flex-direction:column;align-items:flex-end}
+.rt-si .m b{font-size:20px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rt-si .m small{font-size:11px;color:var(--ink3)}
+.rt-si .bar{grid-area:b;display:block;height:5px;border-radius:5px;background:color-mix(in srgb,var(--k) 14%,transparent);overflow:hidden;text-decoration:none}
+.rt-si .bar i{display:block;height:100%;border-radius:5px;background:var(--k)}
+details.rt-notes{padding:0}
+details.rt-notes>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 18px}
+details.rt-notes>summary::-webkit-details-marker{display:none}
+details.rt-notes>summary b{font-size:14px;color:var(--ink)}
+details.rt-notes>summary small{font-size:11.5px;color:var(--ink3)}
+details.rt-notes>summary::after{content:"+";flex:none;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--c-div) 18%,transparent);font-weight:800;color:var(--ink2)}
+details.rt-notes[open]>summary::after{content:"−"}
+details.rt-notes>ul{margin:0;padding:0 18px 18px 36px}
+@media(max-width:640px){
+  #divView .fin-head{flex-wrap:nowrap;align-items:flex-end}
+  #divView .fin-head>div:first-child{flex:1 1 auto;min-width:0}
+  #divView .fin-act{width:auto}#divView .fin-act .btn{flex:none;height:36px;padding:0 16px}
+  #divView .fin-sec h3{font-size:19px}
+  .rt-hl em{order:-1}
+  .rt-big{font-size:36px}
+  .rt-rg{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rt-rc b{font-size:16px}
+  .rt-gcs{grid-template-columns:1fr 1fr;gap:10px}
+  .rt-st{gap:4px}.rt-st button{width:30px;height:36px;font-size:16px}.rt-st input{font-size:15px;padding:8px 2px}
+  .rt-ph{display:none}
+  .rt-pr.rt-it{grid-template-columns:1fr 1fr;gap:8px 10px;padding:12px 8px;margin:0 -8px;width:calc(100% + 16px)}
+  .rt-pr.rt-it .n{grid-column:1/-1}
+  .rt-pr.rt-it .v{text-align:left;background:color-mix(in srgb,var(--k) 12%,transparent);border-radius:11px;padding:8px 11px}
+  .rt-pr.rt-it .v::before{content:attr(data-l);display:block;font-size:11px;font-weight:700;color:var(--ink3);margin-bottom:1px}
+  .rt-si{grid-template-columns:auto 1fr;grid-template-areas:"p m" "a a" "b b"}
+  .rt-si .a{flex-direction:row;flex-wrap:wrap;gap:2px 12px}
+  .rt-cr.out{margin-left:-8px;margin-right:-8px}
+  .rt-pr.rt-it.off .v{display:none}
+  .rt-pr.rt-it.off{padding:10px 8px}
+}
 </style>
 <script>
 (function(){
@@ -1842,7 +1915,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.17.2';
+const APP_VERSION = 'v1.17.3';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -5693,6 +5766,8 @@ const RT_STK0 = [
 const RT = { view: 'now' };
 const RT_NUM = ['birth', 'retire_year', 'pen_annual', 'pen_month', 'pen_paid', 'isa_month', 'isa_lump', 'sub_month', 'pen_rate', 'draw_rate', 'infl', 'npension', 'need', 'kr_tax', 'us_tax', 'price_g', 'div_g', 'w_mac', 'w_hy', 'w_kb'];
 const PEN_RE = /연금|퇴직|IRP/i;
+const RTC = ['#f2a45e', '#5aa0ee', '#4fbf8f', '#e784ad', '#9d89e6', '#ecc04c', '#4cc2cc'], rtColor = i => RTC[i % RTC.length];
+const RT_SCC = { 하락: 'var(--up)', 기본: 'var(--c-div)', 성장: 'var(--inc)', 낙관: 'var(--c-cal)' };
 function rtCfg() {
   const c = Object.assign({}, RT_DEF, (LIFE.meta && LIFE.meta.retire) || {});
   RT_NUM.forEach(k => { c[k] = Number(c[k]); if (!isFinite(c[k])) c[k] = RT_DEF[k]; });
@@ -5815,11 +5890,11 @@ function rtHTML() {
   const gauge = need > 0 ? `<div class="rt-goal"><div class="rt-gt">노후 월 생활비 목표 <b>${rtMan(need)}</b> <small>(지금 가치)</small></div>
       ${gRow(`${c.retire_year + 1}~${npStart - 1}년 · 국민연금 전`, R.pvGap)}${c.npension > 0 ? gRow(`${npStart}년~ · 국민연금 포함`, R.pvAfter) : ''}
       <div class="rt-gn">${gapMsg}${earlyMsg}${c.npension > 0 ? '' : '<small class="rt-np"><br>국민연금·퇴직금은 아직 빠져 있어요. 설정에 국민연금 예상액을 넣으면 더 정확해져요.</small>'}</div></div>` : '';
-  const hero = `<section class="card rt-hero"><div class="rt-hl"><span>${c.retire_year}년 말 은퇴 시점 · 월 노후소득 (세후)</span><em>D-${rtDur(R.n)}</em></div>
+  const hero = `<section class="card rt-hero"><div class="rt-hl"><span>${c.retire_year}년 말 은퇴 · 월 노후소득 (세후)</span><em>D-${rtDur(R.n)}</em></div>
     <div class="rt-big money">${won(Math.round(R.gap))}</div>
     <div class="rt-sub">지금 가치로 약 <b class="money">${won(Math.round(R.pvGap))}</b> · ISA 배당 + 연금계좌 인출${c.npension > 0 ? `<br>국민연금 ${npStart}년 개시 후엔 <b class="money">${won(Math.round(R.after))}</b> (지금 가치 ${rtMan(R.pvAfter)})` : ''}</div>
     ${bar}${gauge}
-    <div class="rt-range">${scen.map(s => `${s.nm} <b>${rtMan(s.pvGap)}</b>`).join(' · ')} <small>(지금 가치, 은퇴 후 ${npStart - c.retire_year - 1}년간 국민연금 전 구간 · 기본은 주가 ${rtSg(c.price_g)}% · 배당 ${rtSg(c.div_g)}%/년)</small></div></section>`;
+    <div class="rt-range"><div class="rt-rg">${scen.map(x => `<div class="rt-rc ${x.nm === '기본' ? 'b' : ''}" style="--k:${RT_SCC[x.nm]}"><span>${x.nm}</span><b>${rtMan(x.pvGap)}</b></div>`).join('')}</div><small>지금 가치 · 은퇴 후 ${npStart - c.retire_year - 1}년간 국민연금 전 구간 · 기본은 주가 ${rtSg(c.price_g)}% · 배당 ${rtSg(c.div_g)}%/년</small></div></section>`;
   const wIT = IT.filter(x => x.wf > 0 && x.px > 0);
   const mixY = wIT.reduce((s, x) => s + x.wf * x.yld, 0) * 100, mixN = wIT.reduce((s, x) => s + x.wf * x.yn, 0) * 100;
   const tiles = `<div class="lf-tiles rt-tiles">${lfTile('ISA 월 배당', `<span class="money">${rtMan(R.isaDiv)}</span>`, `<small>${rtMan(R.L.K)} 자산 · 배당률 세후 ${mixN.toFixed(1)}%</small>`)}${lfTile('연금계좌 자산', `<span class="money">${rtMan(R.L.P)}</span>`, `<small>원금 ${rtMan(R.L.prin)} · 수익 ${rtMan(R.L.P - R.L.prin)}</small>`)}${lfTile('연금 월 인출', `<span class="money">${rtMan(R.penDraw)}</span>`, `<small>연 ${c.draw_rate}% 인출 · 연금소득세 5.5%</small>`)}${lfTile('지금 월 배당', `<span class="money">${rtMan(R.S.rows[0].div)}</span>`, `<small>예수금 투입 후 · 세후 추정</small>`)}</div>`;
@@ -5827,13 +5902,13 @@ function rtHTML() {
   const gOn = v => c.price_g === v && c.div_g === v ? 'on' : '';
   const gcard = `<section class="card rt-gcard"><div class="rt-gct"><b>성장 가정</b><small>숫자를 바꾸면 바로 계산이 다시 돼요 · 연 기준, 빠지면 마이너스</small></div>
     <div class="rt-gcs">${gCtl('price_g', '주가 상승률', c.price_g)}${gCtl('div_g', '배당 성장률', c.div_g)}</div>
-    <div class="rt-gpre"><span>한 번에</span>${[['하락', -2], ['보수', 0], ['완만', 2], ['낙관', 4]].map(([l, v]) => `<button type="button" class="chip ${gOn(v)}" data-rt="gp:${v}">${l} ${rtSg(v)}%</button>`).join('')}</div></section>`;
+    <div class="rt-gpre"><span>주가·배당을 한 번에 맞추기</span>${[['하락', -2], ['보수', 0], ['완만', 2], ['낙관', 4]].map(([l, v]) => `<button type="button" class="chip ${gOn(v)}" data-rt="gp:${v}"><b>${l}</b><small>${rtSg(v)}%</small></button>`).join('')}</div></section>`;
   const syms = new Set(IT.map(x => String(x.sym).toUpperCase()).filter(Boolean));
   const hv = h => { const v = hValue(h); return v == null ? hCost(h) : v; };
   const othH = FIN.holdings.filter(h => (h.market === 'KR' || h.market === 'US') && !PEN_RE.test(h.account || '') && !syms.has(String(h.symbol || '').toUpperCase()));
   const othV = othH.reduce((a, h) => a + hv(h), 0), planV = IT.reduce((a, x) => a + x.qty * x.px, 0);
   const crow = (l, v, sm, cls) => `<div class="rt-cr ${cls || ''}"><span>${l}${sm ? `<small class="rt-cs">${sm}</small>` : ''}</span><b class="money">${v}</b></div>`;
-  const cover = `<div class="fin-sec"><h3>계산에 들어간 자산</h3><span>지금 기준</span></div><section class="card rt-cash">
+  const cover = `<div class="fin-sec" style="--sc:var(--c-cal)"><h3>계산에 들어간 자산</h3><span>지금 기준</span></div><section class="card rt-cash">
     ${crow('배당 종목 보유분', rtMan(planV), IT.filter(x => x.qty > 0).map(x => esc(x.name) + ' ' + x.qty + '주').join(' · ') || '보유 없음')}
     ${crow('연금계좌 (연금저축·퇴직연금)', rtMan(B.pen0), '연 ' + rtMan(c.pen_annual) + '씩 더 넣고 연 ' + c.pen_rate + '%로 불어난다고 계산')}
     ${crow('ISA 예수금 투입분', rtMan(c.isa_lump), '위 종목들에 비중대로 사는 걸로 계산')}
@@ -5841,15 +5916,15 @@ function rtHTML() {
     ${crow('계산 밖: 그 외 보유 주식', rtMan(othV), othH.length + '종목 · ISA·종합·해외 계좌의 배당 종목이 아닌 주식. 팔아서 배당 종목에 넣으면 그만큼 소득이 늘어요', 'out')}
     <div class="rt-cn faint">코인·예금·금·청약통장은 배당 계산에 넣지 않았어요. 위 합계에 없는 돈은 지금 월 소득과 은퇴 소득 모두에 0으로 잡혀 있어요.</div></section>`;
   const penDone = !!c.pen_paid;
-  const planRows = IT.map(x => {
+  const planRows = IT.map((x, i) => {
     const on = x.wf > 0;
-    const sub = [Math.round(x.wf * 100) + '%', x.px > 0 ? '현재가 ' + won(Math.round(x.px)) + (x.live ? '' : ' (입력)') : '가격 없음', x.dps > 0 ? '배당 ' + (x.yld * 100).toFixed(1) + '%' : '배당 없음'].join(' · ');
+    const sub = [x.px > 0 ? '현재가 ' + won(Math.round(x.px)) + (x.live ? '' : ' (입력)') : '가격 없음', x.dps > 0 ? '배당 ' + (x.yld * 100).toFixed(1) + '%' : '배당 없음'].concat(on ? [] : ['매수 안 함']).join(' · ');
     const mv = on && x.px > 0 ? `<b class="money">${rtMan(x.mon)}</b><small>${x.mon >= x.px ? '월 약 ' + (x.mon / x.px).toFixed(1) + '주' : '약 ' + Math.ceil(x.px / x.mon) + '개월에 1주'}</small>` : `<b>-</b><small>${on ? '정보 필요' : '매수 안 함'}</small>`;
-    const lv = on && x.px > 0 ? `<b>${x.sh}주</b><small>${rtMan(x.spent)}</small>` : `<b>-</b>`;
-    return `<button type="button" class="rt-pr rt-it ${on ? '' : 'off'}" data-rt="edit:${esc(x.id)}"><span class="n"><b>${esc(x.name || '(이름 없음)')}</b><small>${sub}</small></span><span class="v">${mv}</span><span class="v">${lv}</span></button>`;
+    const lv = on && x.px > 0 ? `<b>${x.sh}주</b><small>${rtMan(x.spent)}</small>` : `<b>-</b><small>&nbsp;</small>`;
+    return `<button type="button" class="rt-pr rt-it ${on ? '' : 'off'}" data-rt="edit:${esc(x.id)}" style="--k:${rtColor(i)}"><span class="n"><b><i class="rt-dot"></i>${esc(x.name || '(이름 없음)')}<em class="rt-wp">${Math.round(x.wf * 100)}%</em></b><small>${sub}</small><u class="rt-wb"><i style="width:${(x.wf * 100).toFixed(0)}%"></i></u></span><span class="v" data-l="매달 ISA">${mv}</span><span class="v" data-l="예수금 투입">${lv}</span></button>`;
   }).join('');
   const left = c.isa_lump - IT.reduce((a, x) => a + x.spent, 0), noW = !IT.some(x => x.wf > 0);
-  const plan = `<div class="fin-sec"><h3>이번 달 실행</h3><span>${now.getMonth() + 1}월</span></div>
+  const plan = `<div class="fin-sec" style="--sc:var(--c-div)"><h3>이번 달 실행</h3><span>${now.getMonth() + 1}월</span></div>
     <section class="card rt-plan">
       <div class="rt-step"><div class="rt-sn ${penDone ? 'ok' : ''}">${penDone ? '✓' : '1'}</div><div class="rt-sb"><b>연금계좌 연 납입 ${rtMan(c.pen_annual)}</b><small>${c.pen_month}월 한 번에 · 올해 세액공제 환급 최대 ${rtMan(c.pen_annual * 0.165)} (총급여 5,500만 이하 16.5%, 초과 13.2%) · 내년 2~3월 연말정산</small></div><button type="button" class="btn ${penDone ? '' : 'primary'}" data-rt="paid">${penDone ? '납입 완료 취소' : '납입 완료'}</button></div>
       <div class="rt-step"><div class="rt-sn">2</div><div class="rt-sb"><b>ISA 예수금 ${rtMan(c.isa_lump)} 투입</b><small>3~4번에 나눠서 사는 걸 권해요 · 남는 돈 ${rtMan(left)} · 종목을 눌러 고치고, 아래에서 추가해요</small></div></div>
@@ -5859,11 +5934,11 @@ function rtHTML() {
       <div class="lf-note" style="margin:6px 0 0">${noW ? '매수 비중이 있는 종목이 없어요. 종목을 눌러 비중을 넣어 주세요.' : `계획 종목 평균 배당률 세전 ${mixY.toFixed(1)}% · 세후 ${mixN.toFixed(1)}% · 주가 ${rtSg(c.price_g)}%, 배당 ${rtSg(c.div_g)}%/년 가정. 비중은 합이 100이 아니어도 비율로 계산해요.`}${IT.some(x => x.bad) ? ' 가격이나 배당이 비어 있는 종목은 계산에서 빠져요.' : ''}</div>
     </section>`;
   const cashHTML = (() => {
-    if (cash.income == null) return `<div class="fin-sec"><h3>현금흐름 현실 체크</h3></div><section class="card rt-cash"><div class="lf-empty" style="padding:18px">월 실수령액을 넣으면 이 계획이 월급으로 가능한지 계산해 줘요.<br><button type="button" class="btn primary" data-rt="fin">월 실수령액 입력</button></div></section>`;
+    if (cash.income == null) return `<div class="fin-sec" style="--sc:var(--c-pf)"><h3>현금흐름 현실 체크</h3></div><section class="card rt-cash"><div class="lf-empty" style="padding:18px">월 실수령액을 넣으면 이 계획이 월급으로 가능한지 계산해 줘요.<br><button type="button" class="btn primary" data-rt="fin">월 실수령액 입력</button></div></section>`;
     const sur = cash.surplus, ok = sur != null && sur >= 0;
-    const row = (l, v, cls) => `<div class="rt-cr ${cls || ''}"><span>${l}</span><b class="money">${v}</b></div>`;
+    const row = (l, v, cls) => `<div class="rt-cr ${cls || ''}"><span>${l}</span><b class="money ${String(v).charAt(0) === '-' ? 'neg' : ''}">${v}</b></div>`;
     const instNote = cash.instEnd ? `<div class="rt-cn">${cash.instEnd.y}년 ${cash.instEnd.m}월에 휴대폰 할부가 끝나요 → ${cash.instEnd.y}년 ${cash.instEnd.m + 1 > 12 ? 1 : cash.instEnd.m + 1}월부터 월 ${rtMan(cash.instAmt)}이 풀려요.</div>` : '';
-    return `<div class="fin-sec"><h3>현금흐름 현실 체크</h3><span>월 기준</span></div><section class="card rt-cash">
+    return `<div class="fin-sec" style="--sc:var(--c-pf)"><h3>현금흐름 현실 체크</h3><span>월 기준</span></div><section class="card rt-cash">
       ${row('월 실수령액', won(cash.income))}${row('연금계좌 (연 ' + rtMan(c.pen_annual) + ' ÷ 12)', '-' + won(Math.round(c.pen_annual / 12)))}${row('ISA', '-' + won(c.isa_month))}${row('청약통장', '-' + won(c.sub_month))}
       ${row('생활비 (위스키 제외, 최근 ' + cash.n + '개월 평균)', cash.living == null ? '-' : '-' + won(Math.round(cash.living)))}${cash.ins ? row('보험 (카드 밖)', '-' + won(Math.round(cash.ins))) : ''}
       <div class="rt-cr tot ${ok ? 'ok' : 'bad'}"><span>${ok ? '위스키·여유에 쓸 수 있는 돈' : '모자라는 돈'}</span><b class="money">${sur == null ? '-' : won(Math.abs(Math.round(sur)))}</b></div>
@@ -5874,23 +5949,25 @@ function rtHTML() {
   const divChart = `<div class="card lf-chart-card"><div class="lf-ch"><b>ISA 월 배당 성장</b><span class="dk-sub">매달 ${rtMan(c.isa_month)} 재투자</span></div>${lfChartBox('rtDivChart')}${msHTML}</div>`;
   const penChart = `<div class="card lf-chart-card"><div class="lf-ch"><b>연금계좌 자산 성장</b><span class="dk-sub">연 ${rtMan(c.pen_annual)} · ${c.pen_rate}%</span></div>${lfChartBox('rtPenChart')}
     <div class="ev-sum"><span>지금 자산 <b class="money">${rtMan(B.pen0)}</b></span><span>${penOpen}년부터 연금 개시 가능</span><span>${npStart}년 국민연금(만 65세)</span></div></div>`;
-  const stkRows = IT.filter(x => x.qty > 0 || x.wf > 0).map(x => { const ann = x.qty * x.dps; return `<div class="rt-sr"><span class="n"><b>${esc(x.name)}</b><small>${x.qty ? x.qty + '주' : '보유 없음'} · ${rtMonths(x.pay)}${x.accounts.length ? ' · ' + esc(x.accounts.join('/')) : ''}</small></span><span class="v"><b class="money">${rtMan(ann)}</b><small>연 · 배당률 ${x.px ? (x.yld * 100).toFixed(1) : '-'}%</small></span></div>`; }).join('');
+  const stkL = IT.map((x, i) => ({ x, i, ann: x.qty * x.dps })).filter(o => o.x.qty > 0 || o.x.wf > 0), stkT = stkL.reduce((a, o) => a + o.ann, 0) || 1;
+  const stkRows = stkL.map(o => { const x = o.x; return `<div class="rt-sr" style="--k:${rtColor(o.i)}"><span class="n"><b><i class="rt-dot"></i>${esc(x.name)}</b><small>${x.qty ? x.qty + '주' : '보유 없음'} · ${rtMonths(x.pay)}${x.accounts.length ? ' · ' + esc(x.accounts.join('/')) : ''}</small><u class="rt-wb"><i style="width:${(o.ann / stkT * 100).toFixed(0)}%"></i></u></span><span class="v"><b class="money">${rtMan(o.ann)}</b><small>연 · 배당률 ${x.px ? (x.yld * 100).toFixed(1) : '-'}%</small></span></div>`; }).join('');
   const calChart = `<div class="card lf-chart-card"><div class="lf-ch"><b>월별 배당 달력</b><div class="seg rt-seg"><button type="button" class="${RT.view === 'now' ? 'on' : ''}" data-rt="view:now">지금 보유</button><button type="button" class="${RT.view === 'plan' ? 'on' : ''}" data-rt="view:plan">계획 1년 후</button></div></div>${lfChartBox('rtCalChart')}
     <div class="ev-sum"><span>연 합계(세전) <b class="money">${rtMan(mTot)}</b></span><span>월 평균 <b class="money">${rtMan(mTot / 12)}</b></span><span>가장 적은 달 <b class="money">${rtMan(Math.min.apply(null, MV.mon))}</b></span></div>
     <div class="rt-sl">${stkRows}</div>
     <div class="lf-note" style="margin:8px 0 0">지급월과 주당 배당금은 종목마다 고칠 수 있어요. 처음 넣어 둔 5종목은 ${RT_ASOF} 기준 최근 12개월 실적이에요(출처: etfshopping, knowingasset). 분기·월 배당은 연간 금액을 지급월 수로 똑같이 나눠서 계산해요.</div></div>`;
-  const scenHTML = `<div class="card rt-scen"><div class="lf-ch"><b>시나리오 비교</b><span class="dk-sub">은퇴 시점 · 지금 가치</span></div><div class="rt-sg"><div class="h"></div><div class="h">연금 수익률 · 주가 · 배당 (연)</div><div class="h">월 소득</div><div class="h">ISA 자산</div>${scen.map(s => `<div class="r ${s.nm === '기본' ? 'b' : ''}">${s.nm}</div><div>${s.pr}% · ${rtSg(s.pg)}% · ${rtSg(s.dg)}%</div><div><b class="money">${rtMan(s.pvGap)}</b></div><div class="money">${rtMan(s.L.K)}</div>`).join('')}</div>
-    <div class="lf-note" style="margin:10px 0 0">기본은 위 "성장 가정"에서 정한 값이에요. 하락은 기본보다 주가·배당이 해마다 2%p씩 덜 오르고(또는 더 빠지고) 연금 수익률도 2%p 낮은 경우, 성장은 둘 다 2%p 더 오르는 경우, 낙관은 4%p 더 오르고 연금 수익률도 1%p 높은 경우예요.</div></div>`;
-  const notes = `<section class="card rt-notes"><b>이 계산의 가정</b><ul>
+  const maxS = Math.max.apply(null, scen.map(x => x.pvGap).concat([1]));
+  const scenHTML = `<div class="card rt-scen"><div class="lf-ch"><b>시나리오 비교</b><span class="dk-sub">은퇴 시점 · 지금 가치</span></div><div class="rt-sc">${scen.map(x => `<div class="rt-si ${x.nm === '기본' ? 'b' : ''}" style="--k:${RT_SCC[x.nm]}"><span class="pill">${x.nm}</span><div class="m"><b class="money">${rtMan(x.pvGap)}</b><small>월 소득</small></div><div class="a"><span>ISA 자산 <b>${rtMan(x.L.K)}</b></span><span>연금 ${x.pr}% · 주가 ${rtSg(x.pg)}% · 배당 ${rtSg(x.dg)}%</span></div><u class="bar"><i style="width:${(x.pvGap / maxS * 100).toFixed(0)}%"></i></u></div>`).join('')}</div>
+    <div class="lf-note" style="margin:10px 0 0">기본은 위 "성장 가정"에서 정한 값이에요. 하락은 기본보다 주가·배당이 해마다 2%p 덜 오르고 연금 수익률도 2%p 낮은 경우, 성장은 둘 다 2%p 더 오르는 경우, 낙관은 4%p 더 오르고 연금 수익률도 1%p 높은 경우예요.</div></div>`;
+  const notes = `<details class="card rt-notes"><summary><b>이 계산의 가정</b><small>시뮬레이션 값이에요 · 눌러서 보기</small></summary><ul>
     <li>주가는 해마다 ${rtSg(c.price_g)}%, 배당은 해마다 ${rtSg(c.div_g)}% 변한다고 봤어요(설정에서 바꿔요). 0%면 지금 그대로라고 보는 가장 보수적인 계산이에요(물가는 ${c.infl}%). 배당은 전부 같은 종목에 다시 사는 걸로 계산했고, 실제로는 오를 수도 빠질 수도 있어서 시나리오 표의 하락·성장 행도 같이 봐 주세요.</li>
     <li>ISA 안 배당은 계좌 안에서 재투자돼요. 일반적으로 인출은 납입 원금 범위까지만 되고 수익금은 해지(3년 만기) 때 나와서, 은퇴 후 월급처럼 받으려면 만기 시점 계획이 필요해요. 비과세 한도(일반형 200만 원 · 서민형 400만 원)를 넘는 수익은 9.9%예요. 배당 세금은 설정의 국내 ${c.kr_tax}% · 미국 ${c.us_tax}%로 뺐어요.</li>
     <li>연금계좌는 만 55세부터 연금으로 받을 수 있고, 연금소득세 3.3~5.5%(여기선 5.5%)가 붙어요. 연 ${c.draw_rate}%씩 꺼낸다고 봤어요.</li>
     <li>은퇴 후 물가 상승과 회사 퇴직금·퇴직연금 적립분, 국민연금은 별도예요. 국민연금${c.npension > 0 ? '은 입력한 금액을 반영했어요' : '은 아직 입력하지 않았어요 — 국민연금공단 "내 연금"에서 예상 월액을 확인해 설정에 넣어 주세요'}.</li>
-    <li>지금 ${age}세(세는나이), 은퇴 ${retAge}세까지 ${yrsLeft.toFixed(1)}년이에요. 투자 자문이 아니라 가정에 따른 시뮬레이션이에요.</li></ul></section>`;
+    <li>지금 ${age}세(세는나이), 은퇴 ${retAge}세까지 ${yrsLeft.toFixed(1)}년이에요. 투자 자문이 아니라 가정에 따른 시뮬레이션이에요.</li></ul></details>`;
   return `<div class="fin-head"><div><h2>Dividend</h2><p>노후 배당·연금 플랜 · ${c.retire_year}년 은퇴까지 ${rtDur(R.n)}</p></div><div class="fin-act"><button type="button" class="btn" data-rt="set">설정</button></div></div>
     ${hero}${tiles}${gcard}${plan}${cover}${cashHTML}
-    <div class="fin-sec"><h3>자산이 자라는 모습</h3></div>${divChart}${penChart}
-    <div class="fin-sec"><h3>배당 달력 · 보유 종목</h3></div>${calChart}
+    <div class="fin-sec" style="--sc:var(--c-goal)"><h3>자산이 자라는 모습</h3></div>${divChart}${penChart}
+    <div class="fin-sec" style="--sc:var(--c-journal)"><h3>배당 달력 · 보유 종목</h3></div>${calChart}
     ${scenHTML}${notes}`;
 }
 function renderDividend() {
