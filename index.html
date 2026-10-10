@@ -1391,6 +1391,14 @@ body[data-tab="div"] #btnAdd,body[data-tab="div"] .fab{display:none!important}
   .rt-g2{grid-template-columns:1fr}
   .rt-sg{grid-template-columns:.7fr 1fr 1.1fr 1fr;font-size:12px}
 }
+.rt-pr.rt-it{width:calc(100% + 12px);margin:0 -6px;padding:9px 6px;background:transparent;border:0;border-top:1px solid var(--line);border-radius:10px;color:inherit;font:inherit;text-align:left;cursor:pointer;transition:background .15s}
+.rt-pr.rt-it:hover{background:color-mix(in srgb,var(--c-div) 10%,transparent)}
+.rt-pr.rt-it.off{opacity:.55}
+.rt-add{display:block;width:100%;padding:11px;margin:8px 0 6px;border:1px dashed var(--line2);background:transparent;border-radius:12px;color:var(--ink2);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.rt-add:hover{border-color:var(--c-div);color:var(--ink)}
+.rt-mcs{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}
+.rt-mc{min-width:46px;text-align:center}
+.rt-mc.on{background:var(--c-div);border-color:transparent;color:#fff}
 </style>
 <script>
 (function(){
@@ -1818,7 +1826,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.16.1';
+const APP_VERSION = 'v1.17.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -5656,18 +5664,19 @@ $('#calView').addEventListener('click', ev => {
 });
 $('#ledgerView').addEventListener('click', ev => { if (ev.target.closest('[data-fz="set"]')) { lifeReady().then(openFinPlan); } });
 
-/* ===== v1.16 Dividend · 노후 배당·연금 ===== */
+/* ===== v1.17 Dividend · 노후 배당·연금 ===== */
 const RT_ASOF = '2026-10-10';
-const RT_DEF = { birth: 1982, retire_year: 2041, pen_annual: 9000000, pen_month: 10, pen_paid: 0, isa_month: 400000, isa_lump: 12000000, sub_month: 100000, pen_rate: 5, isa_rate: 5, draw_rate: 4, infl: 2.5, npension: 0, need: 1500000, w_mac: 35, w_hy: 35, w_kb: 30 };
-const RT_STK = [
-  { k: 'mac', name: '맥쿼리인프라', sym: '088980', dps: 730, pay: { 2: 380, 8: 350 }, px: 9800 },
-  { k: 'hy', name: '현대차2우B', sym: '005387', dps: 10100, pay: { 4: 2525, 6: 2525, 9: 2525, 12: 2525 }, px: 170500, est: true },
-  { k: 'kb', name: 'KB금융', sym: '105560', dps: 4833, pay: { 4: 1605, 5: 1143, 8: 1155, 11: 930 }, px: 168500 },
-  { k: 'ss', name: '삼성전자우', sym: '005935', dps: 1683, pay: { 4: 567, 5: 372, 8: 374, 11: 370 }, px: 198000 },
-  { k: 'o', name: '리얼티인컴', sym: 'O', usd: true, dps: 3.245, pay: 'm', px: 54.18 * 1340 }
+const RT_DEF = { birth: 1982, retire_year: 2041, pen_annual: 9000000, pen_month: 10, pen_paid: 0, isa_month: 400000, isa_lump: 12000000, sub_month: 100000, pen_rate: 5, draw_rate: 4, infl: 2.5, npension: 0, need: 1500000, kr_tax: 5, us_tax: 15, price_g: 2, div_g: 2, w_mac: 35, w_hy: 35, w_kb: 30 };
+const RT_STK0 = [
+  { id: 'mac', name: '맥쿼리인프라', sym: '088980', cur: 'KRW', px: 9800, dps: 730, pay: [2, 8], wk: 'w_mac' },
+  { id: 'hy', name: '현대차2우B', sym: '005387', cur: 'KRW', px: 170500, dps: 10100, pay: [4, 6, 9, 12], wk: 'w_hy' },
+  { id: 'kb', name: 'KB금융', sym: '105560', cur: 'KRW', px: 168500, dps: 4833, pay: [4, 5, 8, 11], wk: 'w_kb' },
+  { id: 'ss', name: '삼성전자우', sym: '005935', cur: 'KRW', px: 198000, dps: 1683, pay: [4, 5, 8, 11] },
+  { id: 'o', name: '리얼티인컴', sym: 'O', cur: 'USD', px: 54.18, dps: 3.245, pay: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
 ];
 const RT = { view: 'now' };
-const RT_NUM = ['birth', 'retire_year', 'pen_annual', 'pen_month', 'pen_paid', 'isa_month', 'isa_lump', 'sub_month', 'pen_rate', 'isa_rate', 'draw_rate', 'infl', 'npension', 'need', 'w_mac', 'w_hy', 'w_kb'];
+const RT_NUM = ['birth', 'retire_year', 'pen_annual', 'pen_month', 'pen_paid', 'isa_month', 'isa_lump', 'sub_month', 'pen_rate', 'draw_rate', 'infl', 'npension', 'need', 'kr_tax', 'us_tax', 'price_g', 'div_g', 'w_mac', 'w_hy', 'w_kb'];
+const PEN_RE = /연금|퇴직|IRP/i;
 function rtCfg() {
   const c = Object.assign({}, RT_DEF, (LIFE.meta && LIFE.meta.retire) || {});
   RT_NUM.forEach(k => { c[k] = Number(c[k]); if (!isFinite(c[k])) c[k] = RT_DEF[k]; });
@@ -5680,40 +5689,46 @@ function rtMan(n) {
   return s + a.toLocaleString('ko-KR') + '원';
 }
 const rtMan1 = n => { const v = Math.round(n / 1e3) / 10; return (v % 1 ? v.toFixed(1) : String(v)) + '만'; };
-function rtHolds() {
-  const by = {};
-  RT_STK.forEach(s => {
-    const hs = FIN.holdings.filter(h => String(h.symbol || '') === s.sym && (h.market === 'KR' || h.market === 'US'));
-    const qty = hs.reduce((a, h) => a + fnum(h.qty), 0), h0 = hs.find(h => h.last_price != null);
-    const px = h0 ? fnum(h0.last_price) * hMul(h0) : s.px, fx = s.usd ? fxRate() : 1;
-    by[s.k] = { s, qty, px, fx, dpsKRW: s.dps * fx, accounts: Array.from(new Set(hs.map(h => h.account))) };
-  });
-  return by;
+const rtSg = v => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v);
+const rtMonths = p => p.length >= 12 ? '매월' : p.join('·') + '월';
+function rtPlanList(c) {
+  const p = LIFE.meta && LIFE.meta.retire && LIFE.meta.retire.plan;
+  if (Array.isArray(p)) return p.map(x => ({ id: String(x.id || ('s' + Math.random().toString(36).slice(2, 7))), name: String(x.name || ''), sym: String(x.sym || ''), cur: x.cur === 'USD' ? 'USD' : 'KRW', px: Number(x.px) || 0, dps: Number(x.dps) || 0, pay: (Array.isArray(x.pay) ? x.pay : []).map(Number).filter(m => m >= 1 && m <= 12), w: Number(x.w) || 0 }));
+  return RT_STK0.map(s => ({ id: s.id, name: s.name, sym: s.sym, cur: s.cur, px: s.px, dps: s.dps, pay: s.pay.slice(), w: s.wk ? (c[s.wk] || 0) : 0 }));
 }
-function rtBase() {
-  const H = rtHolds(); let cap = 0;
-  ['mac', 'hy', 'kb', 'o'].forEach(k => { cap += H[k].qty * H[k].px; });
-  const ssM = H.ss.qty * H.ss.dpsKRW / 12;
-  const pen = FIN.holdings.filter(h => /연금|퇴직|IRP/i.test(h.account || ''));
-  const pen0 = pen.reduce((a, h) => { const v = hValue(h); return a + (v == null ? hCost(h) : v); }, 0);
-  return { H, cap, ssM, pen0, penN: pen.length };
+function rtItems(c) {
+  const list = rtPlanList(c), fx = fxRate(), W = list.reduce((a, x) => a + Math.max(0, x.w), 0);
+  return list.map(it => {
+    const usd = it.cur === 'USD', k = usd ? fx : 1, symU = it.sym.toUpperCase();
+    const hs = symU ? FIN.holdings.filter(h => String(h.symbol || '').toUpperCase() === symU && (h.market === 'KR' || h.market === 'US') && !PEN_RE.test(h.account || '')) : [];
+    const qty = hs.reduce((a, h) => a + fnum(h.qty), 0), h0 = hs.find(h => h.last_price != null);
+    const px = h0 ? fnum(h0.last_price) * hMul(h0) : it.px * k, dps = it.dps * k, tax = (usd ? c.us_tax : c.kr_tax) / 100;
+    const wf = W > 0 ? Math.max(0, it.w) / W : 0, mon = c.isa_month * wf, lump = c.isa_lump * wf, sh = px > 0 ? Math.floor(lump / px) : 0;
+    return Object.assign({}, it, { usd, qty, live: !!h0, px, dps, tax, yld: px > 0 ? dps / px : 0, yn: px > 0 ? dps * (1 - tax) / px : 0, wf, mon, lump, sh, spent: sh * px, pay: it.pay.length ? it.pay.slice().sort((a, b) => a - b) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], accounts: Array.from(new Set(hs.map(h => h.account))), bad: !(px > 0) || !(dps > 0) });
+  });
+}
+function rtPen0() {
+  return FIN.holdings.filter(h => PEN_RE.test(h.account || '')).reduce((a, h) => { const v = hValue(h); return a + (v == null ? hCost(h) : v); }, 0);
 }
 function rtSim(c, o) {
   o = o || {};
-  const B = rtBase(), penR = (o.penR != null ? o.penR : c.pen_rate) / 100, isaY = (o.isaY != null ? o.isaY : c.isa_rate) / 100, extra = o.extra || 0;
+  const IT = rtItems(c).filter(x => x.px > 0), penR = (o.penR != null ? o.penR : c.pen_rate) / 100, pg = (o.pg != null ? o.pg : c.price_g) / 100, dg = (o.dg != null ? o.dg : c.div_g) / 100, extra = o.extra || 0;
   const now = new Date(); let y = now.getFullYear(), m = now.getMonth() + 1, t = 0;
-  let K = B.cap + c.isa_lump, P = B.pen0, prin = B.pen0;
+  const pen0 = rtPen0(); let P = pen0, prin = pen0;
+  const sh = IT.map(x => x.qty + x.lump / x.px);
+  const snap = tt => { const f = Math.pow(1 + pg, tt / 12), g = Math.pow(1 + dg, tt / 12); let K = 0, div = 0; IT.forEach((x, i) => { K += sh[i] * x.px * f; div += sh[i] * x.dps * g * (1 - x.tax) / 12; }); return { K, div }; };
   const rows = [], lastIdx = c.retire_year * 12 + 11;
   const pay = () => { P += c.pen_annual; prin += c.pen_annual; };
   if (!c.pen_paid && m === c.pen_month) pay();
-  rows.push({ t, y, m, K, P, prin, div: K * isaY / 12 + B.ssM });
+  let s = snap(0); rows.push({ t, y, m, K: s.K, P, prin, div: s.div });
   while (y * 12 + (m - 1) < lastIdx && t < 600) {
     m++; if (m > 12) { m = 1; y++; } t++;
-    K = K * (1 + isaY / 12) + c.isa_month + extra; P *= 1 + penR / 12;
-    if (m === c.pen_month) pay();
-    rows.push({ t, y, m, K, P, prin, div: K * isaY / 12 + B.ssM });
+    const f = Math.pow(1 + pg, t / 12), g = Math.pow(1 + dg, t / 12);
+    IT.forEach((x, i) => { const d = sh[i] * x.dps * g * (1 - x.tax) / 12; sh[i] += (d + x.mon + extra * x.wf) / (x.px * f); });
+    P *= 1 + penR / 12; if (m === c.pen_month) pay();
+    s = snap(t); rows.push({ t, y, m, K: s.K, P, prin, div: s.div });
   }
-  return { rows, B };
+  return { rows, B: { pen0 } };
 }
 const RT_TAX = 0.055;
 function rtResult(c, o) {
@@ -5729,22 +5744,13 @@ function rtNeedExtra(c) {
   for (let i = 0; i < 40; i++) { const mid = (lo + hi) / 2; if (f(mid) >= c.need) hi = mid; else lo = mid; }
   return Math.ceil(hi / 10000) * 10000;
 }
-function rtAlloc(c) {
-  const H = rtHolds(), W = (c.w_mac + c.w_hy + c.w_kb) || 1;
-  return ['mac', 'hy', 'kb'].map(k => {
-    const w = c['w_' + k] / W, px = H[k].px || 1, mon = c.isa_month * w, lump = c.isa_lump * w, sh = Math.floor(lump / px);
-    return { k, name: H[k].s.name, w, mon, lump, px, sh, spent: sh * px, yld: H[k].dpsKRW / px };
-  });
-}
 function rtMonthly(c, view) {
-  const H = rtHolds(), A = rtAlloc(c), add = {};
-  if (view === 'plan') A.forEach(a => { add[a.k] = a.sh + 12 * a.mon / a.px; });
-  const mon = Array(12).fill(0), per = {};
-  RT_STK.forEach(s => {
-    const h = H[s.k], q = h.qty + (add[s.k] || 0); per[s.k] = 0;
-    for (let m = 1; m <= 12; m++) { const v = s.pay === 'm' ? h.dpsKRW / 12 * q : (s.pay[m] || 0) * h.fx * q; mon[m - 1] += v; per[s.k] += v; }
+  const IT = rtItems(c), mon = Array(12).fill(0), per = {};
+  IT.forEach(x => {
+    const q = x.qty + (view === 'plan' && x.px > 0 ? x.sh + 12 * x.mon / x.px : 0); per[x.id] = 0;
+    x.pay.forEach(m => { const v = q * x.dps / x.pay.length; mon[m - 1] += v; per[x.id] += v; });
   });
-  return { mon, per, H };
+  return { mon, per, IT };
 }
 function rtCash(c) {
   const f = fzCfg(), cur = today().slice(0, 7);
@@ -5763,14 +5769,13 @@ function rtDur(t) { const y = Math.floor(t / 12), m = t % 12; return (y ? y + '�
 
 function rtHTML() {
   const c = rtCfg(), R = rtResult(c), now = new Date(), curY = now.getFullYear();
-  const B = R.S.B, A = rtAlloc(c), cash = rtCash(c), f = fzCfg();
-  const scen = [['보수', c.pen_rate - 1, c.isa_rate - 1], ['기본', c.pen_rate, c.isa_rate], ['낙관', c.pen_rate + 1, c.isa_rate + 0.5]].map(([nm, pr, ir]) => Object.assign({ nm, pr, ir }, rtResult(c, { penR: pr, isaY: ir })));
+  const B = R.S.B, IT = rtItems(c), cash = rtCash(c), f = fzCfg();
+  const SC = [['하락', { penR: c.pen_rate - 2, pg: -2, dg: -2 }], ['보수', { penR: c.pen_rate - 1, pg: 0, dg: 0 }], ['기본', {}], ['낙관', { penR: c.pen_rate + 1, pg: c.price_g + 2, dg: c.div_g + 2 }]];
+  const scen = SC.map(([nm, o]) => Object.assign({ nm, pr: o.penR != null ? o.penR : c.pen_rate, pg: o.pg != null ? o.pg : c.price_g, dg: o.dg != null ? o.dg : c.div_g }, rtResult(c, o)));
   const yrsLeft = R.n / 12, age = curY - c.birth + 1, retAge = c.retire_year - c.birth + 1, npStart = c.birth + 65, penOpen = c.birth + 55;
   const need = c.need, pct = need > 0 ? R.pvGap / need * 100 : null, extra = rtNeedExtra(c);
-  // 마일스톤
   const MS = [100000, 200000, 300000, 500000, 700000, 1000000];
   const ms = MS.map(th => { const r = R.S.rows.find(x => x.div >= th); return { th, r }; });
-  // 연도별 차트 데이터
   const yrRows = R.S.rows.filter((r, i) => r.m === 12 || i === R.S.rows.length - 1);
   const step = Math.max(1, Math.ceil(yrRows.length / 12)), yr = yrRows.filter((r, i) => (yrRows.length - 1 - i) % step === 0);
   const lastY = yr[yr.length - 1];
@@ -5798,18 +5803,27 @@ function rtHTML() {
     <div class="rt-big money">${won(Math.round(R.gap))}</div>
     <div class="rt-sub">지금 가치로 약 <b class="money">${won(Math.round(R.pvGap))}</b> · ISA 배당 + 연금계좌 인출${c.npension > 0 ? `<br>국민연금 ${npStart}년 개시 후엔 <b class="money">${won(Math.round(R.after))}</b> (지금 가치 ${rtMan(R.pvAfter)})` : ''}</div>
     ${bar}${gauge}
-    <div class="rt-range">보수 <b>${rtMan(scen[0].pvGap)}</b> · 기본 <b>${rtMan(scen[1].pvGap)}</b> · 낙관 <b>${rtMan(scen[2].pvGap)}</b> <small>(지금 가치, 은퇴 후 ${npStart - c.retire_year - 1}년간 국민연금 전 구간)</small></div></section>`;
-  const tiles = `<div class="lf-tiles rt-tiles">${lfTile('ISA 월 배당', `<span class="money">${rtMan(R.isaDiv)}</span>`, `<small>${rtMan(R.L.K)} 자산 · 세후 ${c.isa_rate}%</small>`)}${lfTile('연금계좌 자산', `<span class="money">${rtMan(R.L.P)}</span>`, `<small>원금 ${rtMan(R.L.prin)} · 수익 ${rtMan(R.L.P - R.L.prin)}</small>`)}${lfTile('연금 월 인출', `<span class="money">${rtMan(R.penDraw)}</span>`, `<small>연 ${c.draw_rate}% 인출 · 연금소득세 5.5%</small>`)}${lfTile('지금 월 배당', `<span class="money">${rtMan(R.S.rows[0].div)}</span>`, `<small>예수금 투입 후 · 세후 추정</small>`)}</div>`;
+    <div class="rt-range">${scen.map(s => `${s.nm} <b>${rtMan(s.pvGap)}</b>`).join(' · ')} <small>(지금 가치, 은퇴 후 ${npStart - c.retire_year - 1}년간 국민연금 전 구간 · 기본은 주가 ${rtSg(c.price_g)}% · 배당 ${rtSg(c.div_g)}%/년)</small></div></section>`;
+  const wIT = IT.filter(x => x.wf > 0 && x.px > 0);
+  const mixY = wIT.reduce((s, x) => s + x.wf * x.yld, 0) * 100, mixN = wIT.reduce((s, x) => s + x.wf * x.yn, 0) * 100;
+  const tiles = `<div class="lf-tiles rt-tiles">${lfTile('ISA 월 배당', `<span class="money">${rtMan(R.isaDiv)}</span>`, `<small>${rtMan(R.L.K)} 자산 · 배당률 세후 ${mixN.toFixed(1)}%</small>`)}${lfTile('연금계좌 자산', `<span class="money">${rtMan(R.L.P)}</span>`, `<small>원금 ${rtMan(R.L.prin)} · 수익 ${rtMan(R.L.P - R.L.prin)}</small>`)}${lfTile('연금 월 인출', `<span class="money">${rtMan(R.penDraw)}</span>`, `<small>연 ${c.draw_rate}% 인출 · 연금소득세 5.5%</small>`)}${lfTile('지금 월 배당', `<span class="money">${rtMan(R.S.rows[0].div)}</span>`, `<small>예수금 투입 후 · 세후 추정</small>`)}</div>`;
   const penDone = !!c.pen_paid;
-  const planRows = A.map(a => `<div class="rt-pr"><span class="n"><b>${esc(a.name)}</b><small>${Math.round(a.w * 100)}% · 현재가 ${won(Math.round(a.px))} · 배당 ${(a.yld * 100).toFixed(1)}%</small></span><span class="v"><b class="money">${rtMan(a.mon)}</b><small>${a.mon >= a.px ? '월 약 ' + (a.mon / a.px).toFixed(1) + '주' : '약 ' + Math.ceil(a.px / a.mon) + '개월에 1주'}</small></span><span class="v"><b>${a.sh}주</b><small>${rtMan(a.spent)}</small></span></div>`).join('');
-  const mixY = A.reduce((s, a) => s + a.w * a.yld, 0) * 100, left = c.isa_lump - A.reduce((s, a) => s + a.spent, 0);
+  const planRows = IT.map(x => {
+    const on = x.wf > 0;
+    const sub = [Math.round(x.wf * 100) + '%', x.px > 0 ? '현재가 ' + won(Math.round(x.px)) + (x.live ? '' : ' (입력)') : '가격 없음', x.dps > 0 ? '배당 ' + (x.yld * 100).toFixed(1) + '%' : '배당 없음'].join(' · ');
+    const mv = on && x.px > 0 ? `<b class="money">${rtMan(x.mon)}</b><small>${x.mon >= x.px ? '월 약 ' + (x.mon / x.px).toFixed(1) + '주' : '약 ' + Math.ceil(x.px / x.mon) + '개월에 1주'}</small>` : `<b>-</b><small>${on ? '정보 필요' : '매수 안 함'}</small>`;
+    const lv = on && x.px > 0 ? `<b>${x.sh}주</b><small>${rtMan(x.spent)}</small>` : `<b>-</b>`;
+    return `<button type="button" class="rt-pr rt-it ${on ? '' : 'off'}" data-rt="edit:${esc(x.id)}"><span class="n"><b>${esc(x.name || '(이름 없음)')}</b><small>${sub}</small></span><span class="v">${mv}</span><span class="v">${lv}</span></button>`;
+  }).join('');
+  const left = c.isa_lump - IT.reduce((a, x) => a + x.spent, 0), noW = !IT.some(x => x.wf > 0);
   const plan = `<div class="fin-sec"><h3>이번 달 실행</h3><span>${now.getMonth() + 1}월</span></div>
     <section class="card rt-plan">
       <div class="rt-step"><div class="rt-sn ${penDone ? 'ok' : ''}">${penDone ? '✓' : '1'}</div><div class="rt-sb"><b>연금계좌 연 납입 ${rtMan(c.pen_annual)}</b><small>${c.pen_month}월 한 번에 · 올해 세액공제 환급 최대 ${rtMan(c.pen_annual * 0.165)} (총급여 5,500만 이하 16.5%, 초과 13.2%) · 내년 2~3월 연말정산</small></div><button type="button" class="btn ${penDone ? '' : 'primary'}" data-rt="paid">${penDone ? '납입 완료 취소' : '납입 완료'}</button></div>
-      <div class="rt-step"><div class="rt-sn">2</div><div class="rt-sb"><b>ISA 예수금 ${rtMan(c.isa_lump)} 투입</b><small>3~4번에 나눠서 사는 걸 권해요 · 남는 돈 ${rtMan(left)}</small></div></div>
-      <div class="rt-pl"><div class="rt-ph"><span>종목</span><span>매달 ISA ${rtMan(c.isa_month)}</span><span>예수금 투입</span></div>${planRows}</div>
+      <div class="rt-step"><div class="rt-sn">2</div><div class="rt-sb"><b>ISA 예수금 ${rtMan(c.isa_lump)} 투입</b><small>3~4번에 나눠서 사는 걸 권해요 · 남는 돈 ${rtMan(left)} · 종목을 눌러 고치고, 아래에서 추가해요</small></div></div>
+      <div class="rt-pl"><div class="rt-ph"><span>종목</span><span>매달 ISA ${rtMan(c.isa_month)}</span><span>예수금 투입</span></div>${planRows}
+        <button type="button" class="rt-add" data-rt="add">+ 종목 추가</button>${IT.length ? '' : '<button type="button" class="rt-add" data-rt="defaults">기본 5종목 다시 불러오기</button>'}</div>
       <div class="rt-step"><div class="rt-sn">3</div><div class="rt-sb"><b>청약통장 월 ${rtMan(c.sub_month)}</b><small>배당 계획과 별개의 저축이에요</small></div></div>
-      <div class="lf-note" style="margin:6px 0 0">계획 종목 평균 배당률(세전) ${mixY.toFixed(1)}% · 설정한 ISA 수익률(세후) ${c.isa_rate}%${Math.abs(mixY - c.isa_rate) > 1.3 ? ' — 차이가 커요. 설정에서 수익률을 맞춰 보세요.' : ''}</div>
+      <div class="lf-note" style="margin:6px 0 0">${noW ? '매수 비중이 있는 종목이 없어요. 종목을 눌러 비중을 넣어 주세요.' : `계획 종목 평균 배당률 세전 ${mixY.toFixed(1)}% · 세후 ${mixN.toFixed(1)}% · 주가 ${rtSg(c.price_g)}%, 배당 ${rtSg(c.div_g)}%/년 가정. 비중은 합이 100이 아니어도 비율로 계산해요.`}${IT.some(x => x.bad) ? ' 가격이나 배당이 비어 있는 종목은 계산에서 빠져요.' : ''}</div>
     </section>`;
   const cashHTML = (() => {
     if (cash.income == null) return `<div class="fin-sec"><h3>현금흐름 현실 체크</h3></div><section class="card rt-cash"><div class="lf-empty" style="padding:18px">월 실수령액을 넣으면 이 계획이 월급으로 가능한지 계산해 줘요.<br><button type="button" class="btn primary" data-rt="fin">월 실수령액 입력</button></div></section>`;
@@ -5827,16 +5841,16 @@ function rtHTML() {
   const divChart = `<div class="card lf-chart-card"><div class="lf-ch"><b>ISA 월 배당 성장</b><span class="dk-sub">매달 ${rtMan(c.isa_month)} 재투자</span></div>${lfChartBox('rtDivChart')}${msHTML}</div>`;
   const penChart = `<div class="card lf-chart-card"><div class="lf-ch"><b>연금계좌 자산 성장</b><span class="dk-sub">연 ${rtMan(c.pen_annual)} · ${c.pen_rate}%</span></div>${lfChartBox('rtPenChart')}
     <div class="ev-sum"><span>지금 자산 <b class="money">${rtMan(B.pen0)}</b></span><span>${penOpen}년부터 연금 개시 가능</span><span>${npStart}년 국민연금(만 65세)</span></div></div>`;
-  const H = MV.H;
-  const stkRows = RT_STK.map(s => { const h = H[s.k], ann = h.qty * h.dpsKRW; return `<div class="rt-sr"><span class="n"><b>${esc(s.name)}</b><small>${h.qty}주 · ${s.pay === 'm' ? '매월' : Object.keys(s.pay).join('·') + '월'}${s.est ? ' (분기 추정)' : ''}${h.accounts.length ? ' · ' + esc(h.accounts.join('/')) : ''}</small></span><span class="v"><b class="money">${rtMan(ann)}</b><small>연 · 수익률 ${h.px ? (h.dpsKRW / h.px * 100).toFixed(1) : '-'}%</small></span></div>`; }).join('');
+  const stkRows = IT.filter(x => x.qty > 0 || x.wf > 0).map(x => { const ann = x.qty * x.dps; return `<div class="rt-sr"><span class="n"><b>${esc(x.name)}</b><small>${x.qty ? x.qty + '주' : '보유 없음'} · ${rtMonths(x.pay)}${x.accounts.length ? ' · ' + esc(x.accounts.join('/')) : ''}</small></span><span class="v"><b class="money">${rtMan(ann)}</b><small>연 · 배당률 ${x.px ? (x.yld * 100).toFixed(1) : '-'}%</small></span></div>`; }).join('');
   const calChart = `<div class="card lf-chart-card"><div class="lf-ch"><b>월별 배당 달력</b><div class="seg rt-seg"><button type="button" class="${RT.view === 'now' ? 'on' : ''}" data-rt="view:now">지금 보유</button><button type="button" class="${RT.view === 'plan' ? 'on' : ''}" data-rt="view:plan">계획 1년 후</button></div></div>${lfChartBox('rtCalChart')}
     <div class="ev-sum"><span>연 합계(세전) <b class="money">${rtMan(mTot)}</b></span><span>월 평균 <b class="money">${rtMan(mTot / 12)}</b></span><span>가장 적은 달 <b class="money">${rtMan(Math.min.apply(null, MV.mon))}</b></span></div>
     <div class="rt-sl">${stkRows}</div>
-    <div class="lf-note" style="margin:8px 0 0">배당금·지급월은 ${RT_ASOF} 기준 최근 12개월 실적이에요(출처: etfshopping, knowingasset). 배당은 해마다 달라질 수 있고, 현대차2우B는 분기 금액을 12개월 합계÷4로 추정했어요.</div></div>`;
-  const scenHTML = `<div class="card rt-scen"><div class="lf-ch"><b>시나리오 비교</b><span class="dk-sub">은퇴 시점 · 지금 가치</span></div><div class="rt-sg"><div class="h"></div><div class="h">연금·ISA 수익률</div><div class="h">월 소득</div><div class="h">연금계좌</div>${scen.map(s => `<div class="r ${s.nm === '기본' ? 'b' : ''}">${s.nm}</div><div>${s.pr}% · ${s.ir}%</div><div><b class="money">${rtMan(s.pvGap)}</b></div><div class="money">${rtMan(s.L.P)}</div>`).join('')}</div></div>`;
+    <div class="lf-note" style="margin:8px 0 0">지급월과 주당 배당금은 종목마다 고칠 수 있어요. 처음 넣어 둔 5종목은 ${RT_ASOF} 기준 최근 12개월 실적이에요(출처: etfshopping, knowingasset). 분기·월 배당은 연간 금액을 지급월 수로 똑같이 나눠서 계산해요.</div></div>`;
+  const scenHTML = `<div class="card rt-scen"><div class="lf-ch"><b>시나리오 비교</b><span class="dk-sub">은퇴 시점 · 지금 가치</span></div><div class="rt-sg"><div class="h"></div><div class="h">연금 수익률 · 주가 · 배당 (연)</div><div class="h">월 소득</div><div class="h">ISA 자산</div>${scen.map(s => `<div class="r ${s.nm === '기본' ? 'b' : ''}">${s.nm}</div><div>${s.pr}% · ${rtSg(s.pg)}% · ${rtSg(s.dg)}%</div><div><b class="money">${rtMan(s.pvGap)}</b></div><div class="money">${rtMan(s.L.K)}</div>`).join('')}</div>
+    <div class="lf-note" style="margin:10px 0 0">하락은 주가·배당이 해마다 2%씩 빠지는 경우예요. 배당을 줄이는 해가 오면 그 시점부터 소득이 같이 줄어요.</div></div>`;
   const notes = `<section class="card rt-notes"><b>이 계산의 가정</b><ul>
-    <li>배당은 전부 재투자하고 주가는 변하지 않는다고 봤어요. 주가가 오르면 자산은 더 늘고, 배당이 줄면 소득은 줄어요.</li>
-    <li>ISA 안 배당은 계좌 안에서 재투자돼요. 일반적으로 인출은 납입 원금 범위까지만 되고 수익금은 해지(3년 만기) 때 나와서, 은퇴 후 월급처럼 받으려면 만기 시점 계획이 필요해요. 비과세 한도(일반형 200만 원 · 서민형 400만 원)를 넘는 수익은 9.9%예요.</li>
+    <li>주가는 해마다 ${rtSg(c.price_g)}%, 배당은 해마다 ${rtSg(c.div_g)}% 변한다고 봤어요(설정에서 바꿔요). 배당 성장은 물가(${c.infl}%)보다 낮게 잡는 게 보수적이에요. 배당은 전부 같은 종목에 다시 사는 걸로 계산했고, 실제로는 오를 수도 빠질 수도 있어서 위 시나리오 표의 하락·보수 행도 같이 봐 주세요.</li>
+    <li>ISA 안 배당은 계좌 안에서 재투자돼요. 일반적으로 인출은 납입 원금 범위까지만 되고 수익금은 해지(3년 만기) 때 나와서, 은퇴 후 월급처럼 받으려면 만기 시점 계획이 필요해요. 비과세 한도(일반형 200만 원 · 서민형 400만 원)를 넘는 수익은 9.9%예요. 배당 세금은 설정의 국내 ${c.kr_tax}% · 미국 ${c.us_tax}%로 뺐어요.</li>
     <li>연금계좌는 만 55세부터 연금으로 받을 수 있고, 연금소득세 3.3~5.5%(여기선 5.5%)가 붙어요. 연 ${c.draw_rate}%씩 꺼낸다고 봤어요.</li>
     <li>은퇴 후 물가 상승과 회사 퇴직금·퇴직연금 적립분, 국민연금은 별도예요. 국민연금${c.npension > 0 ? '은 입력한 금액을 반영했어요' : '은 아직 입력하지 않았어요 — 국민연금공단 "내 연금"에서 예상 월액을 확인해 설정에 넣어 주세요'}.</li>
     <li>지금 ${age}세(세는나이), 은퇴 ${retAge}세까지 ${yrsLeft.toFixed(1)}년이에요. 투자 자문이 아니라 가정에 따른 시뮬레이션이에요.</li></ul></section>`;
@@ -5863,21 +5877,65 @@ function openRetirePlan() {
       ${fld('연금계좌 연 납입 (원)', num('pen_annual', c.pen_annual))}${fld('납입하는 달 (1~12)', dec('pen_month', c.pen_month))}
       ${fld('올해 연금 납입', `<select class="in" name="pen_paid"><option value="0" ${c.pen_paid ? '' : 'selected'}>아직 안 했어요</option><option value="1" ${c.pen_paid ? 'selected' : ''}>이미 했어요</option></select>`)}${fld('청약통장 월 납입 (원)', num('sub_month', c.sub_month))}
       ${fld('ISA 월 납입 (원)', num('isa_month', c.isa_month))}${fld('ISA 예수금 투입 (원)', num('isa_lump', c.isa_lump))}
-      ${fld('ISA 배당 수익률 (세후 %)', dec('isa_rate', c.isa_rate))}${fld('연금계좌 수익률 (%)', dec('pen_rate', c.pen_rate))}
-      ${fld('연금 연 인출률 (%)', dec('draw_rate', c.draw_rate))}${fld('물가 상승률 (%)', dec('infl', c.infl))}
-      ${fld('국민연금 예상 월액 (세후, 지금 가치, 원)', num('npension', c.npension))}${fld('노후 월 생활비 목표 (지금 가치, 원)', num('need', c.need))}
-      ${fld('매수 비중 · 맥쿼리인프라', dec('w_mac', c.w_mac))}${fld('매수 비중 · 현대차2우B', dec('w_hy', c.w_hy))}
-      ${fld('매수 비중 · KB금융', dec('w_kb', c.w_kb))}<div></div></div>
-      <div class="hint faint" style="font-size:11.5px">비중은 합이 100이 아니어도 비율로 계산해요. 수익률은 "세후, 재투자" 기준이에요. 내 계정 DB에만 저장돼요.</div>`,
+      ${fld('주가 상승률 (연 %, 빠지면 마이너스)', dec('price_g', c.price_g))}${fld('배당 성장률 (연 %, 줄면 마이너스)', dec('div_g', c.div_g))}
+      ${fld('국내 배당 세금 (%)', dec('kr_tax', c.kr_tax))}${fld('미국 배당 세금 (%)', dec('us_tax', c.us_tax))}
+      ${fld('연금계좌 수익률 (연 %)', dec('pen_rate', c.pen_rate))}${fld('연금 연 인출률 (%)', dec('draw_rate', c.draw_rate))}
+      ${fld('물가 상승률 (%)', dec('infl', c.infl))}<div></div>
+      ${fld('국민연금 예상 월액 (세후, 지금 가치, 원)', num('npension', c.npension))}${fld('노후 월 생활비 목표 (지금 가치, 원)', num('need', c.need))}</div>
+      <div class="hint faint" style="font-size:11.5px">종목별 매수 비중·가격·배당은 "이번 달 실행" 표에서 종목을 눌러 고쳐요. 주가·배당 성장은 0으로 두면 변하지 않는다고 계산해요. 내 계정 DB에만 저장돼요.</div>`,
     onOpen(b) { b.querySelectorAll('input[inputmode=numeric]').forEach(a => a.addEventListener('input', () => { const d = a.value.replace(/[^\d]/g, ''); a.value = d ? Number(d).toLocaleString('ko-KR') : ''; })); },
     async onSave(b) {
       const g = n => lfNum(b.querySelector(`[name=${n}]`).value), v = {};
-      RT_NUM.forEach(k => { const x = g(k); v[k] = x == null ? RT_DEF[k] : x; });
+      RT_NUM.filter(k => k.indexOf('w_') !== 0).forEach(k => { const x = g(k); v[k] = x == null ? RT_DEF[k] : x; });
       if (v.birth < 1930 || v.birth > 2015) throw new Error('출생연도를 확인해 주세요');
       if (v.retire_year < new Date().getFullYear() || v.retire_year > v.birth + 90) throw new Error('은퇴 연도를 확인해 주세요');
       if (v.pen_month < 1 || v.pen_month > 12) throw new Error('납입하는 달은 1~12예요');
-      if (v.pen_rate < -20 || v.pen_rate > 30 || v.isa_rate < -20 || v.isa_rate > 30) throw new Error('수익률을 확인해 주세요');
+      if (v.pen_rate < -20 || v.pen_rate > 30) throw new Error('수익률을 확인해 주세요');
+      if (v.price_g < -30 || v.price_g > 30 || v.div_g < -30 || v.div_g > 30) throw new Error('주가·배당 증가율은 -30~30 사이로 넣어 주세요');
+      if (v.kr_tax < 0 || v.kr_tax > 50 || v.us_tax < 0 || v.us_tax > 50) throw new Error('세금은 0~50 사이로 넣어 주세요');
       await saveLifeMeta('retire', v);
+      closeFinModal(); renderDividend(); toast('저장했어요');
+    }
+  });
+}
+function openRtStock(id) {
+  const c = rtCfg(), list = rtPlanList(c), cur = id ? list.find(x => x.id === id) : null, isNew = !cur;
+  const it = cur || { id: 's' + Date.now().toString(36), name: '', sym: '', cur: 'KRW', px: '', dps: '', pay: [3, 6, 9, 12], w: 10 };
+  const hmap = new Map(); FIN.holdings.filter(h => h.market === 'KR' || h.market === 'US').forEach(h => { if (!hmap.has(h.name)) hmap.set(h.name, h); });
+  const PRE = [['매월', '1,2,3,4,5,6,7,8,9,10,11,12'], ['분기 3·6·9·12', '3,6,9,12'], ['분기 1·4·7·10', '1,4,7,10'], ['반기 6·12', '6,12'], ['연 1회 (12월)', '12']];
+  openFinModal({
+    title: isNew ? '배당 종목 추가' : '종목 수정',
+    html: `<datalist id="rtDl">${Array.from(hmap.keys()).map(n => `<option value="${esc(n)}">`).join('')}</datalist>
+      ${fld('종목명', `<input class="in" name="name" list="rtDl" value="${esc(it.name)}" placeholder="보유 종목은 고르면 코드·가격이 채워져요">`)}
+      <div class="row2">${fld('종목코드 / 티커', `<input class="in" name="sym" value="${esc(it.sym)}" placeholder="예: 005930 · SCHD">`)}${fld('통화', `<select class="in" name="cur"><option value="KRW" ${it.cur === 'KRW' ? 'selected' : ''}>원 (KRW)</option><option value="USD" ${it.cur === 'USD' ? 'selected' : ''}>달러 (USD)</option></select>`)}</div>
+      <div class="row2">${fld('현재가 (그 통화 기준)', `<input class="in" name="px" inputmode="decimal" value="${it.px}" placeholder="보유 종목이면 시세가 우선이에요">`)}${fld('1년 배당금 (주당 합계)', `<input class="in" name="dps" inputmode="decimal" value="${it.dps}" placeholder="최근 12개월 분배금 합계">`)}</div>
+      ${fld('배당 받는 달', `<div class="rt-mcs">${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(m => `<button type="button" class="chip rt-mc ${it.pay.indexOf(m) >= 0 ? 'on' : ''}" data-m="${m}">${m}월</button>`).join('')}</div><div class="rt-mcs">${PRE.map(p => `<button type="button" class="chip rt-pre" data-p="${p[1]}">${p[0]}</button>`).join('')}</div>`)}
+      ${fld('매수 비중 (%) — 0이면 안 사고 보유만 계산해요', `<input class="in" name="w" inputmode="decimal" value="${it.w}">`)}
+      <div class="hint faint" style="font-size:11.5px">비중은 다른 종목과의 비율로 계산해서 합이 100이 아니어도 돼요. 주당 배당금은 세전이에요.</div>`,
+    onOpen(b) {
+      const nm = b.querySelector('[name=name]');
+      const fill = () => {
+        const h = hmap.get(nm.value.trim()); if (!h) return;
+        b.querySelector('[name=sym]').value = h.symbol || ''; b.querySelector('[name=cur]').value = h.currency === 'USD' || h.market === 'US' ? 'USD' : 'KRW';
+        const p = b.querySelector('[name=px]'); if (!p.value && h.last_price != null) p.value = h.last_price;
+      };
+      nm.addEventListener('change', fill);
+      b.querySelectorAll('.rt-mc').forEach(x => x.addEventListener('click', () => x.classList.toggle('on')));
+      b.querySelectorAll('.rt-pre').forEach(x => x.addEventListener('click', () => { const s = x.dataset.p.split(','); b.querySelectorAll('.rt-mc').forEach(m => m.classList.toggle('on', s.indexOf(m.dataset.m) >= 0)); }));
+    },
+    onDelete: isNew ? null : async () => { await saveLifeMeta('retire', { plan: list.filter(x => x.id !== it.id) }); closeFinModal(); renderDividend(); toast('뺐어요'); },
+    async onSave(b) {
+      const g = n => b.querySelector(`[name=${n}]`).value.trim();
+      const name = g('name'); if (!name) throw new Error('종목명을 넣어 주세요');
+      const px = lfNum(g('px')), dps = lfNum(g('dps')), w = lfNum(g('w'));
+      if (!(px > 0)) throw new Error('현재가를 넣어 주세요');
+      if (dps == null || dps < 0) throw new Error('1년 배당금을 넣어 주세요 (없으면 0)');
+      if (w == null || w < 0) throw new Error('매수 비중을 확인해 주세요');
+      const pay = Array.from(b.querySelectorAll('.rt-mc.on')).map(x => Number(x.dataset.m));
+      if (!pay.length) throw new Error('배당 받는 달을 하나 이상 골라 주세요');
+      const nx = { id: it.id, name, sym: g('sym'), cur: g('cur') === 'USD' ? 'USD' : 'KRW', px, dps, pay, w };
+      const out = isNew ? list.concat([nx]) : list.map(x => x.id === it.id ? nx : x);
+      await saveLifeMeta('retire', { plan: out });
       closeFinModal(); renderDividend(); toast('저장했어요');
     }
   });
@@ -5886,8 +5944,11 @@ $('#divView').addEventListener('click', ev => {
   const x = ev.target.closest('[data-rt]'); if (!x) return; const a = x.dataset.rt;
   if (a === 'set') return openRetirePlan();
   if (a === 'fin') return lifeReady().then(openFinPlan);
+  if (a === 'add') return openRtStock(null);
+  if (a.indexOf('edit:') === 0) return openRtStock(a.slice(5));
+  if (a === 'defaults') { const c = rtCfg(); const d = RT_STK0.map(s => ({ id: s.id, name: s.name, sym: s.sym, cur: s.cur, px: s.px, dps: s.dps, pay: s.pay.slice(), w: s.wk ? (c[s.wk] || 0) : 0 })); return saveLifeMeta('retire', { plan: d }).then(() => renderDividend()).catch(e => toast(e.message || '저장하지 못했어요', true)); }
   if (a.indexOf('view:') === 0) { RT.view = a.slice(5); return renderDividend(); }
-  if (a === 'paid') { const c = rtCfg(); saveLifeMeta('retire', Object.assign({}, c, { pen_paid: c.pen_paid ? 0 : 1 })).then(() => { renderDividend(); toast(c.pen_paid ? '납입 완료를 취소했어요' : '납입 완료로 표시했어요'); }).catch(e => toast(e.message || '저장하지 못했어요', true)); }
+  if (a === 'paid') { const c = rtCfg(); saveLifeMeta('retire', { pen_paid: c.pen_paid ? 0 : 1 }).then(() => { renderDividend(); toast(c.pen_paid ? '납입 완료를 취소했어요' : '납입 완료로 표시했어요'); }).catch(e => toast(e.message || '저장하지 못했어요', true)); }
 });
 
 
