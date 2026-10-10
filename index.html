@@ -888,11 +888,11 @@ body[data-tab="home"] .fab{display:none!important}
 .hm-hello h2{font-family:var(--f);font-size:34px;font-weight:600;margin:0;line-height:1.05;color:var(--ink)}
 .hm-hello h2::after{content:"";display:block;width:38px;height:4px;border-radius:4px;margin-top:9px;background:linear-gradient(90deg,var(--tc),color-mix(in srgb,var(--tc) 35%,#fff))}
 .hm-hello p{font-size:12px;color:var(--ink3);margin:7px 0 0}
-.hm-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:14px}
+.hm-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;margin-bottom:14px}
 .hm-card{padding:18px 20px;text-align:left;display:flex;flex-direction:column;gap:8px;min-width:0;color:var(--ink)}
 .hm-card[data-go]{cursor:pointer;transition:border-color .15s,transform .12s}
 .hm-card[data-go]:hover{border-color:var(--tc,var(--accent-line));transform:translateY(-1px)}
-.hm-card.w2{grid-column:span 2}
+.hm-card{grid-column:span 2}.hm-card.w2{grid-column:span 2}.hm-card.h3{grid-column:span 3}
 .hm-t{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:800;color:var(--tc,var(--ink3));letter-spacing:.02em}
 .hm-t em{font-style:normal;font-weight:600;font-size:11px;color:var(--ink3)}
 .hm-big{font-family:var(--f);font-size:30px;line-height:1.1;color:var(--ink);letter-spacing:-.01em}
@@ -1009,7 +1009,7 @@ body[data-tab="home"] .fab{display:none!important}
 
 @media (max-width:760px){
   #lifeView .fin-act [data-act=add]{display:none}
-  .hm-grid{grid-template-columns:1fr}.hm-card.w2{grid-column:auto}
+  .hm-grid{grid-template-columns:1fr}.hm-card,.hm-card.w2,.hm-card.h3{grid-column:auto}
   .hm-hello h2{font-size:30px}
   .lf-row{grid-template-columns:62px minmax(0,1fr) auto;padding:11px 16px;gap:8px}
   .lf-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -1694,7 +1694,7 @@ body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!importan
     <button data-tab="ledger" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10.5h18"/><circle cx="16.5" cy="14.8" r="1.1"/></svg>Ledger</button>
     <button data-tab="cal" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/><path d="M8 14h2M12 14h2M8 17h2"/></svg>Calendar</button>
     <button data-tab="div" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8 9.5l1.6 5.2 2.4-5.2 2.4 5.2L16 9.5"/><path d="M8.2 12.4h7.6"/></svg>Dividend</button>
-    <button data-tab="life" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.9c0 5.6-7.5 10-7.5 10z"/><path d="M7.5 12.5h2.6l1.4-2.4 2 4 1.2-1.6h1.8"/></svg>Life</button>
+    <button data-tab="life" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.9c0 5.6-7.5 10-7.5 10z"/><path d="M7.5 12.5h2.6l1.4-2.4 2 4 1.2-1.6h1.8"/></svg>Health</button>
     <button data-tab="cult" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M4 6.2c0-.7.5-1.2 1.2-1.2H11v14H5.5A1.5 1.5 0 0 1 4 17.5z"/><path d="M20 6.2c0-.7-.5-1.2-1.2-1.2H13v14h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>Books &amp; Film</button>
     <button data-tab="sched" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>Schedule</button>
   </nav>
@@ -2064,7 +2064,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.4.0';
+const APP_VERSION = 'v2.4.1';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -5711,7 +5711,7 @@ function goalsHTML() {
   return nav + (LIFE.gsub === 'habit' ? habitsHTML() : LIFE.gsub === 'todo' ? todosHTML() : goalsListHTML());
 }
 
-/* ===== Life 탭 ===== */
+/* ===== Health 탭 ===== */
 function renderLifeTab() { lifeEnsure(renderLife); }
 function renderLife() {
   const el = $('#lifeView'); if (!el) return;
@@ -5719,7 +5719,7 @@ function renderLife() {
   const addLabel = hs ? (LIFE.hsub === 'status' ? '+ 체중·허리' : LIFE.hsub === 'workout' ? '+ 운동' : LIFE.hsub === 'drink' ? '+ 음주 기록' : '+ 기록') : LIFE.gsub === 'habit' ? '+ 습관' : LIFE.gsub === 'todo' ? '+ 할 일' : '+ 목표';
   LFQ = [];
   const scroll = window.scrollY;
-  el.innerHTML = `<div class="fin-head"><div><h2>Life</h2><p>건강과 습관, 목표를 한곳에서 관리해요</p></div><div class="fin-act">${hs ? '<button type="button" class="btn" data-act="hset">키·목표</button>' : ''}<button type="button" class="btn primary" data-act="add">${addLabel}</button></div></div>
+  el.innerHTML = `<div class="fin-head"><div><h2>Health</h2><p>건강과 습관, 목표를 한곳에서 관리해요</p></div><div class="fin-act">${hs ? '<button type="button" class="btn" data-act="hset">키·목표</button>' : ''}<button type="button" class="btn primary" data-act="add">${addLabel}</button></div></div>
     <div class="lf-top"><div class="seg" id="lfSub"><button type="button" data-s="health" class="${hs ? 'on' : ''}">건강</button><button type="button" data-s="goals" class="${hs ? '' : 'on'}">목표 · 습관</button></div></div>
     ${LIFE.loaded ? (hs ? healthHTML() : goalsHTML()) : '<div class="lf-empty">불러오는 중…</div>'}`;
   lfRunQueue();
@@ -6833,8 +6833,8 @@ function renderHome() {
   /* 자산 */
   let asset = wait;
   if (FIN.loaded) {
-    const tt = finTotals(FIN.holdings), prev = FIN.snaps.slice().reverse().find(s => s.snap_date < t), dl = prev ? tt.v - fnum(prev.total_value) : null;
-    asset = FIN.holdings.length ? `<div class="hm-big money">${won(tt.v)}</div><div class="hm-sub">투자 손익 <b class="${pnCls(tt.pnl)} money">${tt.pnl > 0 ? '+' : tt.pnl < 0 ? '-' : ''}${won(Math.abs(tt.pnl))}</b> (${pctTxt(tt.pct)})${dl != null ? `<br>직전 기록 대비 <b class="${pnCls(dl)} money">${dl > 0 ? '+' : dl < 0 ? '-' : ''}${won(Math.abs(dl))}</b>` : ''}</div>` : '<div class="hm-empty">Portfolio에서 종목이나 자산을 등록해 보세요.</div>';
+    const tt = finTotals(FIN.holdings);
+    asset = FIN.holdings.length ? `<div class="hm-big money">${won(tt.v)}</div><div class="hm-sub">투자 손익 <b class="${pnCls(tt.pnl)} money">${tt.pnl > 0 ? '+' : tt.pnl < 0 ? '-' : ''}${won(Math.abs(tt.pnl))}</b> (${pctTxt(tt.pct)})</div>` : '<div class="hm-empty">Portfolio에서 종목이나 자산을 등록해 보세요.</div>';
   }
   /* 지출 */
   let spend = wait;
@@ -6856,7 +6856,7 @@ function renderHome() {
   let habits = wait;
   if (LIFE.loaded) {
     const hs = LIFE.habits.filter(x => !x.archived), dn = hs.filter(x => LIFE.logSet.has(x.id + '|' + t)).length;
-    habits = hs.length ? `<div class="hb-chips">${hs.map(x => { const on = LIFE.logSet.has(x.id + '|' + t); return `<button type="button" class="hb-chip ${on ? 'on' : ''}" data-hlog="${esc(x.id)}|${t}"><span class="ck ${on ? 'on' : ''}" style="width:20px;height:20px;border-radius:7px">${CHECK_SVG}</span>${esc(x.name)}</button>`; }).join('')}</div>` : '<div class="hm-empty">Life 탭에서 매일 체크할 습관을 만들어 보세요.</div>';
+    habits = hs.length ? `<div class="hb-chips">${hs.map(x => { const on = LIFE.logSet.has(x.id + '|' + t); return `<button type="button" class="hb-chip ${on ? 'on' : ''}" data-hlog="${esc(x.id)}|${t}"><span class="ck ${on ? 'on' : ''}" style="width:20px;height:20px;border-radius:7px">${CHECK_SVG}</span>${esc(x.name)}</button>`; }).join('')}</div>` : '<div class="hm-empty">Health 탭에서 매일 체크할 습관을 만들어 보세요.</div>';
     habits = { html: habits, extra: hs.length ? `${dn} / ${hs.length}` : '' };
   }
   /* 할 일 */
@@ -6869,25 +6869,13 @@ function renderHome() {
   let goals = wait;
   if (LIFE.loaded) {
     const act = LIFE.goals.filter(g => !g.done).sort((a, b) => (a.due_date || '9999') < (b.due_date || '9999') ? -1 : 1).slice(0, 3);
-    goals = act.length ? act.map(g => { const p = goalProg(g); return `<div style="margin-bottom:10px"><div class="hm-li" style="border:0;padding:0 0 5px"><span class="tx"><b>${esc(g.title)}</b></span><span class="rt">${p.pct == null ? '-' : Math.round(p.pct * 100) + '%'}</span></div><div class="hm-pg"><i style="width:${p.pct == null ? 0 : Math.round(p.pct * 100)}%;background:var(--c-life)"></i></div></div>`; }).join('') : '<div class="hm-empty">Life 탭에서 올해 목표를 적어 보세요.</div>';
+    goals = act.length ? act.map(g => { const p = goalProg(g); return `<div style="margin-bottom:10px"><div class="hm-li" style="border:0;padding:0 0 5px"><span class="tx"><b>${esc(g.title)}</b></span><span class="rt">${p.pct == null ? '-' : Math.round(p.pct * 100) + '%'}</span></div><div class="hm-pg"><i style="width:${p.pct == null ? 0 : Math.round(p.pct * 100)}%;background:var(--c-life)"></i></div></div>`; }).join('') : '<div class="hm-empty">Health 탭에서 올해 목표를 적어 보세요.</div>';
   }
-  /* 다가오는 일정 — 일정(Schedule)·배당/적립·결제일·검진·ISA 만기 */
+  /* 다가오는 일정 — Schedule 탭에 넣은 일정만 */
   let soon = wait;
   if (LIFE.loaded) {
-    const it = [];
-    scUpcoming(t, 21).forEach(o => it.push({ d: o.d, k: o.r.category, n: (o.r.start_time ? String(o.r.start_time).slice(0, 5) + ' ' : '') + o.r.title }));
-    LIFE.check.filter(x => x.next_due && lfDiff(x.next_due, t) >= -7 && lfDiff(x.next_due, t) <= 60).forEach(x => it.push({ d: x.next_due, k: '검진', n: x.title || '검진' }));
-    if (FIN.loaded) {
-      evUpcoming(t, 14).forEach(o => it.push({ d: o.d, k: (EV_KIND[o.e.kind] || EV_KIND.dividend).t, n: o.e.title + (o.e.amount ? ' ' + won(o.e.amount) : '') }));
-      (FIN.subs || []).filter(s => s.active && !s.bundled && fnum(s.amount) > 0).forEach(s => { const dd = sxNext(s); if (dd && lfDiff(dd, t) <= 7) it.push({ d: dd, k: '결제', n: s.name + ' ' + won(fnum(s.amount)) }); });
-      try {
-        const c = rtCfg(), now = new Date(), ni = now.getFullYear() * 12 + now.getMonth(); let mat = c.isa_oy * 12 + (c.isa_om - 1) + 36; while (mat < ni) mat += 36;
-        const md = Math.floor(mat / 12) + '-' + String(mat % 12 + 1).padStart(2, '0') + '-01', mn = lfDiff(md, t);
-        if (mn <= 90) it.push({ d: mn < 0 ? t : md, k: 'ISA', n: 'ISA 3년 만기 (' + Math.floor(mat / 12) + '년 ' + (mat % 12 + 1) + '월)' });
-      } catch (e) { /* ignore */ }
-    }
-    it.sort((a, b) => a.d < b.d ? -1 : 1);
-    soon = it.length ? `<div class="hm-list">${it.slice(0, 6).map(x => { const n = lfDiff(x.d, t); return `<div class="hm-li"><span class="gl-cat" style="margin:0">${esc(x.k)}</span><span class="tx">${esc(x.n)}</span><span class="dd ${n < 0 ? 'od' : n === 0 ? 'tdy' : ''}">${lfDday(x.d)}</span><span class="rt">${lfMD(x.d)}</span></div>`; }).join('')}</div>${it.length > 6 ? `<div class="hm-sub">외 ${it.length - 6}건</div>` : ''}` : '<div class="hm-empty">Schedule 탭에 약속·여행·병원 일정을 넣어 두면 여기에 모여요.</div>';
+    const it = scUpcoming(t, 30);
+    soon = it.length ? `<div class="hm-list">${it.slice(0, 5).map(o => { const n = lfDiff(o.d, t), r = o.r; return `<div class="hm-li"><span class="gl-cat" style="margin:0">${esc(r.category)}</span><span class="tx">${r.start_time ? esc(String(r.start_time).slice(0, 5)) + ' ' : ''}${esc(r.title)}</span><span class="dd ${n === 0 ? 'tdy' : ''}">${lfDday(o.d)}</span><span class="rt">${lfMD(o.d)}</span></div>`; }).join('')}</div>${it.length > 5 ? `<div class="hm-sub">외 ${it.length - 5}건</div>` : ''}` : '<div class="hm-empty">Schedule 탭에 약속·여행·병원 일정을 넣으면 여기에 나와요.</div>';
   }
   /* 독서 · 영화 */
   let cult = wait;
@@ -6904,10 +6892,10 @@ function renderHome() {
   let divc = wait;
   if (FIN.loaded && LIFE.loaded) {
     try {
-      const c = rtCfg(), MV = rtMonthly(c, 'now'), tot = MV.mon.reduce((a, b) => a + b, 0), cm = MV.mon[d.getMonth()], R = rtResult(c), pct = c.need > 0 ? R.pvGap / c.need * 100 : null;
+      const c = rtCfg(), MV = rtMonthly(c, 'now'), tot = MV.mon.reduce((a, b) => a + b, 0), cm = MV.mon[d.getMonth()];
       const nx = evUpcoming(t, 60).filter(o => o.e.kind === 'dividend').sort((a, b) => a.d < b.d ? -1 : 1)[0];
       const got = (FIN.events || []).filter(e => e.kind === 'dividend' && e.received && e.pay_date && String(e.pay_date).slice(0, 4) === t.slice(0, 4)).reduce((a, e) => a + (Number(e.amount) || 0), 0);
-      divc = tot > 0 || R.pvGap > 0 ? `<div class="hm-big money">${rtMan(tot)}</div><div class="hm-sub">연 예상 배당 (세전) · 이번 달 <b class="money">${rtMan(cm)}</b>${got ? `<br>올해 받은 배당 <b class="money">${rtMan(got)}</b>` : ''}${nx ? `<br>다음 <b>${esc(nx.e.title)}</b> ${lfDday(nx.d)}` : ''}<br>은퇴 후 월 <b class="money">${rtMan(R.pvGap)}</b>${pct != null ? ` (목표의 ${Math.round(pct)}%)` : ''}</div>` : '<div class="hm-empty">Dividend 탭에서 배당 종목을 등록해 보세요.</div>';
+      divc = tot > 0 ? `<div class="hm-big money">${rtMan(tot)}</div><div class="hm-sub">지금 보유 종목 기준 연 예상 배당 (세전)<br>이번 달 <b class="money">${rtMan(cm)}</b>${got ? ` · 올해 받은 배당 <b class="money">${rtMan(got)}</b>` : ''}${nx ? `<br>다음 <b>${esc(nx.e.title)}</b> ${lfDday(nx.d)}` : ''}</div>` : '<div class="hm-empty">Dividend 탭에서 배당 종목을 등록해 보세요.</div>';
     } catch (e) { divc = '<div class="hm-empty">Dividend 탭에서 확인해 주세요.</div>'; }
   }
   /* My Bar */
@@ -6923,13 +6911,13 @@ function renderHome() {
       ${hmCard('portfolio', 'var(--c-pf)', '총 자산', 'Portfolio', asset)}
       ${hmCard('ledger', 'var(--c-ld)', '이번 달 지출', 'Ledger', spend)}
       ${hmCard('div', 'var(--c-div)', '배당', 'Dividend', divc)}
-      ${hmCard('sched', 'var(--c-home)', '다가오는 일정', 'Schedule', soon, 'w2')}
-      ${hmCard('life:goals:todo', 'var(--c-life)', '할 일', td.extra, td.html)}
-      ${hmCard('life:health', 'var(--c-life)', '건강', 'Life', health)}
+      ${hmCard('sched', 'var(--c-home)', '다가오는 일정', 'Schedule', soon, 'h3')}
+      ${hmCard('life:goals:todo', 'var(--c-life)', '할 일', td.extra, td.html, 'h3')}
+      ${hmCard('life:health', 'var(--c-life)', '건강', 'Health', health)}
       ${hmCard('life:goals:habit', 'var(--c-life)', '오늘의 습관', hb.extra, hb.html)}
       ${hmCard('cult', 'var(--c-goal)', '독서 · 영화', 'Books & Film', cult)}
-      ${hmCard('life:goals:goal', 'var(--c-life)', '목표 진행', 'Life', goals, 'w2')}
-      ${hmCard('bar', 'var(--c-bar)', 'My Bar', '', bar)}
+      ${hmCard('life:goals:goal', 'var(--c-life)', '목표 진행', 'Goals', goals, 'h3')}
+      ${hmCard('bar', 'var(--c-bar)', 'My Bar', '', bar, 'h3')}
     </div>
     <div class="hm-foot"><span>${esc(APP.email || '')}</span><span><button type="button" id="hmImport">가져오기</button><button type="button" id="hmBackup">백업·복원</button><button type="button" id="hmLogout">로그아웃</button></span></div>`;
 }
