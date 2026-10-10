@@ -1581,6 +1581,58 @@ body[data-tab="cult"] #btnAdd,body[data-tab="cult"] .fab{display:none!important}
 .cu-stars{display:flex;gap:2px}.cu-stars button{font-size:28px;line-height:1;background:none;border:0;color:var(--line2);cursor:pointer;padding:0 3px}.cu-stars button.on{color:#f0b232}
 .cu-goalb{display:block;height:6px;border-radius:4px;background:var(--soft);margin-top:7px;overflow:hidden}.cu-goalb i{display:block;height:100%;border-radius:4px;background:var(--k)}
 @media (max-width:640px){.cu-row{gap:9px}.cu-m b{font-size:14px}}
+/* ===== Schedule ===== */
+.tabs button[data-tab="sched"]{--tc:var(--c-home)}
+body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!important}
+#schedView .card{border-radius:22px}
+.sc-chip{background:color-mix(in srgb,var(--k) 18%,var(--card))}
+.sc-chip i{background:var(--k)}
+.sc-chip.got{opacity:.5}.sc-chip.got b{text-decoration:line-through}
+.ev-c[data-sc]{cursor:pointer}
+.sc-cats{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.sc-cats .chip i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--k);margin-right:6px}
+.sc-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:11px 6px;cursor:pointer;color:inherit;font:inherit}
+.sc-row:first-child{border-top:0}
+.sc-row:hover{background:var(--soft);border-radius:12px}
+.sc-d{min-width:46px;text-align:center;line-height:1.15}
+.sc-d b{display:block;font-size:20px;color:var(--ink);font-family:var(--f);letter-spacing:-.03em}
+.sc-d small{font-size:11px;color:var(--ink3);font-weight:700}
+.sc-d.su small{color:var(--up)}.sc-d.sa small{color:var(--down)}
+.sc-m b{display:block;font-size:14.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc-m small{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--ink3);margin-top:3px;min-width:0}
+.sc-m small span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc-k{flex:none;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:999px;color:var(--k);background:color-mix(in srgb,var(--k) 14%,transparent)}
+.sc-row.dn .sc-m b{text-decoration:line-through;color:var(--ink3)}
+.sc-r{text-align:right;font-size:12px;color:var(--ink3);white-space:nowrap;display:flex;gap:8px;align-items:center}
+.sc-r .dd{font-weight:800;color:var(--ink2)}.sc-r .dd.tdy{color:var(--c-home)}
+.sc-ck{width:24px;height:24px;border-radius:8px;border:1.5px solid var(--line2);background:none;cursor:pointer;color:transparent;display:grid;place-items:center;padding:0}
+.sc-ck svg{width:14px;height:14px}
+.sc-ck.on{background:var(--c-home);border-color:var(--c-home);color:#fff}
+.hm-gap{height:6px}
+.hm-cu1{margin-bottom:10px}
+.hm-cu1 .l{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;color:var(--ink3);margin-bottom:5px}
+.hm-cu1 .l b{font-size:17px;color:var(--ink);font-family:var(--f);letter-spacing:-.03em}
+.hm-cu1 .l b small{font-size:11.5px;color:var(--ink3);margin-left:2px}
+@media (max-width:640px){.sc-row{gap:9px}.sc-m b{font-size:14px}.sc-d{min-width:40px}}
+.cu-th{position:relative;flex:none;width:42px;height:60px;border-radius:8px;overflow:hidden;display:grid;place-items:center;background:color-mix(in srgb,var(--k) 16%,var(--soft))}
+.cu-th b{font-size:16px;color:var(--k);font-family:var(--f)}
+.cu-th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cu-m small .cu-k{margin-right:6px}
+.cu-cov{display:flex;gap:12px;align-items:flex-start;margin:0 0 12px}
+.cu-cvp{position:relative;flex:none;width:72px;height:104px;border-radius:12px;overflow:hidden;background:var(--soft);display:grid;place-items:center;color:var(--ink3);font-size:11px;text-align:center;border:1px dashed var(--line2)}
+.cu-cvp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cu-cvb{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cu-cvb .btn{font-size:12.5px;padding:7px 12px}
+.cu-cvb input[type=file]{display:none}
+.cu-res{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:10px;margin:0 0 12px}
+.cu-res button{background:none;border:1px solid var(--line);border-radius:12px;padding:6px;cursor:pointer;text-align:left;color:inherit;font:inherit;min-width:0}
+.cu-res button:hover{border-color:var(--c-goal)}
+.cu-res img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:8px;background:var(--soft)}
+.cu-res b{display:block;font-size:11.5px;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.cu-res small{display:block;font-size:10.5px;color:var(--ink3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cu-note{font-size:12px;color:var(--ink3);margin:0 0 10px}
+.hm-shelf{display:flex;gap:7px;margin:2px 0 10px}
+.hm-shelf img{width:36px;height:52px;object-fit:cover;border-radius:6px;background:var(--soft)}
 </style>
 <script>
 (function(){
@@ -1614,7 +1666,7 @@ body[data-tab="cult"] #btnAdd,body[data-tab="cult"] .fab{display:none!important}
   <div class="top">
     <div class="titleblock">
       <h1><svg viewBox="0 0 24 24" width="30" height="30" style="color:var(--s1);flex:none;transform:rotate(60deg)" aria-hidden="true"><use href="#jetIcon"/></svg> Maverick</h1>
-      <div class="titlesub">Private Office<span class="verbadge" id="appVersion"></span></div>
+      <div class="titlesub">Bravo My Life<span class="verbadge" id="appVersion"></span></div>
     </div>
     <span class="sync hide-m" id="sync"></span>
     <button class="btn" id="btnTheme" title="테마 전환"></button>
@@ -1644,6 +1696,7 @@ body[data-tab="cult"] #btnAdd,body[data-tab="cult"] .fab{display:none!important}
     <button data-tab="div" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8 9.5l1.6 5.2 2.4-5.2 2.4 5.2L16 9.5"/><path d="M8.2 12.4h7.6"/></svg>Dividend</button>
     <button data-tab="life" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.9c0 5.6-7.5 10-7.5 10z"/><path d="M7.5 12.5h2.6l1.4-2.4 2 4 1.2-1.6h1.8"/></svg>Life</button>
     <button data-tab="cult" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M4 6.2c0-.7.5-1.2 1.2-1.2H11v14H5.5A1.5 1.5 0 0 1 4 17.5z"/><path d="M20 6.2c0-.7-.5-1.2-1.2-1.2H13v14h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>Books &amp; Film</button>
+    <button data-tab="sched" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>Schedule</button>
   </nav>
 
   <div id="barView" hidden>
@@ -1695,6 +1748,7 @@ body[data-tab="cult"] #btnAdd,body[data-tab="cult"] .fab{display:none!important}
   <div id="calView" hidden></div>
   <div id="divView" hidden></div>
   <div id="cultView" hidden></div>
+  <div id="schedView" hidden></div>
   <div id="soonView" hidden></div>
 </div>
 
@@ -2010,7 +2064,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.3.0';
+const APP_VERSION = 'v2.4.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -2454,7 +2508,7 @@ $('#viewSeg').addEventListener('click', e => { const b = e.target.closest('butto
 $('#sort').addEventListener('change', e => { S.sort = e.target.value; store.set('sort', S.sort); renderContent(); });
 let qT; $('#q').addEventListener('input', e => { clearTimeout(qT); qT = setTimeout(()=>{ S.q = e.target.value; renderContent(); }, 120); });
 $('#btnPrice').addEventListener('click', () => { S.hidePrice = !S.hidePrice; store.set('hidePrice', S.hidePrice); renderAll(); });
-$('#btnRefresh').addEventListener('click', () => { refresh(); if (S.tab === 'home' || S.tab === 'life' || S.tab === 'cult') { Promise.all([loadLife(), loadFin()]).then(() => { lifeRerender(); }); } });
+$('#btnRefresh').addEventListener('click', () => { refresh(); if (S.tab === 'home' || S.tab === 'life' || S.tab === 'cult' || S.tab === 'sched') { Promise.all([loadLife(), loadFin()]).then(() => { lifeRerender(); }); } });
 $('#btnAdd').addEventListener('click', () => openForm(null));
 $('#fab').addEventListener('click', () => { if (S.tab === 'home') return; if (S.tab === 'life') lifeAdd(); else if (S.tab === 'portfolio') openHolding(null); else if (S.tab === 'ledger') openLedgerForm(null); else if (S.tab === 'cal') openEvent(null); else openForm(null); });
 
@@ -3842,7 +3896,7 @@ document.addEventListener('click', ev => {
 
 /* ---------- 탭 전환 ---------- */
 const SOON_LABEL = {};
-const TAB_GRP = { home:'h', bar:'w', yt:'w', goal:'w', journal:'w', wdb:'w', portfolio:'m', ledger:'m', cal:'m', div:'m', life:'m', cult:'m' };
+const TAB_GRP = { home:'h', bar:'w', yt:'w', goal:'w', journal:'w', wdb:'w', portfolio:'m', ledger:'m', cal:'m', div:'m', life:'m', cult:'m', sched:'m' };
 const GRP_LAST = { h:'home', w:'bar', m:'portfolio' };
 function switchTab(tab){
   S.tab = tab;
@@ -3863,6 +3917,7 @@ function switchTab(tab){
   $('#calView').hidden = tab !== 'cal';
   $('#divView').hidden = tab !== 'div';
   $('#cultView').hidden = tab !== 'cult';
+  $('#schedView').hidden = tab !== 'sched';
   $('#soonView').hidden = !(tab in SOON_LABEL);
   document.body.dataset.tab = tab;
   if (tab === 'home') renderHomeTab();
@@ -3872,6 +3927,7 @@ function switchTab(tab){
   else if (tab === 'cal') renderCalTab();
   else if (tab === 'div') renderDivTab();
   else if (tab === 'cult') renderCultTab();
+  else if (tab === 'sched') renderSchedTab();
   else if (tab === 'wdb') renderWdbTab();
   else if (tab === 'dist') renderDistTab();
   else if (tab === 'goal') renderGoalTab();
@@ -4590,7 +4646,7 @@ const LIFE = {
   sub: store.get('lifeSub', 'health'), hsub: (v => (v === 'body' || v === 'sleep') ? 'status' : v)(store.get('lifeH', 'status')), gsub: store.get('lifeG', 'habit'),
   bm: 'weight', rng: '90', ck: '혈압',
   more: {}, showDone: false,
-  body: [], workout: [], sleep: [], check: [], exam: [], drinks: [], culture: [], goals: [], habits: [], logs: [], todos: [], meta: {}, logSet: new Set()
+  body: [], workout: [], sleep: [], check: [], exam: [], drinks: [], culture: [], schedule: [], goals: [], habits: [], logs: [], todos: [], meta: {}, logSet: new Set()
 };
 const HM_DEF = { height: null, target_weight: null, start_weight: null, sleep_goal: 7, workout_goal: 3 };
 const hm = () => Object.assign({}, HM_DEF, LIFE.meta.health || {});
@@ -4603,7 +4659,7 @@ async function loadLife() {
   LIFE.loading = true;
   try {
     const since = lfAdd(today(), -150);
-    const [b, w, s, c, g, h, l, t, m, xm, dk, cu] = await Promise.all([
+    const [b, w, s, c, g, h, l, t, m, xm, dk, cu, sc] = await Promise.all([
       sb.from('health_body').select('*').order('measured_on', { ascending: false }).limit(1000),
       sb.from('health_workout').select('*').order('done_on', { ascending: false }).limit(1000),
       sb.from('health_sleep').select('*').order('sleep_date', { ascending: false }).limit(1000),
@@ -4615,7 +4671,8 @@ async function loadLife() {
       sb.from('life_meta').select('*'),
       sb.from('health_exam').select('*').order('exam_date', { ascending: false }),
       sb.from('health_drink').select('*').order('drink_date', { ascending: false }).limit(3000),
-      sb.from('life_culture').select('*').order('created_at', { ascending: false }).limit(3000)
+      sb.from('life_culture').select('*').order('created_at', { ascending: false }).limit(3000),
+      sb.from('life_schedule').select('*').order('start_date', { ascending: true }).limit(3000)
     ]);
     const bad = [b, w, s, c, g, h, l, t, m].find(r => r.error);
     if (bad) throw new Error(bad.error.message);
@@ -4623,6 +4680,7 @@ async function loadLife() {
     LIFE.exam = xm.error ? (LIFE.exam || []) : (xm.data || []);
     LIFE.drinks = dk.error ? (LIFE.drinks || []) : (dk.data || []);
     LIFE.culture = cu.error ? (LIFE.culture || []) : (cu.data || []);
+    LIFE.schedule = sc.error ? (LIFE.schedule || []) : (sc.data || []);
     LIFE.goals = g.data || []; LIFE.habits = h.data || []; LIFE.logs = l.data || []; LIFE.todos = t.data || [];
     LIFE.meta = {}; (m.data || []).forEach(r => { LIFE.meta[r.key] = r.value; });
     lfRebuildLogs();
@@ -4635,7 +4693,7 @@ function lifeEnsure(render) {
   render();
   loadLife().then(() => { if (LIFE.loaded) render(); });
 }
-function lifeRerender() { if (S.tab === 'life') renderLife(); else if (S.tab === 'home') renderHome(); else if (S.tab === 'cult') renderCult(); }
+function lifeRerender() { if (S.tab === 'life') renderLife(); else if (S.tab === 'home') renderHome(); else if (S.tab === 'cult') renderCult(); else if (S.tab === 'sched') renderSched(); }
 
 /* ---------- DB 저장 공통 ---------- */
 async function lfSave(table, list, dateKey, row, id) {
@@ -6134,23 +6192,25 @@ function rtSim(c, o) {
   const pen0 = rtPen0(); let P = pen0, prin = pen0;
   /* 원화 종목은 ISA 안(배당 세금 없이 재투자, 해지 때 9.9%), 그 외 계좌·미국 주식은 계좌 세금을 바로 뺀다 */
   const sI = IT.map(x => x.usd ? 0 : x.qIsa + x.lump / x.px), sG = IT.map(x => x.usd ? x.qty + x.lump / x.px : x.qGen);
-  let basis = IT.reduce((a, x) => a + (x.usd ? 0 : x.costIsa + x.lump), 0);
+  let basis = IT.reduce((a, x) => a + (x.usd ? 0 : x.costIsa + x.lump), 0), acc = 0;
   const lim = c.isa_low ? 4e6 : 2e6, penM = Math.pow(1 + penR, 1 / 12);
   const nowIdx = y * 12 + (m - 1); let mat = c.isa_oy * 12 + (c.isa_om - 1) + 36; while (mat <= nowIdx) mat += 36;
   const ev = []; let taxPaid = 0;
   const snap = tt => {
     const f = Math.pow(1 + pg, tt / 12), g = Math.pow(1 + dg, tt / 12); let KI = 0, KG = 0, dI = 0, dG = 0;
     IT.forEach((x, i) => { KI += sI[i] * x.px * f; KG += sG[i] * x.px * f; dI += sI[i] * x.dps * g / 12; dG += sG[i] * x.dps * g * (1 - x.tax) / 12; });
-    const gain = KI - basis, isaTax = Math.max(0, gain - lim) * RT_ISA, eff = gain > 0 ? isaTax / gain : 0;
-    return { K: KI + KG, KI, gain, basis, isaTax, eff, dI, dG, div: dI * (1 - eff) + dG };
+    /* ISA 과세 대상은 배당(분배금)뿐 — 국내 상장주식 시세차익은 비과세. 월 배당 세율은 앞으로 3년(해지·재가입이면 새 계좌) 배당에 비과세 한도를 적용해 구한다 */
+    const gain = KI - basis, pgain = Math.max(0, gain - acc), isaTax = Math.max(0, acc - lim) * RT_ISA;
+    const a0 = cyc ? 0 : acc, w = 36 * dI, eff = w > 0 ? (Math.max(0, a0 + w - lim) - Math.max(0, a0 - lim)) * RT_ISA / w : 0;
+    return { K: KI + KG, KI, gain, pgain, acc, basis, isaTax, eff, dI, dG, div: dI * (1 - eff) + dG };
   };
-  /* 3년 만기: 해지하고(수익 − 비과세 한도)에 9.9% → 새 ISA에 연 납입한도만큼 다시 넣고, 나머지는 일반계좌로 */
+  /* 3년 만기: 해지하고 (배당 합계 − 비과세 한도)에 9.9% → 새 ISA에 연 납입한도만큼 다시 넣고, 나머지는 일반계좌로 */
   const cycle = (f) => {
     let KI = 0; IT.forEach((x, i) => { KI += sI[i] * x.px * f; });
-    const gain = KI - basis, tax = Math.max(0, gain - lim) * RT_ISA, net = KI - tax;
+    const gain = KI - basis, tax = Math.max(0, acc - lim) * RT_ISA, net = KI - tax;
     const cap = Math.max(0, 2e7 - c.isa_month * (12 - m)), D = Math.min(net, cap);
     if (KI > 0) { const kD = D / KI, kR = (net - D) / KI; IT.forEach((x, i) => { const v = sI[i]; sI[i] = v * kD; sG[i] += v * kR; }); }
-    taxPaid += tax; ev.push({ y, m, t, KI, basis, gain, tax, re: D, out: net - D }); basis = D;
+    taxPaid += tax; ev.push({ y, m, t, KI, basis, gain, pgain: Math.max(0, gain - acc), div: acc, tax, re: D, out: net - D }); basis = D; acc = 0;
   };
   const rows = [], lastIdx = c.retire_year * 12 + 11;
   const pay = () => { P += c.pen_annual; prin += c.pen_annual; };
@@ -6161,7 +6221,7 @@ function rtSim(c, o) {
     const f = Math.pow(1 + pg, t / 12), g = Math.pow(1 + dg, t / 12);
     IT.forEach((x, i) => {
       const buy = x.mon + extra * x.wf;
-      sI[i] += sI[i] * x.dps * g / 12 / (x.px * f); sG[i] += sG[i] * x.dps * g * (1 - x.tax) / 12 / (x.px * f);
+      acc += sI[i] * x.dps * g / 12; sI[i] += sI[i] * x.dps * g / 12 / (x.px * f); sG[i] += sG[i] * x.dps * g * (1 - x.tax) / 12 / (x.px * f);
       if (x.usd) sG[i] += buy / (x.px * f); else { sI[i] += buy / (x.px * f); basis += buy; }
     });
     P *= penM; if (m === c.pen_month) pay();
@@ -6274,17 +6334,19 @@ function rtHTML() {
   const taxAll = x => x.taxPaid + x.L.isaTax;
   const penWarn = R.penOver ? `<div class="rt-cn bad">연금 연 인출이 1,500만 원을 넘어요. 넘으면 전액 16.5% 분리과세(또는 종합과세)라서 세금이 확 늘어요. 연 인출률을 ${(RT_PEN_LIM / L0.P * 100).toFixed(1)}% 이하로 낮추면 ${(R.penAge < 70 ? 5.5 : R.penAge < 80 ? 4.4 : 3.3)}%로 줄어요.</div>` : '';
   const isaWarn = [yr1 > 20000000 ? '첫해 ISA 납입이 연 2,000만 원 한도를 넘어요. 예수금과 월 납입을 나눠서 넣어야 해요.' : '', y5 > 100000000 ? '5년 합계가 ISA 총 납입한도 1억 원을 넘어요.' : ''].filter(Boolean).map(t => `<div class="rt-cn bad">${t}</div>`).join('');
-  const evRows = R.ev.map(e => `<div class="rt-cr"><span>${e.y}년 ${e.m}월 만기 해지<small class="rt-cs">수익 ${rtMan(e.gain)} · 세금 ${rtMan(e.tax)} · 새 ISA ${rtMan(e.re)}${e.out > 0 ? ' · 일반계좌로 ' + rtMan(e.out) : ''}</small></span><b class="money">${rtMan(e.tax)}</b></div>`).join('');
+  const evRows = R.ev.map(e => `<div class="rt-cr"><span>${e.y}년 ${e.m}월 만기 해지<small class="rt-cs">배당 ${rtMan(e.div)} · 시세차익 ${rtMan(e.pgain)}(비과세) · 세금 ${rtMan(e.tax)} · 새 ISA ${rtMan(e.re)}${e.out > 0 ? ' · 일반계좌로 ' + rtMan(e.out) : ''}</small></span><b class="money">${rtMan(e.tax)}</b></div>`).join('');
   const dm = (a, b) => { const d = Math.round((a - b) / 1e4); return d === 0 ? '비슷해요' : (d > 0 ? '+' : '−') + Math.abs(d).toLocaleString('ko-KR') + '만 원'; };
-  const cmp = `<div class="rt-cn"><b>${c.isa_cycle ? '3년마다 해지·재가입' : '은퇴까지 유지'}</b>${c.isa_cycle ? '으로' : '로'} 계산 중이에요. ${c.isa_cycle ? '은퇴까지 유지와' : '3년마다 해지·재가입과'} 비교하면 은퇴 후 월 소득(지금 가치)이 <b>${dm(R.pvGap, alt.pvGap)}</b>, ISA 세금 합계는 ${rtMan(taxAll(R))} 대 ${rtMan(taxAll(alt))}예요.</div>`;
+  const cdif = R.pvGap - alt.pvGap, cycNote = !c.isa_cycle ? '' : cdif < -1e4 ? ' ISA 세금은 줄지만, 새 ISA에 다시 넣지 못하는 금액이 일반계좌로 빠져 배당세(' + c.kr_gen + '%)를 내기 때문에 월 소득은 오히려 줄어요.' : cdif > 1e4 ? ' 해지·재가입 때마다 비과세 한도가 새로 생겨서 유리해요.' : '';
+  const cmp = `<div class="rt-cn"><b>${c.isa_cycle ? '3년마다 해지·재가입' : '은퇴까지 유지'}</b>${c.isa_cycle ? '으로' : '로'} 계산 중이에요. ${c.isa_cycle ? '은퇴까지 유지와' : '3년마다 해지·재가입과'} 비교하면 은퇴 후 월 소득(지금 가치)이 <b>${dm(R.pvGap, alt.pvGap)}</b>, ISA 세금 합계는 ${rtMan(taxAll(R))} 대 ${rtMan(taxAll(alt))}예요.${cycNote}</div>`;
   const taxHTML = `<div class="fin-sec" style="--sc:var(--c-inc, var(--c-pf))"><h3>세금 점검</h3><span>${c.retire_year}년 말 기준 추정</span></div><section class="card rt-cash">
     ${R.ev.length ? `<div class="rt-cn faint" style="margin:0 0 4px">ISA ${c.isa_oy}년 ${c.isa_om}월 개설 · 3년 만기마다 해지 후 재가입 (${c.isa_low ? '서민형' : '일반형'} 비과세 ${lim}만 원이 새로 적용)</div>${evRows}` : ''}
-    ${crow('은퇴 시점 ISA 평가금액 (계획 종목)', rtMan(L0.KI), 'ISA 안 배당은 세금 없이 재투자되는 걸로 계산')}
+    ${crow('은퇴 시점 ISA 평가금액 (계획 종목)', rtMan(L0.KI), 'ISA 안 배당은 세금 없이 재투자되고, 해지할 때 한 번에 정산해요')}
     ${crow('이번 계좌 납입 원금', rtMan(L0.basis), R.ev.length ? '마지막 재가입 때 넣은 돈 + 이후 매달 납입' : '지금 보유 취득가 + 예수금 + 매달 납입')}
-    ${crow('이번 계좌 수익', rtMan(L0.gain))}
+    ${crow('시세차익 (국내 주식 · 비과세)', rtMan(L0.pgain), '국내 상장주식 매매차익은 ISA에서도 세금이 없어요')}
+    ${crow('배당 수익 (과세 대상)', rtMan(L0.acc), '이번 ISA 계좌에서 받은 배당 합계')}
     ${crow('비과세 한도 (' + (c.isa_low ? '서민형' : '일반형') + ')', '-' + rtMan(lim * 10000))}
-    <div class="rt-cr tot"><span>은퇴 때 해지 세금 (초과분 9.9%)</span><b class="money">${rtMan(L0.isaTax)}</b></div>
-    ${L0.isaTax > 0 ? `<div class="rt-cn">수익의 ${(L0.eff * 100).toFixed(1)}%가 세금이고, 해지하고 나면 약 <b>${rtMan(isaNet)}</b>이 남아요. 월 배당에는 이 비율을 미리 빼서 보여줘요.</div>` : '<div class="rt-cn">수익이 비과세 한도 안이라 해지 세금이 없어요.</div>'}${isaWarn}${cmp}
+    <div class="rt-cr tot"><span>은퇴 때 해지 세금 (배당 초과분 9.9%)</span><b class="money">${rtMan(L0.isaTax)}</b></div>
+    ${L0.isaTax > 0 ? `<div class="rt-cn">배당 수익의 ${(L0.isaTax / L0.acc * 100).toFixed(1)}%가 세금이고, 해지하고 나면 약 <b>${rtMan(isaNet)}</b>이 남아요. 월 배당에는 앞으로 3년 배당 기준 세율 ${(L0.eff * 100).toFixed(1)}%를 미리 빼서 보여줘요.</div>` : '<div class="rt-cn">배당 수익이 비과세 한도 안이라 해지 세금이 없어요.</div>'}${isaWarn}${cmp}
     ${crow('연금 연 인출 (은퇴 첫해, 세전)', rtMan(R.penAnnual), '1,500만 원까지는 연금소득세만 · ' + R.penAge + '세 구간 ' + (R.penRate * 100).toFixed(1).replace(/\.0$/, '') + '%')}${penWarn}
     ${crow('일반계좌 국내 배당 세금', c.kr_gen + '%', '종합·해외 계좌의 원화 종목 · 미국 종목은 ' + c.us_tax + '%')}
     <div class="rt-cn faint">금융소득(이자·배당)이 일반계좌 기준 연 2,000만 원을 넘으면 종합과세 대상이라 세금이 달라져요. 지금은 한참 아래예요.</div></section>`;
@@ -6333,7 +6395,7 @@ function rtHTML() {
     <div class="lf-note" style="margin:10px 0 0">기본은 위 "성장 가정"에서 정한 값이에요. 하락은 기본보다 주가·배당이 해마다 2%p 덜 오르고 연금 수익률도 2%p 낮은 경우, 성장은 둘 다 2%p 더 오르는 경우, 낙관은 4%p 더 오르고 연금 수익률도 1%p 높은 경우예요.</div></div>`;
   const notes = `<details class="card rt-notes"><summary><b>이 계산의 가정</b><small>시뮬레이션 값이에요 · 눌러서 보기</small></summary><ul>
     <li>주가는 해마다 ${rtSg(c.price_g)}%, 배당은 해마다 ${rtSg(c.div_g)}% 변한다고 봤어요(설정에서 바꿔요). 0%면 지금 그대로라고 보는 가장 보수적인 계산이에요(물가는 ${c.infl}%). 배당은 전부 같은 종목에 다시 사는 걸로 계산했고, 실제로는 오를 수도 빠질 수도 있어서 시나리오 표의 하락·성장 행도 같이 봐 주세요.</li>
-    <li>ISA 안 원화 종목의 배당은 세금 없이 계좌 안에서 재투자돼요(원천징수 없음). 해지할 때 수익에서 비과세 한도(일반형 200만 원 · 서민형 400만 원)를 뺀 나머지에 9.9%가 붙는다고 보고, 그 비율을 월 배당에서 미리 뺐어요. 3년 만기 뒤 해지하고 다시 가입하면 비과세 한도와 납입한도가 새로 생겨서, 설정이 \"3년마다 해지·재가입\"이면 만기마다 세금을 내고 새 ISA에 연 납입한도(연 2,000만 원, 그해 남은 월 납입분 제외)만큼 다시 넣고 나머지는 일반계좌로 옮기는 걸로 계산해요(실물 이전은 안 돼서 팔고 다시 사는 값은 따로 안 봤어요). 만기 해지 자금을 60일 안에 연금계좌로 옮기면 이전 금액의 10%(최대 300만 원) 세액공제가 더 되지만 여기엔 넣지 않았어요. 서민형은 총급여 5,000만 원(종합소득 3,800만 원) 이하일 때만 가입돼요. 2026 세제개편안의 신설 ISA는 국회 통과 전이라 현행 기준으로만 계산해요. ISA 수익은 계획 종목만 계산해요(다른 ISA 종목의 손익은 빠져 있어요).</li>
+    <li>ISA 안 원화 종목은 국내 상장주식 매매차익이 비과세라서 시세차익에는 세금을 매기지 않고, 배당(분배금)만 과세 대상으로 봐요. 배당은 계좌 안에서 세금 없이 재투자되다가 해지할 때 계좌 전체 배당 합계에서 비과세 한도(일반형 200만 원 · 서민형 400만 원)를 뺀 나머지에 9.9%가 붙어요. 월 배당에는 앞으로 3년(해지·재가입이면 새 계좌 기준) 배당에 이 한도를 적용한 세율을 미리 뺐어요. 해외 투자·채권형 등 과세형 ETF의 매매차익, 손익통산, 이미 받은 과거 배당은 반영하지 않았어요. 3년 만기 뒤 해지하고 다시 가입하면 비과세 한도와 납입한도가 새로 생겨서, 설정이 \"3년마다 해지·재가입\"이면 만기마다 배당분 세금을 내고 새 ISA에 연 납입한도(연 2,000만 원, 그해 남은 월 납입분 제외)만큼 다시 넣고 나머지는 일반계좌로 옮기는 걸로 계산해요(실물 이전은 안 돼서 팔고 다시 사는 값은 따로 안 봤어요). 만기 해지 자금을 60일 안에 연금계좌로 옮기면 이전 금액의 10%(최대 300만 원) 세액공제가 더 되지만 여기엔 넣지 않았어요. 서민형은 총급여 5,000만 원(종합소득 3,800만 원) 이하일 때만 가입돼요. 2026 세제개편안의 신설 ISA는 국회 통과 전이라 현행 기준으로만 계산해요. ISA 배당은 계획 종목만 계산해요(다른 ISA 종목의 배당은 빠져 있어요).</li>
     <li>종합·해외 계좌에 있는 종목은 원화 ${c.kr_gen}% · 미국 ${c.us_tax}%를 배당 때 바로 뺐고, 새로 사는 미국 종목도 같은 방식이에요.</li>
     <li>연금계좌는 만 55세부터 연금으로 받을 수 있고, 연금소득세는 55~69세 5.5%, 70~79세 4.4%, 80세 이상 3.3%예요. 연 ${c.draw_rate}%씩 꺼낸다고 봤고, 연 1,500만 원을 넘으면 전액 16.5%로 계산해요. 수익률은 실제 연 ${c.pen_rate}%가 되도록 월 단위로 환산했어요.</li>
     <li>은퇴 후 물가 상승과 회사 퇴직금·퇴직연금 적립분, 국민연금은 별도예요. 국민연금${c.npension > 0 ? '은 입력한 금액을 반영했어요' : '은 아직 입력하지 않았어요 — 국민연금공단 "내 연금"에서 예상 월액을 확인해 설정에 넣어 주세요'}.</li>
@@ -6481,7 +6543,7 @@ function renderCult() {
   const open = list.filter(r => r.status !== 'done').sort((a, b) => a.status === b.status ? (cuDate(b) < cuDate(a) ? -1 : 1) : (a.status === 'doing' ? -1 : 1));
   const fin = list.filter(r => r.status === 'done').sort((a, b) => cuDate(a) < cuDate(b) ? 1 : cuDate(a) > cuDate(b) ? -1 : (String(a.created_at) < String(b.created_at) ? 1 : -1));
   const row = r => { const K = CU_K[r.kind], meta = [r.creator, r.genre, r.amount ? r.amount.toLocaleString('ko-KR') + K.am : ''].filter(Boolean).map(esc).join(' · '), d = cuDate(r);
-    return `<button type="button" class="cu-row" data-cu="edit:${esc(r.id)}"><span class="cu-k" style="--k:${K.c}">${K.t}</span><span class="cu-m"><b>${esc(r.title)}</b>${meta ? `<small>${meta}</small>` : ''}${r.memo ? `<em>${esc(r.memo)}</em>` : ''}</span><span class="cu-r">${r.status === 'done' ? cuStars(r.rating) : `<span class="cu-badge">${CU_ST[r.status]}</span>`}<small>${r.status === 'want' ? '' : d ? Number(d.slice(5, 7)) + '/' + Number(d.slice(8, 10)) : ''}</small></span></button>`; };
+    return `<button type="button" class="cu-row" data-cu="edit:${esc(r.id)}">${cuThumb(r)}<span class="cu-m"><b>${esc(r.title)}</b><small><span class="cu-k" style="--k:${K.c}">${K.t}</span>${meta}</small>${r.memo ? `<em>${esc(r.memo)}</em>` : ''}</span><span class="cu-r">${r.status === 'done' ? cuStars(r.rating) : `<span class="cu-badge">${CU_ST[r.status]}</span>`}<small>${r.status === 'want' ? '' : d ? Number(d.slice(5, 7)) + '/' + Number(d.slice(8, 10)) : ''}</small></span></button>`; };
   let body = '';
   if (open.length) body += `<div class="cu-sec"><b>진행 · 예정</b><span>${open.length}건</span></div><section class="card cu-list">${open.map(row).join('')}</section>`;
   const byM = {}; fin.forEach(r => { const m = cuDate(r).slice(0, 7) || '날짜 없음'; (byM[m] = byM[m] || []).push(r); });
@@ -6489,23 +6551,75 @@ function renderCult() {
   if (!list.length) body = `<div class="lf-empty">${all.length ? '조건에 맞는 기록이 없어요.' : '읽은 책이나 본 영화를 하나씩 남겨 보세요.<br>별점과 한줄평까지 적어두면 나중에 다시 꺼내 보기 좋아요.'}<br><button type="button" class="btn primary" data-cu="new">+ 첫 기록 추가</button></div>`;
   const kseg = `<div class="seg">${[['all', '전체'], ['book', '독서'], ['film', '영화']].map(([k, l]) => `<button type="button" data-cu="kind:${k}" class="${kindSel === k ? 'on' : ''}">${l}</button>`).join('')}</div>`;
   const sch = [['all', '전체'], ['doing', '진행 중'], ['want', '예정'], ['done', '완료']].map(([k, l]) => `<button type="button" class="chip ${CU.st === k ? 'on' : ''}" data-cu="st:${k}">${l}</button>`).join('');
-  el.innerHTML = `<div class="fin-head"><div><h2>Books &amp; Film</h2><p>읽은 책과 본 영화를 기록하고 한 해를 돌아봐요</p></div><div class="fin-act"><button type="button" class="btn" data-cu="goal">목표</button><button type="button" class="btn primary" data-cu="new">+ 기록 추가</button></div></div>
+  el.innerHTML = `<div class="fin-head"><div><h2>Books &amp; Film</h2><p>읽은 책과 본 영화를 기록하고 한 해를 돌아봐요</p></div><div class="fin-act"><button type="button" class="btn" data-cu="goal">설정</button><button type="button" class="btn primary" data-cu="new">+ 기록 추가</button></div></div>
     ${tiles}
     <div class="card lf-chart-card"><div class="lf-ch"><b>${yr}년 월별 완료</b><span class="cu-yr"><button type="button" data-cu="yr:-1" aria-label="이전 해">‹</button><b>${yr}</b><button type="button" data-cu="yr:1" aria-label="다음 해">›</button></span></div>${lfChartBox('cuChart')}</div>
     <div class="cu-bar" style="margin-top:16px">${kseg}<div class="lf-chips">${sch}</div></div>
     ${body}`;
   lfRunQueue();
 }
+/* ===== v2.4 표지·포스터 검색 ===== */
+const cuTmdb = () => String((((LIFE.meta && LIFE.meta.culture) || {}).tmdb) || '').trim();
+const cuThumb = r => { const K = CU_K[r.kind]; return `<span class="cu-th" style="--k:${K.c}"><b>${esc(String(r.title || '?').trim().charAt(0))}</b>${r.cover ? `<img src="${esc(r.cover)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">` : ''}</span>`; };
+async function cuFetchJson(url, opt) {
+  const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 9000);
+  try {
+    const res = await fetch(url, Object.assign({ signal: ctl.signal }, opt || {}));
+    if (!res.ok) throw new Error(res.status === 429 ? '검색 요청이 많아요. 잠시 뒤에 다시 눌러 주세요' : res.status === 401 ? 'TMDB 키가 맞지 않아요. 설정에서 확인해 주세요' : '검색에 실패했어요 (' + res.status + ')');
+    return await res.json();
+  } catch (e) { throw new Error(e.name === 'AbortError' ? '응답이 늦어요. 다시 눌러 주세요' : (e.message === 'Failed to fetch' ? '네트워크에 연결할 수 없어요' : (e.message || '검색에 실패했어요'))); }
+  finally { clearTimeout(to); }
+}
+async function cuSearch(kind, title, creator) {
+  const q = String(title || '').trim(); if (!q) throw new Error('제목을 먼저 입력해 주세요');
+  if (kind === 'book') {
+    const base = 'https://www.googleapis.com/books/v1/volumes?maxResults=12&printType=books&langRestrict=ko&q=';
+    const one = async (qq, lang) => { const j = await cuFetchJson(base.replace('&langRestrict=ko', lang ? '&langRestrict=ko' : '') + qq); return (j.items || []).map(it => { const v = it.volumeInfo || {}, im = v.imageLinks || {}, u = im.thumbnail || im.smallThumbnail || ''; return u ? { title: v.title || '', sub: [(v.authors || []).slice(0, 2).join(', '), String(v.publishedDate || '').slice(0, 4)].filter(Boolean).join(' · '), img: u.replace(/^http:/, 'https:').replace('&edge=curl', '') } : null; }).filter(Boolean); };
+    let r = await one(encodeURIComponent('intitle:' + q) + (creator ? '+' + encodeURIComponent('inauthor:' + creator) : ''), true);
+    if (!r.length && creator) r = await one(encodeURIComponent('intitle:' + q), true);
+    if (!r.length) r = await one(encodeURIComponent(q), false);
+    return r;
+  }
+  const key = cuTmdb();
+  if (key) {
+    const hdr = key.length > 40 ? { headers: { Authorization: 'Bearer ' + key } } : null;
+    const j = await cuFetchJson('https://api.themoviedb.org/3/search/movie?language=ko-KR&include_adult=false&query=' + encodeURIComponent(q) + (hdr ? '' : '&api_key=' + encodeURIComponent(key)), hdr);
+    return (j.results || []).filter(x => x.poster_path).slice(0, 12).map(x => ({ title: x.title || x.original_title || '', sub: [String(x.release_date || '').slice(0, 4), x.original_title && x.original_title !== x.title ? x.original_title : ''].filter(Boolean).join(' · '), img: 'https://image.tmdb.org/t/p/w342' + x.poster_path }));
+  }
+  const j = await cuFetchJson('https://ko.wikipedia.org/w/api.php?action=query&generator=search&gsrlimit=12&prop=pageimages&piprop=thumbnail&pithumbsize=342&format=json&origin=*&gsrsearch=' + encodeURIComponent(q + ' 영화'));
+  const pages = Object.values((j.query && j.query.pages) || {}).sort((a, b) => (a.index || 0) - (b.index || 0));
+  return pages.filter(p => p.thumbnail && p.thumbnail.source).map(p => ({ title: p.title, sub: '위키백과', img: p.thumbnail.source }));
+}
+function cuResize(file) {
+  return new Promise((ok, no) => {
+    const fr = new FileReader();
+    fr.onerror = () => no(new Error('사진을 읽지 못했어요'));
+    fr.onload = () => {
+      const im = new Image();
+      im.onerror = () => no(new Error('이미지 파일이 아니에요'));
+      im.onload = () => {
+        const H = 420, k = Math.min(1, H / im.height), cv = document.createElement('canvas');
+        cv.width = Math.round(im.width * k); cv.height = Math.round(im.height * k);
+        cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
+        ok(cv.toDataURL('image/jpeg', 0.82));
+      };
+      im.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+}
 function openCultForm(r) {
   const isNew = !r;
   r = r || { kind: CU.kind === 'film' ? 'film' : 'book', title: '', creator: '', status: 'done', done_on: today(), started_on: null, rating: null, amount: null, genre: '', memo: '' };
-  let kind = r.kind, status = r.status, rating = r.rating || 0;
+  let kind = r.kind, status = r.status, rating = r.rating || 0, cover = r.cover || '', found = [];
   const seg = (id, items) => `<div class="seg" id="${id}">${items.map(([k, t, on]) => `<button type="button" data-k="${k}" class="${on ? 'on' : ''}">${t}</button>`).join('')}</div>`;
   const d0 = status === 'done' ? r.done_on : status === 'doing' ? r.started_on : '';
   openFinModal({
     title: isNew ? '기록 추가' : '기록 수정',
     html: `${fld('종류', seg('cuKind', [['book', '독서', kind === 'book'], ['film', '영화', kind === 'film']]))}
       ${fld('제목', `<input class="in" name="t" value="${esc(r.title)}" placeholder="책이나 영화 제목">`)}
+      <div class="cu-cov"><div class="cu-cvp" id="cuCvP"></div><div class="cu-cvb"><button type="button" class="btn" id="cuCvFind">표지·포스터 검색</button><label class="btn" for="cuCvFile">사진 올리기</label><input type="file" id="cuCvFile" accept="image/*"><button type="button" class="btn" id="cuCvDel">지우기</button></div></div>
+      <div id="cuCvRes"></div>
       ${fld('<span id="cuByL"></span>', `<input class="in" name="c" value="${esc(r.creator || '')}" placeholder="선택">`)}
       ${fld('상태', seg('cuSt', [['want', '예정', status === 'want'], ['doing', '진행 중', status === 'doing'], ['done', '완료', status === 'done']]))}
       <div id="cuDateW">${fld('<span id="cuDL"></span>', `<input class="in" type="date" name="d" value="${esc(d0 ? String(d0).slice(0, 10) : today())}">`)}</div>
@@ -6521,11 +6635,27 @@ function openCultForm(r) {
         b.querySelector('#cuGl').innerHTML = CU_GENRE[kind].map(g => `<option value="${g}">`).join('');
         b.querySelectorAll('#cuKind button').forEach(x => x.classList.toggle('on', x.dataset.k === kind)); b.querySelectorAll('#cuSt button').forEach(x => x.classList.toggle('on', x.dataset.k === status));
         b.querySelectorAll('#cuStars button').forEach(x => x.classList.toggle('on', Number(x.dataset.n) <= rating));
+        b.querySelector('#cuCvP').innerHTML = cover ? `<img src="${esc(cover)}" alt="" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">` : (kind === 'book' ? '표지' : '포스터');
+        b.querySelector('#cuCvDel').hidden = !cover;
+        b.querySelector('#cuCvFind').textContent = kind === 'book' ? '표지 검색' : '포스터 검색';
       };
       sync();
       b.querySelector('#cuKind').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; kind = x.dataset.k; sync(); });
       b.querySelector('#cuSt').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; status = x.dataset.k; sync(); });
       b.querySelector('#cuStars').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; const n = Number(x.dataset.n); rating = rating === n ? 0 : n; sync(); });
+      const res = b.querySelector('#cuCvRes');
+      b.querySelector('#cuCvFind').addEventListener('click', async () => {
+        const q = b.querySelector('[name=t]').value, c = b.querySelector('[name=c]').value.trim();
+        if (!q.trim()) { res.innerHTML = '<div class="cu-note">제목을 먼저 입력해 주세요.</div>'; return; }
+        res.innerHTML = '<div class="cu-note">찾는 중…</div>';
+        try {
+          found = await cuSearch(kind, q, kind === 'book' ? c : '');
+          res.innerHTML = found.length ? `<div class="cu-res">${found.map((x, i) => `<button type="button" data-i="${i}"><img src="${esc(x.img)}" alt="" loading="lazy" referrerpolicy="no-referrer"><b>${esc(x.title)}</b><small>${esc(x.sub || '')}</small></button>`).join('')}</div>${kind === 'film' && !cuTmdb() ? '<div class="cu-note">위키백과에서 찾았어요. 더 정확하게 찾으려면 설정에 TMDB 키를 넣어 보세요.</div>' : ''}` : `<div class="cu-note">검색 결과가 없어요. 제목을 바꿔 보거나 사진을 직접 올려 주세요.</div>`;
+        } catch (e) { res.innerHTML = `<div class="cu-note">${esc(e.message || '검색에 실패했어요')}</div>`; }
+      });
+      res.addEventListener('click', ev => { const x = ev.target.closest('button[data-i]'); if (!x) return; const it = found[Number(x.dataset.i)]; if (!it) return; cover = it.img; res.innerHTML = ''; sync(); });
+      b.querySelector('#cuCvDel').addEventListener('click', () => { cover = ''; sync(); });
+      b.querySelector('#cuCvFile').addEventListener('change', async ev => { const f = ev.target.files && ev.target.files[0]; if (!f) return; try { cover = await cuResize(f); res.innerHTML = ''; sync(); } catch (e) { res.innerHTML = `<div class="cu-note">${esc(e.message)}</div>`; } ev.target.value = ''; });
       setTimeout(() => b.querySelector('[name=t]').focus(), 50);
     },
     async onSave(b) {
@@ -6534,7 +6664,7 @@ function openCultForm(r) {
       const d = g('d'), a = lfNum(g('a'));
       if (status !== 'want' && !d) throw new Error('날짜를 선택해 주세요');
       if (a != null && (a < 0 || a > 100000)) throw new Error('페이지·시간을 확인해 주세요');
-      const row = { kind, title, creator: g('c') || null, status, started_on: status === 'doing' ? d : (status === 'done' ? (r.started_on || null) : null), done_on: status === 'done' ? d : null, rating: status === 'done' && rating ? rating : null, amount: a == null ? null : Math.round(a), genre: g('g') || null, memo: g('m') || null };
+      const row = { kind, title, creator: g('c') || null, status, started_on: status === 'doing' ? d : (status === 'done' ? (r.started_on || null) : null), done_on: status === 'done' ? d : null, rating: status === 'done' && rating ? rating : null, amount: a == null ? null : Math.round(a), genre: g('g') || null, memo: g('m') || null, cover: cover || null };
       await lfSave('life_culture', 'culture', null, row, isNew ? null : r.id);
       lfDone('저장했어요');
     },
@@ -6544,12 +6674,12 @@ function openCultForm(r) {
 function openCultGoal() {
   const G = cuGoal();
   openFinModal({
-    title: '올해 목표', saveLabel: '저장',
-    html: `<div class="row2">${fld('독서 (권)', `<input class="in" name="b" inputmode="numeric" value="${G.book}">`)}${fld('영화 (편)', `<input class="in" name="f" inputmode="numeric" value="${G.film}">`)}</div><div class="hint faint" style="font-size:11.5px">매년 같은 목표로 진행률을 보여줘요.</div>`,
+    title: '설정', saveLabel: '저장',
+    html: `<div class="row2">${fld('독서 (권)', `<input class="in" name="b" inputmode="numeric" value="${G.book}">`)}${fld('영화 (편)', `<input class="in" name="f" inputmode="numeric" value="${G.film}">`)}</div><div class="hint faint" style="font-size:11.5px;margin-bottom:12px">매년 같은 목표로 진행률을 보여줘요.</div>${fld('TMDB 키 (영화 포스터 정확도, 선택)', `<input class="in" name="k" value="${esc(cuTmdb())}" placeholder="themoviedb.org 설정 &gt; API에서 무료 발급" autocomplete="off">`)}`,
     async onSave(b) {
       const bk = lfNum(b.querySelector('[name=b]').value), fl = lfNum(b.querySelector('[name=f]').value);
       if (!(bk > 0) || !(fl > 0) || bk > 1000 || fl > 1000) throw new Error('1 이상의 숫자로 넣어 주세요');
-      await saveLifeMeta('culture', { book_goal: Math.round(bk), film_goal: Math.round(fl) });
+      await saveLifeMeta('culture', { book_goal: Math.round(bk), film_goal: Math.round(fl), tmdb: b.querySelector('[name=k]').value.trim() });
       closeFinModal(); renderCult(); toast('저장했어요');
     }
   });
@@ -6564,6 +6694,126 @@ $('#cultView').addEventListener('click', ev => {
   if (a.indexOf('yr:') === 0) { CU.yr = (CU.yr || Number(today().slice(0, 4))) + Number(a.slice(3)); return renderCult(); }
 });
 
+/* ===== v2.4 Schedule · 개인 일정 ===== */
+const SC = { ym: null, cat: 'all' };
+const SC_CAT = { '약속': 'var(--s1)', '업무': 'var(--s2)', '여행': 'var(--s3)', '병원': 'var(--s4)', '경조사': 'var(--s5)', '기념일': 'var(--s6)', '기타': 'var(--s7)' };
+const SC_REP = { none: '반복 없음', weekly: '매주', monthly: '매월', yearly: '매년' };
+const scDs = x => x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0');
+const scAdd = (d, n) => { const x = lfParse(d); x.setDate(x.getDate() + n); return scDs(x); };
+const scCol = r => SC_CAT[r.category] || SC_CAT['기타'];
+function scHit(r, d) {
+  const s = String(r.start_date).slice(0, 10); if (d < s) return false;
+  const rep = r.repeat || 'none';
+  if (rep === 'none') return d <= String(r.end_date || s).slice(0, 10);
+  if (rep === 'weekly') return lfDiff(d, s) % 7 === 0;
+  const dim = new Date(Number(d.slice(0, 4)), Number(d.slice(5, 7)), 0).getDate(), sd = Math.min(Number(s.slice(8, 10)), dim);
+  if (rep === 'monthly') return Number(d.slice(8, 10)) === sd;
+  return d.slice(5, 7) === s.slice(5, 7) && Number(d.slice(8, 10)) === sd;
+}
+function scRange(from, to, cat) {
+  const rows = (LIFE.schedule || []).filter(r => r.start_date && (!cat || cat === 'all' || r.category === cat)), out = [];
+  for (let d = from, n = 0; d <= to && n < 400; d = scAdd(d, 1), n++) rows.forEach(r => { if (scHit(r, d)) out.push({ r, d }); });
+  return out.sort((a, b) => a.d < b.d ? -1 : a.d > b.d ? 1 : String(a.r.start_time || '99') < String(b.r.start_time || '99') ? -1 : 1);
+}
+/* 오늘부터 span일 안에 시작하는 일정(진행 중인 여러 날 일정은 오늘로 표시) */
+function scUpcoming(t, span) {
+  const seen = {}, out = [];
+  scRange(t, scAdd(t, span)).forEach(o => {
+    if (o.r.repeat === 'none' && o.r.done) return;
+    const k = o.r.id; if (o.r.repeat === 'none') { if (seen[k]) return; seen[k] = 1; }
+    out.push(o);
+  });
+  return out;
+}
+const scTime = r => r.start_time ? String(r.start_time).slice(0, 5) + (r.end_time ? '~' + String(r.end_time).slice(0, 5) : '') : '';
+function renderSchedTab() { lifeEnsure(renderSched); }
+function renderSched() {
+  const el = $('#schedView'); if (!el) return;
+  if (!LIFE.loaded) { el.innerHTML = '<div class="fin-head"><div><h2>Schedule</h2><p>불러오는 중…</p></div></div>'; return; }
+  const t = today(); if (!SC.ym) SC.ym = t.slice(0, 7);
+  const ym = SC.ym, y = Number(ym.slice(0, 4)), m = Number(ym.slice(5)), first = new Date(y, m - 1, 1).getDay(), dim = new Date(y, m, 0).getDate();
+  const occ = scRange(ym + '-01', ym + '-' + String(dim).padStart(2, '0'), SC.cat), byDay = {};
+  occ.forEach(o => { const k = Number(o.d.slice(8)); (byDay[k] = byDay[k] || []).push(o); });
+  const up = scUpcoming(t, 30), wkEnd = scAdd(t, 6), nWeek = up.filter(o => o.d <= wkEnd).length, nxt = up[0];
+  const nMon = scRange(t.slice(0, 7) + '-01', t.slice(0, 7) + '-' + String(new Date(Number(t.slice(0, 4)), Number(t.slice(5, 7)), 0).getDate()).padStart(2, '0')).length;
+  const tiles = `<div class="lf-tiles">${lfTile('다음 일정', nxt ? `<span style="font-size:19px">${esc(nxt.r.title)}</span>` : '-', nxt ? `<small>${lfMD(nxt.d)} · ${lfDday(nxt.d)}${scTime(nxt.r) ? ' · ' + scTime(nxt.r) : ''}</small>` : '<small>예정 없음</small>')}${lfTile('앞으로 7일', `${nWeek}<small>건</small>`, '')}${lfTile('이번 달', `${nMon}<small>건</small>`, '')}${lfTile('30일 안', `${up.length}<small>건</small>`, '')}</div>`;
+  const head = DOW.map((d, i) => `<div class="ev-dow ${i === 0 ? 'su' : i === 6 ? 'sa' : ''}">${d}</div>`).join('');
+  let cells = ''; for (let i = 0; i < first; i++) cells += '<div class="ev-c out"></div>';
+  for (let d = 1; d <= dim; d++) {
+    const ds = ym + '-' + String(d).padStart(2, '0'), list = byDay[d] || [], dow = (first + d - 1) % 7;
+    cells += `<div class="ev-c ${ds === t ? 'today' : ''} ${dow === 0 ? 'su' : dow === 6 ? 'sa' : ''}" data-sc="new:${ds}"><span class="ev-n">${d}</span>${list.slice(0, 2).map(o => `<button type="button" class="ev-chip sc-chip${o.r.done ? ' got' : ''}" style="--k:${scCol(o.r)}" data-sc="edit:${esc(o.r.id)}"><i></i><b>${esc(o.r.title)}</b></button>`).join('')}${list.length > 2 ? `<small class="ev-more">+${list.length - 2}</small>` : ''}</div>`;
+  }
+  const tail = (first + dim) % 7; if (tail) for (let i = tail; i < 7; i++) cells += '<div class="ev-c out"></div>';
+  const shown = occ.filter(o => o.r.repeat !== 'none' || o.d === (o.r.start_date > ym + '-01' ? String(o.r.start_date).slice(0, 10) : ym + '-01'));
+  const rows = shown.map(o => {
+    const r = o.r, dd = lfParse(o.d), dow = dd.getDay(), n = lfDiff(o.d, t), multi = r.repeat === 'none' && r.end_date && r.end_date > r.start_date;
+    const range = multi ? lfMD(r.start_date) + ' ~ ' + lfMD(r.end_date) : '';
+    const sub = [scTime(r), range, r.place, r.repeat !== 'none' ? SC_REP[r.repeat] : ''].filter(Boolean).map(esc);
+    return `<div class="sc-row ${r.done ? 'dn' : ''}" data-sc="edit:${esc(r.id)}"><span class="sc-d ${dow === 0 ? 'su' : dow === 6 ? 'sa' : ''}"><b>${dd.getDate()}</b><small>${DOW[dow]}</small></span><span class="sc-m"><b>${esc(r.title)}</b><small><span class="sc-k" style="--k:${scCol(r)}">${esc(r.category)}</span>${sub.length ? `<span>${sub.join(' · ')}</span>` : ''}</small></span><span class="sc-r">${n >= 0 && n <= 30 && !r.done ? `<span class="dd ${n === 0 ? 'tdy' : ''}">${n === 0 ? '오늘' : 'D-' + n}</span>` : ''}${r.repeat === 'none' ? `<button type="button" class="sc-ck ${r.done ? 'on' : ''}" data-sc="done:${esc(r.id)}" aria-label="완료">${CHECK_SVG}</button>` : ''}</span></div>`;
+  }).join('');
+  const cats = [['all', '전체']].concat(Object.keys(SC_CAT).map(k => [k, k])).map(([k, l]) => `<button type="button" class="chip ${SC.cat === k ? 'on' : ''}" data-sc="cat:${esc(k)}" ${k === 'all' ? '' : `style="--k:${SC_CAT[k]}"`}>${k === 'all' ? '' : '<i></i>'}${l}</button>`).join('');
+  const empty = !(LIFE.schedule || []).length;
+  el.innerHTML = `<div class="fin-head"><div><h2>Schedule</h2><p>약속·업무·여행·병원 일정을 한 곳에서 챙겨요</p></div><div class="fin-act"><button type="button" class="btn primary" data-sc="new:">+ 일정 추가</button></div></div>
+    ${tiles}
+    ${empty ? `<div class="lf-empty">아직 등록한 일정이 없어요.<br>약속, 출장, 여행, 병원 예약을 넣어두면 Today의 다가오는 일정에도 나와요.<br><button type="button" class="btn primary" data-sc="new:">+ 첫 일정 등록</button></div>` : ''}
+    <div class="sc-cats">${cats}</div>
+    <div class="ev-nav"><button type="button" class="btn" data-sc="prev">‹</button><b>${y}년 ${m}월</b><button type="button" class="btn" data-sc="next">›</button>${ym !== t.slice(0, 7) ? '<button type="button" class="btn" data-sc="now">오늘</button>' : ''}</div>
+    <div class="card ev-grid">${head}${cells}</div>
+    <div class="fin-sec"><h3>${m}월 일정</h3><span>${shown.length}건</span></div>
+    <section class="card lf-list">${rows || '<div class="lf-empty" style="padding:22px">이 달에는 일정이 없어요. 달력의 날짜를 누르면 바로 추가돼요.</div>'}</section>`;
+}
+function openSchedForm(r, pre) {
+  const isNew = !r;
+  r = r || { title: '', category: '약속', start_date: pre || today(), end_date: null, start_time: '', end_time: '', place: '', memo: '', repeat: 'none', done: false };
+  let cat = r.category || '기타', rep = r.repeat || 'none', done = !!r.done;
+  const seg = (id, items) => `<div class="seg" id="${id}">${items.map(([k, t, on]) => `<button type="button" data-k="${k}" class="${on ? 'on' : ''}">${t}</button>`).join('')}</div>`;
+  openFinModal({
+    title: isNew ? '일정 추가' : '일정 수정',
+    html: `${fld('제목', `<input class="in" name="t" value="${esc(r.title)}" placeholder="예: 치과 예약, 부산 출장">`)}
+      ${fld('종류', `<div class="lf-chips" id="scCat">${Object.keys(SC_CAT).map(k => `<button type="button" class="chip ${k === cat ? 'on' : ''}" data-k="${k}">${k}</button>`).join('')}</div>`)}
+      <div class="row2">${fld('날짜', `<input class="in" type="date" name="d" value="${esc(String(r.start_date).slice(0, 10))}">`)}${fld('종료일 (여행 등, 선택)', `<input class="in" type="date" name="e" value="${esc(r.end_date ? String(r.end_date).slice(0, 10) : '')}">`)}</div>
+      <div class="row2">${fld('시작 시간 (선택)', `<input class="in" type="time" name="ts" value="${esc(r.start_time || '')}">`)}${fld('끝 시간 (선택)', `<input class="in" type="time" name="te" value="${esc(r.end_time || '')}">`)}</div>
+      ${fld('장소 (선택)', `<input class="in" name="p" value="${esc(r.place || '')}" placeholder="예: 강남역 · 온라인">`)}
+      ${fld('반복', seg('scRep', Object.keys(SC_REP).map(k => [k, SC_REP[k], k === rep])))}
+      <div id="scDoneW">${fld('상태', seg('scDone', [['0', '예정', !done], ['1', '완료', done]]))}</div>
+      ${fld('메모 (선택)', `<textarea class="in" name="m" rows="3" placeholder="준비물, 연락처, 예약번호 등">${esc(r.memo || '')}</textarea>`)}`,
+    onOpen(b) {
+      const sync = () => {
+        b.querySelectorAll('#scCat button').forEach(x => x.classList.toggle('on', x.dataset.k === cat));
+        b.querySelectorAll('#scRep button').forEach(x => x.classList.toggle('on', x.dataset.k === rep));
+        b.querySelectorAll('#scDone button').forEach(x => x.classList.toggle('on', (x.dataset.k === '1') === done));
+        b.querySelector('#scDoneW').hidden = rep !== 'none'; b.querySelector('[name=e]').disabled = rep !== 'none';
+      };
+      sync();
+      b.querySelector('#scCat').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; cat = x.dataset.k; sync(); });
+      b.querySelector('#scRep').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; rep = x.dataset.k; sync(); });
+      b.querySelector('#scDone').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; done = x.dataset.k === '1'; sync(); });
+      setTimeout(() => b.querySelector('[name=t]').focus(), 50);
+    },
+    async onSave(b) {
+      const g = n => b.querySelector(`[name=${n}]`).value.trim();
+      const title = g('t'); if (!title) throw new Error('제목을 입력해 주세요');
+      const d = g('d'); if (!d) throw new Error('날짜를 선택해 주세요');
+      const e = rep === 'none' ? g('e') : '';
+      if (e && e < d) throw new Error('종료일이 시작일보다 빨라요');
+      const ts = g('ts'), te = g('te'); if (te && !ts) throw new Error('끝 시간만 있으면 시작 시간도 넣어 주세요');
+      const row = { title, category: cat, start_date: d, end_date: e && e > d ? e : null, start_time: ts || null, end_time: te || null, place: g('p') || null, memo: g('m') || null, repeat: rep, done: rep === 'none' ? done : false };
+      await lfSave('life_schedule', 'schedule', null, row, isNew ? null : r.id);
+      lfDone('저장했어요');
+    },
+    onDelete: isNew ? null : async () => { await lfDel('life_schedule', 'schedule', r.id); lfDone('삭제했어요'); }
+  });
+}
+$('#schedView').addEventListener('click', async ev => {
+  const x = ev.target.closest('[data-sc]'); if (!x) return; const a = x.dataset.sc;
+  if (a.indexOf('new:') === 0) return openSchedForm(null, a.slice(4));
+  if (a.indexOf('edit:') === 0) { const r = (LIFE.schedule || []).find(y => y.id === a.slice(5)); if (r) openSchedForm(r); return; }
+  if (a.indexOf('done:') === 0) { const r = (LIFE.schedule || []).find(y => y.id === a.slice(5)); if (!r) return; try { await lfSave('life_schedule', 'schedule', null, { done: !r.done }, r.id); renderSched(); } catch (e) { toast(e.message || '저장하지 못했어요', true); } return; }
+  if (a.indexOf('cat:') === 0) { SC.cat = a.slice(4); return renderSched(); }
+  if (a === 'prev') { SC.ym = shiftMonth(SC.ym, -1); return renderSched(); }
+  if (a === 'next') { SC.ym = shiftMonth(SC.ym, 1); return renderSched(); }
+  if (a === 'now') { SC.ym = today().slice(0, 7); return renderSched(); }
+});
 /* ===== Home ===== */
 function finReady() { return FIN.loaded ? Promise.resolve() : (FIN._p || (FIN._p = loadFin().then(() => { FIN._p = null; }, () => { FIN._p = null; }))); }
 function lifeReady() { return LIFE.loaded ? Promise.resolve() : (LIFE._p || (LIFE._p = loadLife().then(() => { LIFE._p = null; }, () => { LIFE._p = null; }))); }
@@ -6621,16 +6871,44 @@ function renderHome() {
     const act = LIFE.goals.filter(g => !g.done).sort((a, b) => (a.due_date || '9999') < (b.due_date || '9999') ? -1 : 1).slice(0, 3);
     goals = act.length ? act.map(g => { const p = goalProg(g); return `<div style="margin-bottom:10px"><div class="hm-li" style="border:0;padding:0 0 5px"><span class="tx"><b>${esc(g.title)}</b></span><span class="rt">${p.pct == null ? '-' : Math.round(p.pct * 100) + '%'}</span></div><div class="hm-pg"><i style="width:${p.pct == null ? 0 : Math.round(p.pct * 100)}%;background:var(--c-life)"></i></div></div>`; }).join('') : '<div class="hm-empty">Life 탭에서 올해 목표를 적어 보세요.</div>';
   }
-  /* 다가오는 일정 */
+  /* 다가오는 일정 — 일정(Schedule)·배당/적립·결제일·검진·ISA 만기 */
   let soon = wait;
   if (LIFE.loaded) {
     const it = [];
-    LIFE.todos.filter(x => !x.done && x.due_date && lfDiff(x.due_date, t) <= 7).forEach(x => it.push({ d: x.due_date, k: '할 일', n: x.title }));
+    scUpcoming(t, 21).forEach(o => it.push({ d: o.d, k: o.r.category, n: (o.r.start_time ? String(o.r.start_time).slice(0, 5) + ' ' : '') + o.r.title }));
     LIFE.check.filter(x => x.next_due && lfDiff(x.next_due, t) >= -7 && lfDiff(x.next_due, t) <= 60).forEach(x => it.push({ d: x.next_due, k: '검진', n: x.title || '검진' }));
-    LIFE.goals.filter(x => !x.done && x.due_date && lfDiff(x.due_date, t) >= -7 && lfDiff(x.due_date, t) <= 45).forEach(x => it.push({ d: x.due_date, k: '목표', n: x.title }));
-    if (FIN.loaded) evUpcoming(t, 14).forEach(o => it.push({ d: o.d, k: (EV_KIND[o.e.kind] || EV_KIND.dividend).t, n: o.e.title + (o.e.amount ? ' ' + won(o.e.amount) : '') }));
+    if (FIN.loaded) {
+      evUpcoming(t, 14).forEach(o => it.push({ d: o.d, k: (EV_KIND[o.e.kind] || EV_KIND.dividend).t, n: o.e.title + (o.e.amount ? ' ' + won(o.e.amount) : '') }));
+      (FIN.subs || []).filter(s => s.active && !s.bundled && fnum(s.amount) > 0).forEach(s => { const dd = sxNext(s); if (dd && lfDiff(dd, t) <= 7) it.push({ d: dd, k: '결제', n: s.name + ' ' + won(fnum(s.amount)) }); });
+      try {
+        const c = rtCfg(), now = new Date(), ni = now.getFullYear() * 12 + now.getMonth(); let mat = c.isa_oy * 12 + (c.isa_om - 1) + 36; while (mat < ni) mat += 36;
+        const md = Math.floor(mat / 12) + '-' + String(mat % 12 + 1).padStart(2, '0') + '-01', mn = lfDiff(md, t);
+        if (mn <= 90) it.push({ d: mn < 0 ? t : md, k: 'ISA', n: 'ISA 3년 만기 (' + Math.floor(mat / 12) + '년 ' + (mat % 12 + 1) + '월)' });
+      } catch (e) { /* ignore */ }
+    }
     it.sort((a, b) => a.d < b.d ? -1 : 1);
-    soon = it.length ? `<div class="hm-list">${it.slice(0, 6).map(x => { const n = lfDiff(x.d, t); return `<div class="hm-li"><span class="gl-cat" style="margin:0">${x.k}</span><span class="tx">${esc(x.n)}</span><span class="dd ${n < 0 ? 'od' : n === 0 ? 'tdy' : ''}">${lfDday(x.d)}</span><span class="rt">${lfMD(x.d)}</span></div>`; }).join('')}</div>` : '<div class="hm-empty">앞으로 일주일 안에 마감되는 일, 두 달 안의 검진 일정이 여기에 모여요.</div>';
+    soon = it.length ? `<div class="hm-list">${it.slice(0, 6).map(x => { const n = lfDiff(x.d, t); return `<div class="hm-li"><span class="gl-cat" style="margin:0">${esc(x.k)}</span><span class="tx">${esc(x.n)}</span><span class="dd ${n < 0 ? 'od' : n === 0 ? 'tdy' : ''}">${lfDday(x.d)}</span><span class="rt">${lfMD(x.d)}</span></div>`; }).join('')}</div>${it.length > 6 ? `<div class="hm-sub">외 ${it.length - 6}건</div>` : ''}` : '<div class="hm-empty">Schedule 탭에 약속·여행·병원 일정을 넣어 두면 여기에 모여요.</div>';
+  }
+  /* 독서 · 영화 */
+  let cult = wait;
+  if (LIFE.loaded) {
+    const cu = LIFE.culture || [], G = cuGoal(), cy = t.slice(0, 4), cd = cu.filter(r => r.status === 'done' && cuDate(r).slice(0, 4) === cy);
+    const nB = cd.filter(r => r.kind === 'book').length, nF = cd.filter(r => r.kind === 'film').length;
+    const bar1 = (lab, n, g, u, col) => `<div class="hm-cu1"><div class="l"><span>${cy}년 ${lab}</span><b>${n}<small>/ ${g}${u}</small></b></div><div class="hm-pg"><i style="width:${Math.min(100, n / g * 100).toFixed(0)}%;background:${col}"></i></div></div>`;
+    const doing = cu.filter(r => r.status === 'doing'), recent = cu.filter(r => r.status === 'done').sort((a, b) => cuDate(a) < cuDate(b) ? 1 : -1);
+    const shelf = doing.concat(recent).filter(r => r.cover).slice(0, 6);
+    const line = doing.length ? `${doing[0].kind === 'film' ? '보는 중' : '읽는 중'} <b>${esc(doing[0].title)}</b>${doing.length > 1 ? ' 외 ' + (doing.length - 1) : ''}` : recent.length ? `최근 <b>${esc(recent[0].title)}</b>${recent[0].rating ? ' ' + '★'.repeat(recent[0].rating) : ''}` : '';
+    cult = cu.length ? `${bar1('독서', nB, G.book, '권', 'var(--s1)')}${bar1('영화', nF, G.film, '편', 'var(--s2)')}${shelf.length ? `<div class="hm-shelf">${shelf.map(r => `<img src="${esc(r.cover)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`).join('')}</div>` : ''}${line ? `<div class="hm-sub">${line}</div>` : ''}` : '<div class="hm-empty">읽은 책, 본 영화를 기록해 보세요.</div>';
+  }
+  /* 배당 */
+  let divc = wait;
+  if (FIN.loaded && LIFE.loaded) {
+    try {
+      const c = rtCfg(), MV = rtMonthly(c, 'now'), tot = MV.mon.reduce((a, b) => a + b, 0), cm = MV.mon[d.getMonth()], R = rtResult(c), pct = c.need > 0 ? R.pvGap / c.need * 100 : null;
+      const nx = evUpcoming(t, 60).filter(o => o.e.kind === 'dividend').sort((a, b) => a.d < b.d ? -1 : 1)[0];
+      const got = (FIN.events || []).filter(e => e.kind === 'dividend' && e.received && e.pay_date && String(e.pay_date).slice(0, 4) === t.slice(0, 4)).reduce((a, e) => a + (Number(e.amount) || 0), 0);
+      divc = tot > 0 || R.pvGap > 0 ? `<div class="hm-big money">${rtMan(tot)}</div><div class="hm-sub">연 예상 배당 (세전) · 이번 달 <b class="money">${rtMan(cm)}</b>${got ? `<br>올해 받은 배당 <b class="money">${rtMan(got)}</b>` : ''}${nx ? `<br>다음 <b>${esc(nx.e.title)}</b> ${lfDday(nx.d)}` : ''}<br>은퇴 후 월 <b class="money">${rtMan(R.pvGap)}</b>${pct != null ? ` (목표의 ${Math.round(pct)}%)` : ''}</div>` : '<div class="hm-empty">Dividend 탭에서 배당 종목을 등록해 보세요.</div>';
+    } catch (e) { divc = '<div class="hm-empty">Dividend 탭에서 확인해 주세요.</div>'; }
   }
   /* My Bar */
   const cnt = { '미개봉': 0, '개봉': 0, '소진': 0 }; S.items.forEach(i => { if (cnt[i.status] != null) cnt[i.status]++; });
@@ -6644,11 +6922,13 @@ function renderHome() {
       ${rvHTML()}
       ${hmCard('portfolio', 'var(--c-pf)', '총 자산', 'Portfolio', asset)}
       ${hmCard('ledger', 'var(--c-ld)', '이번 달 지출', 'Ledger', spend)}
+      ${hmCard('div', 'var(--c-div)', '배당', 'Dividend', divc)}
+      ${hmCard('sched', 'var(--c-home)', '다가오는 일정', 'Schedule', soon, 'w2')}
+      ${hmCard('life:goals:todo', 'var(--c-life)', '할 일', td.extra, td.html)}
       ${hmCard('life:health', 'var(--c-life)', '건강', 'Life', health)}
       ${hmCard('life:goals:habit', 'var(--c-life)', '오늘의 습관', hb.extra, hb.html)}
-      ${hmCard('life:goals:todo', 'var(--c-life)', '할 일', td.extra, td.html)}
-      ${hmCard('life:goals:goal', 'var(--c-life)', '목표 진행', 'Life', goals)}
-      ${hmCard('life:goals:todo', 'var(--c-home)', '다가오는 일정', '', soon, 'w2')}
+      ${hmCard('cult', 'var(--c-goal)', '독서 · 영화', 'Books & Film', cult)}
+      ${hmCard('life:goals:goal', 'var(--c-life)', '목표 진행', 'Life', goals, 'w2')}
       ${hmCard('bar', 'var(--c-bar)', 'My Bar', '', bar)}
     </div>
     <div class="hm-foot"><span>${esc(APP.email || '')}</span><span><button type="button" id="hmImport">가져오기</button><button type="button" id="hmBackup">백업·복원</button><button type="button" id="hmLogout">로그아웃</button></span></div>`;
@@ -6657,7 +6937,7 @@ function renderHome() {
 const BK_TABLES = [
   ['fin_holdings', 'id'], ['fin_ledger', 'id'], ['fin_snapshots', 'snap_date'], ['fin_meta', 'key'], ['fin_merchant_rules', 'merchant_key'], ['fin_subs', 'id'], ['fin_events', 'id'],
   ['health_body', 'id'], ['health_workout', 'id'], ['health_sleep', 'id'], ['health_checkup', 'id'], ['health_exam', 'id'], ['health_drink', 'id'],
-  ['life_meta', 'user_id,key'], ['life_goals', 'id'], ['life_habits', 'id'], ['life_habit_logs', 'habit_id,log_date'], ['life_todos', 'id'], ['life_culture', 'id'],
+  ['life_meta', 'user_id,key'], ['life_goals', 'id'], ['life_habits', 'id'], ['life_habit_logs', 'habit_id,log_date'], ['life_todos', 'id'], ['life_culture', 'id'], ['life_schedule', 'id'],
   ['whisky_my_bar', 'id'], ['whisky_journal', 'id'], ['whisky_yt_channels', 'id'], ['whisky_yt_videos', 'id'],
   ['whisky_products', 'id', 1], ['whisky_distilleries', 'id', 1], ['whisky_goals', 'id', 1]
 ];
