@@ -746,6 +746,7 @@ body[data-tab="portfolio"] #btnAdd,body[data-tab="ledger"] #btnAdd{display:none}
 .al-c small{font-size:11.5px;color:var(--ink3);line-height:1.25;font-weight:600}
 .al-c b{font-family:var(--f);font-size:27px;line-height:1.15;letter-spacing:-.03em;color:var(--ink);font-weight:800}
 .al-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 14px}
+.al-wrap.sm{grid-template-columns:auto minmax(0,1fr);gap:12px 18px}.al-wrap.sm .al-ring{width:150px;height:150px}.al-wrap.sm .al-c{padding:0 26px}.al-wrap.sm .al-c b{font-size:21px}.al-wrap.sm .al-list{grid-template-columns:1fr;gap:2px}
 .al-row{display:grid;grid-template-columns:10px minmax(0,1fr) auto;grid-template-areas:"d l p" ". m m";align-items:center;column-gap:8px;padding:8px 10px;border-radius:11px;font-size:13px;color:var(--ink2);cursor:pointer;transition:background .12s}
 .al-row .dot{grid-area:d;width:10px;height:10px}.al-row span{grid-area:l;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .al-row b{grid-area:p;color:var(--ink);font-variant-numeric:tabular-nums}.al-row em{grid-area:m;font-style:normal;font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
@@ -844,6 +845,7 @@ body[data-tab="portfolio"] #btnAdd,body[data-tab="ledger"] #btnAdd{display:none}
   .card.fin-sum{grid-template-columns:1fr;padding:18px}
   .fs-big{font-size:34px}
   .al-wrap{grid-template-columns:1fr;gap:14px}.al-ring{width:200px;height:200px}.al-list{grid-template-columns:1fr}
+  .al-wrap.sm{grid-template-columns:1fr;gap:12px}.al-wrap.sm .al-ring{width:176px;height:176px}
   .al-row{grid-template-columns:10px minmax(0,1fr) auto auto;grid-template-areas:"d l p m"}.al-row em{font-size:12px}
   .fh-row{grid-template-columns:minmax(0,1fr) auto;padding:11px 16px}.fh-p{display:none}
   .fg-h{padding:14px 16px}
@@ -1588,7 +1590,7 @@ details.rt-notes>ul{margin:0;padding:0 18px 18px 36px}
   <div class="top">
     <div class="titleblock">
       <h1><svg viewBox="0 0 24 24" width="30" height="30" style="color:var(--s1);flex:none;transform:rotate(60deg)" aria-hidden="true"><use href="#jetIcon"/></svg> Maverick</h1>
-      <div class="titlesub">Personal Dashboard<span class="verbadge" id="appVersion"></span></div>
+      <div class="titlesub">Life Hub<span class="verbadge" id="appVersion"></span></div>
     </div>
     <span class="sync hide-m" id="sync"></span>
     <button class="btn" id="btnTheme" title="테마 전환"></button>
@@ -1982,7 +1984,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v1.19.0';
+const APP_VERSION = 'v2.1.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -3152,6 +3154,30 @@ function yearExpense(y){
   FIN.ledger.forEach(r => { const d = String(r.entry_date); if (d.slice(0, 4) === String(y) && r.kind === '지출') arr[Number(d.slice(5, 7)) - 1] += fnum(r.amount); });
   return arr;
 }
+/* ===== 카테고리 지출 도넛 (원형 차트 공용) ===== */
+function donutHTML(items, aria){
+  const tot = items.reduce((a, x) => a + x.v, 0);
+  if (!(tot > 0)) return '';
+  const C = 2 * Math.PI * 46; let off = 0;
+  const arcs = items.map((x, i) => {
+    const f = x.v / tot, len = Math.max(f * C - (items.length > 1 ? 2.2 : 0), 0.6);
+    const a = `<circle class="al-arc s${i % 7 + 1}" data-al="d${i}" cx="60" cy="60" r="46" fill="none" stroke-width="15" stroke-dasharray="${len.toFixed(2)} ${(C - len).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}"><title>${esc(x.label)} ${(f * 100).toFixed(1)}%</title></circle>`;
+    off += f * C; return a;
+  }).join('');
+  const top = items[0];
+  return `<div class="al-wrap sm" data-dl="${esc(top.label)}" data-dp="${(top.v / tot * 100).toFixed(1)}">
+    <div class="al-ring" role="img" aria-label="${esc(aria || '비중 원형 차트')}">
+      <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="46" fill="none" class="al-bg" stroke-width="15"/><g transform="rotate(-90 60 60)">${arcs}</g></svg>
+      <div class="al-c"><small>${esc(top.label)}</small><b>${(top.v / tot * 100).toFixed(1)}%</b></div>
+    </div>
+    <div class="al-list">${items.map((x, i) => `<div class="al-row" data-al="d${i}" data-lb="${esc(x.label)}" data-pc="${(x.v / tot * 100).toFixed(1)}"><i class="dot s${i % 7 + 1}"></i><span>${esc(x.label)}</span><b>${(x.v / tot * 100).toFixed(1)}%</b><em class="money">${won(x.v)}</em></div>`).join('')}</div>
+  </div>`;
+}
+function ldDonut(cats){
+  let it = cats.map(([c, v]) => ({ label: c, v }));
+  if (it.length > 7) { const rest = it.slice(6), sum = rest.reduce((a, x) => a + x.v, 0); it = it.slice(0, 6).concat([{ label: '그 외 ' + rest.length + '개', v: sum }]); }
+  return donutHTML(it, '카테고리별 지출 원형 차트');
+}
 function renderLedger(){
   const el = $('#ledgerView');
   if (!FIN.loaded) { el.innerHTML = '<div class="fin-head"><div><h2>Ledger</h2><p>불러오는 중…</p></div></div>'; return; }
@@ -3178,7 +3204,7 @@ function renderLedger(){
     </section>
     <div class="ld-cols">
       <section class="card ld-cat"><h3>카테고리별 지출</h3>
-        ${cats.length ? cats.map(([c, v]) => `<div class="ld-cr"><div class="ld-cn"><span>${esc(c)}</span><span><b class="money">${won(v)}</b> <em>${(v / (exp || 1) * 100).toFixed(0)}%</em></span></div><div class="ld-bar"><i style="width:${Math.max(2, v / cmax * 100)}%"></i></div></div>`).join('') : '<div class="tr-empty">이번 달 지출이 아직 없어요.</div>'}
+        ${cats.length ? ldDonut(cats) : '<div class="tr-empty">이번 달 지출이 아직 없어요.</div>'}
       </section>
       <section class="card ld-year"><h3>${yr}년 월별 지출</h3>
         <div class="ld-bars">${ye.map((v, i) => { const m = yr + '-' + String(i + 1).padStart(2, '0'); return `<button class="ld-b ${m === ym ? 'on' : ''}" data-ym="${m}" title="${i + 1}월 ${won(v)}"><i style="height:${v > 0 ? Math.max(4, v / ymax * 100) : 0}%"></i><span>${i + 1}</span></button>`; }).join('')}</div>
@@ -6022,7 +6048,7 @@ $('#ledgerView').addEventListener('click', ev => { if (ev.target.closest('[data-
 
 /* ===== v1.17 Dividend · 노후 배당·연금 ===== */
 const RT_ASOF = '2026-10-10';
-const RT_DEF = { birth: 1982, retire_year: 2041, pen_annual: 9000000, pen_month: 10, pen_paid: 0, isa_month: 400000, isa_lump: 12000000, sub_month: 100000, pen_rate: 4, draw_rate: 4, infl: 2.5, npension: 0, need: 1500000, kr_tax: 5, us_tax: 15, price_g: 0, div_g: 0, w_mac: 35, w_hy: 35, w_kb: 30 };
+const RT_DEF = { birth: 1982, retire_year: 2041, pen_annual: 9000000, pen_month: 10, pen_paid: 0, isa_month: 400000, isa_lump: 12000000, sub_month: 100000, pen_rate: 4, draw_rate: 4, infl: 2.5, npension: 0, need: 1500000, kr_tax: 5, kr_gen: 15.4, isa_low: 0, us_tax: 15, price_g: 0, div_g: 0, w_mac: 35, w_hy: 35, w_kb: 30 };
 const RT_STK0 = [
   { id: 'mac', name: '맥쿼리인프라', sym: '088980', cur: 'KRW', px: 9800, dps: 730, pay: [2, 8], wk: 'w_mac' },
   { id: 'hy', name: '현대차2우B', sym: '005387', cur: 'KRW', px: 170500, dps: 10100, pay: [4, 6, 9, 12], wk: 'w_hy' },
@@ -6031,7 +6057,7 @@ const RT_STK0 = [
   { id: 'o', name: '리얼티인컴', sym: 'O', cur: 'USD', px: 54.18, dps: 3.245, pay: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
 ];
 const RT = { view: 'now' };
-const RT_NUM = ['birth', 'retire_year', 'pen_annual', 'pen_month', 'pen_paid', 'isa_month', 'isa_lump', 'sub_month', 'pen_rate', 'draw_rate', 'infl', 'npension', 'need', 'kr_tax', 'us_tax', 'price_g', 'div_g', 'w_mac', 'w_hy', 'w_kb'];
+const RT_NUM = ['birth', 'retire_year', 'pen_annual', 'pen_month', 'pen_paid', 'isa_month', 'isa_lump', 'sub_month', 'pen_rate', 'draw_rate', 'infl', 'npension', 'need', 'kr_gen', 'isa_low', 'us_tax', 'price_g', 'div_g', 'w_mac', 'w_hy', 'w_kb'];
 const PEN_RE = /연금|퇴직|IRP/i;
 const RTC = ['#f2a45e', '#5aa0ee', '#4fbf8f', '#e784ad', '#9d89e6', '#ecc04c', '#4cc2cc'], rtColor = i => RTC[i % RTC.length];
 const RT_SCC = { 하락: 'var(--up)', 기본: 'var(--c-div)', 성장: 'var(--inc)', 낙관: 'var(--c-cal)' };
@@ -6060,39 +6086,56 @@ function rtItems(c) {
     const usd = it.cur === 'USD', k = usd ? fx : 1, symU = it.sym.toUpperCase();
     const hs = symU ? FIN.holdings.filter(h => String(h.symbol || '').toUpperCase() === symU && (h.market === 'KR' || h.market === 'US') && !PEN_RE.test(h.account || '')) : [];
     const qty = hs.reduce((a, h) => a + fnum(h.qty), 0), h0 = hs.find(h => h.last_price != null);
-    const px = h0 ? fnum(h0.last_price) * hMul(h0) : it.px * k, dps = it.dps * k, tax = (usd ? c.us_tax : c.kr_tax) / 100;
+    const isaH = usd ? [] : hs.filter(h => /ISA/i.test(h.account || '')), qIsa = isaH.reduce((a, h) => a + fnum(h.qty), 0), costIsa = isaH.reduce((a, h) => a + hCost(h), 0);
+    const px = h0 ? fnum(h0.last_price) * hMul(h0) : it.px * k, dps = it.dps * k, tax = (usd ? c.us_tax : c.kr_gen) / 100;
     const wf = W > 0 ? Math.max(0, it.w) / W : 0, mon = c.isa_month * wf, lump = c.isa_lump * wf, sh = px > 0 ? Math.floor(lump / px) : 0;
-    return Object.assign({}, it, { usd, qty, live: !!h0, px, dps, tax, yld: px > 0 ? dps / px : 0, yn: px > 0 ? dps * (1 - tax) / px : 0, wf, mon, lump, sh, spent: sh * px, pay: it.pay.length ? it.pay.slice().sort((a, b) => a - b) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], accounts: Array.from(new Set(hs.map(h => h.account))), bad: !(px > 0) || !(dps > 0) });
+    return Object.assign({}, it, { usd, qty, qIsa, qGen: qty - qIsa, costIsa, live: !!h0, px, dps, tax, yld: px > 0 ? dps / px : 0, yn: px > 0 ? dps * (1 - (usd ? tax : RT_ISA)) / px : 0, wf, mon, lump, sh, spent: sh * px, pay: it.pay.length ? it.pay.slice().sort((a, b) => a - b) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], accounts: Array.from(new Set(hs.map(h => h.account))), bad: !(px > 0) || !(dps > 0) });
   });
 }
 function rtPen0() {
   return FIN.holdings.filter(h => PEN_RE.test(h.account || '')).reduce((a, h) => { const v = hValue(h); return a + (v == null ? hCost(h) : v); }, 0);
 }
+const RT_ISA = 0.099;
 function rtSim(c, o) {
   o = o || {};
   const IT = rtItems(c).filter(x => x.px > 0), penR = (o.penR != null ? o.penR : c.pen_rate) / 100, pg = (o.pg != null ? o.pg : c.price_g) / 100, dg = (o.dg != null ? o.dg : c.div_g) / 100, extra = o.extra || 0;
   const now = new Date(); let y = now.getFullYear(), m = now.getMonth() + 1, t = 0;
   const pen0 = rtPen0(); let P = pen0, prin = pen0;
-  const sh = IT.map(x => x.qty + x.lump / x.px);
-  const snap = tt => { const f = Math.pow(1 + pg, tt / 12), g = Math.pow(1 + dg, tt / 12); let K = 0, div = 0; IT.forEach((x, i) => { K += sh[i] * x.px * f; div += sh[i] * x.dps * g * (1 - x.tax) / 12; }); return { K, div }; };
+  /* 원화 종목은 ISA 안(배당 세금 없이 재투자, 해지 때 9.9%), 그 외 계좌·미국 주식은 계좌 세금을 바로 뺀다 */
+  const sI = IT.map(x => x.usd ? 0 : x.qIsa + x.lump / x.px), sG = IT.map(x => x.usd ? x.qty + x.lump / x.px : x.qGen);
+  let basis = IT.reduce((a, x) => a + (x.usd ? 0 : x.costIsa + x.lump), 0);
+  const lim = c.isa_low ? 4e6 : 2e6, penM = Math.pow(1 + penR, 1 / 12);
+  const snap = tt => {
+    const f = Math.pow(1 + pg, tt / 12), g = Math.pow(1 + dg, tt / 12); let KI = 0, KG = 0, dI = 0, dG = 0;
+    IT.forEach((x, i) => { KI += sI[i] * x.px * f; KG += sG[i] * x.px * f; dI += sI[i] * x.dps * g / 12; dG += sG[i] * x.dps * g * (1 - x.tax) / 12; });
+    const gain = KI - basis, isaTax = Math.max(0, gain - lim) * RT_ISA, eff = gain > 0 ? isaTax / gain : 0;
+    return { K: KI + KG, KI, gain, basis, isaTax, eff, dI, dG, div: dI * (1 - eff) + dG };
+  };
   const rows = [], lastIdx = c.retire_year * 12 + 11;
   const pay = () => { P += c.pen_annual; prin += c.pen_annual; };
   if (!c.pen_paid && m === c.pen_month) pay();
-  let s = snap(0); rows.push({ t, y, m, K: s.K, P, prin, div: s.div });
+  rows.push(Object.assign({ t, y, m, P, prin }, snap(0)));
   while (y * 12 + (m - 1) < lastIdx && t < 600) {
     m++; if (m > 12) { m = 1; y++; } t++;
     const f = Math.pow(1 + pg, t / 12), g = Math.pow(1 + dg, t / 12);
-    IT.forEach((x, i) => { const d = sh[i] * x.dps * g * (1 - x.tax) / 12; sh[i] += (d + x.mon + extra * x.wf) / (x.px * f); });
-    P *= 1 + penR / 12; if (m === c.pen_month) pay();
-    s = snap(t); rows.push({ t, y, m, K: s.K, P, prin, div: s.div });
+    IT.forEach((x, i) => {
+      const buy = x.mon + extra * x.wf;
+      sI[i] += sI[i] * x.dps * g / 12 / (x.px * f); sG[i] += sG[i] * x.dps * g * (1 - x.tax) / 12 / (x.px * f);
+      if (x.usd) sG[i] += buy / (x.px * f); else { sI[i] += buy / (x.px * f); basis += buy; }
+    });
+    P *= penM; if (m === c.pen_month) pay();
+    rows.push(Object.assign({ t, y, m, P, prin }, snap(t)));
   }
   return { rows, B: { pen0 } };
 }
-const RT_TAX = 0.055;
+const RT_PEN_LIM = 15000000;
 function rtResult(c, o) {
   const S = rtSim(c, o), L = S.rows[S.rows.length - 1], n = S.rows.length - 1, pvf = Math.pow(1 + c.infl / 100, -n / 12);
-  const isaDiv = L.div, penDraw = L.P * c.draw_rate / 100 / 12 * (1 - RT_TAX), gap = isaDiv + penDraw;
-  return { S, L, n, pvf, isaDiv, penDraw, gap, pvGap: gap * pvf, after: gap + (c.npension > 0 ? c.npension / pvf : 0), pvAfter: gap * pvf + c.npension };
+  /* 연금소득세: 연 1,500만 원 이하는 나이별 5.5/4.4/3.3%, 넘으면 전액 16.5% 분리과세(또는 종합과세)로 계산 */
+  const age = c.retire_year + 1 - c.birth, penAnnual = L.P * c.draw_rate / 100, penOver = penAnnual > RT_PEN_LIM;
+  const penRate = penOver ? 0.165 : age < 70 ? 0.055 : age < 80 ? 0.044 : 0.033;
+  const isaDiv = L.div, penDraw = penAnnual / 12 * (1 - penRate), gap = isaDiv + penDraw;
+  return { S, L, n, pvf, isaDiv, penDraw, penAnnual, penOver, penRate, penAge: age, gap, pvGap: gap * pvf, after: gap + (c.npension > 0 ? c.npension / pvf : 0), pvAfter: gap * pvf + c.npension };
 }
 function rtNeedExtra(c) {
   if (!(c.need > 0)) return 0;
@@ -6164,7 +6207,7 @@ function rtHTML() {
     <div class="rt-range"><div class="rt-rg">${scen.map(x => `<div class="rt-rc ${x.nm === '기본' ? 'b' : ''}" style="--k:${RT_SCC[x.nm]}"><span>${x.nm}</span><b>${rtMan(x.pvGap)}</b></div>`).join('')}</div><small>지금 가치 · 은퇴 후 ${npStart - c.retire_year - 1}년간 국민연금 전 구간 · 기본은 주가 ${rtSg(c.price_g)}% · 배당 ${rtSg(c.div_g)}%/년</small></div></section>`;
   const wIT = IT.filter(x => x.wf > 0 && x.px > 0);
   const mixY = wIT.reduce((s, x) => s + x.wf * x.yld, 0) * 100, mixN = wIT.reduce((s, x) => s + x.wf * x.yn, 0) * 100;
-  const tiles = `<div class="lf-tiles rt-tiles">${lfTile('ISA 월 배당', `<span class="money">${rtMan(R.isaDiv)}</span>`, `<small>${rtMan(R.L.K)} 자산 · 배당률 세후 ${mixN.toFixed(1)}%</small>`)}${lfTile('연금계좌 자산', `<span class="money">${rtMan(R.L.P)}</span>`, `<small>원금 ${rtMan(R.L.prin)} · 수익 ${rtMan(R.L.P - R.L.prin)}</small>`)}${lfTile('연금 월 인출', `<span class="money">${rtMan(R.penDraw)}</span>`, `<small>연 ${c.draw_rate}% 인출 · 연금소득세 5.5%</small>`)}${lfTile('지금 월 배당', `<span class="money">${rtMan(R.S.rows[0].div)}</span>`, `<small>예수금 투입 후 · 세후 추정</small>`)}</div>`;
+  const tiles = `<div class="lf-tiles rt-tiles">${lfTile('ISA 월 배당', `<span class="money">${rtMan(R.isaDiv)}</span>`, `<small>${rtMan(R.L.K)} 자산 · 배당률 세후 ${mixN.toFixed(1)}%</small>`)}${lfTile('연금계좌 자산', `<span class="money">${rtMan(R.L.P)}</span>`, `<small>원금 ${rtMan(R.L.prin)} · 수익 ${rtMan(R.L.P - R.L.prin)}</small>`)}${lfTile('연금 월 인출', `<span class="money">${rtMan(R.penDraw)}</span>`, `<small>연 ${c.draw_rate}% 인출 · 연금소득세 ${(R.penRate * 100).toFixed(1).replace(/\.0$/, '')}%</small>`)}${lfTile('지금 월 배당', `<span class="money">${rtMan(R.S.rows[0].div)}</span>`, `<small>예수금 투입 후 · 세후 추정</small>`)}</div>`;
   const gCtl = (k, label, v) => `<div class="rt-gc1"><span>${label}</span><div class="rt-st"><button type="button" data-rt="g:${k}:-0.5" aria-label="내리기">−</button><input class="in" data-gk="${k}" inputmode="decimal" value="${v}" aria-label="${label}"><em>%</em><button type="button" data-rt="g:${k}:0.5" aria-label="올리기">+</button></div></div>`;
   const gOn = v => c.price_g === v && c.div_g === v ? 'on' : '';
   const gcard = `<section class="card rt-gcard"><div class="rt-gct"><b>성장 가정</b><small>숫자를 바꾸면 바로 계산이 다시 돼요 · 연 기준, 빠지면 마이너스</small></div>
@@ -6182,6 +6225,20 @@ function rtHTML() {
     <div class="rt-cr tot"><span>계산에 들어간 합계</span><b class="money">${rtMan(planV + B.pen0 + c.isa_lump)}</b></div>
     ${crow('계산 밖: 그 외 보유 주식', rtMan(othV), othH.length + '종목 · ISA·종합·해외 계좌의 배당 종목이 아닌 주식. 팔아서 배당 종목에 넣으면 그만큼 소득이 늘어요', 'out')}
     <div class="rt-cn faint">코인·예금·금·청약통장은 배당 계산에 넣지 않았어요. 위 합계에 없는 돈은 지금 월 소득과 은퇴 소득 모두에 0으로 잡혀 있어요.</div></section>`;
+  const L0 = R.L, lim = c.isa_low ? 400 : 200, isaNet = L0.KI - L0.isaTax;
+  const yr1 = c.isa_lump + c.isa_month * 12, y5 = c.isa_lump + c.isa_month * 60;
+  const penWarn = R.penOver ? `<div class="rt-cn bad">연금 연 인출이 1,500만 원을 넘어요. 넘으면 전액 16.5% 분리과세(또는 종합과세)라서 세금이 확 늘어요. 연 인출률을 ${(RT_PEN_LIM / L0.P * 100).toFixed(1)}% 이하로 낮추면 ${(R.penAge < 70 ? 5.5 : R.penAge < 80 ? 4.4 : 3.3)}%로 줄어요.</div>` : '';
+  const isaWarn = [yr1 > 20000000 ? '첫해 ISA 납입이 연 2,000만 원 한도를 넘어요. 예수금과 월 납입을 나눠서 넣어야 해요.' : '', y5 > 100000000 ? '5년 합계가 ISA 총 납입한도 1억 원을 넘어요.' : ''].filter(Boolean).map(t => `<div class="rt-cn bad">${t}</div>`).join('');
+  const taxHTML = `<div class="fin-sec" style="--sc:var(--c-inc, var(--c-pf))"><h3>세금 점검</h3><span>${c.retire_year}년 말 기준 추정</span></div><section class="card rt-cash">
+    ${crow('ISA 평가금액 (계획 종목)', rtMan(L0.KI), 'ISA 안 배당은 세금 없이 재투자되는 걸로 계산')}
+    ${crow('ISA 납입 원금', rtMan(L0.basis), '지금 보유 취득가 + 예수금 + 매달 납입')}
+    ${crow('ISA 수익', rtMan(L0.gain))}
+    ${crow('비과세 한도 (' + (c.isa_low ? '서민형' : '일반형') + ')', '-' + rtMan(lim * 10000))}
+    <div class="rt-cr tot"><span>해지 때 세금 (초과분 9.9%)</span><b class="money">${rtMan(L0.isaTax)}</b></div>
+    ${L0.isaTax > 0 ? `<div class="rt-cn">수익의 ${(L0.eff * 100).toFixed(1)}%가 세금이고, 해지하고 나면 약 <b>${rtMan(isaNet)}</b>이 남아요. 월 배당에는 이 비율을 미리 빼서 보여줘요.</div>` : '<div class="rt-cn">수익이 비과세 한도 안이라 해지 세금이 없어요.</div>'}${isaWarn}
+    ${crow('연금 연 인출 (은퇴 첫해, 세전)', rtMan(R.penAnnual), '1,500만 원까지는 연금소득세만 · ' + R.penAge + '세 구간 ' + (R.penRate * 100).toFixed(1).replace(/\.0$/, '') + '%')}${penWarn}
+    ${crow('일반계좌 국내 배당 세금', c.kr_gen + '%', '종합·해외 계좌의 원화 종목 · 미국 종목은 ' + c.us_tax + '%')}
+    <div class="rt-cn faint">금융소득(이자·배당)이 일반계좌 기준 연 2,000만 원을 넘으면 종합과세 대상이라 세금이 달라져요. 지금은 한참 아래예요.</div></section>`;
   const penDone = !!c.pen_paid;
   const planRows = IT.map((x, i) => {
     const on = x.wf > 0;
@@ -6227,12 +6284,13 @@ function rtHTML() {
     <div class="lf-note" style="margin:10px 0 0">기본은 위 "성장 가정"에서 정한 값이에요. 하락은 기본보다 주가·배당이 해마다 2%p 덜 오르고 연금 수익률도 2%p 낮은 경우, 성장은 둘 다 2%p 더 오르는 경우, 낙관은 4%p 더 오르고 연금 수익률도 1%p 높은 경우예요.</div></div>`;
   const notes = `<details class="card rt-notes"><summary><b>이 계산의 가정</b><small>시뮬레이션 값이에요 · 눌러서 보기</small></summary><ul>
     <li>주가는 해마다 ${rtSg(c.price_g)}%, 배당은 해마다 ${rtSg(c.div_g)}% 변한다고 봤어요(설정에서 바꿔요). 0%면 지금 그대로라고 보는 가장 보수적인 계산이에요(물가는 ${c.infl}%). 배당은 전부 같은 종목에 다시 사는 걸로 계산했고, 실제로는 오를 수도 빠질 수도 있어서 시나리오 표의 하락·성장 행도 같이 봐 주세요.</li>
-    <li>ISA 안 배당은 계좌 안에서 재투자돼요. 일반적으로 인출은 납입 원금 범위까지만 되고 수익금은 해지(3년 만기) 때 나와서, 은퇴 후 월급처럼 받으려면 만기 시점 계획이 필요해요. 비과세 한도(일반형 200만 원 · 서민형 400만 원)를 넘는 수익은 9.9%예요. 배당 세금은 설정의 국내 ${c.kr_tax}% · 미국 ${c.us_tax}%로 뺐어요.</li>
-    <li>연금계좌는 만 55세부터 연금으로 받을 수 있고, 연금소득세 3.3~5.5%(여기선 5.5%)가 붙어요. 연 ${c.draw_rate}%씩 꺼낸다고 봤어요.</li>
+    <li>ISA 안 원화 종목의 배당은 세금 없이 계좌 안에서 재투자돼요(원천징수 없음). 해지(3년 만기) 때 수익에서 비과세 한도(일반형 200만 원 · 서민형 400만 원)를 뺀 나머지에 9.9%가 붙는다고 보고, 그 비율을 월 배당에서 미리 뺐어요. 인출은 보통 납입 원금까지만 되고 수익금은 해지 때 나와서, 은퇴 후 월급처럼 받으려면 만기 시점 계획이 필요해요. ISA 수익은 계획 종목만 계산해요(다른 ISA 종목의 손익은 빠져 있어요).</li>
+    <li>종합·해외 계좌에 있는 종목은 원화 ${c.kr_gen}% · 미국 ${c.us_tax}%를 배당 때 바로 뺐고, 새로 사는 미국 종목도 같은 방식이에요.</li>
+    <li>연금계좌는 만 55세부터 연금으로 받을 수 있고, 연금소득세는 55~69세 5.5%, 70~79세 4.4%, 80세 이상 3.3%예요. 연 ${c.draw_rate}%씩 꺼낸다고 봤고, 연 1,500만 원을 넘으면 전액 16.5%로 계산해요. 수익률은 실제 연 ${c.pen_rate}%가 되도록 월 단위로 환산했어요.</li>
     <li>은퇴 후 물가 상승과 회사 퇴직금·퇴직연금 적립분, 국민연금은 별도예요. 국민연금${c.npension > 0 ? '은 입력한 금액을 반영했어요' : '은 아직 입력하지 않았어요 — 국민연금공단 "내 연금"에서 예상 월액을 확인해 설정에 넣어 주세요'}.</li>
     <li>지금 ${age}세(세는나이), 은퇴 ${retAge}세까지 ${yrsLeft.toFixed(1)}년이에요. 투자 자문이 아니라 가정에 따른 시뮬레이션이에요.</li></ul></details>`;
   return `<div class="fin-head"><div><h2>Dividend</h2><p>노후 배당·연금 플랜 · ${c.retire_year}년 은퇴까지 ${rtDur(R.n)}</p></div><div class="fin-act"><button type="button" class="btn" data-rt="set">설정</button></div></div>
-    ${hero}${tiles}${gcard}${plan}${cover}${cashHTML}
+    ${hero}${tiles}${gcard}${plan}${cover}${taxHTML}${cashHTML}
     <div class="fin-sec" style="--sc:var(--c-goal)"><h3>자산이 자라는 모습</h3></div>${divChart}${penChart}
     <div class="fin-sec" style="--sc:var(--c-journal)"><h3>배당 달력 · 보유 종목</h3></div>${calChart}
     ${scenHTML}${notes}`;
@@ -6255,9 +6313,9 @@ function openRetirePlan() {
       ${fld('올해 연금 납입', `<select class="in" name="pen_paid"><option value="0" ${c.pen_paid ? '' : 'selected'}>아직 안 했어요</option><option value="1" ${c.pen_paid ? 'selected' : ''}>이미 했어요</option></select>`)}${fld('청약통장 월 납입 (원)', num('sub_month', c.sub_month))}
       ${fld('ISA 월 납입 (원)', num('isa_month', c.isa_month))}${fld('ISA 예수금 투입 (원)', num('isa_lump', c.isa_lump))}
       ${fld('주가 상승률 (연 %, 빠지면 마이너스)', dec('price_g', c.price_g))}${fld('배당 성장률 (연 %, 줄면 마이너스)', dec('div_g', c.div_g))}
-      ${fld('국내 배당 세금 (%)', dec('kr_tax', c.kr_tax))}${fld('미국 배당 세금 (%)', dec('us_tax', c.us_tax))}
+      ${fld('일반계좌 국내 배당 세금 (%)', dec('kr_gen', c.kr_gen))}${fld('미국 배당 세금 (%)', dec('us_tax', c.us_tax))}
+      ${fld('ISA 유형 (비과세 한도)', `<select class="in" name="isa_low"><option value="0" ${c.isa_low ? '' : 'selected'}>일반형 (200만 원)</option><option value="1" ${c.isa_low ? 'selected' : ''}>서민형 (400만 원)</option></select>`)}${fld('물가 상승률 (%)', dec('infl', c.infl))}
       ${fld('연금계좌 수익률 (연 %)', dec('pen_rate', c.pen_rate))}${fld('연금 연 인출률 (%)', dec('draw_rate', c.draw_rate))}
-      ${fld('물가 상승률 (%)', dec('infl', c.infl))}<div></div>
       ${fld('국민연금 예상 월액 (세후, 지금 가치, 원)', num('npension', c.npension))}${fld('노후 월 생활비 목표 (지금 가치, 원)', num('need', c.need))}</div>
       <div class="hint faint" style="font-size:11.5px">종목별 매수 비중·가격·배당은 "이번 달 실행" 표에서 종목을 눌러 고쳐요. 주가·배당 성장은 0으로 두면 변하지 않는다고 계산해요. 내 계정 DB에만 저장돼요.</div>`,
     onOpen(b) { b.querySelectorAll('input[inputmode=numeric]').forEach(a => a.addEventListener('input', () => { const d = a.value.replace(/[^\d]/g, ''); a.value = d ? Number(d).toLocaleString('ko-KR') : ''; })); },
@@ -6269,7 +6327,7 @@ function openRetirePlan() {
       if (v.pen_month < 1 || v.pen_month > 12) throw new Error('납입하는 달은 1~12예요');
       if (v.pen_rate < -20 || v.pen_rate > 30) throw new Error('수익률을 확인해 주세요');
       if (v.price_g < -30 || v.price_g > 30 || v.div_g < -30 || v.div_g > 30) throw new Error('주가·배당 증가율은 -30~30 사이로 넣어 주세요');
-      if (v.kr_tax < 0 || v.kr_tax > 50 || v.us_tax < 0 || v.us_tax > 50) throw new Error('세금은 0~50 사이로 넣어 주세요');
+      if (v.kr_gen < 0 || v.kr_gen > 50 || v.us_tax < 0 || v.us_tax > 50) throw new Error('세금은 0~50 사이로 넣어 주세요');
       await saveLifeMeta('retire', v);
       closeFinModal(); renderDividend(); toast('저장했어요');
     }
