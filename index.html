@@ -1729,7 +1729,6 @@ body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!importan
     <button data-tab="wdb" data-g="w"><svg class="tabi" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="8" ry="2.5"/><path d="M4 5.5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/><path d="M4 11.5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/></svg>Library</button>
     <button data-tab="portfolio" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M3 17l5.5-5.5 4 4L21 7"/><path d="M15 7h6v6"/></svg>Portfolio</button>
     <button data-tab="ledger" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10.5h18"/><circle cx="16.5" cy="14.8" r="1.1"/></svg>Ledger</button>
-    <button data-tab="cal" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/><path d="M8 14h2M12 14h2M8 17h2"/></svg>Calendar</button>
     <button data-tab="div" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8 9.5l1.6 5.2 2.4-5.2 2.4 5.2L16 9.5"/><path d="M8.2 12.4h7.6"/></svg>Dividend</button>
     <button data-tab="life" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.9c0 5.6-7.5 10-7.5 10z"/><path d="M7.5 12.5h2.6l1.4-2.4 2 4 1.2-1.6h1.8"/></svg>Health</button>
     <button data-tab="cult" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M4 6.2c0-.7.5-1.2 1.2-1.2H11v14H5.5A1.5 1.5 0 0 1 4 17.5z"/><path d="M20 6.2c0-.7-.5-1.2-1.2-1.2H13v14h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>Books &amp; Film</button>
@@ -2101,7 +2100,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.4.2';
+const APP_VERSION = 'v2.5.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -3940,7 +3939,7 @@ function switchTab(tab){
   const grp = TAB_GRP[tab] || 'h'; GRP_LAST[grp] = tab;
   document.body.dataset.grp = grp;
   $$('#grpTabs button').forEach(b => b.classList.toggle('on', b.dataset.grp === grp));
-  $$('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+  $$('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === (tab === 'cal' ? 'div' : tab)));
   $('#homeView').hidden = tab !== 'home';
   $('#lifeView').hidden = tab !== 'life';
   $('#barView').hidden = tab !== 'bar';
@@ -6081,7 +6080,7 @@ function evUpcoming(t, span) {
 function renderCalTab() { finEnsure(renderCalendar); }
 function renderCalendar() {
   const el = $('#calView'); if (!el) return;
-  if (!FIN.loaded) { el.innerHTML = '<div class="fin-head"><div><h2>Calendar</h2><p>불러오는 중…</p></div></div>'; return; }
+  if (!FIN.loaded) { el.innerHTML = divNav('cal') + '<div class="fin-head"><div><h2>Calendar</h2><p>불러오는 중…</p></div></div>'; return; }
   const ym = CAL.ym, y = Number(ym.slice(0, 4)), m = Number(ym.slice(5)), first = new Date(y, m - 1, 1).getDay(), dim = new Date(y, m, 0).getDate(), t = today();
   const occ = evOcc(ym), byDay = {}; occ.forEach(o => { if (o.day != null) (byDay[o.day] = byDay[o.day] || []).push(o); });
   const head = ['일', '월', '화', '수', '목', '금', '토'].map((d, i) => `<div class="ev-dow ${i === 0 ? 'su' : i === 6 ? 'sa' : ''}">${d}</div>`).join('');
@@ -6100,7 +6099,7 @@ function renderCalendar() {
   const dvYear = mon.reduce((s, x) => s + x.dv, 0), gotYear = mon.reduce((s, x) => s + x.got, 0), ivYear = mon.reduce((s, x) => s + x.iv, 0), ivMonth = ivYear / 12;
   LFQ.push(() => { const b = $('#evChart'); if (b) drawBars(b, { items: !dvYear ? [] : mon.map((x, i) => ({ v: x.dv, txt: x.dv ? Math.round(x.dv / 1000) / 10 + '만' : '', label: (i + 1) + '월', on: i + 1 === m, tip: `${i + 1}월 배당 예상<br><b>${won(x.dv)}</b>` })), color: 'var(--c-cal)', min: 1, empty: '배당 일정을 등록하면 월별 예상 금액이 보여요.', label: '월별 배당 예상' }); });
   const empty = !(FIN.events || []).length;
-  el.innerHTML = `<div class="fin-head"><div><h2>Calendar</h2><p>배당과 정기 적립 일정을 한눈에 봐요</p></div><div class="fin-act"><button type="button" class="btn primary" data-ev="new">+ 일정 추가</button></div></div>
+  el.innerHTML = divNav('cal') + `<div class="fin-head"><div><h2>Calendar</h2><p>배당과 정기 적립 일정을 한눈에 봐요</p></div><div class="fin-act"><button type="button" class="btn primary" data-ev="new">+ 일정 추가</button></div></div>
     ${empty ? `<div class="lf-empty">아직 등록한 일정이 없어요.<br>배당 받는 종목과 매달 자동으로 사는 적립(연금저축·ETF 등)을 한 번 등록하면 달력에 계속 표시돼요.<br><button type="button" class="btn primary" data-ev="new">+ 첫 일정 등록</button></div>` : ''}
     <div class="ev-nav"><button type="button" class="btn" data-ev="prev">‹</button><b>${y}년 ${m}월</b><button type="button" class="btn" data-ev="next">›</button>${ym !== t.slice(0, 7) ? '<button type="button" class="btn" data-ev="now">오늘</button>' : ''}</div>
     <div class="card ev-grid">${head}${cells}</div>
@@ -6445,10 +6444,13 @@ function rtHTML() {
 }
 function renderDividend() {
   const el = $('#divView'); if (!el) return;
-  if (!FIN.loaded || !LIFE.loaded) { el.innerHTML = '<div class="fin-head"><div><h2>Dividend</h2><p>불러오는 중…</p></div></div>'; return; }
-  el.innerHTML = rtHTML(); lfRunQueue();
+  if (!FIN.loaded || !LIFE.loaded) { el.innerHTML = divNav('div') + '<div class="fin-head"><div><h2>Dividend</h2><p>불러오는 중…</p></div></div>'; return; }
+  el.innerHTML = divNav('div') + rtHTML(); lfRunQueue();
 }
 function renderDivTab() { renderDividend(); Promise.all([finReady(), lifeReady()]).then(renderDividend); }
+/* v2.5.0 Dividend 하위 칩: 플랜 / 캘린더 (캘린더는 별도 탭 대신 Dividend 안으로) */
+function divNav(on) { return `<div class="fin-chips" id="divNav"><button type="button" class="chip ${on === 'div' ? 'on' : ''}" data-dnav="div">플랜</button><button type="button" class="chip ${on === 'cal' ? 'on' : ''}" data-dnav="cal">캘린더</button></div>`; }
+['#divView', '#calView'].forEach(sel => $(sel).addEventListener('click', ev => { const b = ev.target.closest('[data-dnav]'); if (b) { ev.stopImmediatePropagation(); switchTab(b.dataset.dnav); } }, true));
 function openRetirePlan() {
   const c = rtCfg();
   const num = (n, v) => `<input class="in" name="${n}" inputmode="numeric" value="${Number(v).toLocaleString('ko-KR')}">`;
