@@ -1456,6 +1456,10 @@ body[data-tab="div"] #btnAdd,body[data-tab="div"] .fab{display:none!important}
 #divView .fin-sec h3{display:flex;align-items:center;gap:9px;letter-spacing:-.03em}
 #divView .fin-sec h3::before{content:"";flex:none;width:7px;height:20px;border-radius:6px;background:linear-gradient(180deg,var(--sc,var(--c-div)),color-mix(in srgb,var(--sc,var(--c-div)) 40%,transparent))}
 #divView .card{border-radius:22px}
+/* v2.5.1 Dividend/Calendar 하위 칩: 제목 줄 우측 끝 */
+.fin-head.dv-h{position:relative;min-height:74px}
+.fin-head.dv-h>.dv-nav{position:absolute;top:1px;right:0;margin:0;gap:6px;flex-wrap:nowrap;z-index:1}
+.fin-head.dv-h h2{padding-right:150px}
 .rt-hero{position:relative;overflow:hidden}
 .rt-hero::after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--c-div) 26%,transparent),transparent 70%);pointer-events:none}
 .rt-hero>*{position:relative;z-index:1}
@@ -2100,7 +2104,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.5.0';
+const APP_VERSION = 'v2.5.1';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -6080,7 +6084,7 @@ function evUpcoming(t, span) {
 function renderCalTab() { finEnsure(renderCalendar); }
 function renderCalendar() {
   const el = $('#calView'); if (!el) return;
-  if (!FIN.loaded) { el.innerHTML = divNav('cal') + '<div class="fin-head"><div><h2>Calendar</h2><p>불러오는 중…</p></div></div>'; return; }
+  if (!FIN.loaded) { el.innerHTML = '<div class="fin-head dv-h">' + divNav('cal') + '<div><h2>Calendar</h2><p>불러오는 중…</p></div></div>'; return; }
   const ym = CAL.ym, y = Number(ym.slice(0, 4)), m = Number(ym.slice(5)), first = new Date(y, m - 1, 1).getDay(), dim = new Date(y, m, 0).getDate(), t = today();
   const occ = evOcc(ym), byDay = {}; occ.forEach(o => { if (o.day != null) (byDay[o.day] = byDay[o.day] || []).push(o); });
   const head = ['일', '월', '화', '수', '목', '금', '토'].map((d, i) => `<div class="ev-dow ${i === 0 ? 'su' : i === 6 ? 'sa' : ''}">${d}</div>`).join('');
@@ -6099,7 +6103,7 @@ function renderCalendar() {
   const dvYear = mon.reduce((s, x) => s + x.dv, 0), gotYear = mon.reduce((s, x) => s + x.got, 0), ivYear = mon.reduce((s, x) => s + x.iv, 0), ivMonth = ivYear / 12;
   LFQ.push(() => { const b = $('#evChart'); if (b) drawBars(b, { items: !dvYear ? [] : mon.map((x, i) => ({ v: x.dv, txt: x.dv ? Math.round(x.dv / 1000) / 10 + '만' : '', label: (i + 1) + '월', on: i + 1 === m, tip: `${i + 1}월 배당 예상<br><b>${won(x.dv)}</b>` })), color: 'var(--c-cal)', min: 1, empty: '배당 일정을 등록하면 월별 예상 금액이 보여요.', label: '월별 배당 예상' }); });
   const empty = !(FIN.events || []).length;
-  el.innerHTML = divNav('cal') + `<div class="fin-head"><div><h2>Calendar</h2><p>배당과 정기 적립 일정을 한눈에 봐요</p></div><div class="fin-act"><button type="button" class="btn primary" data-ev="new">+ 일정 추가</button></div></div>
+  el.innerHTML = `<div class="fin-head dv-h">${divNav('cal')}<div><h2>Calendar</h2><p>배당과 정기 적립 일정을 한눈에 봐요</p></div><div class="fin-act"><button type="button" class="btn primary" data-ev="new">+ 일정 추가</button></div></div>
     ${empty ? `<div class="lf-empty">아직 등록한 일정이 없어요.<br>배당 받는 종목과 매달 자동으로 사는 적립(연금저축·ETF 등)을 한 번 등록하면 달력에 계속 표시돼요.<br><button type="button" class="btn primary" data-ev="new">+ 첫 일정 등록</button></div>` : ''}
     <div class="ev-nav"><button type="button" class="btn" data-ev="prev">‹</button><b>${y}년 ${m}월</b><button type="button" class="btn" data-ev="next">›</button>${ym !== t.slice(0, 7) ? '<button type="button" class="btn" data-ev="now">오늘</button>' : ''}</div>
     <div class="card ev-grid">${head}${cells}</div>
@@ -6436,7 +6440,7 @@ function rtHTML() {
     <li>연금계좌는 만 55세부터 연금으로 받을 수 있고, 연금소득세는 55~69세 5.5%, 70~79세 4.4%, 80세 이상 3.3%예요. 연 ${c.draw_rate}%씩 꺼낸다고 봤고, 연 1,500만 원을 넘으면 전액 16.5%로 계산해요. 수익률은 실제 연 ${c.pen_rate}%가 되도록 월 단위로 환산했어요.</li>
     <li>은퇴 후 물가 상승과 회사 퇴직금·퇴직연금 적립분, 국민연금은 별도예요. 국민연금${c.npension > 0 ? '은 입력한 금액을 반영했어요' : '은 아직 입력하지 않았어요 — 국민연금공단 "내 연금"에서 예상 월액을 확인해 설정에 넣어 주세요'}.</li>
     <li>지금 ${age}세(세는나이), 은퇴 ${retAge}세까지 ${yrsLeft.toFixed(1)}년이에요. 투자 자문이 아니라 가정에 따른 시뮬레이션이에요.</li></ul></details>`;
-  return `<div class="fin-head"><div><h2>Dividend</h2><p>노후 배당·연금 플랜 · ${c.retire_year}년 은퇴까지 ${rtDur(R.n)}</p></div><div class="fin-act"><button type="button" class="btn" data-rt="set">설정</button></div></div>
+  return `<div class="fin-head dv-h">${divNav('div')}<div><h2>Dividend</h2><p>노후 배당·연금 플랜 · ${c.retire_year}년 은퇴까지 ${rtDur(R.n)}</p></div><div class="fin-act"><button type="button" class="btn" data-rt="set">설정</button></div></div>
     ${hero}${tiles}${gcard}${plan}${cover}${taxHTML}${cashHTML}
     <div class="fin-sec" style="--sc:var(--c-goal)"><h3>자산이 자라는 모습</h3></div>${divChart}${penChart}
     <div class="fin-sec" style="--sc:var(--c-journal)"><h3>배당 달력 · 보유 종목</h3></div>${calChart}
@@ -6444,12 +6448,12 @@ function rtHTML() {
 }
 function renderDividend() {
   const el = $('#divView'); if (!el) return;
-  if (!FIN.loaded || !LIFE.loaded) { el.innerHTML = divNav('div') + '<div class="fin-head"><div><h2>Dividend</h2><p>불러오는 중…</p></div></div>'; return; }
-  el.innerHTML = divNav('div') + rtHTML(); lfRunQueue();
+  if (!FIN.loaded || !LIFE.loaded) { el.innerHTML = '<div class="fin-head dv-h">' + divNav('div') + '<div><h2>Dividend</h2><p>불러오는 중…</p></div></div>'; return; }
+  el.innerHTML = rtHTML(); lfRunQueue();
 }
 function renderDivTab() { renderDividend(); Promise.all([finReady(), lifeReady()]).then(renderDividend); }
 /* v2.5.0 Dividend 하위 칩: 플랜 / 캘린더 (캘린더는 별도 탭 대신 Dividend 안으로) */
-function divNav(on) { return `<div class="fin-chips" id="divNav"><button type="button" class="chip ${on === 'div' ? 'on' : ''}" data-dnav="div">플랜</button><button type="button" class="chip ${on === 'cal' ? 'on' : ''}" data-dnav="cal">캘린더</button></div>`; }
+function divNav(on) { return `<div class="fin-chips dv-nav"><button type="button" class="chip ${on === 'div' ? 'on' : ''}" data-dnav="div">플랜</button><button type="button" class="chip ${on === 'cal' ? 'on' : ''}" data-dnav="cal">캘린더</button></div>`; }
 ['#divView', '#calView'].forEach(sel => $(sel).addEventListener('click', ev => { const b = ev.target.closest('[data-dnav]'); if (b) { ev.stopImmediatePropagation(); switchTab(b.dataset.dnav); } }, true));
 function openRetirePlan() {
   const c = rtCfg();
