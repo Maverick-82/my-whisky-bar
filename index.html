@@ -1456,6 +1456,7 @@ body[data-tab="div"] #btnAdd,body[data-tab="div"] .fab{display:none!important}
 #divView .fin-sec h3{display:flex;align-items:center;gap:9px;letter-spacing:-.03em}
 #divView .fin-sec h3::before{content:"";flex:none;width:7px;height:20px;border-radius:6px;background:linear-gradient(180deg,var(--sc,var(--c-div)),color-mix(in srgb,var(--sc,var(--c-div)) 40%,transparent))}
 #divView .card{border-radius:22px}
+.cu-addrow{display:flex;gap:8px;margin:10px 0 2px;flex-wrap:wrap}.cu-addrow .chip{font-size:12.5px}
 /* v2.5.1 Dividend/Calendar 하위 칩: 제목 줄 우측 끝 */
 .fin-head.dv-h{position:relative;min-height:74px}
 .fin-head.dv-h>.dv-nav{position:absolute;top:1px;right:0;margin:0;gap:6px;flex-wrap:nowrap;z-index:1}
@@ -2104,7 +2105,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.5.2';
+const APP_VERSION = 'v2.6.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -6599,6 +6600,7 @@ function renderCult() {
     ${tiles}
     <div class="card lf-chart-card"><div class="lf-ch"><b>${yr}년 월별 완료</b><span class="cu-yr"><button type="button" data-cu="yr:-1" aria-label="이전 해">‹</button><b>${yr}</b><button type="button" data-cu="yr:1" aria-label="다음 해">›</button></span></div>${lfChartBox('cuChart')}</div>
     <div class="cu-bar" style="margin-top:16px">${kseg}<div class="lf-chips">${sch}</div></div>
+    <div class="cu-addrow"><button type="button" class="chip" data-cu="newwant">+ 예정 추가</button><button type="button" class="chip" data-cu="bulk">+ 여러 개 한번에</button></div>
     ${body}`;
   lfRunQueue();
 }
@@ -6652,14 +6654,14 @@ function cuResize(file) {
     fr.readAsDataURL(file);
   });
 }
-function openCultForm(r) {
+function openCultForm(r, st0) {
   const isNew = !r;
-  r = r || { kind: CU.kind === 'film' ? 'film' : 'book', title: '', creator: '', status: 'done', done_on: today(), started_on: null, rating: null, amount: null, genre: '', memo: '' };
+  r = r || { kind: CU.kind === 'film' ? 'film' : 'book', title: '', creator: '', status: st0 || 'done', done_on: today(), started_on: null, rating: null, amount: null, genre: '', memo: '' };
   let kind = r.kind, status = r.status, rating = r.rating || 0, cover = r.cover || '', found = [];
   const seg = (id, items) => `<div class="seg" id="${id}">${items.map(([k, t, on]) => `<button type="button" data-k="${k}" class="${on ? 'on' : ''}">${t}</button>`).join('')}</div>`;
   const d0 = status === 'done' ? r.done_on : status === 'doing' ? r.started_on : '';
   openFinModal({
-    title: isNew ? '기록 추가' : '기록 수정',
+    title: isNew ? (st0 === 'want' ? '예정 추가' : '기록 추가') : '기록 수정',
     html: `${fld('종류', seg('cuKind', [['book', '독서', kind === 'book'], ['film', '영화', kind === 'film']]))}
       ${fld('제목', `<input class="in" name="t" value="${esc(r.title)}" placeholder="책이나 영화 제목">`)}
       <div class="cu-cov"><div class="cu-cvp" id="cuCvP"></div><div class="cu-cvb"><button type="button" class="btn" id="cuCvFind">표지·포스터 검색</button><label class="btn" for="cuCvFile">사진 올리기</label><input type="file" id="cuCvFile" accept="image/*"><button type="button" class="btn" id="cuCvDel">지우기</button></div></div>
@@ -6715,6 +6717,20 @@ function openCultForm(r) {
     onDelete: isNew ? null : async () => { await lfDel('life_culture', 'culture', r.id); lfDone('삭제했어요'); }
   });
 }
+function openCultBulk() {
+  let kind = CU.kind === 'film' ? 'film' : 'book';
+  openFinModal({
+    title: '예정 여러 개 추가', saveLabel: '추가',
+    html: `${fld('종류', `<div class="seg" id="cuBk">${[['book', '독서'], ['film', '영화']].map(([k, t]) => `<button type="button" data-k="${k}" class="${kind === k ? 'on' : ''}">${t}</button>`).join('')}</div>`)}${fld('제목 (한 줄에 하나씩)', '<textarea class="in" name="bt" rows="8" placeholder="제목을 줄바꿈으로 구분해 붙여넣으세요"></textarea>')}<div class="hint faint" style="font-size:11.5px">모두 \'예정\' 상태로 들어가요. 표지나 별점은 나중에 하나씩 수정하면 돼요.</div>`,
+    onOpen(b) { b.querySelector('#cuBk').addEventListener('click', ev => { const x = ev.target.closest('button'); if (!x) return; kind = x.dataset.k; b.querySelectorAll('#cuBk button').forEach(y => y.classList.toggle('on', y.dataset.k === kind)); }); setTimeout(() => b.querySelector('[name=bt]').focus(), 50); },
+    async onSave(b) {
+      const ts = b.querySelector('[name=bt]').value.split(/\n/).map(x => x.trim()).filter(Boolean);
+      if (!ts.length) throw new Error('제목을 한 줄 이상 입력해 주세요');
+      for (const t of ts) await lfSave('life_culture', 'culture', null, { kind, title: t, creator: null, status: 'want', started_on: null, done_on: null, rating: null, amount: null, genre: null, memo: null, cover: null }, null);
+      lfDone(ts.length + '건 추가했어요');
+    }
+  });
+}
 function openCultGoal() {
   const G = cuGoal();
   openFinModal({
@@ -6731,6 +6747,8 @@ function openCultGoal() {
 $('#cultView').addEventListener('click', ev => {
   const x = ev.target.closest('[data-cu]'); if (!x) return; const a = x.dataset.cu;
   if (a === 'new') return openCultForm(null);
+  if (a === 'newwant') return openCultForm(null, 'want');
+  if (a === 'bulk') return openCultBulk();
   if (a === 'goal') return openCultGoal();
   if (a.indexOf('edit:') === 0) { const r = (LIFE.culture || []).find(y => y.id === a.slice(5)); if (r) openCultForm(r); return; }
   if (a.indexOf('kind:') === 0) { CU.kind = a.slice(5); return renderCult(); }
