@@ -2105,7 +2105,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.6.0';
+const APP_VERSION = 'v2.6.1';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -2927,6 +2927,7 @@ function renderPortfolio(){
     ${invGroups.map(g => {
       const gt = finTotals(g.items);
       const stocks = g.items.filter(h => !isCashLike(h)), cashes = g.items.filter(h => h.market === 'CASH');
+      const others = g.items.filter(h => h.market === 'BANK' || h.market === 'OTHER');
       const cashV = cashes.reduce((a, h) => a + (hValue(h) || 0), 0);
       const usdCash = cashes.filter(h => h.currency === 'USD').reduce((a, h) => a + fnum(h.qty), 0);
       const cashRow = `<button class="fh-cash ${cashes.length ? '' : 'empty'}" data-cb="${esc(g.broker)}" data-ca="${esc(g.account)}"><span>예수금</span>${cashes.length ? `<div><b class="money">${won(cashV)}</b>${usdCash ? `<small class="money">${usd(usdCash)}</small>` : ''}</div>` : '<b>+ 예수금 입력</b>'}</button>`;
@@ -2936,6 +2937,7 @@ function renderPortfolio(){
           <div class="fg-r"><b class="money">${won(gt.v)}</b>${stocks.length ? `<span class="pn ${pnCls(gt.pnl)}"><span class="money">${arrow(gt.pnl)} ${won(Math.abs(gt.pnl))}</span> ${pctTxt(gt.pct)}</span>` : ''}</div>
         </header>
         ${stocks.length ? `<div class="fh-wrap"><div class="fh-scroll"><div class="fh-tbl"><div class="fh-head"><span class="fh-hn"><b>종목명</b><i>보유수량</i></span><span><b>평가손익</b><i>수익률(%)</i></span><span><b>평가금액</b><i>매입금액</i></span><span><b>현재가</b><i>평균단가</i></span></div>${stocks.map(holdRow).join('')}</div></div></div>` : ''}
+        ${others.length ? `<div class="fh-rows">${others.map(assetRow).join('')}</div>` : ''}
         ${cashRow}
       </section>`;
     }).join('')}
