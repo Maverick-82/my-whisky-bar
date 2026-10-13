@@ -2104,7 +2104,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.5.1';
+const APP_VERSION = 'v2.5.2';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -6588,7 +6588,8 @@ function renderCult() {
   const row = r => { const K = CU_K[r.kind], meta = [r.creator, r.genre, r.amount ? r.amount.toLocaleString('ko-KR') + K.am : ''].filter(Boolean).map(esc).join(' · '), d = cuDate(r);
     return `<button type="button" class="cu-row" data-cu="edit:${esc(r.id)}">${cuThumb(r)}<span class="cu-m"><b>${esc(r.title)}</b><small><span class="cu-k" style="--k:${K.c}">${K.t}</span>${meta}</small>${r.memo ? `<em>${esc(r.memo)}</em>` : ''}</span><span class="cu-r">${r.status === 'done' ? cuStars(r.rating) : `<span class="cu-badge">${CU_ST[r.status]}</span>`}<small>${r.status === 'want' ? '' : d ? Number(d.slice(5, 7)) + '/' + Number(d.slice(8, 10)) : ''}</small></span></button>`; };
   let body = '';
-  if (open.length) body += `<div class="cu-sec"><b>진행 · 예정</b><span>${open.length}건</span></div><section class="card cu-list">${open.map(row).join('')}</section>`;
+  /* v2.5.2: 전체 보기에서는 진행·예정 목록을 숨기고, 상태 칩(진행 중/예정)을 눌렀을 때만 제목 없이 보여준다 */
+  if (open.length && CU.st !== 'all') body += `<section class="card cu-list" style="margin-top:12px">${open.map(row).join('')}</section>`;
   const byM = {}; fin.forEach(r => { const m = cuDate(r).slice(0, 7) || '날짜 없음'; (byM[m] = byM[m] || []).push(r); });
   Object.keys(byM).sort().reverse().forEach(m => { body += `<div class="cu-sec"><b>${monthLabel2(m)}</b><span>${byM[m].length}건</span></div><section class="card cu-list">${byM[m].map(row).join('')}</section>`; });
   if (!list.length) body = `<div class="lf-empty">${all.length ? '조건에 맞는 기록이 없어요.' : '읽은 책이나 본 영화를 하나씩 남겨 보세요.<br>별점과 한줄평까지 적어두면 나중에 다시 꺼내 보기 좋아요.'}<br><button type="button" class="btn primary" data-cu="new">+ 첫 기록 추가</button></div>`;
