@@ -1724,6 +1724,60 @@ body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!importan
   .hm-k:nth-child(n+3)::after{content:"";position:absolute;top:0;left:16px;right:16px;height:1px;background:var(--line)}
 }
 }
+
+/* ===== v2.9.1 홈 디자인 : 컬러 · 그라데이션 ===== */
+#homeView .hm-hello{align-items:center;margin:2px 2px 18px}
+#homeView .hm-hello h2{background:linear-gradient(90deg,var(--lg1),var(--lg2) 55%,var(--lg3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-size:38px;font-weight:800;letter-spacing:-.05em}
+#homeView .hm-hello h2::after{width:44px;background:linear-gradient(90deg,var(--lg1),var(--lg3))}
+.hm-greet{font-size:12.5px;font-weight:800;color:var(--ink2);padding:8px 14px;border-radius:999px;background:linear-gradient(120deg,color-mix(in srgb,var(--lg1) 16%,var(--card)),color-mix(in srgb,var(--lg3) 16%,var(--card)));border:1px solid color-mix(in srgb,var(--lg2) 24%,var(--line));white-space:nowrap}
+/* 시세 띠 */
+#homeView .mi-strip{background:linear-gradient(115deg,color-mix(in srgb,var(--c-home) 14%,var(--card)),var(--card) 38%,var(--card) 62%,color-mix(in srgb,var(--c-journal) 14%,var(--card)));border-color:color-mix(in srgb,var(--lg2) 20%,var(--line))}
+.mi-c>span{display:flex;align-items:center;gap:6px;color:var(--ink2)}
+.mi-c>span::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--mc);box-shadow:0 0 0 3px color-mix(in srgb,var(--mc) 22%,transparent)}
+.mi-c>small{width:fit-content;padding:2px 9px;border-radius:999px;background:var(--soft)}
+.mi-c>small.up{background:color-mix(in srgb,var(--up) 14%,transparent)}.mi-c>small.down{background:color-mix(in srgb,var(--down) 15%,transparent)}
+/* 핵심 숫자 4타일 */
+#homeView .hm-kpi{background:none;border:0;box-shadow:none;padding:0;gap:12px;grid-template-columns:1.3fr 1fr 1fr 1fr;margin-bottom:14px}
+#homeView .hm-k{--kc:var(--c-home);border-radius:24px;padding:18px 18px 16px;gap:8px;overflow:hidden;border:1px solid color-mix(in srgb,var(--kc) 26%,var(--line));box-shadow:var(--shadow);background:radial-gradient(110% 90% at 100% 0%,color-mix(in srgb,var(--kc) 26%,transparent),transparent 60%),linear-gradient(160deg,color-mix(in srgb,var(--kc) 11%,var(--card)),var(--card) 70%);transition:transform .15s,box-shadow .15s}
+#homeView .hm-k:hover{transform:translateY(-3px);box-shadow:0 16px 34px color-mix(in srgb,var(--kc) 24%,transparent)}
+#homeView .hm-k::before,#homeView .hm-k::after{display:none!important}
+#homeView .hm-k:nth-child(2){--kc:var(--c-life)}#homeView .hm-k:nth-child(3){--kc:var(--c-ld)}#homeView .hm-k:nth-child(4){--kc:var(--c-pf)}
+#homeView .hm-k>span{display:flex;align-items:center;gap:8px;color:var(--ink2);font-weight:800}
+.hm-ki,.hm-ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:10px;color:#fff;background:linear-gradient(135deg,var(--kc,var(--tc)),color-mix(in srgb,var(--kc,var(--tc)) 55%,#8a5cf6));box-shadow:0 6px 14px color-mix(in srgb,var(--kc,var(--tc)) 38%,transparent)}
+.hm-ki svg,.hm-ic svg{width:16px;height:16px}
+#homeView .hm-k>b{font-size:clamp(20px,2.2vw,27px)}
+#homeView .hm-k:nth-child(1){background:linear-gradient(135deg,var(--lg1),var(--lg2) 62%,var(--lg3));border-color:transparent;box-shadow:0 18px 38px color-mix(in srgb,var(--lg2) 34%,transparent)}
+#homeView .hm-k:nth-child(1) .hm-ki{background:rgba(255,255,255,.24);box-shadow:none}
+#homeView .hm-k:nth-child(1)>span,#homeView .hm-k:nth-child(1)>b,#homeView .hm-k:nth-child(1)>small,#homeView .hm-k:nth-child(1)>small b{color:#fff}
+#homeView .hm-k:nth-child(1)>small{opacity:.95}
+#homeView .hm-k:nth-child(1)>small i{padding:1px 8px;border-radius:999px;background:rgba(255,255,255,.22);color:#fff}
+/* 카드 */
+#homeView .hm-grid{gap:16px}
+#homeView .hm-card{position:relative;overflow:hidden;border-radius:26px;padding:20px 22px;border:1px solid color-mix(in srgb,var(--tc) 28%,var(--line));box-shadow:var(--shadow);background:radial-gradient(120% 80% at 100% 0%,color-mix(in srgb,var(--tc) 20%,transparent),transparent 58%),linear-gradient(165deg,color-mix(in srgb,var(--tc) 10%,var(--card)),var(--card) 62%)}
+#homeView .hm-card::before{content:"";position:absolute;left:22px;top:0;width:46px;height:4px;border-radius:0 0 8px 8px;background:linear-gradient(90deg,var(--tc),color-mix(in srgb,var(--tc) 50%,#fff))}
+#homeView .hm-card[data-go]:hover{transform:translateY(-4px);box-shadow:0 20px 40px color-mix(in srgb,var(--tc) 24%,transparent);border-color:color-mix(in srgb,var(--tc) 55%,var(--line))}
+#homeView .hm-t{font-size:14.5px;letter-spacing:-.02em}
+#homeView .hm-t>span::before{display:none}
+#homeView .hm-t>span{gap:10px}
+#homeView .hm-t em{padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--tc) 13%,transparent);color:color-mix(in srgb,var(--tc) 70%,var(--ink2));font-weight:800}
+#homeView .hm-big{font-size:38px;font-weight:800;background:linear-gradient(90deg,var(--tc),color-mix(in srgb,var(--tc) 45%,#8a5cf6));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+#homeView .hm-big small{-webkit-text-fill-color:var(--ink3);font-size:15px}
+#homeView .hm-li{border-bottom:1px solid color-mix(in srgb,var(--tc) 12%,var(--line));padding:9px 0}
+#homeView .hm-li:last-child{border-bottom:0}
+#homeView .gl-cat{background:color-mix(in srgb,var(--tc) 14%,transparent);color:color-mix(in srgb,var(--tc) 72%,var(--ink));border-color:transparent;font-weight:800}
+#homeView .hm-li .dd{border:0;background:color-mix(in srgb,var(--tc) 12%,var(--soft));color:color-mix(in srgb,var(--tc) 68%,var(--ink2))}
+#homeView .hm-li .dd.tdy{background:var(--tc);color:#fff}
+#homeView .hm-li .dd.od{background:color-mix(in srgb,var(--up) 14%,transparent);color:var(--up)}
+#homeView .hb-chip{border-color:color-mix(in srgb,var(--tc) 30%,var(--line));background:color-mix(in srgb,var(--tc) 6%,var(--card))}
+#homeView .hb-chip.on{background:linear-gradient(135deg,color-mix(in srgb,var(--tc) 24%,var(--card)),color-mix(in srgb,var(--tc) 10%,var(--card)));border-color:var(--tc)}
+#homeView .hm-pg{height:9px;background:color-mix(in srgb,var(--tc) 12%,var(--soft))}
+#homeView .hm-pg i{box-shadow:0 2px 8px color-mix(in srgb,var(--tc) 30%,transparent)}
+#homeView .hm-shelf img{box-shadow:0 6px 14px rgba(40,30,90,.18);border-radius:8px}
+#homeView .hm-stack{display:flex;gap:3px;height:12px;border-radius:8px;overflow:hidden;margin:4px 0 2px}#homeView .hm-stack i{display:block;border-radius:4px}
+.hm-lg{display:inline-flex;align-items:center;gap:6px;margin-right:14px}.hm-lg i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.mi-row{align-items:start}
+@media (max-width:860px){#homeView .hm-kpi{grid-template-columns:1fr 1fr}#homeView .hm-k:nth-child(1),#homeView .hm-k:nth-child(4){grid-column:1/-1}.hm-greet{display:none}}
+@media (max-width:640px){#homeView .hm-hello h2{font-size:34px}#homeView .hm-big{font-size:34px}}
 </style>
 <script>
 (function(){
@@ -2156,7 +2210,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.9.0';
+const APP_VERSION = 'v2.9.1';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -6940,8 +6994,24 @@ function renderHomeTab() {
   if (!LIFE.loaded) lifeReady().then(() => { if (S.tab === 'home') renderHome(); });
   if (!MKT.loaded) mktReady().then(() => { if (S.tab === 'home') renderHome(); });
 }
+const HM_IC = {
+  sched: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  mkt: '<rect x="4.5" y="8" width="4" height="8" rx="1"/><path d="M6.5 4.5V8M6.5 16v3.5"/><rect x="15.5" y="6" width="4" height="9" rx="1"/><path d="M17.5 3v3M17.5 15v4"/>',
+  todo: '<rect x="4" y="4" width="16" height="16" rx="4.5"/><path d="m8.5 12.3 2.4 2.4 4.6-5"/>',
+  bar: '<path d="M7.5 4h9l-.9 7.2a3.6 3.6 0 0 1-7.2 0z"/><path d="M12 14.8V19M8.5 20h7"/>',
+  habit: '<path d="M12 3.2c.7 3.2-3.2 4.9-3.2 8.8a3.9 3.9 0 0 0 7.8 0c0-1.8-.9-3-1.9-4.1-.2 1.3-.8 1.9-1.6 2 .7-2.6.2-4.9-1.1-6.7z"/>',
+  goal: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".9"/>',
+  cult: '<path d="M4 6.2c0-.7.5-1.2 1.2-1.2H11v14H5.5A1.5 1.5 0 0 1 4 17.5z"/><path d="M20 6.2c0-.7-.5-1.2-1.2-1.2H13v14h5.5a1.5 1.5 0 0 0 1.5-1.5z"/>',
+  portfolio: '<path d="M3 17l5.5-5.5 4 4L21 7"/><path d="M15 7h6v6"/>',
+  ledger: '<rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10.5h18"/><circle cx="16.5" cy="14.8" r="1.1"/>',
+  div: '<circle cx="12" cy="12" r="8.5"/><path d="M8 9.5l1.6 5.2 2.4-5.2 2.4 5.2L16 9.5"/><path d="M8.2 12.4h7.6"/>',
+  health: '<path d="M12 20.5s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.9c0 5.6-7.5 10-7.5 10z"/>'
+};
+const hmIco = (k, c) => `<i class="${c || 'hm-ic'}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${HM_IC[k] || ''}</svg></i>`;
+const HM_KEY = { 'life:goals:todo': 'todo', 'life:goals:habit': 'habit', 'life:goals:goal': 'goal', 'life:health': 'health' };
 function hmCard(go, tc, title, extra, inner, cls) {
-  return `<section class="card hm-card ${cls || ''}" ${go ? `data-go="${go}"` : ''} style="--tc:${tc}"><div class="hm-t"><span>${title}</span>${extra ? `<em>${extra}</em>` : ''}</div>${inner}</section>`;
+  const ik = HM_KEY[go] || go;
+  return `<section class="card hm-card ${cls || ''}" ${go ? `data-go="${go}"` : ''} style="--tc:${tc}"><div class="hm-t"><span>${HM_IC[ik] ? hmIco(ik) : ''}${title}</span>${extra ? `<em>${extra}</em>` : ''}</div>${inner}</section>`;
 }
 function renderHome() {
   const el = $('#homeView'); if (!el) return;
@@ -6949,7 +7019,7 @@ function renderHome() {
   const wait = '<div class="hm-empty">불러오는 중…</div>';
 
   /* 핵심 숫자 4개 — 자산 · 지출 · 배당 · 체중 */
-  const KP = (go, label, big, sub) => `<button type="button" class="hm-k" data-go="${go}"><span>${label}</span><b>${big}</b><small>${sub}</small></button>`;
+  const KP = (go, label, big, sub) => `<button type="button" class="hm-k" data-go="${go}"><span>${hmIco(HM_KEY[go] || go, 'hm-ki')}${label}</span><b>${big}</b><small>${sub}</small></button>`;
   const kLoad = (go, label) => KP(go, label, '…', '불러오는 중');
   let kA = kLoad('portfolio', '총 자산'), kB = kLoad('ledger', '이번 달 지출'), kC = kLoad('div', '연 예상 배당'), kD = kLoad('life:health', '체중');
   if (FIN.loaded) {
@@ -6987,7 +7057,7 @@ function renderHome() {
   let goals = wait;
   if (LIFE.loaded) {
     const act = LIFE.goals.filter(g => !g.done).sort((a, b) => (a.due_date || '9999') < (b.due_date || '9999') ? -1 : 1).slice(0, 3);
-    goals = act.length ? act.map(g => { const p = goalProg(g); return `<div style="margin-bottom:10px"><div class="hm-li" style="border:0;padding:0 0 5px"><span class="tx"><b>${esc(g.title)}</b></span><span class="rt">${p.pct == null ? '-' : Math.round(p.pct * 100) + '%'}</span></div><div class="hm-pg"><i style="width:${p.pct == null ? 0 : Math.round(p.pct * 100)}%;background:var(--c-life)"></i></div></div>`; }).join('') : '<div class="hm-empty">Health 탭에서 올해 목표를 적어 보세요.</div>';
+    goals = act.length ? act.map(g => { const p = goalProg(g); return `<div style="margin-bottom:10px"><div class="hm-li" style="border:0;padding:0 0 5px"><span class="tx"><b>${esc(g.title)}</b></span><span class="rt">${p.pct == null ? '-' : Math.round(p.pct * 100) + '%'}</span></div><div class="hm-pg"><i style="width:${p.pct == null ? 0 : Math.round(p.pct * 100)}%;background:linear-gradient(90deg,var(--c-journal),var(--c-goal))"></i></div></div>`; }).join('') : '<div class="hm-empty">Health 탭에서 올해 목표를 적어 보세요.</div>';
   }
   /* 다가오는 일정 — Schedule 탭에 넣은 일정만 */
   let soon = wait;
@@ -7014,21 +7084,22 @@ function renderHome() {
   }
   /* My Bar */
   const cnt = { '미개봉': 0, '개봉': 0, '소진': 0 }; S.items.forEach(i => { if (cnt[i.status] != null) cnt[i.status]++; });
-  const bar = S.items.length ? `<div class="hm-big">${cnt['미개봉'] + cnt['개봉']}<small>병 보유</small></div><div class="hm-sub">미개봉 <b>${cnt['미개봉']}</b> · 개봉 <b>${cnt['개봉']}</b> · 소진 <b>${cnt['소진']}</b></div>` : wait;
+  const bar = S.items.length ? `<div class="hm-big">${cnt['미개봉'] + cnt['개봉']}<small>병 보유</small></div><div class="hm-stack">${[['미개봉', 'var(--c-bar)'], ['개봉', 'var(--c-pf)'], ['소진', 'var(--line2)']].map(([k, c]) => cnt[k] ? `<i style="flex:${cnt[k]};background:${c}"></i>` : '').join('')}</div><div class="hm-sub"><span class="hm-lg"><i style="background:var(--c-bar)"></i>미개봉 <b>${cnt['미개봉']}</b></span><span class="hm-lg"><i style="background:var(--c-pf)"></i>개봉 <b>${cnt['개봉']}</b></span><span class="hm-lg"><i style="background:var(--line2)"></i>소진 <b>${cnt['소진']}</b></span></div>` : wait;
 
   const H = x => (typeof x === 'string' ? { html: x, extra: '' } : x);
   const hb = H(habits), td = H(todos);
-  el.innerHTML = `<div class="hm-hello"><div><h2>Today</h2><p>${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일</p></div></div>
+  const hr = new Date().getHours(), greet = hr < 5 ? '늦은 시간이에요' : hr < 11 ? '좋은 아침이에요' : hr < 17 ? '좋은 오후예요' : '좋은 저녁이에요';
+  el.innerHTML = `<div class="hm-hello"><div><h2>Today</h2><p>${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일</p></div><span class="hm-greet">${greet}</span></div>
     <section class="card mi-strip" id="miStrip">${miHTML()}</section>
     <section class="card hm-kpi">${kA}${kB}${kC}${kD}</section>
     <div class="hm-grid">
       ${hmCard('sched', 'var(--c-home)', '다가오는 일정', 'Schedule', soon)}
       ${hmCard('mkt', 'var(--c-pf)', '증시 · 공모주', H(mkt).extra || 'IPO', H(mkt).html)}
       ${hmCard('life:goals:todo', 'var(--c-life)', '할 일', td.extra, td.html)}
-      ${hmCard('life:goals:habit', 'var(--c-life)', '오늘의 습관', hb.extra, hb.html)}
+      ${hmCard('life:goals:habit', 'var(--c-ld)', '오늘의 습관', hb.extra, hb.html)}
       ${hmCard('bar', 'var(--c-bar)', 'My Bar', '', bar)}
       ${hmCard('cult', 'var(--c-goal)', '독서 · 영화', 'Books & Film', cult)}
-      ${hmCard('life:goals:goal', 'var(--c-life)', '목표 진행', 'Goals', goals)}
+      ${hmCard('life:goals:goal', 'var(--c-journal)', '목표 진행', 'Goals', goals)}
     </div>
     <details class="hm-rvd" ${store.get('rvOpen', 0) ? 'open' : ''}><summary>${RV.mode === 'month' ? '이번 달 리뷰' : '이번 주 리뷰'}</summary>${rvHTML()}</details>
     ${bkBanner()}
@@ -7465,15 +7536,16 @@ $('#mktView').addEventListener('change', ev => { if (ev.target.id === 'mktAuto')
 
 /* ===== v2.8 홈 상단 시세 (코스피·코스닥·S&P500·나스닥100·비트코인) ===== */
 const MI_LIST = [['US:^KS11', '코스피', 2], ['US:^KQ11', '코스닥', 2], ['US:^GSPC', 'S&P 500', 2], ['US:^NDX', '나스닥 100', 2], ['COIN:KRW-BTC', '비트코인', 0], ['US:KRW=X', '원/달러', 2]];
+const MI_COL = ['#5b9bf5', '#2fbdb4', '#9a86f2', '#ec7db6', '#f39a5a', '#35bd92'];
 const MI = { data: store.get('miCache', null) || {}, at: Number(store.get('miAt', 0)) || 0, loading: false, err: '' };
 const miKrw = p => { const e = Math.floor(p / 1e8), m = Math.round((p % 1e8) / 1e4); return e ? '₩' + e + '억 ' + (m ? m.toLocaleString('ko-KR') + '만' : '') : '₩' + Math.round(p / 1e4).toLocaleString('ko-KR') + '만'; };
 function miHTML() {
-  const cell = ([k, lab, dec]) => {
+  const cell = ([k, lab, dec], i) => {
     const d = MI.data[k];
-    if (!d || !(d.price > 0)) return `<div class="mi-c"><span>${lab}</span><b>-</b><small>${MI.loading ? '불러오는 중' : '시세 없음'}</small></div>`;
+    if (!d || !(d.price > 0)) return `<div class="mi-c" style="--mc:${MI_COL[i]}"><span>${lab}</span><b>-</b><small>${MI.loading ? '불러오는 중' : '시세 없음'}</small></div>`;
     const ch = d.prev > 0 ? (d.price - d.prev) / d.prev * 100 : null, cls = ch == null ? '' : pnCls(ch);
     const v = k.indexOf('COIN:') === 0 ? miKrw(d.price) : d.price.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
-    return `<div class="mi-c"><span>${lab}</span><b>${v}</b><small class="${cls}">${ch == null ? '-' : arrow(ch) + ' ' + Math.abs(ch).toFixed(2) + '%'}</small></div>`;
+    return `<div class="mi-c" style="--mc:${MI_COL[i]}"><span>${lab}</span><b>${v}</b><small class="${cls}">${ch == null ? '-' : arrow(ch) + ' ' + Math.abs(ch).toFixed(2) + '%'}</small></div>`;
   };
   const t = MI.at ? new Date(MI.at) : null, tm = t ? pad2(t.getHours()) + ':' + pad2(t.getMinutes()) : '';
   return `<div class="mi-row">${MI_LIST.map(cell).join('')}</div><div class="mi-foot"><span>${MI.err ? '시세를 못 가져왔어요: ' + esc(MI.err) : tm ? tm + ' 기준 · 지수는 거래소보다 지연될 수 있어요' : ''}</span><button type="button" data-mi="refresh" ${MI.loading ? 'disabled' : ''}>${MI.loading ? '불러오는 중…' : '시세 새로고침'}</button></div>`;
