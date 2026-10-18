@@ -1586,6 +1586,38 @@ body[data-tab="cult"] #btnAdd,body[data-tab="cult"] .fab{display:none!important}
 .cu-stars{display:flex;gap:2px}.cu-stars button{font-size:28px;line-height:1;background:none;border:0;color:var(--line2);cursor:pointer;padding:0 3px}.cu-stars button.on{color:#f0b232}
 .cu-goalb{display:block;height:6px;border-radius:4px;background:var(--soft);margin-top:7px;overflow:hidden}.cu-goalb i{display:block;height:100%;border-radius:4px;background:var(--k)}
 @media (max-width:640px){.cu-row{gap:9px}.cu-m b{font-size:14px}}
+/* ===== Market ===== */
+.tabs button[data-tab="mkt"]{--tc:var(--c-pf)}
+body[data-tab="mkt"] #btnAdd,body[data-tab="mkt"] .fab{display:none!important}
+#mktView .card{border-radius:22px}
+#mktView .fin-sec{margin-top:26px}
+.mk-nav{margin-bottom:6px}
+.mk-f{margin:14px 0 10px;flex-wrap:wrap}
+.mk-auto{display:flex;align-items:center;gap:7px;margin-top:8px;color:var(--ink2);font-weight:700;cursor:pointer}
+.mk-evr .d small{color:var(--ink3);margin-left:2px}
+.mk-sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:16px 18px;margin-bottom:4px}
+.mk-sum div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.mk-sum span{font-size:12px;color:var(--ink3);font-weight:700}
+.mk-sum b{font-size:20px;font-weight:800;letter-spacing:-.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mk-sum b small{font-size:12px;color:var(--ink3);margin-left:2px;font-weight:700}
+.mk-list{padding:6px 10px;margin-bottom:12px}
+.mk-row{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:12px 6px;cursor:pointer;color:inherit;font:inherit}
+.mk-row:first-child{border-top:0}
+.mk-row:hover{background:var(--soft);border-radius:12px}
+.mk-d b{display:block;font-size:14px;color:var(--ink);white-space:nowrap}
+.mk-d small{display:block;font-size:11px;color:var(--ink3);margin-top:2px}
+.mk-m b{display:block;font-size:14.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mk-m small{display:block;font-size:12px;color:var(--ink3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}
+.mk-m em{display:block;font-style:normal;font-size:12px;color:var(--ink2);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mk-r{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.mk-r small{font-size:11.5px;color:var(--ink3);white-space:nowrap}
+.mk-ph{font-style:normal;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap;background:var(--soft);color:var(--ink2)}
+.mk-ph.on{background:color-mix(in srgb,#e6ad34 22%,transparent);color:#b57d0c}
+.mk-ph.pre{background:color-mix(in srgb,var(--c-home) 18%,transparent);color:var(--c-home)}
+.mk-ph.wait{background:color-mix(in srgb,#f0668a 16%,transparent);color:#d04b72}
+.mk-ph.done{opacity:.75}
+#ipMine[hidden],#ipSell[hidden]{display:none}
+@media (max-width:640px){.mk-row{grid-template-columns:82px minmax(0,1fr) auto;gap:8px}.mk-d b{font-size:13px}.mk-sum b{font-size:17px}}
 /* ===== Schedule ===== */
 .tabs button[data-tab="sched"]{--tc:var(--c-home)}
 body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!important}
@@ -1735,6 +1767,7 @@ body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!importan
     <button data-tab="portfolio" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M3 17l5.5-5.5 4 4L21 7"/><path d="M15 7h6v6"/></svg>Portfolio</button>
     <button data-tab="ledger" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10.5h18"/><circle cx="16.5" cy="14.8" r="1.1"/></svg>Ledger</button>
     <button data-tab="div" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8 9.5l1.6 5.2 2.4-5.2 2.4 5.2L16 9.5"/><path d="M8.2 12.4h7.6"/></svg>Dividend</button>
+    <button data-tab="mkt" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><rect x="4.5" y="8" width="4" height="8" rx="1"/><path d="M6.5 4.5V8M6.5 16v3.5"/><rect x="15.5" y="6" width="4" height="9" rx="1"/><path d="M17.5 3v3M17.5 15v4"/></svg>Market</button>
     <button data-tab="life" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.9c0 5.6-7.5 10-7.5 10z"/><path d="M7.5 12.5h2.6l1.4-2.4 2 4 1.2-1.6h1.8"/></svg>Health</button>
     <button data-tab="cult" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M4 6.2c0-.7.5-1.2 1.2-1.2H11v14H5.5A1.5 1.5 0 0 1 4 17.5z"/><path d="M20 6.2c0-.7-.5-1.2-1.2-1.2H13v14h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>Books &amp; Film</button>
     <button data-tab="sched" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>Schedule</button>
@@ -1790,6 +1823,7 @@ body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!importan
   <div id="divView" hidden></div>
   <div id="cultView" hidden></div>
   <div id="schedView" hidden></div>
+  <div id="mktView" hidden></div>
   <div id="soonView" hidden></div>
 </div>
 
@@ -2105,7 +2139,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.6.2';
+const APP_VERSION = 'v2.7.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -3938,7 +3972,7 @@ document.addEventListener('click', ev => {
 
 /* ---------- 탭 전환 ---------- */
 const SOON_LABEL = {};
-const TAB_GRP = { home:'h', bar:'w', yt:'w', goal:'w', journal:'w', wdb:'w', portfolio:'m', ledger:'m', cal:'m', div:'m', life:'m', cult:'m', sched:'m' };
+const TAB_GRP = { home:'h', bar:'w', yt:'w', goal:'w', journal:'w', wdb:'w', portfolio:'m', ledger:'m', cal:'m', div:'m', life:'m', cult:'m', sched:'m', mkt:'m' };
 const GRP_LAST = { h:'home', w:'bar', m:'portfolio' };
 function switchTab(tab){
   S.tab = tab;
@@ -3960,6 +3994,7 @@ function switchTab(tab){
   $('#divView').hidden = tab !== 'div';
   $('#cultView').hidden = tab !== 'cult';
   $('#schedView').hidden = tab !== 'sched';
+  $('#mktView').hidden = tab !== 'mkt';
   $('#soonView').hidden = !(tab in SOON_LABEL);
   document.body.dataset.tab = tab;
   if (tab === 'home') renderHomeTab();
@@ -3970,6 +4005,7 @@ function switchTab(tab){
   else if (tab === 'div') renderDivTab();
   else if (tab === 'cult') renderCultTab();
   else if (tab === 'sched') renderSchedTab();
+  else if (tab === 'mkt') renderMktTab();
   else if (tab === 'wdb') renderWdbTab();
   else if (tab === 'dist') renderDistTab();
   else if (tab === 'goal') renderGoalTab();
@@ -6884,6 +6920,7 @@ function renderHomeTab() {
   renderHome();
   if (!FIN.loaded) finReady().then(() => { if (S.tab === 'home') renderHome(); });
   if (!LIFE.loaded) lifeReady().then(() => { if (S.tab === 'home') renderHome(); });
+  if (!MKT.loaded) mktReady().then(() => { if (S.tab === 'home') renderHome(); });
 }
 function hmCard(go, tc, title, extra, inner, cls) {
   return `<section class="card hm-card ${cls || ''}" ${go ? `data-go="${go}"` : ''} style="--tc:${tc}"><div class="hm-t"><span>${title}</span>${extra ? `<em>${extra}</em>` : ''}</div>${inner}</section>`;
@@ -6940,6 +6977,12 @@ function renderHome() {
     const it = scUpcoming(t, 30);
     soon = it.length ? `<div class="hm-list">${it.slice(0, 5).map(o => { const n = lfDiff(o.d, t), r = o.r; return `<div class="hm-li"><span class="gl-cat" style="margin:0">${esc(r.category)}</span><span class="tx">${r.start_time ? esc(String(r.start_time).slice(0, 5)) + ' ' : ''}${esc(r.title)}</span><span class="dd ${n === 0 ? 'tdy' : ''}">${lfDday(o.d)}</span><span class="rt">${lfMD(o.d)}</span></div>`; }).join('')}</div>${it.length > 5 ? `<div class="hm-sub">외 ${it.length - 5}건</div>` : ''}` : `<div class="hm-empty">${(LIFE.schedule || []).length ? '앞으로 30일 안에 일정이 없어요.' : 'Schedule 탭에서 일정을 추가해 보세요.'}</div>`;
   }
+  /* 증시 · 공모주 */
+  let mkt = wait;
+  if (MKT.loaded) {
+    const it = mktSoon(t, 7), on = MKT.ipos.filter(r => ipoPhase(r, t).k === 'on');
+    mkt = { extra: on.length ? `청약 중 ${on.length}` : '', html: (on.length || it.length) ? `<div class="hm-list">${on.slice(0, 2).map(r => `<div class="hm-li"><span class="gl-cat" style="margin:0">공모주</span><span class="tx">${esc(r.name)} 청약 ${ipoPhase(r, t).t === '오늘 청약 마감' ? '오늘 마감' : '중'}</span><span class="dd tdy">~${esc(lfMD(r.sub_end || r.sub_start))}</span></div>`).join('')}${it.filter(o => !(o.ipo && on.some(r => 'ipo:' + r.id === o.ref))).slice(0, 5 - Math.min(2, on.length)).map(o => { const n = lfDiff(o.d, t); return `<div class="hm-li"><span class="gl-cat" style="margin:0">${esc(o.tag)}</span><span class="tx">${esc(o.title)}</span><span class="dd ${n === 0 ? 'tdy' : ''}">${lfDday(o.d)}</span><span class="rt">${lfMD(o.d)}</span></div>`; }).join('')}</div>` : '<div class="hm-empty">앞으로 7일 안에 등록된 증시 일정이 없어요.</div>' };
+  }
   /* 독서 · 영화 */
   let cult = wait;
   if (LIFE.loaded) {
@@ -6962,6 +7005,7 @@ function renderHome() {
     <section class="card hm-kpi">${kA}${kB}${kC}${kD}</section>
     <div class="hm-grid">
       ${hmCard('sched', 'var(--c-home)', '다가오는 일정', 'Schedule', soon)}
+      ${hmCard('mkt', 'var(--c-pf)', '증시 · 공모주', H(mkt).extra || 'Market', H(mkt).html)}
       ${hmCard('life:goals:todo', 'var(--c-life)', '할 일', td.extra, td.html)}
       ${hmCard('life:goals:habit', 'var(--c-life)', '오늘의 습관', hb.extra, hb.html)}
       ${hmCard('bar', 'var(--c-bar)', 'My Bar', '', bar)}
@@ -6973,7 +7017,7 @@ function renderHome() {
 }
 /* ===== 백업 / 복원 ===== */
 const BK_TABLES = [
-  ['fin_holdings', 'id'], ['fin_ledger', 'id'], ['fin_snapshots', 'snap_date'], ['fin_meta', 'key'], ['fin_merchant_rules', 'merchant_key'], ['fin_subs', 'id'], ['fin_events', 'id'],
+  ['fin_holdings', 'id'], ['fin_ledger', 'id'], ['fin_snapshots', 'snap_date'], ['fin_meta', 'key'], ['fin_merchant_rules', 'merchant_key'], ['fin_subs', 'id'], ['fin_events', 'id'], ['market_events', 'id'], ['ipo_list', 'id'],
   ['health_body', 'id'], ['health_workout', 'id'], ['health_sleep', 'id'], ['health_checkup', 'id'], ['health_exam', 'id'], ['health_drink', 'id'],
   ['life_meta', 'user_id,key'], ['life_goals', 'id'], ['life_habits', 'id'], ['life_habit_logs', 'habit_id,log_date'], ['life_todos', 'id'], ['life_culture', 'id'], ['life_schedule', 'id'],
   ['whisky_my_bar', 'id'], ['whisky_journal', 'id'], ['whisky_yt_channels', 'id'], ['whisky_yt_videos', 'id'],
@@ -7141,6 +7185,237 @@ $('#homeView').addEventListener('click', e => {
     switchTab(p[0]);
   }
 });
+
+/* ===== v2.7 Market · 증시일정 + 공모주 ===== */
+const MKT = { loaded: false, loading: false, events: [], ipos: [], ym: today().slice(0, 7), sub: store.get('mkSub', 'cal'), ipoF: 'open', auto: store.get('mkAuto', 1) };
+const MKT_KIND = {
+  macro: { t: '지표·FOMC', k: '#4f8fe6' }, earn: { t: '실적발표', k: '#9a86f2' }, divx: { t: '배당락·권리', k: '#f2a45e' },
+  exp: { t: '만기일', k: '#e5566d' }, hol: { t: '휴장', k: '#8a8f98' }, etc: { t: '기타', k: '#35bd92' }
+};
+const MKT_IPO_COL = { sub: '#e6ad34', refund: '#4fb3d9', list: '#f0668a' };
+const MKT_MARKET = { KR: '국내', US: '미국', GL: '기타' };
+const IPO_MKT = ['코스닥', '코스피', '스팩', '기타'];
+const IPO_ST = { watch: '관심', applied: '청약함', won: '배정받음', nowin: '미배정', sold: '매도 완료', skip: '패스' };
+const pad2 = n => String(n).padStart(2, '0');
+const mktDs = (y, m, d) => y + '-' + pad2(m) + '-' + pad2(d);
+function nthDow(y, m, dow, n) { const f = new Date(y, m - 1, 1).getDay(); return 1 + ((dow - f + 7) % 7) + (n - 1) * 7; }
+function mktReady() { return MKT.loaded ? Promise.resolve() : (MKT._p || (MKT._p = loadMkt().then(() => { MKT._p = null; }, () => { MKT._p = null; }))); }
+async function loadMkt() {
+  if (MKT.loading) return;
+  MKT.loading = true;
+  try {
+    const [a, b] = await Promise.all([
+      sb.from('market_events').select('*').order('ev_date', { ascending: true }),
+      sb.from('ipo_list').select('*').order('sub_start', { ascending: true, nullsFirst: false })
+    ]);
+    if (a.error) throw new Error(a.error.message);
+    if (b.error) throw new Error(b.error.message);
+    MKT.events = a.data || []; MKT.ipos = b.data || []; MKT.loaded = true;
+  } catch (e) { toast('증시 데이터를 불러오지 못했어요: ' + e.message, true); }
+  finally { MKT.loading = false; }
+}
+function renderMktTab() { renderMkt(); if (!MKT.loaded) loadMkt().then(() => { if (MKT.loaded && S.tab === 'mkt') renderMkt(); }); }
+
+/* 한 달치 일정 모으기: 직접 입력 + 공모주 + 규칙 기반(자동) */
+function mktOcc(ym) {
+  const y = Number(ym.slice(0, 4)), m = Number(ym.slice(5)), dim = new Date(y, m, 0).getDate(), out = [];
+  const first = ym + '-01', last = ym + '-' + pad2(dim);
+  MKT.events.forEach(e => {
+    const s = String(e.ev_date).slice(0, 10), en = e.end_date ? String(e.end_date).slice(0, 10) : s;
+    if (en < first || s > last) return;
+    const K = MKT_KIND[e.kind] || MKT_KIND.etc, a = s < first ? first : s, z = en > last ? last : en;
+    for (let d = Number(a.slice(8)); d <= Number(z.slice(8)); d++) out.push({ d: mktDs(y, m, d), title: e.title, k: K.k, tag: K.t, ref: 'ev:' + e.id, sub: MKT_MARKET[e.market] || '', multi: en !== s, memo: e.memo });
+  });
+  MKT.ipos.forEach(r => {
+    const add = (d, lab, col) => { if (d && String(d).slice(0, 7) === ym) out.push({ d: String(d).slice(0, 10), title: r.name + ' ' + lab, k: col, tag: '공모주', ref: 'ipo:' + r.id, ipo: true }); };
+    if (r.sub_start && r.sub_end && r.sub_start !== r.sub_end) { add(r.sub_start, '청약 시작', MKT_IPO_COL.sub); add(r.sub_end, '청약 마감', MKT_IPO_COL.sub); }
+    else add(r.sub_start || r.sub_end, '청약', MKT_IPO_COL.sub);
+    add(r.refund_date, '환불', MKT_IPO_COL.refund);
+    add(r.list_date, '상장', MKT_IPO_COL.list);
+  });
+  if (MKT.auto) {
+    const th = nthDow(y, m, 4, 2), q = m % 3 === 0;
+    out.push({ d: mktDs(y, m, th), title: q ? '선물·옵션 동시만기' : '옵션 만기', k: MKT_KIND.exp.k, tag: '만기일', auto: true });
+    if (q) out.push({ d: mktDs(y, m, nthDow(y, m, 5, 3)), title: '美 쿼드러플 위칭', k: MKT_KIND.exp.k, tag: '만기일', auto: true });
+    if (m === 12) { const w = new Date(y, 11, 31).getDay(); out.push({ d: mktDs(y, 12, w === 6 ? 30 : w === 0 ? 29 : 31), title: '국내 연말 휴장', k: MKT_KIND.hol.k, tag: '휴장', auto: true }); }
+  }
+  out.sort((a, b) => a.d < b.d ? -1 : a.d > b.d ? 1 : (a.auto ? 1 : 0) - (b.auto ? 1 : 0));
+  return out;
+}
+function mktSoon(t, span) {
+  const e = new Date(lfParse(t).getTime() + span * 864e5), tz = e.getFullYear() + '-' + pad2(e.getMonth() + 1) + '-' + pad2(e.getDate());
+  const seen = new Set(), res = [];
+  [t.slice(0, 7), shiftMonth(t.slice(0, 7), 1)].forEach(ym => mktOcc(ym).forEach(o => { if (o.d < t || o.d > tz) return; const key = o.d + o.title + (o.ref || ''); if (seen.has(key)) return; seen.add(key); res.push(o); }));
+  return res;
+}
+function ipoPhase(r, t) {
+  const n = d => lfDiff(d, t);
+  if (r.list_date && t >= r.list_date) return { k: 'done', t: t === String(r.list_date).slice(0, 10) ? '오늘 상장' : '상장 완료' };
+  if (r.sub_start && t < r.sub_start) return { k: 'pre', t: '청약 D-' + n(r.sub_start) };
+  const end = r.sub_end || r.sub_start;
+  if (end && t <= end) return { k: 'on', t: t === end ? '오늘 청약 마감' : '청약 중' };
+  if (r.list_date) return { k: 'wait', t: '상장 D-' + n(r.list_date) };
+  if (!r.sub_start && !r.sub_end) return { k: 'wait', t: '일정 미정' };
+  return { k: 'wait', t: '상장 대기' };
+}
+const ipoMine = r => ['applied', 'won', 'nowin', 'sold'].includes(r.apply_status);
+const ipoPnl = r => (r.apply_status === 'sold' && r.sell_price != null && r.offer_price != null && r.alloc_qty != null) ? (fnum(r.sell_price) - fnum(r.offer_price)) * fnum(r.alloc_qty) : null;
+const mktRange = (a, b) => { if (!a && !b) return '일정 미정'; if (!b || a === b) return lfMD(a || b); return lfMD(a) + '~' + (String(a).slice(5, 7) === String(b).slice(5, 7) ? Number(String(b).slice(8, 10)) : lfMD(b)); };
+
+function mktNav() {
+  return `<div class="fin-chips mk-nav"><button type="button" class="chip ${MKT.sub === 'cal' ? 'on' : ''}" data-mk="sub:cal">증시 일정</button><button type="button" class="chip ${MKT.sub === 'ipo' ? 'on' : ''}" data-mk="sub:ipo">공모주</button></div>`;
+}
+function renderMkt() {
+  const el = $('#mktView'); if (!el) return;
+  const head = `<div class="fin-head dv-h">${mktNav()}<div><h2>Market</h2><p>${MKT.sub === 'cal' ? '증시 일정을 한곳에 모아 봐요' : '공모주 청약부터 매도까지 기록해요'}</p></div><div class="fin-act"><button type="button" class="btn primary" data-mk="${MKT.sub === 'cal' ? 'newev' : 'newipo'}">${MKT.sub === 'cal' ? '+ 일정 추가' : '+ 공모주 추가'}</button></div></div>`;
+  if (!MKT.loaded) { el.innerHTML = head + '<div class="lf-empty">불러오는 중…</div>'; return; }
+  el.innerHTML = head + (MKT.sub === 'cal' ? mktCalHTML() : mktIpoHTML());
+}
+function mktChip(o) {
+  const tag = o.auto ? 'span' : 'button';
+  return `<${tag} ${o.auto ? '' : `type="button" data-mk="${esc(o.ref)}"`} class="ev-chip sc-chip" style="--k:${o.k}" title="${esc(o.title)}"><i></i><b>${esc(o.title)}</b></${tag}>`;
+}
+function mktCalHTML() {
+  const ym = MKT.ym, y = Number(ym.slice(0, 4)), m = Number(ym.slice(5)), first = new Date(y, m - 1, 1).getDay(), dim = new Date(y, m, 0).getDate(), t = today();
+  const occ = mktOcc(ym), byDay = {}; occ.forEach(o => { const d = Number(o.d.slice(8)); (byDay[d] = byDay[d] || []).push(o); });
+  const head = DOW.map((d, i) => `<div class="ev-dow ${i === 0 ? 'su' : i === 6 ? 'sa' : ''}">${d}</div>`).join('');
+  let cells = ''; for (let i = 0; i < first; i++) cells += '<div class="ev-c out"></div>';
+  for (let d = 1; d <= dim; d++) {
+    const ds = mktDs(y, m, d), list = byDay[d] || [], dow = (first + d - 1) % 7;
+    cells += `<div class="ev-c ${ds === t ? 'today' : ''} ${dow === 0 ? 'su' : dow === 6 ? 'sa' : ''}"><span class="ev-n">${d}</span>${list.slice(0, 2).map(mktChip).join('')}${list.length > 2 ? `<small class="ev-more">+${list.length - 2}</small>` : ''}</div>`;
+  }
+  const tail = (first + dim) % 7; if (tail) for (let i = tail; i < 7; i++) cells += '<div class="ev-c out"></div>';
+  const row = o => {
+    const n = lfDiff(o.d, t);
+    return `<${o.auto ? 'div' : 'button type="button"'} class="lf-row ev-row mk-evr" ${o.auto ? '' : `data-mk="${esc(o.ref)}"`}><span class="d"><i class="ev-dot" style="background:${o.k}"></i>${lfMD(o.d)} <small>${DOW[lfParse(o.d).getDay()]}</small></span><span class="m"><b>${esc(o.title)}</b> <small class="dk-src">${esc(o.tag)}${o.sub ? ' · ' + esc(o.sub) : ''}${o.auto ? ' · 자동' : ''}</small>${o.memo ? `<small>${esc(o.memo)}</small>` : ''}</span><span class="r">${n >= 0 && n <= 30 ? `<small class="ev-dd">${n === 0 ? '오늘' : 'D-' + n}</small>` : ''}</span></${o.auto ? 'div' : 'button'}>`;
+  };
+  const soon = mktSoon(t, 14);
+  const soonHTML = soon.length ? `<section class="card lf-list">${soon.slice(0, 8).map(row).join('')}</section>` : '<div class="lf-empty" style="padding:20px">앞으로 2주 안에 등록된 일정이 없어요.</div>';
+  const noUser = !MKT.events.length && !MKT.ipos.length;
+  return `${noUser ? `<div class="lf-empty">직접 입력한 일정이 아직 없어요.<br>FOMC·실적발표·배당락일처럼 챙기고 싶은 날짜를 추가하면 달력에 계속 표시돼요.<br>옵션 만기일·연말 휴장은 규칙으로 자동 표시해요.</div>` : ''}
+    <div class="fin-sec"><h3>앞으로 2주</h3><span>${soon.length}건</span></div>${soonHTML}
+    <div class="ev-nav" style="margin-top:22px"><button type="button" class="btn" data-mk="prev">‹</button><b>${y}년 ${m}월</b><button type="button" class="btn" data-mk="next">›</button>${ym !== t.slice(0, 7) ? '<button type="button" class="btn" data-mk="now">오늘</button>' : ''}</div>
+    <div class="card ev-grid">${head}${cells}</div>
+    <div class="fin-sec"><h3>${m}월 일정</h3><span>${occ.length}건</span></div>
+    <section class="card lf-list">${occ.map(row).join('') || '<div class="lf-empty" style="padding:22px">이번 달 일정이 없어요.</div>'}</section>
+    <div class="lf-note" style="margin:0 2px 26px">자동 표시: 매월 둘째 목요일 옵션 만기, 3·6·9·12월 선물옵션 동시만기·미국 쿼드러플 위칭(셋째 금요일), 12월 연말 휴장. 규칙으로 계산한 날짜라 공휴일 때문에 당겨지는 날은 거래소 공지를 꼭 확인하세요.
+      <label class="mk-auto"><input type="checkbox" id="mktAuto" ${MKT.auto ? 'checked' : ''}> 자동 일정 표시</label></div>`;
+}
+function mktIpoHTML() {
+  const t = today(), F = MKT.ipoF, all = MKT.ipos.map(r => ({ r, p: ipoPhase(r, t) }));
+  const cnt = { open: all.filter(x => x.p.k !== 'done').length, all: all.length, done: all.filter(x => x.p.k === 'done').length, mine: all.filter(x => ipoMine(x.r)).length };
+  let list = all.filter(x => F === 'all' ? true : F === 'done' ? x.p.k === 'done' : F === 'mine' ? ipoMine(x.r) : x.p.k !== 'done');
+  const ord = { on: 0, pre: 1, wait: 2, done: 3 };
+  list.sort((a, b) => a.p.k === 'done' || b.p.k === 'done' ? (ord[a.p.k] - ord[b.p.k]) || String(b.r.list_date || '').localeCompare(String(a.r.list_date || '')) : (ord[a.p.k] - ord[b.p.k]) || String(a.r.sub_start || a.r.list_date || '9').localeCompare(String(b.r.sub_start || b.r.list_date || '9')));
+  const yr = t.slice(0, 4), mine = all.filter(x => ipoMine(x.r) && String(x.r.sub_start || x.r.list_date || x.r.created_at || '').slice(0, 4) === yr);
+  const won_ = mine.filter(x => x.r.apply_status === 'won' || x.r.apply_status === 'sold').length;
+  const sold = mine.filter(x => ipoPnl(x.r) != null), pnl = sold.reduce((s, x) => s + ipoPnl(x.r), 0);
+  const sum = `<section class="card mk-sum"><div><span>${yr}년 청약</span><b>${mine.length}<small>건</small></b></div><div><span>배정</span><b>${won_}<small>건</small></b></div><div><span>매도 손익</span><b class="${pnCls(pnl)} money">${sold.length ? (pnl > 0 ? '+' : pnl < 0 ? '-' : '') + won(Math.abs(pnl)) : '-'}</b></div></section>`;
+  const chips = [['open', '예정·진행'], ['all', '전체'], ['done', '상장 완료'], ['mine', '내 청약']].map(([k, l]) => `<button type="button" class="chip ${F === k ? 'on' : ''}" data-mk="f:${k}">${l} ${cnt[k]}</button>`).join('');
+  const row = x => {
+    const r = x.r, p = x.p, pn = ipoPnl(r);
+    const info = [r.market, r.underwriter, r.offer_price != null ? '공모가 ' + won(r.offer_price) : (r.price_band ? '밴드 ' + r.price_band : ''), r.comp_rate ? '경쟁률 ' + r.comp_rate : ''].filter(Boolean).map(esc).join(' · ');
+    return `<button type="button" class="mk-row" data-mk="ipo:${esc(r.id)}"><span class="mk-d"><b>${esc(mktRange(r.sub_start, r.sub_end))}</b><small>청약${r.list_date ? ' · 상장 ' + lfMD(r.list_date) : ''}</small></span><span class="mk-m"><b>${esc(r.name)}</b><small>${info || '정보 없음'}</small>${r.memo ? `<em>${esc(r.memo)}</em>` : ''}</span><span class="mk-r"><i class="mk-ph ${p.k}">${esc(p.t)}</i><small>${esc(IPO_ST[r.apply_status] || '')}${pn != null ? ` · <b class="${pnCls(pn)} money">${pn > 0 ? '+' : pn < 0 ? '-' : ''}${won(Math.abs(pn))}</b>` : ''}</small></span></button>`;
+  };
+  const empty = !MKT.ipos.length ? `<div class="lf-empty">아직 등록한 공모주가 없어요.<br>청약 일정·공모가는 증권사 공지나 공모주 일정 사이트에서 확인해서 직접 입력하는 방식이에요.<br>입력해 두면 청약·환불·상장일이 달력과 홈에도 같이 떠요.<br><button type="button" class="btn primary" data-mk="newipo">+ 첫 공모주 추가</button></div>` : '';
+  return `${sum}<div class="fin-chips mk-f">${chips}</div>${empty}${MKT.ipos.length ? `<section class="card mk-list">${list.map(row).join('') || '<div class="lf-empty" style="padding:22px">해당하는 공모주가 없어요.</div>'}</section>` : ''}
+    <div class="lf-note" style="margin:0 2px 26px">매도 손익은 (매도가 − 공모가) × 배정수량이고 수수료·세금은 빼지 않았어요.</div>`;
+}
+
+/* ---- 증시 일정 추가/수정 ---- */
+function openMktEvent(e, ds) {
+  const isNew = !e;
+  e = e || { kind: 'macro', title: '', ev_date: ds || today(), end_date: '', market: 'KR', memo: '' };
+  let kind = e.kind || 'etc', mk = e.market || 'KR';
+  const chips = (id, items, cur) => `<div class="lf-chips" id="${id}">${items.map(([k, t]) => `<button type="button" class="chip ${cur === k ? 'on' : ''}" data-k="${k}">${t}</button>`).join('')}</div>`;
+  openFinModal({
+    title: isNew ? '증시 일정 추가' : '증시 일정 수정',
+    html: `${fld('종류', chips('mkKind', Object.entries(MKT_KIND).map(([k, v]) => [k, v.t]), kind))}
+      ${fld('제목', `<input class="in" name="t" value="${esc(e.title)}" placeholder="예: FOMC 금리 발표, 삼성전자 3분기 실적">`)}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${fld('날짜', `<input class="in" type="date" name="d" value="${esc(String(e.ev_date).slice(0, 10))}">`)}${fld('종료일 (선택)', `<input class="in" type="date" name="d2" value="${esc(e.end_date ? String(e.end_date).slice(0, 10) : '')}">`)}</div>
+      ${fld('시장', chips('mkMk', Object.entries(MKT_MARKET), mk))}
+      ${fld('메모 (선택)', `<input class="in" name="memo" value="${esc(e.memo || '')}" placeholder="예: 새벽 3시, 발표 후 기자회견">`)}`,
+    onOpen(b) {
+      const bind = (id, set) => b.querySelector(id).addEventListener('click', ev => { const x = ev.target.closest('[data-k]'); if (!x) return; set(x.dataset.k); b.querySelectorAll(id + ' .chip').forEach(y => y.classList.toggle('on', y === x)); });
+      bind('#mkKind', k => { kind = k; }); bind('#mkMk', k => { mk = k; });
+      setTimeout(() => b.querySelector('[name=t]').focus(), 50);
+    },
+    async onSave(b) {
+      const title = b.querySelector('[name=t]').value.trim(), d = b.querySelector('[name=d]').value, d2 = b.querySelector('[name=d2]').value;
+      if (!title) throw new Error('제목을 입력해 주세요');
+      if (!d) throw new Error('날짜를 선택해 주세요');
+      if (d2 && d2 < d) throw new Error('종료일이 시작일보다 빨라요');
+      const row = { kind, title, ev_date: d, end_date: d2 || null, market: mk, memo: b.querySelector('[name=memo]').value.trim() || null };
+      let data;
+      if (e.id) { const r = await sb.from('market_events').update(row).eq('id', e.id).select().single(); if (r.error) throw new Error(r.error.message); data = r.data; MKT.events = MKT.events.map(x => x.id === e.id ? data : x); }
+      else { const r = await sb.from('market_events').insert(row).select().single(); if (r.error) throw new Error(r.error.message); data = r.data; MKT.events.push(data); }
+      MKT.events.sort((a, b) => String(a.ev_date).localeCompare(String(b.ev_date)));
+      MKT.ym = String(data.ev_date).slice(0, 7);
+      closeFinModal(); renderMkt(); toast('저장했어요');
+    },
+    onDelete: isNew ? null : async () => { const r = await sb.from('market_events').delete().eq('id', e.id); if (r.error) throw new Error(r.error.message); MKT.events = MKT.events.filter(x => x.id !== e.id); closeFinModal(); renderMkt(); toast('삭제했어요'); }
+  });
+}
+
+/* ---- 공모주 추가/수정 ---- */
+function openIpo(r) {
+  const isNew = !r;
+  r = r || { name: '', market: '코스닥', underwriter: '', sub_start: '', sub_end: '', refund_date: '', list_date: '', price_band: '', offer_price: null, comp_rate: '', lockup: '', apply_status: 'watch', apply_qty: null, alloc_qty: null, sell_price: null, memo: '' };
+  let mkt = r.market || '코스닥', st = r.apply_status || 'watch';
+  const chips = (id, items, cur) => `<div class="lf-chips" id="${id}">${items.map(([k, t]) => `<button type="button" class="chip ${cur === k ? 'on' : ''}" data-k="${k}">${t}</button>`).join('')}</div>`;
+  const dv = v => esc(v ? String(v).slice(0, 10) : '');
+  const nv = v => v == null || v === '' ? '' : Number(v).toLocaleString('ko-KR');
+  const two = (a, b) => `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${a}${b}</div>`;
+  openFinModal({
+    title: isNew ? '공모주 추가' : '공모주 수정',
+    html: `${fld('종목명', `<input class="in" name="name" value="${esc(r.name)}" placeholder="예: OO바이오">`)}
+      ${fld('시장', chips('ipMk', IPO_MKT.map(x => [x, x]), mkt))}
+      ${two(fld('청약 시작', `<input class="in" type="date" name="s1" value="${dv(r.sub_start)}">`), fld('청약 마감', `<input class="in" type="date" name="s2" value="${dv(r.sub_end)}">`))}
+      ${two(fld('환불일', `<input class="in" type="date" name="rf" value="${dv(r.refund_date)}">`), fld('상장일', `<input class="in" type="date" name="ld" value="${dv(r.list_date)}">`))}
+      ${two(fld('희망 공모가 밴드', `<input class="in" name="band" value="${esc(r.price_band || '')}" placeholder="예: 8,000~10,000">`), fld('확정 공모가 (원)', `<input class="in" name="op" inputmode="numeric" value="${nv(r.offer_price)}">`))}
+      ${two(fld('주관사', `<input class="in" name="uw" value="${esc(r.underwriter || '')}" placeholder="예: 미래에셋">`), fld('기관 경쟁률', `<input class="in" name="cr" value="${esc(r.comp_rate || '')}" placeholder="예: 1,200:1">`))}
+      ${fld('의무보유확약 · 유통 메모', `<input class="in" name="lock" value="${esc(r.lockup || '')}" placeholder="예: 확약 25%, 유통가능 30%">`)}
+      ${fld('내 상태', chips('ipSt', Object.entries(IPO_ST), st))}
+      <div id="ipMine">${two(fld('청약 수량 (주)', `<input class="in" name="aq" inputmode="numeric" value="${nv(r.apply_qty)}">`), fld('배정 수량 (주)', `<input class="in" name="gq" inputmode="numeric" value="${nv(r.alloc_qty)}">`))}
+      <div id="ipSell">${fld('매도가 (원)', `<input class="in" name="sp" inputmode="numeric" value="${nv(r.sell_price)}">`)}</div></div>
+      ${fld('메모 (선택)', `<input class="in" name="memo" value="${esc(r.memo || '')}">`)}`,
+    onOpen(b) {
+      const sync = () => { b.querySelector('#ipMine').hidden = !['applied', 'won', 'nowin', 'sold'].includes(st); b.querySelector('#ipSell').hidden = st !== 'sold'; };
+      const bind = (id, set) => b.querySelector(id).addEventListener('click', ev => { const x = ev.target.closest('[data-k]'); if (!x) return; set(x.dataset.k); b.querySelectorAll(id + ' .chip').forEach(y => y.classList.toggle('on', y === x)); sync(); });
+      bind('#ipMk', k => { mkt = k; }); bind('#ipSt', k => { st = k; }); sync();
+      b.querySelectorAll('[inputmode=numeric]').forEach(a => a.addEventListener('input', () => { const d = a.value.replace(/[^\d]/g, ''); a.value = d ? Number(d).toLocaleString('ko-KR') : ''; }));
+      setTimeout(() => b.querySelector('[name=name]').focus(), 50);
+    },
+    async onSave(b) {
+      const g = n => b.querySelector('[name=' + n + ']').value.trim(), name = g('name');
+      if (!name) throw new Error('종목명을 입력해 주세요');
+      const s1 = g('s1') || null, s2 = g('s2') || null, rf = g('rf') || null, ld = g('ld') || null;
+      if (s1 && s2 && s2 < s1) throw new Error('청약 마감이 시작일보다 빨라요');
+      if (s2 && ld && ld < s2) throw new Error('상장일이 청약 마감보다 빨라요');
+      const row = { name, market: mkt, underwriter: g('uw') || null, sub_start: s1, sub_end: s2, refund_date: rf, list_date: ld, price_band: g('band') || null, offer_price: lfNum(g('op')), comp_rate: g('cr') || null, lockup: g('lock') || null, apply_status: st, apply_qty: lfNum(g('aq')), alloc_qty: lfNum(g('gq')), sell_price: st === 'sold' ? lfNum(g('sp')) : null, memo: g('memo') || null };
+      if (st === 'sold' && (row.sell_price == null || row.alloc_qty == null || row.offer_price == null)) throw new Error('매도 완료는 공모가·배정수량·매도가를 모두 입력해 주세요');
+      let data;
+      if (r.id) { const q = await sb.from('ipo_list').update(row).eq('id', r.id).select().single(); if (q.error) throw new Error(q.error.message); data = q.data; MKT.ipos = MKT.ipos.map(x => x.id === r.id ? data : x); }
+      else { const q = await sb.from('ipo_list').insert(row).select().single(); if (q.error) throw new Error(q.error.message); data = q.data; MKT.ipos.push(data); }
+      const d0 = data.sub_start || data.list_date; if (d0) MKT.ym = String(d0).slice(0, 7);
+      closeFinModal(); renderMkt(); toast('저장했어요');
+    },
+    onDelete: isNew ? null : async () => { const q = await sb.from('ipo_list').delete().eq('id', r.id); if (q.error) throw new Error(q.error.message); MKT.ipos = MKT.ipos.filter(x => x.id !== r.id); closeFinModal(); renderMkt(); toast('삭제했어요'); }
+  });
+}
+$('#mktView').addEventListener('click', ev => {
+  const x = ev.target.closest('[data-mk]'); if (!x) return; const a = x.dataset.mk;
+  if (a.indexOf('sub:') === 0) { MKT.sub = a.slice(4); store.set('mkSub', MKT.sub); return renderMkt(); }
+  if (a.indexOf('f:') === 0) { MKT.ipoF = a.slice(2); return renderMkt(); }
+  if (a === 'newev') return openMktEvent(null);
+  if (a === 'newipo') return openIpo(null);
+  if (a === 'prev') { MKT.ym = shiftMonth(MKT.ym, -1); return renderMkt(); }
+  if (a === 'next') { MKT.ym = shiftMonth(MKT.ym, 1); return renderMkt(); }
+  if (a === 'now') { MKT.ym = today().slice(0, 7); return renderMkt(); }
+  if (a.indexOf('ev:') === 0) { const e = MKT.events.find(y => y.id === a.slice(3)); if (e) openMktEvent(e); return; }
+  if (a.indexOf('ipo:') === 0) { const r = MKT.ipos.find(y => y.id === a.slice(4)); if (r) openIpo(r); }
+});
+$('#mktView').addEventListener('change', ev => { if (ev.target.id === 'mktAuto') { MKT.auto = ev.target.checked ? 1 : 0; store.set('mkAuto', MKT.auto); renderMkt(); } });
 
 /* ===== 로그인 ===== */
 const AUTH = { mode: 'in', recover: /type=recovery/.test(location.hash), busy: false };
