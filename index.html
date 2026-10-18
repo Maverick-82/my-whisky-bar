@@ -1725,7 +1725,7 @@ body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!importan
 }
 }
 
-/* ===== v2.9.1 홈 디자인 : 컬러 · 그라데이션 ===== */
+/* ===== v2.9.2 홈 디자인 : 컬러 · 그라데이션 ===== */
 #homeView .hm-hello{align-items:center;margin:2px 2px 18px}
 #homeView .hm-hello h2{background:linear-gradient(90deg,var(--lg1),var(--lg2) 55%,var(--lg3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-size:38px;font-weight:800;letter-spacing:-.05em}
 #homeView .hm-hello h2::after{width:44px;background:linear-gradient(90deg,var(--lg1),var(--lg3))}
@@ -1746,11 +1746,9 @@ body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!importan
 .hm-ki,.hm-ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:10px;color:#fff;background:linear-gradient(135deg,var(--kc,var(--tc)),color-mix(in srgb,var(--kc,var(--tc)) 55%,#8a5cf6));box-shadow:0 6px 14px color-mix(in srgb,var(--kc,var(--tc)) 38%,transparent)}
 .hm-ki svg,.hm-ic svg{width:16px;height:16px}
 #homeView .hm-k>b{font-size:clamp(20px,2.2vw,27px)}
-#homeView .hm-k:nth-child(1){background:linear-gradient(135deg,var(--lg1),var(--lg2) 62%,var(--lg3));border-color:transparent;box-shadow:0 18px 38px color-mix(in srgb,var(--lg2) 34%,transparent)}
-#homeView .hm-k:nth-child(1) .hm-ki{background:rgba(255,255,255,.24);box-shadow:none}
-#homeView .hm-k:nth-child(1)>span,#homeView .hm-k:nth-child(1)>b,#homeView .hm-k:nth-child(1)>small,#homeView .hm-k:nth-child(1)>small b{color:#fff}
-#homeView .hm-k:nth-child(1)>small{opacity:.95}
-#homeView .hm-k:nth-child(1)>small i{padding:1px 8px;border-radius:999px;background:rgba(255,255,255,.22);color:#fff}
+#homeView .hm-k:nth-child(1){--kc:var(--lg1);background:radial-gradient(120% 100% at 100% 0%,color-mix(in srgb,var(--lg1) 22%,transparent),transparent 62%),linear-gradient(160deg,color-mix(in srgb,var(--lg1) 12%,var(--card)),color-mix(in srgb,var(--lg2) 8%,var(--card)) 80%);border-color:color-mix(in srgb,var(--lg1) 28%,var(--line));box-shadow:var(--shadow)}
+#homeView .hm-k:nth-child(1)>b{color:var(--ink)}
+#homeView .hm-k:nth-child(1)>small i{padding:1px 8px;border-radius:999px;background:color-mix(in srgb,var(--lg1) 14%,var(--card));font-weight:800}
 /* 카드 */
 #homeView .hm-grid{gap:16px}
 #homeView .hm-card{position:relative;overflow:hidden;border-radius:26px;padding:20px 22px;border:1px solid color-mix(in srgb,var(--tc) 28%,var(--line));box-shadow:var(--shadow);background:radial-gradient(120% 80% at 100% 0%,color-mix(in srgb,var(--tc) 20%,transparent),transparent 58%),linear-gradient(165deg,color-mix(in srgb,var(--tc) 10%,var(--card)),var(--card) 62%)}
@@ -2210,7 +2208,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.9.1';
+const APP_VERSION = 'v2.9.2';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
