@@ -2208,7 +2208,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.9.2';
+const APP_VERSION = 'v2.9.3';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -2837,7 +2837,8 @@ function formData(){
   let price = String(F.price.value).replace(/[^\d.]/g,'');
   price = price === '' ? '' : Number(price);
   if (price !== '' && currency === 'USD') price = Math.round(price * S.rate);
-  const img = pendingImg ? (pendingImg.type === 'clear' ? '' : pendingImg.value) : (editing ? editing.image : '');
+  /* v2.9.3: 폼 미리보기에 보이는 사진(같은 이름의 기존 병 사진 포함)을 그대로 저장 */
+  const img = pendingImg ? (pendingImg.type === 'clear' ? '' : pendingImg.value) : ((editing && editing.image) || currentImage());
   return {
     name: F.name.value.trim(), category: F.category.value, style: F.style.value.trim(),
     volume: String(F.volume.value).replace(/[^\d]/g,''), abv: String(F.abv.value).trim(), age: String(F.age.value).trim(),
