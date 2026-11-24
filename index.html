@@ -2343,7 +2343,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.11.0';
+const APP_VERSION = 'v2.11.1';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -7976,10 +7976,9 @@ const SJ = (function () {
     if (YANGIN[dS] !== undefined) { r = find([YANGIN[dS]]); if (r.length) out.push({ n: '양인살', pos: r, desc: '강한 추진력과 날카로움의 별' }); }
     const xun = Math.floor(dayIdx60 / 10), g1 = mod(10 - 2 * xun, 12), g2 = (g1 + 1) % 12;
     r = find([g1, g2]); if (r.length) out.push({ n: '공망', pos: r, desc: '비어 있는 자리 (' + BRANCH[g1] + BRANCH[g2] + ' 공망)' });
-    const gg = [16, 46, 28, 58];
-    const ps = [pil.year, pil.month, pil.day, pil.hour], gl = ['년주', '월주', '일주', '시주'];
-    const gr = []; for (let i = 0; i < n; i++) if (gg.includes(idx60(ps[i].s, ps[i].b))) gr.push(gl[i]);
-    if (gr.length) out.push({ n: '괴강살', pos: gr, desc: '강렬하고 극단적인 기운의 별' });
+    const gg = [16, 46, 28, 58, 34]; /* 경진·경술·임진·임술·무술 — 일주 기준, 무술 포함 여부는 학파마다 다름 */
+    const gr = []; if (gg.includes(idx60(pil.day.s, pil.day.b))) gr.push('일주');
+    if (gr.length) out.push({ n: '괴강살', pos: gr, desc: '강렬하고 극단적인 기운의 별 (일주 기준)' });
     return { list: out, gongmang: [g1, g2] };
   }
 
@@ -8225,6 +8224,7 @@ const SJ_TXT = (function () {
     '천간합': '두 기운이 끌려서 하나로 묶이려는 힘이에요. 인연·협력이 생기지만, 일간이 묶이면 본래 성향이 바뀌기도 해요.',
     '천간충': '천간끼리 정면으로 부딪히는 힘이에요. 갈등·변화·결단의 계기가 되기 쉬워요.',
     '육합': '지지끼리 결합하는 힘이에요. 안정적인 관계·협력·인연을 뜻하고, 주변 변화에 잘 흔들리지 않게 해줘요.',
+    '반합': '삼합 세 글자 중 두 글자만 모인 상태예요. 완전한 삼합보다는 약하지만 그 오행의 기운이 일부 모여요.',
     '삼합': '세 지지가 모여 한 오행의 큰 힘을 만드는 구조예요. 그 오행이 사주 전체에서 강해져요.',
     '방합': '같은 계절의 세 지지가 모여 한 방향으로 힘이 쏠리는 구조예요.',
     '충': '지지끼리 부딪히는 힘이에요. 변동·이동·갈등이 생기기 쉽고, 해당 궁(년·월·일·시)에 관련된 일에서 변화가 나타나요.',
