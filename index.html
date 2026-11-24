@@ -1776,6 +1776,101 @@ body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!importan
 .mi-row{align-items:start}
 @media (max-width:860px){#homeView .hm-kpi{grid-template-columns:1fr 1fr}#homeView .hm-k:nth-child(1),#homeView .hm-k:nth-child(4){grid-column:1/-1}.hm-greet{display:none}}
 @media (max-width:640px){#homeView .hm-hello h2{font-size:34px}#homeView .hm-big{font-size:34px}}
+/* ===== 사주 탭 ===== */
+:root{--sj-e0:#2f9e5b;--sj-e1:#e5484d;--sj-e2:#c98a1b;--sj-e3:#7c869b;--sj-e4:#3b7ddd;--sj-g:#8a63d2;--c-saju:#8a63d2}
+:root[data-theme="dark"]{--sj-e0:#4cc582;--sj-e1:#ff7378;--sj-e2:#e8b04a;--sj-e3:#aab3c6;--sj-e4:#6ea8ff;--sj-g:#b69bff;--c-saju:#b69bff}
+.tabs button[data-tab="saju"]{--tc:var(--c-saju)}
+body[data-tab="saju"] #btnAdd,body[data-tab="saju"] .fab{display:none!important}
+#sajuView h5{margin:16px 0 8px;font-size:13px;font-weight:700;color:var(--ink2)}
+#sajuView h5 small{font-weight:500;color:var(--ink3)}
+#sajuView .card{margin-top:12px}
+.sj-chips{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 0}
+.sj-info .sj-i1{display:flex;align-items:center;gap:8px}
+.sj-info .sj-i1 b{font-size:18px}
+.sj-info .sj-i1 span{font-size:12px;color:var(--ink3);background:var(--soft);border-radius:999px;padding:2px 9px}
+.sj-info .sj-edit{margin-left:auto;padding:5px 12px;font-size:12px}
+.sj-i2{margin-top:8px;font-size:14px;color:var(--ink)}
+.sj-i3{margin-top:6px;font-size:12px;color:var(--ink3);line-height:1.6}
+.sj-opt{margin-top:12px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.sj-opt summary{cursor:pointer;padding:11px 14px;font-size:13px;font-weight:600;color:var(--ink2)}
+.sj-optb{padding:0 14px 12px;display:grid;gap:10px;font-size:13px}
+.sj-optb label{display:flex;gap:8px;align-items:center}
+.sj-optb p{margin:0;font-size:12px;color:var(--ink3);line-height:1.6}
+.sj-opt2{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sj-opt2 span{color:var(--ink2)}
+.sj-grid{display:grid;grid-template-columns:44px repeat(4,1fr);gap:6px;align-items:stretch}
+.sj-rows{display:grid;grid-template-rows:26px 22px 62px 62px 22px 44px 22px;gap:6px;font-size:11px;color:var(--ink3);text-align:right;align-items:center}
+.sj-rows>div{white-space:nowrap}
+.sj-col{display:grid;grid-template-rows:26px 22px 62px 62px 22px 44px 22px;gap:6px;text-align:center;align-items:center;min-width:0}
+.sj-col.me .sj-ch{color:var(--sj-g)}
+.sj-ch{font-size:12px;font-weight:700;color:var(--ink2);white-space:nowrap}
+.sj-ss{font-size:12px;color:var(--ink2)}
+.sj-st{font-size:11.5px;color:var(--ink3)}
+.sj-gz{height:62px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid color-mix(in srgb,var(--e) 40%,var(--line));background:color-mix(in srgb,var(--e) 14%,var(--card))}
+.sj-gz b{font-size:26px;line-height:1.1;color:var(--e);font-weight:700}
+.sj-gz small{font-size:10.5px;color:var(--ink2);margin-top:2px}
+.sj-gz.dm{box-shadow:0 0 0 2px var(--sj-g)}
+.sj-hid{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;align-content:center}
+.sj-hid span{font-size:12px;font-weight:600;color:var(--e);background:color-mix(in srgb,var(--e) 14%,var(--card));border-radius:6px;padding:1px 5px}
+.sj-col.unk .sj-q{height:62px;border:1px dashed var(--line2);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:22px}
+.sj-col.unk{grid-template-rows:26px 62px 62px;align-content:start}
+.sj-legend{display:flex;gap:12px;justify-content:center;margin-top:12px;font-size:12px;flex-wrap:wrap}
+.sj-legend span{color:var(--e);font-weight:600}
+.sj-two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.sj-bar{display:grid;grid-template-columns:52px 1fr 64px;gap:8px;align-items:center;margin:7px 0;font-size:12.5px}
+.sj-bl{color:var(--ink2)}
+.sj-bt{height:9px;border-radius:99px;background:var(--soft);overflow:hidden;display:block}
+.sj-bt i{display:block;height:100%;border-radius:99px}
+.sj-bv{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
+.sj-bv small{color:var(--ink3);margin-left:4px}
+.sj-meter{position:relative;height:12px;border-radius:99px;background:var(--soft);overflow:visible;margin-top:12px}
+.sj-meter i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,var(--sj-e4),var(--sj-g),var(--sj-e1))}
+.sj-meter u{position:absolute;top:-3px;bottom:-3px;width:1.5px;background:var(--ink3);opacity:.5}
+.sj-mlab{display:grid;grid-template-columns:30fr 12fr 10fr 13fr 35fr;font-size:11px;color:var(--ink3);margin-top:8px}
+.sj-mlab span{text-align:center;white-space:nowrap}
+.sj-mlab span:first-child{text-align:left}.sj-mlab span:last-child{text-align:right}
+.sj-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sj-tile{background:var(--soft);border-radius:12px;padding:10px 8px;text-align:center;min-width:0}
+.sj-tile small{display:block;font-size:11px;color:var(--ink3)}
+.sj-tile b{display:block;font-size:15px;margin-top:3px;color:var(--ink);white-space:nowrap}
+.sj-tile span{display:block;font-size:10.5px;color:var(--ink3);margin-top:2px}
+.sj-p{margin:10px 0 0;font-size:13px;line-height:1.7;color:var(--ink2)}
+.sj-tags{display:flex;flex-wrap:wrap;gap:6px}
+.sj-tag{font-size:12px;padding:5px 10px;border-radius:999px;background:var(--soft);color:var(--ink2);border:1px solid var(--line)}
+.sj-tag b{color:var(--ink);font-weight:600;margin-right:3px}
+.sj-tag.t-h{border-color:color-mix(in srgb,var(--sj-e0) 50%,var(--line))}
+.sj-tag.t-x{border-color:color-mix(in srgb,var(--sj-e1) 50%,var(--line))}
+.sj-none{font-size:12.5px;color:var(--ink3)}
+.sj-fs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.sj-fc{flex:0 0 74px;scroll-snap-align:start;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:8px 4px;text-align:center;display:flex;flex-direction:column;gap:3px}
+.sj-fc.cur{border-color:var(--sj-g);box-shadow:0 0 0 2px color-mix(in srgb,var(--sj-g) 35%,transparent);background:color-mix(in srgb,var(--sj-g) 10%,var(--card))}
+.sj-fc small{font-size:11px;color:var(--ink3)}
+.sj-fc small.rel{color:var(--sj-e1);font-size:10px;line-height:1.3}
+.sj-fc b{font-size:20px;line-height:1.15;display:flex;flex-direction:column;align-items:center}
+.sj-fc b i{font-style:normal}
+.sj-fc span{font-size:11px;color:var(--ink2)}
+.sj-fc em{font-style:normal;font-size:10.5px;color:var(--ink2)}
+.sj-rs{border-top:1px solid var(--line);padding:2px 0}
+.sj-rs:first-of-type{border-top:0}
+.sj-rs summary{cursor:pointer;padding:11px 0;font-weight:600;font-size:14px}
+.sj-rs p{margin:0 0 10px;font-size:13.5px;line-height:1.75;color:var(--ink2)}
+.fin-sec h3 small{font-size:11px;font-weight:500;color:var(--ink3);margin-left:6px}
+.sj-q2{resize:vertical;margin-top:10px;font-size:14px}
+.sj-aibtn{margin-top:10px;display:flex;gap:8px}
+.sj-md{margin-top:16px;border-top:1px solid var(--line);padding-top:6px}
+.sj-md h4{margin:18px 0 6px;font-size:15px;color:var(--sj-g)}
+.sj-md p,.sj-md li{font-size:13.5px;line-height:1.8;color:var(--ink2);margin:0 0 8px}
+.sj-md ul{margin:0 0 8px;padding-left:20px}
+.sj-chk{display:flex;gap:8px;align-items:center;font-size:13px;margin:0 0 12px;color:var(--ink2)}
+.sj-foot{margin:16px 2px 4px;font-size:11.5px;line-height:1.7;color:var(--ink3)}
+@media(max-width:560px){
+  .sj-grid{grid-template-columns:34px repeat(4,1fr);gap:4px}
+  .sj-rows{font-size:10px}
+  .sj-gz b{font-size:22px}.sj-gz small{font-size:9.5px}
+  .sj-two{grid-template-columns:1fr;gap:4px}
+  .sj-tiles{grid-template-columns:repeat(2,1fr)}
+  .sj-hid span{font-size:11px;padding:1px 4px}
+}
 </style>
 <script>
 (function(){
@@ -1840,6 +1935,7 @@ body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!importan
     <button data-tab="life" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.9c0 5.6-7.5 10-7.5 10z"/><path d="M7.5 12.5h2.6l1.4-2.4 2 4 1.2-1.6h1.8"/></svg>Health</button>
     <button data-tab="cult" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><path d="M4 6.2c0-.7.5-1.2 1.2-1.2H11v14H5.5A1.5 1.5 0 0 1 4 17.5z"/><path d="M20 6.2c0-.7-.5-1.2-1.2-1.2H13v14h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>Books &amp; Film</button>
     <button data-tab="sched" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>Schedule</button>
+    <button data-tab="saju" data-g="m"><svg class="tabi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a4.25 4.25 0 0 1 0 8.5 4.25 4.25 0 0 0 0 8.5"/><circle cx="12" cy="7.75" r=".9"/><circle cx="12" cy="16.25" r=".9"/></svg>사주</button>
   </nav>
 
   <div id="barView" hidden>
@@ -1893,6 +1989,7 @@ body[data-tab="sched"] #btnAdd,body[data-tab="sched"] .fab{display:none!importan
   <div id="cultView" hidden></div>
   <div id="schedView" hidden></div>
   <div id="mktView" hidden></div>
+  <div id="sajuView" hidden></div>
   <div id="soonView" hidden></div>
 </div>
 
@@ -2208,7 +2305,7 @@ const store = {
 };
 
 /* ---------- 버전 / 테마 ---------- */
-const APP_VERSION = 'v2.9.3';
+const APP_VERSION = 'v2.10.0';
 $('#appVersion').textContent = APP_VERSION;
 const ICON_SUN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
 const ICON_MOON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -4042,7 +4139,7 @@ document.addEventListener('click', ev => {
 
 /* ---------- 탭 전환 ---------- */
 const SOON_LABEL = {};
-const TAB_GRP = { home:'h', bar:'w', yt:'w', goal:'w', journal:'w', wdb:'w', portfolio:'m', ledger:'m', cal:'m', div:'m', life:'m', cult:'m', sched:'m', mkt:'m' };
+const TAB_GRP = { home:'h', bar:'w', yt:'w', goal:'w', journal:'w', wdb:'w', portfolio:'m', ledger:'m', cal:'m', div:'m', life:'m', cult:'m', sched:'m', mkt:'m', saju:'m' };
 const GRP_LAST = { h:'home', w:'bar', m:'portfolio' };
 function switchTab(tab){
   S.tab = tab;
@@ -4065,6 +4162,7 @@ function switchTab(tab){
   $('#cultView').hidden = tab !== 'cult';
   $('#schedView').hidden = tab !== 'sched';
   $('#mktView').hidden = tab !== 'mkt';
+  $('#sajuView').hidden = tab !== 'saju';
   $('#soonView').hidden = !(tab in SOON_LABEL);
   document.body.dataset.tab = tab;
   if (tab === 'home') renderHomeTab();
@@ -4076,6 +4174,7 @@ function switchTab(tab){
   else if (tab === 'cult') renderCultTab();
   else if (tab === 'sched') renderSchedTab();
   else if (tab === 'mkt') renderMktTab();
+  else if (tab === 'saju') renderSajuTab();
   else if (tab === 'wdb') renderWdbTab();
   else if (tab === 'dist') renderDistTab();
   else if (tab === 'goal') renderGoalTab();
@@ -7110,7 +7209,7 @@ const BK_TABLES = [
   ['health_body', 'id'], ['health_workout', 'id'], ['health_sleep', 'id'], ['health_checkup', 'id'], ['health_exam', 'id'], ['health_drink', 'id'],
   ['life_meta', 'user_id,key'], ['life_goals', 'id'], ['life_habits', 'id'], ['life_habit_logs', 'habit_id,log_date'], ['life_todos', 'id'], ['life_culture', 'id'], ['life_schedule', 'id'],
   ['whisky_my_bar', 'id'], ['whisky_journal', 'id'], ['whisky_yt_channels', 'id'], ['whisky_yt_videos', 'id'],
-  ['whisky_products', 'id', 1], ['whisky_distilleries', 'id', 1], ['whisky_goals', 'id', 1]
+  ['saju_profiles', 'id'], ['whisky_products', 'id', 1], ['whisky_distilleries', 'id', 1], ['whisky_goals', 'id', 1]
 ];
 function bkLast() {
   const a = store.get('lastBackup', null);
@@ -7621,6 +7720,806 @@ $('#authForm').addEventListener('submit', async e => {
   } catch (err) { msg(authErrKo(err.message)); }
   finally { AUTH.busy = false; btn.disabled = false; }
 });
+
+/* ===== 사주 데이터 (자동 생성) ===== */
+const SJ_TERMS_Y0 = 1899;
+const SJ_TERMS = '000000gcwgesghdgligpwgvbh0ch5qha0hduhg5hhchgxhf4hc5h7wh36gxqgsognhgjegfsgds0005a8gd4geighlgl8gq5gv1h0mh5ghaahdmhgdhh6hh2hf2hc6h7wh33gxtgsjgnkgj9gfxgdm00bf3vgd0genghhgldgq0gv8h0hh5oha3hdvhg4hhghgshfahbyh82h2zgxxgsfgnpgj6gg0gdl00moxsgcxgeqgheglggpxgv9h0eh5mha2hdqhg8hh7hh0hf1hc7h7uh39gxqgsqgnigjhgftgdv00xyrkgd6geighngl6gq5guzh0lh5fha6hdmhg9hh7hgzhf5hc2h81h33gxygsignqgj8gg1gdl0198lfgcxgepghdglfgpvgv9h0ch5oh9zhdvhg2hhghgthfahc0h83h32gxwgskgnngjbgfygdo01kif6gd0genghhglcgq0gv5h0hh5iha6hdmhgahh4hh2heyhc8h7th38gxqgsognjgjggfvgdt01vs8tgd5gelghmglagq4gv2h0kh5hha4hdohg5hh9hgthf7hbyh82h2zgy0gsggnsgj7gg4gdl02722qgcwgetghcglhgpugvah0ah5oh9xhdthg2hhchguhf6hc3h7zh36gxtgsognlgjfgfwgds02ibwdgd4gekghjgl9gq2gv1h0kh5fha8hdkhgbhh5hh1hf0hc7h7vh36gxsgsmgnkgjcgfxgdp02tlpwgd1genghiglcgq1gv5h0hh5mha2hdthg3hhehgshf9hbxh83h2ygxzgsfgnqgj7gg2gdk034vjogcxgesghcglhgpvgv9h0ch5nha0hdrhg4hh9hgxhf2hc6h7vh39gxqgsrgnigjhgfugdu03g5dbgd6geighlgl6gq4guzh0kh5dha7hdkhgahh6hh0hf4hc5h7zh35gxxgsjgnpgjagfzgdm03rf70gcxgeoghdglcgpwgv6h0ch5nh9yhdwhg2hhghgthfchc0h85h32gxygsjgnpgj9gfzgdm042p0pgcxgeoghdglcgpwgv5h0eh5jha3hdohg9hh6hh2hf0hc9h7vh3agxrgsqgnjgjhgfugdu04dyu9gd5geighlgl6gq3guzh0ih5eha5hdmhg6hh9hgwhf7hc1h84h32gy1gsjgntgj9gg4gdl04p8o5gcwgeqghbglegprgv7h08h5lh9vhdthg0hhehguhfahc3h83h38gxygsognpgjfgfygdr050ihugd1gekghggl8gpyguzh0fh5eha4hdkhgahh4hh3hf1hc9h7xh3agxugsqgnlgjggfxgds05bsbbgd4gejghjgl8gq0gv1h0fh5hha2hdphg3hhchgthf9hbzh85h31gy2gshgnugj9gg5gdl05n256gcwgesghcglfgpsgv8h08h5lh9whdqhg1hh9hgwhf4hc5h7yh3agxugssgnmgjkgfwgdw05ybytgd6gejghkgl6gq2guxh0ih5bha5hdhhg9hh3hh1hf2hc7h7zh38gxxgsognpgjegg0gdp069lsigd0gemghfglagpwgv4h0ch5kh9yhdshg1hhfhgshfchc0h86h31gy2gsjgnsgjagg2gdm06kvm9gcxgeqghcgldgpvgv5h0ch5jha0hdphg5hh7hh0hf2hc7h7wh3agxsgssgnkgjjgfugdw06w5fugd6geighlgl6gq3guyh0jh5cha5hdkhg8hh6hgyhf5hc4h82h34gy1gskgntgjbgg3gdn077f9sgcxgepghbgldgpsgv5h08h5lh9vhdthg0hhfhguhfbhc3h86h36gy0gsognrgjegfzgdq07ip3mgcygemghdgl8gpwgv0h0dh5fha3hdlhgahh5hh4hf2hcbh7xh3dgxtgssgnlgjigfvgdt07tyx6gd3geighigl5gq0guyh0gh5fha2hdohg5hhbhgwhfahc2h86h33gy4gsjgnvgj9gg5gdl0858r5gcvgergh9glegpqgv5h07h5kh9uhdrhg0hhbhgvhf8hc6h82h3bgxygstgnpgjjgfygdu08gikxgd3gejghhgl4gpyguwh0eh5aha3hdghg9hh4hh2hf3hcah80h3cgxzgsrgnqgjhgg0gdr08rselgd1gejghfgl6gpvguzh0bh5gh9xhdphg2hhdhguhfdhc1h89h33gy5gslgnwgjagg5gdm09328dgcwgepghaglcgprgv4h07h5ih9whdohg2hh8hgyhf3hc8h7zh3cgxvgsugnngjlgfwgdx09ec1ugd6geighkgl5gq0guwh0gh59ha3hdghg7hh3hgzhf3hc6h82h38gy1gsognugjegg4gdq09plvmgczgeoghcglagpsgv2h06h5ih9thdqhfyhhehgrhfchc2h87h36gy4gsognugjegg3gdp0a0vpagcygenghcgl9gptgv0h0ah5fh9zhdkhg6hh6hh1hf2hcbh7xh3dgxugsugnmgjkgfvgdw0ac5imgd5gehghjgl4gq0guwh0gh5cha3hdkhg6hh8hgwhf8hc3h85h34gy3gslgnvgjbgg6gdm0anfcggcwgeqgh9gldgpqgv4h05h5kh9shdrhfyhhdhgthfahc4h84h39gy1gsrgnsgjigg0gdt0ayp65gd1gekghegl6gpvguwh0ch5bha1hdhhg9hh3hh4hf2hcch80h3egxygsugnpgjigfygdt0b9yzqgd2gehghegl4gpvguxh0bh5dh9zhdohg3hhdhgwhfdhc3h8ah35gy7gslgnxgjbgg6gdl0bl8tlgcugepgh7glcgpogv3h05h5ih9uhdphg1hhbhgxhf8hc8h82h3dgxygsvgnpgjlgfygdw0bwin7gd5gehghhgl3gpyguth0eh58ha2hdfhg8hh3hh2hf4hcah83h3cgy2gstgnugjhgg4gdr0c7sh5gczgekghcgl6gprguyh06h5eh9thdohfzhhdhgthffhc3h8ch37gy8gsqgnygjfgg6gdo0cj2b0gcwgeogh8gl9gppguzh06h5eh9vhdlhg3hh7hh1hf4hcch81h3ggxxgsxgnpgjmgfygdx0cuc4igd5gegghigl2gpyguth0fh58ha1hdhhg6hh6hgyhf7hc6h86h38gy5gspgnxgjegg7gdp0d5lyggcxgepghaglagppgv2h03h5hh9qhdphfwhhchgshfbhc3h88h39gy5gssgnwgjigg5gdt0dgvs8gd0gemghdgl6gptguwh09h5ah9xhdhhg5hh3hh3hf2hcch80h3hgxygsxgnpgjmgfzgdw0ds5lsgd3gehghggl2gpwguuh0ch5ah9zhdkhg4hhahgwhfbhc4h89h37gy7gsngnygjcgg7gdm0e3ffmgcugeqgh7glbgpogv3h04h5hh9shdphfzhhbhgvhf9hc6h84h3bgy1gsugnrgjkgg1gdv0eep96gd3geighggl4gpwguuh0ch58ha1hdfhg7hh3hh2hf3hcbh82h3egy1gsvgnsgjkgg1gdt0epz2ygd1geighdgl3gpsguvh07h5ch9uhdnhg0hhdhguhfehc4h8dh38gy9gspgnzgjegg7gdn0f18wsgcugengh6gl9gpmgv0h03h5eh9thdnhg2hh9hh0hf7hcch83h3ggxzgsygnpgjngfxgdw0fciq7gd3gefghggl0gpwgush0ch57ha1hdghg7hh5hh1hf7hcah85h3cgy5gssgnxgjggg6gdq0fnsk2gcxgemgh9gl7gpoguxh03h5dh9qhdnhfwhhdhgthfdhc5h8bh3bgy8gstgnzgjigg7gdr0fz2dugcygemgh8gl6gpoguvh04h59h9uhdhhg3hh5hh2hf4hcfh82h3kgy0gt0gnsgjogfzgdx0gac7cgd3gefghfgkygpvguph0ah56h9yhdhhg4hh8hgyhfbhc7h8ah3agy9gsrgo0gjfgg8gdo0glm14gcvgeogh7gl9gplgv0h01h5fh9ohdohfwhhbhgthfbhc6h87h3dgy4gswgnvgjmgg4gdv0gwvuogd2gekghdgl4gptguth08h56h9xhddhg5hh1hh2hf3hcdh82h3hgy2gsygnugjngg3gdw0h85odgd3gehghegl1gpsgush06h58h9uhdihg0hhahgvhfdhc5h8dh39gybgsrgo1gjfggagdo0hjfi6gcvgeogh6gl8gplguzh01h5eh9qhdnhfzhhahgxhf8hcbh84h3ggy1gsygnsgjngg0gdw0hupblgd4gegghfgl1gpvgurh0bh56ha0hdfhg7hh3hh2hf5hcbh85h3egy4gsvgnwgjjgg5gds0i5z5ggd0gekghagl5gppguvh04h5bh9rhdmhfxhhchgthfehc5h8dh3agyagstgo1gjhgg9gdq0ih8zdgcwgengh7gl6gplguxh01h5bh9shdjhg2hh7hh1hf7hcfh84h3kgy1gt1gnsgjpgfzgdx0isisygd3gedghfgkxgptguph09h55h9zhdfhg7hh7hh1hfbhcah8bh3dgy9gstgo0gjggg8gdp0j3smwgcvgemgh6gl6gplguxh00h5eh9ohdnhfxhhdhgthfehc7h8bh3dgy9gsvgnzgjlgg6gdt0jf2gngczgekghagl4gpoguth04h56h9vhdehg4hh3hh3hf4hcgh84h3lgy3gt2gnugjqgg2gdy0jqcafgd4geeghdgkygprgunh06h54h9uhdghg0hh9hgxhfehc8h8fh3cgyegstgo4gjhggbgdp0k1m4dgcugengh4gl6gpiguxgzyh5ch9nhdmhfwhhbhgwhfbhcah89h3hgy5gszgnwgjogg3gdx0kcvxsgd3gegghdgl0gpsguqh08h53h9xhdchg6hh1hh3hf4hceh84h3igy5gszgnxgjngg5gdw0ko5rjgd2geighcgl1gpqgurh03h57h9phdihfwhhahgshfehc5h8eh3bgydgsugo4gjjggbgdr0kzflcgcwgeogh5gl7gpjguwgzyh5ah9ohdihfzhh6hgzhf7hceh85h3kgy4gt2gntgjrgg1gdy0lapeqgd4gedghegkxgptgunh08h53h9yhdchg6hh4hh2hf8hcch89h3fgy8gsvgo0gjjgg7gdr0llz8ggcxgekgh8gl4gplguvh01h5bh9ohdlhfwhhchgshfehc6h8ch3cgyagsvgo1gjkgg8gds0lx922gcygelgh8gl4gpmguuh01h58h9rhdfhg3hh3hh2hf5hcgh84h3mgy3gt3gnugjsgg1gdy0m8ivogd4gecghdgkwgprgumh05h52h9vhdehg3hh7hh0hfchcbh8eh3fgydgsvgo4gjiggagdp0mjspjgcugelgh3gl5gphguvgzwh5ch9mhdmhfwhhdhgvhffhcah8ch3ggy9gszgnygjngg5gdv0mv2j1gd0gegghagl0gpoguph04h54h9vhddhg5hh2hh5hf5hchh86h3lgy6gt2gnxgjqgg4gdy0n6ccugd2gefghbgkygpogunh02h54h9qhdfhfyhh9hgvhffhc8h8gh3egyhgswgo6gjkggdgdr0nhm6tgcugengh3gl5gpggutgzvh59h9lhdihfwhh9hgyhfbhceh8ah3mgy7gt4gnygjsgg3gdz0nsw0cgd2geeghbgkwgpqgulh05h50h9whdahg6hh2hh4hf7hcgh89h3kgyagt0go1gjngg8gdu0o45u5gczgejgh8gl1gplgurgzzh57h9nhdjhfuhhbhgshffhc6h8fh3egyegswgo5gjmggcgds0offnxgcxgengh6gl5gpjgutgzyh56h9ohdfhfzhh3hh0hf6hcgh86h3ngy6gt5gnxgjugg3ge10oqphlgd4geeghdgkvgpqgukh05h4zh9uhdbhg3hh4hh0hfbhcch8eh3hgydgsygo4gjlggbgds0p1zbggcwgelgh4gl4gphguugzwh59h9lhdlhfvhhchguhffhc8h8eh3fgycgsygo1gjngg7gdu0pd94zgczgejgh8gl1gpmgurh02h54h9thddhg4hh2hh4hf5hchh85h3ngy5gt4gnwgjsgg4gdz0poiyqgd3geeghcgkwgppgumh03h51h9rhdehfzhh7hgxhfehc9h8hh3fgyggsxgo7gjkggdgdq0pzsspgcugemgh2gl4gpeguugzth59h9khdjhfvhhbhgxhfehcdh8ch3mgy9gt4gnzgjqgg5gdx0qb2m7gd1gedgh9gkwgpmgulh03h50h9vhdbhg6hh3hh5hf8hcih8ah3ngy9gt3gnzgjqgg6gdv0qmcfzgczgefgh8gkxgplgunh00h53h9ohdghfwhhbhguhfghc8h8ih3fgyhgsxgo7gjlggegdr0qxm9rgcvgemgh3gl3gpggurgzuh56h9lhdfhfwhh7hgzhf9hcgh8ah3pgy9gt7gnzgjvgg4ge10r8w3dgd3gecghbgktgpnguhh02h4wh9thd8hg3hh3hh2hfahchh8eh3lgyfgt2go5gjoggbgdu0rk5x5gcxgeigh5gkzgpggupgzvh55h9jhdjhfthhbhguhfghc9h8hh3hgyfgt0go5gjnggcgdt0rvfqngcxgekgh5gl1gpjgupgzxh54h9ohdchg0hh2hh2hf6hchh87h3pgy8gt7gnygjvgg5ge20s6pk9gd4gedghdgktgpogujh01h4yh9qhd9hfzhh4hgxhfchcbh8gh3igyigszgo9gjnggegdt0shze3gcwgelgh3gl2gpfgurgzsh56h9ihdihfshhbhguhffhcbh8fh3kgydgt3go3gjrgg7gdx0st97jgd0geggh7gkxgpkgumh00h50h9shdahg4hh2hh5hf7hcjh88h3pgy9gt5go0gjsgg5gdz0t4j17gd2geegh9gkwgpmgulh00h51h9ohdehfxhh8hgvhfghc8h8ih3ggyigsxgo9gjmggegds0tfsv1gcvgemgh2gl4gpegusgzsh56h9jhdhhfvhh8hgxhfchcgh8ch3ogybgt7go0gjvgg5ge00tr2oqgd2gecgh9gktgplguhh01h4wh9shd9hg4hh2hh5hfahcjh8eh3pgyegt5go4gjqggagdv0u2cimgcygefgh5gkwgphgumgzvh53h9khdhhfvhhchgvhfjhcah8kh3hgyjgt0go7gjnggdgdt0udmccgcvgejgh3gl0gpfgupgzuh54h9mhddhfzhh5hh2hf9hcjh8ah3sgy9gtago0gjwgg6ge20uow64gd4gebghbgkrgpmgugh00h4uh9qhd7hg1hh3hh0hfchcgh8hh3mgyjgt4go9gjqggfgdu0v0604gcwgekgh1gl0gpcguogzqh54h9ghdghfshhbhguhfihcch8jh3lgyigt4go7gjrggbgdw0vbftqgcygeggh5gkwgphgukgzwh4zh9ohdahg2hh2hh4hf8hclh8ah3sgyagt9go1gjwgg7ge10vmpnegd3gedghagksgpmguhgzzh4xh9nhdahfxhh5hgwhfehcbh8ih3igykgt1gobgjngghgdu0vxzh7gcwgemgh2gl2gpdguqgzqh54h9ghdfhfshh7hgvhfdhceh8fh3ogyegt7go4gjvgg9ge00w99asgd2geegh7gkugpjguhgzyh4vh9phd7hg2hh1hh4hf8hclh8ch3rgydgt8go4gjtgg9gdy0wkj4hgd0geegh6gkugpigujgzwh50h9lhdehfuhhahgvhfhhcah8kh3hgykgszgoagjnggegds0wvsy1gcugelgh1gl2gpdgupgzsh54h9jhdfhfwhh6hgzhfahcih8bh3rgybgt9go1gjxgg5ge20x72rngd3gebghagkrgplguegzzh4uh9qhd6hg1hh1hh3hfahcih8gh3pgyhgt6go8gjsggdgdw0xiclhgcxgehgh2gkwgpdgulgzqh52h9ghdghfshhchguhfkhcch8lh3lgylgt3go9gjqggcgdu0xtmf2gcvgeggh1gkxgpdgukgzth50h9lhdchg0hh4hh4hfahcnh8bh3vgybgtcgo1gjxgg6ge20y4w8ogd3geagh9gkpgpkguegzyh4uh9ohd7hfzhh4hgzhfehcfh8jh3mgylgt4gocgjqgghgdu0yg62kgcugelgh0gkzgpagungzoh52h9dhdfhfqhhahgvhfghcfh8jh3pgyjgt8go8gjwggbge00yrfw8gd0geegh4gksgpfguggzth4uh9mhd6hg1hh1hh5hf9hcoh8dh3vgyggtcgo5gjygg9ge10z2ppygd2gebgh7gkrgphgufgzuh4wh9khdahfvhh7hgwhfhhcch8mh3kgyngt3godgjpgghgdu0zdzjngcugemggzgl1gpbguogzoh53h9fhddhfthh6hgyhfchchh8eh3sgyegtbgo5gjyggage20zp9dbgd4gecgh9gkrgpjgudgzxh4rh9ohd3hg0hh0hh3hf9hcjh8gh3rgyigtago9gjvggegdz100j77gczgeggh4gkugpeguigzrh4yh9ghddhfshhahguhfjhcbh8nh3lgymgt4gocgjqggggdu10bt0ugcvgeigh0gkygpbgumgzqh51h9ihdchfyhh5hh2hfbhclh8dh3ugycgtdgo2gjzgg6ge310n2uhgd3gebgh9gkpgpkgudgzyh4sh9phd5hg0hh2hh1hfchchh8ih3ogykgt6gobgjsggggdw10ycodgcwgejgh1gkygpagumgznh52h9dhdfhfqhhbhguhfihceh8lh3pgylgt7goagjuggegdx119mi5gcxgefgh1gktgpcguhgzrh4vh9khd8hg0hh2hh6hfbhcoh8fh3xgyfgtego5gjzgg8ge211kwbvgd1geagh6gkogpggudgzuh4th9lhd9hfxhh6hgzhfhhcfh8nh3ngyogt4goegjpggigdt11w65mgctgejggzgkygp8gumgzmh52h9dhdehfrhh9hgxhffhchh8jh3sgyigtcgo8gjyggbge2127fzbgd1gedgh5gkpgpfgucgzth4rh9khd3hg0hgzhh4hfahcnh8gh3wgyjgtego9gjzggdge212ipt5gd0gecgh4gkqgpdgudgzqh4uh9fhdahfrhh9hgvhfjhceh8ph3ngyqgt6gofgjrggjgdu12tzmqgcugeiggygkxgp7gukgzmh4zh9fhdbhfthh6hh0hfdhclh8gh3vgyggtego6gk0gg9ge41359g9gd3geagh8gkogpiguagzwh4ph9mhd2hfzhgzhh1hfbhcih8ih3rgylgtagocgjwgghgdy13gj9zgcygehgh2gkvgpbguigznh4xh9chdchfohh9hgshfjhcdh8nh3ogyogt8goegjugghgdx13rt3mgcwgehggzgkvgp9guhgzoh4vh9ghd7hfxhh2hh4hfahcoh8fh3ygyggtggo5gk1gg9ge41432x6gd2ge9gh7gkngphguagzvh4qh9lhd6hfxhh4hh0hffhcgh8mh3ogyogt6godgjsggigdu14ecqtgcugejggzgkxgp8gulgzlh51h9chdehfqhh9hgwhfhhcgh8kh3rgylgtbgoagjxggdge114pmkjgczgedgh3gkrgpcgudgzrh4rh9jhd4hfzhgzhh6hfahcoh8hh3ygyjgtggo8gk1ggcge2150wecgd1gebgh4gkngpdgubgzqh4sh9ghd8hfuhh8hgyhfkhcfh8rh3pgyrgt7goggjsggjgdt15c684gcsgeiggvgkwgp5gujgzkh4zh9dhdchfthh8hh0hfhhclh8kh3wgyjgtfgo8gk1ggage315ng1tgd2ge9gh5gkngpfgu9gzth4oh9lhd1hg0hgzhh4hfbhcnh8jh3wgymgtdgodgjzgggge115ypvpgczgefgh2gkrgpagudgzmh4uh9chd9hfphh9hguhfkhcfh8rh3qgysgtagohgjwggjgdx169zplgcugehggxgktgp6guggzjh4vh9chd8hfuhh4hh2hfdhcph8ih41gyjgtjgo8gk3ggbge516l9j9gd3ge8gh6gklgpfgu8gzsh4nh9khd2hfxhh2hh1hfehcjh8mh3sgypgtagoggjvggjgdy16wjcygcwgeiggzgkvgp8guigzkh4xh9ahdchfnhh9hguhfihcfh8nh3rgypgtbgoegjygghge1177t6pgczgefgh1gksgp9gudgznh4rh9ghd2hfwhgzhh4hfahcph8gh40gyjgtjgo9gk4ggcge517j30fgd2geagh5gkmgpegu8gzrh4oh9hhd4hfuhh5hgyhfihcgh8qh3qgysgt8gohgjtggkgdv17ucu1gctgeiggwgkwgp5guigzjh4yh9bhdchfqhh9hgyhfhhcjh8lh3vgylgtegoagk0ggdge2185mnmgd1gebgh3gkogpdgu9gzrh4ph9jhd1hfzhgyhh5hfahcoh8hh3ygylgtfgocgk1ggege318gwhcgd0gecgh3gkogpbgubgznh4rh9dhd8hfqhh8hgvhfkhcgh8sh3qgyugt9gojgjuggkgdw18s6b4gctgegggvgktgp3gufgzhh4vh9bhd9hfshh6hh2hfghcph8lh40gylgtkgo9gk3ggbge4193g4pgd2ge7gh3gkkgpcgu6gzrh4lh9khd1hfyhh1hh4hfehcnh8mh3wgypgtdgofgjyggigdy19epydgcwgefggygkrgp7guegzjh4uh99hdahfohh9hguhflhcgh8sh3sgytgtcgohgjyggkgdz19pzs6gcvgegggxgkrgp5gubgzjh4qh9bhd3hfuhh1hh3hfchcrh8jh43gymgtmgobgk7ggdge71a19lugd3ge8gh4gkjgpcgu4gzph4kh9ghd1hfuhh3hh0hfhhckh8qh3ugyugtcgokgjwgglgdx1acjfigcugehggvgktgp3gufgzhh4vh98hdahfohh9hgwhfjhcjh8ph3vgyqgtfgofgk1gggge21ant95gczgedgh1gkpgp9gu9gznh4nh9fhd1hfvhgyhh4hf9hcqh8ih40gymgtkgodgk4gggge61az32ugd3gebgh4gkmgpbgu8gznh4nh9dhd4hfqhh4hgwhfjhchh8sh3sgyvgtbgolgjwggngdx1bacwogctgeiggugktgp3guegzgh4uh98hd9hfqhh6hh0hfhhcnh8nh3zgyogtjgocgk4ggdge51blmqbgd1ge8gh3gklgpbgu6gzph4mh9ihd0hfyhgzhh5hfchcph8lh3ygyogtggoegk0gghge21bwwjzgcygedgh1gkpgp8gubgzlh4sh9ahd9hfohh9hguhfmhcgh8sh3sgyvgtbgokgjxgglgdy1c86dwgcugehggvgkrgp3gudgzgh4rh9ahd5hfshh3hh3hfehcrh8lh44gyngtmgocgk7ggdge71cjg7ogd2ge7gh3gkhgpbgu3gzoh4jh9hhd0hfwhh2hh3hfhhcnh8rh3xgytgtfgojgjyggkgdy1cuq1fgcugeeggvgkqgp2gudgzgh4th98hdahfohhahgxhfmhcjh8th3wgytgtfgoigk0ggjge01d5zv7gcwgedggygkogp5gu9gzjh4mh9dhd1hfuhgzhh5hfbhcsh8kh44gyngtngoegk7ggfge81dh9oxgd3ge8gh3gkjgpagu4gzlh4kh9chd0hfrhh3hgyhfkhcjh8uh3vgyygtegongjyggogdy1dsjirgctgegggtgkrgp0gucgzch4sh95hd8hfnhh7hgyhfkhcnh8qh41gyrgtkgoggk5gggge51e3tccgd0ge9gh1gkkgp7gu5gzmh4jh9fhcyhfwhgxhh5hfbhcrh8lh41gypgtkgofgk5gghge51ef35ugd1gebgh2gkmgp8gu7gzkh4nh9ahd4hfohh5hgvhfkhcgh8uh3tgyxgtdgomgjzggogdy1eqczmgcugeiggugksgp0gucgzdh4rh95hd5hfohh3hh0hffhcph8nh43gypgtogoegk8ggfge71f1mt7gd2ge8gh2gkigp9gu2gznh4hh9fhcyhfwhgzhh3hffhcoh8ph3zgytgthgoigk1ggkge01fcwmqgcwgedggwgkpgp3guagzgh4sh97hd8hfohh9hgvhfnhcih8uh3vgyvgtegokgk0ggkge01fo6gfgcvgefggvgkpgp3gu9gzhh4oh9ahd1hfthh0hh4hfchcsh8lh44gyogtogoegk8ggfge81fzga2gd3ge7gh3gkhgpagu1gzmh4ih9dhcyhfuhh1hh1hfihcnh8th3ygyxgtggongk0ggngdy1gaq3xgctgeeggsgkpgozguagzbh4rh95hd8hfnhh9hgyhfnhcnh8uh40gyvgtlgoigk4ggige31glzxngcxgeaggxgkjgp5gu4gzih4kh9chczhfwhgzhh6hfdhcth8nh45gyqgtngoggk7gghge61gx9ragd1ge8gh1gkjgp7gu3gzjh4kh9ahd2hfphh5hgxhflhckh8wh3wgz0gtfgoqgjzggqgdz1h8jlagctgegggsgkqgoygu9gzah4ph93hd4hfnhh5hgyhfjhcqh8rh45gytgtqgoigk9ggige81hjtf1gd1ge8gh0gkhgp6gu0gzjh4gh9chcwhfvhgyhh5hfehcsh8ph44gyugtmgojgk5gglge31hv38ogcygebggxgklgp4gu6gzfh4nh97hd5hfmhh8hgvhfnhcjh8wh3wgyzgtggoogk1ggoge01i6d2igcugegggugkqgp0gu9gzdh4nh96hd1hfphh1hh1hfdhcrh8nh45gyqgtrgoggkagghgea1ihmw5gd4ge8gh3gkggp9gu0gzkh4gh9chcvhfthgzhh1hfghcoh8sh41gyxgtjgongk2ggoge11iswpygcugeeggugkngp0gu8gzbh4ph94hd7hflhh9hgwhfnhclh8wh3zgyxgtkgolgk3gglge21j46jmgcwgecggvgklgp3gu5gzgh4kh9ahd0hfthh0hh5hfchcuh8mh46gypgtpgofgk9gggge81jfgd4gd3ge7gh1gkhgp8gu1gzkh4ih9bhczhfrhh3hgzhfkhclh8vh3ygyzgthgopgk0ggqgdz1jqq71gctgefggrgkpgoxgu8gz9h4ph91hd6hflhh7hgyhflhcph8th45gywgtogokgk8ggjge61k200qgczge8ggxgkggp3gu0gzhh4fh9bhcwhfvhgzhh6hffhcvh8ph47gyugtogojgk7ggjge51kd9uagcyge8ggxgkhgp3gu2gzfh4kh97hd3hfohh7hgxhfohclh8yh3ygz2gthgoqgk1ggqgdz1kojo3gctgefggrgkogowgu8gz8h4nh92hd2hfnhh2hh1hfghcsh8qh48gytgtsgojgkcggigeb1kzthpgd3ge7gh0gkfgp5gtxgzih4ch9ahcthfthgxhh3hfghcsh8th45gyygtngopgk5ggoge41lb3bggcwgebggugkjgoygu4gzah4lh92hd3hfkhh8hgwhfphclh8zh41gz1gtlgoqgk4ggoge21lmd54gcvgedggtgklgoygu5gzbh4jh96hcyhfrhgzhh3hfehcth8oh48gysgtsgohgkcggigea1lxmykgd4ge6gh2gkfgp7gtzgzih4eh9ahcwhfqhgzhh0hfihcnh8vh40gz1gtjgorgk3ggrge21m8wsfgcvgefggsgkngoxgu6gz8h4mh90hd4hfihh7hgvhfnhcnh8wh44gyzgtogongk8ggnge61mk6m5gcygeaggwgkhgp2gu0gzeh4gh98hcwhfthgyhh6hfehcvh8ph48gyugtrgoigkaggige81mvgfngd1ge7ggygkggp4gu0gzgh4ih98hd0hfphh5hgyhfnhcmh8zh3ygz2gtigosgk1ggrgdz1n6q9kgctgefggqgkogovgu8gz8h4mh92hd3hflhh4hgzhfkhcqh8th47gywgtrgolgkbggkge91ni03bgd1ge7ggzgkegp4gtxgzgh4ch9ahcthfuhgxhh6hffhcvh8th47gyygtqgoogk8ggmge51nt9x5gcwge9ggugkggozgu1gzah4jh93hd2hfmhh8hgxhfrhcnh92h41gz5gtlgosgk3ggqge11o4jr1gcsgedggpgklgovgu4gz8h4kh93hd0hfphh1hh3hfhhcvh8rh4agyvgtugojgkdggigeb1oftklgd3ge5gh0gkdgp5gtwgzgh4bh9ahcthfrhgzhh2hfihcrh8wh44gz2gtogosgk6ggrge31or3ekgcvgedggrgkkgovgu3gz5h4kh8yhd2hfhhh7hgvhfphcoh90h44gz4gtpgosgk9ggpge61p2d8cgcwgebggtgkhgoxgu0gzah4eh94hcvhfrhgxhh5hffhcxh8qh4cgyvgtugolgkdggjgea1pdn1sgd1ge6ggzgkdgp3gtxgzfh4dh97hcwhfphh1hgzhfmhcnh8zh41gz4gtkgotgk4ggtge11powvlgctgefggqgkngougu6gz5h4lh8xhd2hfihh4hgwhfkhcph8vh47gyygtsgoogkcggnge91q06p6gd0ge9ggxgkfgp2gtxgzdh4bh97hcshfrhgvhh5hfehcwh8rh4agyxgttgongkbggmge81qbgirgczge7ggvgkfgozgtzgzah4gh93hczhfmhh6hgxhfphcnh92h41gz6gtkgougk3ggsge11qmqchgcrgeeggpgklgotgu5gz6h4kh90hd1hfmhh3hh0hfjhcth8sh4agyvgtugokgkeggjgea1qy05wgd2ge5ggzgkcgp4gtvgzgh4ah99hcshfshgxhh4hfhhcuh8uh47gz1gtqgorgk8ggpge5';
+const SJ_LUNAR_Y0 = 1900;
+const SJ_LUNAR = '3k8bi154q92aa7a22o9o0tqni1ni1u3bvvc0u2i31ro683n15h154q03m1st1qm9c1lu042wjmh1nzfw0uf4y1s42e1tijt49ihr248xe21usm43s631ggfi0f7kz3dslz12d6324r344m5cm29v6w21vvh0sy7j1m3hg2x4yh1oyzw12d5u2adhz14xm13iuhq1newh0t1d21m6xm1gylp1s4rn49jx51teln1reow45bbp1ngh43ay1o0t2y71nzfo3cbq224y7g24n4y4kjpz22o1645d7i1nh9t0tzc61o61n1ov1p12bkz2aae02aa7f28aao1ypxx1nl7r3bw0t0uf5b1rrc43n1ay154q51455t3h9g61lu092wwf20f19s0ufxh1s49n24r3i248wz48is821usr43sf41m2pe0f8dj3dspo12d6824r384m5i229v7121vky1m2ty1m3hk2x53y1rs4x12d5y2b2vv14xm610xsz3auqf0t1d61m6n33byxh0j6lj49kv01tels1rep145bh51ngh80t2xt1m8d21nzfs3dqhq0wpbl24nxi4kkm322o1a1nggz3azh40tzca1o5r33dq5112bl42aaho2aa7j28aat1yq1m1ytrf0u2ht1ov6e1s3zd3n1ni154q91qm923h9jv1lu0d0q8820u3iv0uhii1s3z349i8l248x44jrh921usv1lvl0386e10f8do0w2e824r862add54m5nj29v7521vl21m2zf1m3hp0r67611ouv12dyi2b2n429vbp10xt33ay1o0t1db1m6n73bz2x0uf581ro693mu521rep545bmm1nghd0t2xx1nzq21o5rh0vtpf1tfkn24nxm22o0w45cyd1yp0n3b0f00tzcf1o5r83dwm112bl82aa754q6tz0zc4p1yqzh1z6eo0u2hy1ovbu1s3zh154pv3j8k81qm960zcwv37owk0q887';
+const SJ_TZ = [[-2209075200000,507],[-1948780800000,510],[-1830412800000,540],[-681210000000,600],[-672228000000,540],[-654771600000,600],[-640864800000,540],[-623408400000,600],[-609415200000,540],[-588848400000,600],[-577965600000,540],[-498128400000,510],[-462700800000,570],[-451731600000,510],[-429782400000,570],[-418294800000,510],[-399542400000,570],[-387450000000,510],[-368092800000,570],[-356000400000,510],[-336643200000,570],[-324550800000,510],[-305193600000,570],[-293101200000,510],[-264931200000,540],[547578000000,600],[560883600000,540],[579027600000,600],[592333200000,540]];
+
+/* ===== 사주 엔진: 만세력 · 명식 · 십성 · 신강신약 · 격국 · 용신 · 합충 · 신살 · 대운 · 세운 ===== */
+const SJ = (function () {
+  'use strict';
+  const STEM = '갑을병정무기경신임계'.split(''), BRANCH = '자축인묘진사오미신유술해'.split('');
+  const STEM_H = '甲乙丙丁戊己庚辛壬癸'.split(''), BRANCH_H = '子丑寅卯辰巳午未申酉戌亥'.split('');
+  const ELEM = ['목', '화', '토', '금', '수'], ELEM_H = ['木', '火', '土', '金', '水'];
+  const SE = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4], BE = [4, 2, 0, 0, 2, 1, 1, 2, 3, 3, 2, 4];
+  /* 지장간 (여기→중기→정기) 과 월률분야 일수 */
+  const HID = [[8, 9], [9, 7, 5], [4, 2, 0], [0, 1], [1, 9, 4], [4, 6, 2], [2, 5, 3], [3, 1, 5], [4, 8, 6], [6, 7], [7, 3, 4], [4, 0, 8]];
+  const HIDD = [[10, 20], [9, 3, 18], [7, 7, 16], [10, 20], [9, 3, 18], [7, 7, 16], [10, 9, 11], [9, 3, 18], [7, 7, 16], [10, 20], [9, 3, 18], [7, 7, 16]];
+  const SS = ['비견', '겁재', '식신', '상관', '편재', '정재', '편관', '정관', '편인', '정인'];
+  const GRP = ['비겁', '식상', '재성', '관성', '인성'];
+  const STAGE = ['장생', '목욕', '관대', '건록', '제왕', '쇠', '병', '사', '묘', '절', '태', '양'];
+  const STAGE_START = [11, 6, 2, 9, 2, 9, 5, 0, 8, 3];
+  const JIE_NAMES = ['소한', '입춘', '경칩', '청명', '입하', '망종', '소서', '입추', '백로', '한로', '입동', '대설'];
+  const TERM_NAMES = ['소한', '대한', '입춘', '우수', '경칩', '춘분', '청명', '곡우', '입하', '소만', '망종', '하지', '소서', '대서', '입추', '처서', '백로', '추분', '한로', '상강', '입동', '소설', '대설', '동지'];
+  const mod = (a, n) => ((a % n) + n) % n;
+  const E1900 = Date.UTC(1900, 0, 1);
+  const DAY0 = 10957; /* 2000-01-01 (무오일) 의 1970 기준 일수 */
+  const DAY0_IDX = 54;
+
+  /* ---------- 절기표 ---------- */
+  const _tc = {};
+  function termsMs(y) {
+    if (_tc[y]) return _tc[y];
+    if (y < SJ_TERMS_Y0 || y > SJ_TERMS_Y0 + 202) return null;
+    const per = 75, off = (y - SJ_TERMS_Y0) * per, s = SJ_TERMS.substr(off, per);
+    let v = parseInt(s.substr(0, 6), 36); const out = [E1900 + v * 60000];
+    for (let k = 0; k < 23; k++) { v += parseInt(s.substr(6 + 3 * k, 3), 36); out.push(E1900 + v * 60000); }
+    return (_tc[y] = out);
+  }
+  function jieList(y) { /* y-1 ~ y+1 의 12절 */
+    const out = [];
+    for (let yy = y - 1; yy <= y + 1; yy++) {
+      const t = termsMs(yy); if (!t) continue;
+      for (let j = 0; j < 12; j++) out.push({ ms: t[2 * j], name: JIE_NAMES[j], branch: (j + 1) % 12, year: yy, j });
+    }
+    return out;
+  }
+
+  /* ---------- 한국 시각 → UTC ---------- */
+  function wallToUtc(wallMs, useDst) {
+    const T = SJ_TZ;
+    const std = o => (o === 600 ? 540 : o === 570 ? 510 : o); /* 서머타임 제거 */
+    for (let i = 0; i < T.length; i++) {
+      const start = T[i][0], end = i + 1 < T.length ? T[i + 1][0] : Infinity;
+      const off = useDst ? T[i][1] : std(T[i][1]);
+      const utc = wallMs - off * 60000;
+      if (utc >= start && utc < end) return utc;
+    }
+    /* 전환 구간의 빈 시각: 직전 구간 오프셋 */
+    for (let i = T.length - 1; i >= 0; i--) { if (wallMs - T[i][1] * 60000 >= T[i][0]) return wallMs - (useDst ? T[i][1] : std(T[i][1])) * 60000; }
+    return wallMs - 540 * 60000;
+  }
+  function utcToWallOffset(utcMs) {
+    let off = 540; for (let i = 0; i < SJ_TZ.length; i++) { if (utcMs >= SJ_TZ[i][0]) off = SJ_TZ[i][1]; else break; }
+    return off;
+  }
+
+  /* ---------- 음력 ---------- */
+  const _lc = {};
+  function lunarYear(Y) {
+    if (_lc[Y]) return _lc[Y];
+    if (Y < SJ_LUNAR_Y0 || Y > SJ_LUNAR_Y0 + 200) return null;
+    const v = parseInt(SJ_LUNAR.substr((Y - SJ_LUNAR_Y0) * 5, 5), 36);
+    const off = v & 63, leap = (v >> 6) & 15, mask = v >> 10;
+    const jan1 = Date.UTC(Y, 0, 1) / 864e5 + off;
+    const months = []; let bit = 0;
+    for (let m = 1; m <= 12; m++) {
+      months.push({ m, leap: false, len: (mask >> bit++) & 1 ? 30 : 29 });
+      if (leap === m) months.push({ m, leap: true, len: (mask >> bit++) & 1 ? 30 : 29 });
+    }
+    return (_lc[Y] = { jan1, leap, months });
+  }
+  function lunarToSolar(Y, M, leap, D) {
+    const L = lunarYear(Y); if (!L) return null;
+    let day = L.jan1;
+    for (const mo of L.months) {
+      if (mo.m === M && mo.leap === !!leap) {
+        if (D < 1 || D > mo.len) return null;
+        const dt = new Date((day + D - 1) * 864e5);
+        return { y: dt.getUTCFullYear(), m: dt.getUTCMonth() + 1, d: dt.getUTCDate() };
+      }
+      day += mo.len;
+    }
+    return null;
+  }
+  function solarToLunar(y, m, d) {
+    const e = Date.UTC(y, m - 1, d) / 864e5;
+    for (const Y of [y, y - 1]) {
+      const L = lunarYear(Y); if (!L) continue;
+      const nxt = lunarYear(Y + 1);
+      const end = nxt ? nxt.jan1 : L.jan1 + 384;
+      if (e >= L.jan1 && e < end) {
+        let day = L.jan1;
+        for (const mo of L.months) {
+          if (e < day + mo.len) return { y: Y, m: mo.m, leap: mo.leap, d: e - day + 1, len: mo.len };
+          day += mo.len;
+        }
+      }
+    }
+    return null;
+  }
+  function leapOf(Y) { const L = lunarYear(Y); return L ? L.leap : 0; }
+  function lunarMonthLen(Y, M, leap) { const L = lunarYear(Y); if (!L) return 0; const mo = L.months.find(x => x.m === M && x.leap === !!leap); return mo ? mo.len : 0; }
+
+  /* ---------- 기본 계산 ---------- */
+  const idx60 = (s, b) => { for (let i = s; i < 60; i += 10) if (i % 12 === b) return i; return -1; };
+  const gzName = i => STEM[i % 10] + BRANCH[i % 12];
+  const gzHanja = i => STEM_H[i % 10] + BRANCH_H[i % 12];
+  function ssIdx(d, s) {
+    const rel = mod(SE[s] - SE[d], 5), same = (s % 2) === (d % 2);
+    return rel * 2 + (same ? 0 : 1);
+  }
+  const mainHid = b => HID[b][HID[b].length - 1];
+  function stageIdx(d, b) { const st = STAGE_START[d]; return d % 2 === 0 ? mod(b - st, 12) : mod(st - b, 12); }
+  function dayIndexOf(y, m, d) { return mod(Math.round(Date.UTC(y, m - 1, d) / 864e5) - DAY0 + DAY0_IDX, 60); }
+
+  function pillarsAt(instMs, opt) {
+    const off = opt.lon ? 510 : 540; /* 사주 시계 = UTC + 8:30(경도 보정) 또는 + 9:00 */
+    const sc = new Date(instMs + off * 60000);
+    const Y = sc.getUTCFullYear(), Mo = sc.getUTCMonth() + 1, D = sc.getUTCDate(), h = sc.getUTCHours(), mi = sc.getUTCMinutes();
+    /* 연주 */
+    const kst = new Date(instMs + 540 * 60000), ky = kst.getUTCFullYear();
+    const ip = termsMs(ky); let sy = ky;
+    if (ip && instMs < ip[2]) sy = ky - 1;
+    const ys = mod(sy - 4, 10), yb = mod(sy - 4, 12);
+    /* 월주 */
+    const jl = jieList(ky); let cur = null, nxt = null;
+    for (let i = 0; i < jl.length; i++) { if (jl[i].ms <= instMs) cur = jl[i]; else { nxt = jl[i]; break; } }
+    const mb = cur.branch;
+    const first = ((ys % 5) * 2 + 2) % 10;
+    const ms = (first + mod(mb - 2, 12)) % 10;
+    /* 일주 */
+    let dIdx = dayIndexOf(Y, Mo, D);
+    const late = h >= 23;
+    if (late && opt.zi === 'jo') dIdx = mod(dIdx + 1, 60);
+    const dayForHour = late ? (opt.zi === 'jo' ? dIdx : mod(dIdx + 1, 60)) : dIdx;
+    const hb = Math.floor((h * 60 + mi + 60) / 120) % 12;
+    const hs = ((dayForHour % 10) % 5 * 2 + hb) % 10;
+    return {
+      year: { s: ys, b: yb }, month: { s: ms, b: mb }, day: { s: dIdx % 10, b: dIdx % 12 }, hour: { s: hs, b: hb },
+      sajuYear: sy, curJie: cur, nextJie: nxt, clock: { y: Y, m: Mo, d: D, h, mi }
+    };
+  }
+
+  /* ---------- 합충형파해 ---------- */
+  const SAM = [[8, 0, 4, 4], [11, 3, 7, 0], [2, 6, 10, 1], [5, 9, 1, 3]]; /* 생지,왕지,고지,오행 */
+  const BANG = [[2, 3, 4, 0], [5, 6, 7, 1], [8, 9, 10, 3], [11, 0, 1, 4]];
+  const YUKHAP = [[0, 1, 2], [2, 11, 0], [3, 10, 1], [4, 9, 3], [5, 8, 4], [6, 7, 1]]; /* 합화 오행 (오미는 화로 표기) */
+  const CHEONGAN_HAP = [[0, 5, 2], [1, 6, 3], [2, 7, 4], [3, 8, 0], [4, 9, 1]];
+  const BREAK = [[0, 9], [1, 4], [2, 11], [3, 6], [5, 8], [7, 10]];
+  const HARM = [[0, 7], [1, 6], [2, 5], [3, 4], [8, 11], [9, 10]];
+  function branchPairRel(a, b) {
+    const out = [];
+    const has = (p, x, y) => (p[0] === x && p[1] === y) || (p[0] === y && p[1] === x);
+    for (const p of YUKHAP) if (has(p, a, b)) out.push({ t: '육합', n: BRANCH[a] + BRANCH[b] + '합', e: p[2] });
+    if (mod(a - b, 12) === 6) out.push({ t: '충', n: BRANCH[a] + BRANCH[b] + '충' });
+    for (const p of BREAK) if (has(p, a, b)) out.push({ t: '파', n: BRANCH[a] + BRANCH[b] + '파' });
+    for (const p of HARM) if (has(p, a, b)) out.push({ t: '해', n: BRANCH[a] + BRANCH[b] + '해' });
+    if (has([0, 3], a, b)) out.push({ t: '형', n: '자묘형(무례지형)' });
+    const tri1 = [2, 5, 8], tri2 = [1, 10, 7];
+    if (a !== b && tri1.includes(a) && tri1.includes(b)) out.push({ t: '형', n: BRANCH[a] + BRANCH[b] + '형(무은지형)' });
+    if (a !== b && tri2.includes(a) && tri2.includes(b)) out.push({ t: '형', n: BRANCH[a] + BRANCH[b] + '형(지세지형)' });
+    if (a === b && [4, 6, 9, 11].includes(a)) out.push({ t: '형', n: BRANCH[a] + BRANCH[b] + '자형' });
+    for (const g of SAM) {
+      if ((a === g[0] && b === g[1]) || (a === g[1] && b === g[0]) || (a === g[1] && b === g[2]) || (a === g[2] && b === g[1]))
+        out.push({ t: '반합', n: BRANCH[a] + BRANCH[b] + ' 반합(' + ELEM[g[3]] + ')', e: g[3] });
+    }
+    return out;
+  }
+  function relations(pil, hourKnown) {
+    const labels = ['년', '월', '일', '시'], P = [pil.year, pil.month, pil.day, pil.hour];
+    const n = hourKnown ? 4 : 3, res = [];
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+      const a = P[i].s, b = P[j].s;
+      for (const p of CHEONGAN_HAP) if ((a === p[0] && b === p[1]) || (a === p[1] && b === p[0])) res.push({ t: '천간합', n: STEM[a] + STEM[b] + '합(' + ELEM[p[2]] + ')', pos: labels[i] + '간·' + labels[j] + '간' });
+      for (const p of [[0, 6], [1, 7], [2, 8], [3, 9]]) if ((a === p[0] && b === p[1]) || (a === p[1] && b === p[0])) res.push({ t: '천간충', n: STEM[a] + STEM[b] + '충', pos: labels[i] + '간·' + labels[j] + '간' });
+      branchPairRel(P[i].b, P[j].b).forEach(r => res.push({ t: r.t, n: r.n, e: r.e, pos: labels[i] + '지·' + labels[j] + '지' }));
+    }
+    const bs = [];
+    for (let i = 0; i < n; i++) bs.push(P[i].b);
+    const present = new Set(bs);
+    for (const g of SAM) if (present.has(g[0]) && present.has(g[1]) && present.has(g[2])) res.push({ t: '삼합', n: BRANCH[g[0]] + BRANCH[g[1]] + BRANCH[g[2]] + ' 삼합(' + ELEM[g[3]] + ')', e: g[3], pos: '지지' });
+    for (const g of BANG) if (present.has(g[0]) && present.has(g[1]) && present.has(g[2])) res.push({ t: '방합', n: BRANCH[g[0]] + BRANCH[g[1]] + BRANCH[g[2]] + ' 방합(' + ELEM[g[3]] + ')', e: g[3], pos: '지지' });
+    for (const tri of [[2, 5, 8], [1, 10, 7]]) if (tri.every(x => present.has(x))) res.push({ t: '삼형', n: tri.map(x => BRANCH[x]).join('') + ' 삼형', pos: '지지' });
+    return res;
+  }
+
+  /* ---------- 신살 ---------- */
+  const CHEONEUL = [[1, 7], [0, 8], [11, 9], [11, 9], [1, 7], [0, 8], [1, 7], [2, 6], [3, 5], [3, 5]];
+  const grpOf = b => SAM.findIndex(g => g.slice(0, 3).includes(b));
+  const DOHWA = [9, 0, 3, 6]; /* SAM 순서: 신자진→유, 해묘미→자, 인오술→묘, 사유축→오 */
+  const YEOKMA = [2, 5, 8, 11]; /* 신자진→인, 해묘미→사, 인오술→신, 사유축→해 */
+  const HWAGAE = [4, 7, 10, 1]; /* 신자진→진, 해묘미→미, 인오술→술, 사유축→축 */
+  const YANGIN = { 0: 3, 2: 6, 4: 6, 6: 9, 8: 0 };
+  function sinsal(pil, hourKnown, dayIdx60) {
+    const P = [pil.year, pil.month, pil.day, pil.hour], lab = ['년지', '월지', '일지', '시지'], n = hourKnown ? 4 : 3, out = [];
+    const find = set => { const r = []; for (let i = 0; i < n; i++) if (set.includes(P[i].b)) r.push(lab[i]); return r; };
+    const dS = pil.day.s;
+    let r = find(CHEONEUL[dS]); if (r.length) out.push({ n: '천을귀인', pos: r, desc: '어려울 때 도움을 받는 귀인의 별 (' + CHEONEUL[dS].map(x => BRANCH[x]).join('·') + ')' });
+    for (const [base, bl] of [[pil.year.b, '년지'], [pil.day.b, '일지']]) {
+      const g = grpOf(base);
+      let r2 = find([DOHWA[g]]).filter(x => x !== bl); if (r2.length) out.push({ n: '도화살', pos: r2, desc: '매력·인기·이성운의 별 (' + bl + ' 기준 ' + BRANCH[DOHWA[g]] + ')' });
+      r2 = find([YEOKMA[g]]).filter(x => x !== bl); if (r2.length) out.push({ n: '역마살', pos: r2, desc: '이동·변화·활동성의 별 (' + bl + ' 기준 ' + BRANCH[YEOKMA[g]] + ')' });
+      r2 = find([HWAGAE[g]]).filter(x => x !== bl); if (r2.length) out.push({ n: '화개살', pos: r2, desc: '예술·종교·학문·고독의 별 (' + bl + ' 기준 ' + BRANCH[HWAGAE[g]] + ')' });
+    }
+    if (YANGIN[dS] !== undefined) { r = find([YANGIN[dS]]); if (r.length) out.push({ n: '양인살', pos: r, desc: '강한 추진력과 날카로움의 별' }); }
+    const xun = Math.floor(dayIdx60 / 10), g1 = mod(10 - 2 * xun, 12), g2 = (g1 + 1) % 12;
+    r = find([g1, g2]); if (r.length) out.push({ n: '공망', pos: r, desc: '비어 있는 자리 (' + BRANCH[g1] + BRANCH[g2] + ' 공망)' });
+    const gg = [16, 46, 28, 58];
+    const ps = [pil.year, pil.month, pil.day, pil.hour], gl = ['년주', '월주', '일주', '시주'];
+    const gr = []; for (let i = 0; i < n; i++) if (gg.includes(idx60(ps[i].s, ps[i].b))) gr.push(gl[i]);
+    if (gr.length) out.push({ n: '괴강살', pos: gr, desc: '강렬하고 극단적인 기운의 별' });
+    return { list: out, gongmang: [g1, g2] };
+  }
+
+  /* ---------- 분석 ---------- */
+  function analyze(c) {
+    const pil = c.pillars, d = pil.day.s, hk = c.hourKnown;
+    const stems = [[pil.year.s, 10, '년간'], [pil.month.s, 15, '월간'], [pil.hour.s, 12, '시간']];
+    const brs = [[pil.year.b, 8, '년지'], [pil.month.b, 30, '월지'], [pil.day.b, 15, '일지'], [pil.hour.b, 10, '시지']];
+    const useS = hk ? stems : stems.slice(0, 2), useB = hk ? brs : brs.slice(0, 3);
+    const elemW = [0, 0, 0, 0, 0], ssW = new Array(10).fill(0); let total = 0;
+    for (const [s, w] of useS) { ssW[ssIdx(d, s)] += w; elemW[SE[s]] += w; total += w; }
+    for (const [b, w] of useB) {
+      HID[b].forEach((h, k) => { const ww = w * HIDD[b][k] / 30; ssW[ssIdx(d, h)] += ww; elemW[SE[h]] += ww; });
+      total += w;
+    }
+    const pct = x => total ? x / total * 100 : 0;
+    const ssPct = ssW.map(pct), elemPct = elemW.map(pct);
+    const grpPct = [0, 1, 2, 3, 4].map(g => ssPct[g * 2] + ssPct[g * 2 + 1]);
+    const self = grpPct[0] + grpPct[4];
+    /* 8글자 단순 개수 */
+    const elemCnt = [0, 0, 0, 0, 0];
+    const eight = [pil.year.s, pil.month.s, pil.day.s].concat(hk ? [pil.hour.s] : []);
+    eight.forEach(s => elemCnt[SE[s]]++);
+    [pil.year.b, pil.month.b, pil.day.b].concat(hk ? [pil.hour.b] : []).forEach(b => elemCnt[SE[mainHid(b)]]++);
+    /* 득령 · 득지 · 득세 */
+    const mb = pil.month.b, allyG = new Set([0, 4]);
+    let monthAlly = 0; HID[mb].forEach((h, k) => { if (allyG.has(Math.floor(ssIdx(d, h) / 2))) monthAlly += HIDD[mb][k] / 30; });
+    const deukryeong = monthAlly >= 0.5;
+    /* 신강/신약 */
+    let grade, gradeKey;
+    if (self >= 65) { grade = '극신강'; gradeKey = 'xs'; } else if (self >= 52) { grade = '신강'; gradeKey = 's'; }
+    else if (self >= 42) { grade = '중화'; gradeKey = 'm'; } else if (self >= 30) { grade = '신약'; gradeKey = 'w'; } else { grade = '극신약'; gradeKey = 'xw'; }
+    /* 종격 가능성: 뿌리(비겁·인성)가 거의 없을 때 */
+    const jong = self < 12 ? '종약(從弱)' : (self > 88 ? '종강(從強)' : null);
+    /* 격국 (월지 지장간 투출 기준) */
+    const topStems = [pil.year.s, pil.month.s].concat(hk ? [pil.hour.s] : []);
+    const cand = HID[mb].slice().reverse(); let pick = cand[0], touchul = false;
+    for (const h of cand) { if (h !== cand[0] && ssIdx(d, h) < 2) continue; /* 비견·겁재가 투출해도 격으로 쓰지 않음(정기가 비겁이면 건록·양인·월겁격) */ if (topStems.includes(h)) { pick = h; touchul = true; break; } }
+    const gss = ssIdx(d, pick);
+    const GN = ['건록격', d % 2 === 0 ? '양인격' : '월겁격', '식신격', '상관격', '편재격', '정재격', '편관격', '정관격', '편인격', '정인격'];
+    const gyeok = { name: GN[gss], ss: gss, stem: pick, touchul, month: BRANCH[mb] };
+    /* 용신 (억부 + 조후) */
+    const eBi = SE[d], eSik = mod(SE[d] + 1, 5), eJae = mod(SE[d] + 2, 5), eGwan = mod(SE[d] + 3, 5), eIn = mod(SE[d] + 4, 5);
+    const gE = { 0: eBi, 1: eSik, 2: eJae, 3: eGwan, 4: eIn };
+    let yong, hui, gi = [], reason = '';
+    if (jong) {
+      const top = elemPct.map((v, i) => [v, i]).sort((a, b) => b[0] - a[0])[0][1];
+      yong = top; hui = mod(top - 1, 5);
+      reason = '일간을 돕는 뿌리가 거의 없어 가장 강한 ' + ELEM[top] + ' 기운을 따라가는 종격(' + jong + ')으로 볼 수 있어요.';
+      gi = [mod(top + 3, 5)];
+    } else if (gradeKey === 'xs' || gradeKey === 's') {
+      const sc = g => Math.min(grpPct[g], 20) + ({ 1: 3, 2: 2, 3: 1.5 })[g];
+      const order = [1, 2, 3].sort((a, b) => sc(b) - sc(a)); const pg = order[0];
+      yong = gE[pg]; hui = mod(yong - 1, 5);
+      reason = '일간이 ' + grade + '이라 힘을 덜어주는 ' + GRP[pg] + '(' + ELEM[yong] + ')을 용신으로 봐요.';
+      gi = [gE[4], gE[0]].filter(e => e !== yong && e !== hui);
+    } else if (gradeKey === 'm') {
+      const sc = g => grpPct[g];
+      const g = [1, 2, 3].sort((a, b) => sc(a) - sc(b))[0];
+      yong = gE[g]; hui = mod(yong - 1, 5);
+      reason = '균형이 비교적 맞는 중화 사주라, 상대적으로 약한 ' + GRP[g] + '(' + ELEM[yong] + ')을 보강하는 쪽으로 봐요.';
+      gi = [];
+    } else {
+      const pg = grpPct[2] > grpPct[3] ? 0 : 4; /* 재가 강하면 비겁, 관이 강하면 인성 */
+      const pg2 = pg === 0 ? 4 : 0;
+      yong = gE[pg]; hui = gE[pg2];
+      reason = '일간이 ' + grade + '이라 일간을 도와주는 ' + GRP[pg] + '(' + ELEM[yong] + ')을 용신으로 봐요.';
+      gi = [gE[1], gE[2], gE[3]].filter(e => e !== yong && e !== hui);
+    }
+    const season = [0, 11, 1].includes(mb) ? 'win' : [5, 6, 7].includes(mb) ? 'sum' : [2, 3, 4].includes(mb) ? 'spr' : 'aut';
+    let johu = null;
+    if (season === 'win' && elemPct[1] < 10) johu = { e: 1, note: '겨울 태생이고 불(火) 기운이 약해 한습한 사주예요. 화(火)로 따뜻하게 해주는 조후가 중요해요.' };
+    else if (season === 'sum' && elemPct[4] < 10) johu = { e: 4, note: '여름 태생이고 물(水) 기운이 약해 조열한 사주예요. 수(水)로 식혀주는 조후가 중요해요.' };
+    else if (season === 'win' && elemPct[1] >= 10) johu = { e: null, note: '겨울 태생이지만 불(火) 기운이 있어 한기는 어느 정도 풀려 있어요.' };
+    else if (season === 'sum' && elemPct[4] >= 10) johu = { e: null, note: '여름 태생이지만 물(水) 기운이 있어 열기는 어느 정도 식혀져 있어요.' };
+    const missing = [0, 1, 2, 3, 4].filter(e => elemPct[e] < 3);
+    const excess = [0, 1, 2, 3, 4].filter(e => elemPct[e] >= 35);
+    /* 12운성 / 십성 표 */
+    const pos = ['year', 'month', 'day', 'hour'];
+    const table = pos.map(k => {
+      const p = pil[k], isDay = k === 'day';
+      return {
+        key: k, s: p.s, b: p.b,
+        ssStem: isDay ? null : ssIdx(d, p.s), ssBranch: ssIdx(d, mainHid(p.b)),
+        stage: stageIdx(d, p.b), hid: HID[p.b].map(h => ({ s: h, ss: ssIdx(d, h) }))
+      };
+    });
+    const rel = relations(pil, hk);
+    const dIdx60 = idx60(pil.day.s, pil.day.b);
+    const sal = sinsal(pil, hk, dIdx60);
+    return {
+      elemW, elemPct, elemCnt, ssPct, grpPct, self, deukryeong, grade, gradeKey, jong, gyeok,
+      yong: { e: yong, hui, gi, reason, johu }, season, missing, excess, table, rel, sinsal: sal.list, gongmang: sal.gongmang, dIdx60
+    };
+  }
+
+  /* ---------- 대운 · 세운 ---------- */
+  function fortunes(c, opt) {
+    const pil = c.pillars, d = pil.day.s, inst = c.instant;
+    const yang = pil.year.s % 2 === 0, male = c.gender === '남';
+    const forward = (male && yang) || (!male && !yang);
+    const jl2 = jieList(new Date(inst + 540 * 60000).getUTCFullYear());
+    let prev = null, next = null;
+    for (let i = 0; i < jl2.length; i++) { if (jl2[i].ms <= inst) prev = jl2[i]; else { next = jl2[i]; break; } }
+    const diffMin = (forward ? next.ms - inst : inst - prev.ms) / 60000;
+    const days = diffMin / 1440;
+    const years = Math.floor(days / 3), rem = days - 3 * years, months = Math.floor(rem * 4), remDays = Math.floor((rem * 4 - months) * 30);
+    const dae = years + (months >= 6 ? 1 : 0);
+    const mIdx = idx60(pil.month.s, pil.month.b);
+    const bd = new Date(inst + 540 * 60000);
+    const list = [];
+    const nowY = opt.nowYear;
+    for (let n = 1; n <= 10; n++) {
+      const gi = forward ? mod(mIdx + n, 60) : mod(mIdx - n, 60);
+      const s = gi % 10, b = gi % 12;
+      const startAge = dae + 10 * (n - 1);
+      const sy = c.solar.y + years + 10 * (n - 1) + Math.floor((c.solar.m - 1 + months) / 12);
+      list.push({
+        n, idx: gi, s, b, startAge, endAge: startAge + 9, startYear: sy, endYear: sy + 9,
+        ssStem: ssIdx(d, s), ssBranch: ssIdx(d, mainHid(b)), stage: stageIdx(d, b)
+      });
+    }
+    let cur = null; for (const l of list) if (nowY >= l.startYear && nowY <= l.endYear) cur = l.n;
+    const seun = [];
+    for (let y = nowY - 3; y <= nowY + 12; y++) {
+      const s = mod(y - 4, 10), b = mod(y - 4, 12);
+      const rels = []; ['year', 'month', 'day', 'hour'].forEach((k, i) => {
+        if (i === 3 && !c.hourKnown) return;
+        branchPairRel(b, pil[k].b).forEach(r => rels.push({ t: r.t, n: r.n, pos: ['년', '월', '일', '시'][i] + '지' }));
+      });
+      seun.push({ y, s, b, ssStem: ssIdx(d, s), ssBranch: ssIdx(d, mainHid(b)), stage: stageIdx(d, b), rels });
+    }
+    return { forward, years, months, remDays, dae, list, cur, seun, prevJie: prev, nextJie: next, nowY };
+  }
+
+  /* ---------- 진입점 ---------- */
+  function calc(inp) {
+    const opt = { lon: inp.lon !== false, dst: inp.dst !== false, zi: inp.zi === 'jo' ? 'jo' : 'ya' };
+    let solar = { y: inp.y, m: inp.m, d: inp.d }, lunarIn = null;
+    if (inp.calendar === 'lunar') {
+      const s = lunarToSolar(inp.y, inp.m, !!inp.leap, inp.d);
+      if (!s) throw new Error('입력한 음력 날짜가 달력에 없어요. 월·일·윤달 여부를 확인해 주세요.');
+      lunarIn = { y: inp.y, m: inp.m, d: inp.d, leap: !!inp.leap };
+      solar = s;
+    }
+    if (solar.y < 1900 || solar.y > 2099) throw new Error('1900~2099년 사이만 계산할 수 있어요.');
+    const hourKnown = inp.h != null && inp.h !== '' && !isNaN(inp.h);
+    const h = hourKnown ? Number(inp.h) : 12, mi = hourKnown ? Number(inp.mi || 0) : 0;
+    const wallMs = Date.UTC(solar.y, solar.m - 1, solar.d, h, mi);
+    const instant = wallToUtc(wallMs, opt.dst);
+    const dstApplied = opt.dst && (() => { const o = utcToWallOffset(instant); return o === 600 || o === 570; })();
+    const pillars = pillarsAt(instant, opt);
+    const lunar = lunarIn || solarToLunar(solar.y, solar.m, solar.d);
+    const c = { input: Object.assign({}, inp), opt, solar, lunar, instant, hourKnown, gender: inp.gender === '여' ? '여' : '남', pillars, dstApplied };
+    c.analysis = analyze(c);
+    c.fortune = fortunes(c, { nowYear: inp.nowYear || new Date().getFullYear() });
+    return c;
+  }
+
+  return {
+    calc, lunarToSolar, solarToLunar, leapOf, lunarMonthLen, termsMs, wallToUtc, pillarsAt, jieList, branchPairRel, ssIdx, stageIdx, idx60, dayIndexOf,
+    STEM, BRANCH, STEM_H, BRANCH_H, ELEM, ELEM_H, SE, BE, HID, SS, GRP, STAGE, TERM_NAMES, JIE_NAMES, mainHid, gzName, gzHanja, mod
+  };
+})();
+
+/* ===== 사주 풀이 문장 (자평명리 기본 해석, 규칙 기반) ===== */
+const SJ_TXT = (function () {
+  const DAY = [
+    ['갑목(甲木) · 큰 나무', '곧게 위로 뻗는 큰 나무예요. 시작하고 이끄는 힘이 있고 자존심이 강해서, 굽히기보다 부러지는 쪽에 가까워요. 정의감과 추진력이 장점이고, 융통성이 부족해 보일 수 있어요.'],
+    ['을목(乙木) · 풀과 덩굴', '바람에 휘어도 꺾이지 않는 풀과 덩굴이에요. 유연하고 적응력이 좋고 끈질기게 버텨요. 겉은 부드럽지만 속에 고집이 있고, 남의 눈치를 많이 보는 면이 있어요.'],
+    ['병화(丙火) · 태양', '세상을 비추는 태양이에요. 밝고 열정적이고 숨기는 것 없이 공개적이에요. 베푸는 걸 좋아하고 존재감이 크지만, 성격이 급하고 끝맺음이 약할 때가 있어요.'],
+    ['정화(丁火) · 촛불', '어둠을 밝히는 촛불이에요. 따뜻하고 섬세하고 집중력이 좋아요. 겉으로는 차분해도 속에 열정이 있고, 감정이 예민해서 마음에 오래 담아두는 편이에요.'],
+    ['무토(戊土) · 큰 산', '움직이지 않는 큰 산이에요. 듬직하고 신용을 중시하고 중심을 잘 잡아요. 한번 정하면 잘 안 바꾸는 고집과, 속내를 잘 드러내지 않는 면이 있어요.'],
+    ['기토(己土) · 논밭', '곡식을 키우는 논밭이에요. 포용력이 있고 현실적이고 실속을 챙겨요. 다재다능하고 남을 잘 돌보지만, 걱정과 생각이 많고 속으로 삭이는 편이에요.'],
+    ['경금(庚金) · 바위와 쇠', '단단한 바위, 갓 캔 쇠예요. 의리가 있고 결단이 빠르고 강직해요. 옳고 그름이 분명해서 말과 행동이 거칠어 보일 수 있고, 다듬어질수록 큰 그릇이 돼요.'],
+    ['신금(辛金) · 보석', '잘 다듬어진 보석, 예리한 칼날이에요. 섬세하고 깔끔하고 완벽주의 성향이 있어요. 자존심이 강하고 상처를 잘 받으며, 인정받고 싶은 마음이 커요.'],
+    ['임수(壬水) · 큰 강과 바다', '넓게 흐르는 큰 강, 바다예요. 지혜롭고 포용력이 크고 자유로운 걸 좋아해요. 스케일이 크고 활동적이지만, 속을 알기 어렵고 한곳에 머물기 힘들어해요.'],
+    ['계수(癸水) · 이슬과 비', '조용히 스며드는 이슬, 빗물이에요. 영리하고 감수성이 풍부하고 눈치가 빨라요. 조용한 지략가 타입인데, 생각이 많아 걱정이 늘고 소극적으로 보일 때가 있어요.']
+  ];
+  const SS = [
+    ['비견', '나와 같은 기운. 독립심·자존심·동료·경쟁을 뜻해요. 많으면 고집이 세지고 재물이 나뉘기 쉬워요.'],
+    ['겁재', '나와 비슷하지만 다투는 기운. 승부욕·추진력·경쟁을 뜻해요. 많으면 충동 지출과 동업 문제를 조심해야 해요.'],
+    ['식신', '내가 낳는 기운(온화한 쪽). 표현·여유·창작·먹을복·꾸준한 생산을 뜻해요. 많으면 느긋함이 지나쳐 게을러질 수 있어요.'],
+    ['상관', '내가 낳는 기운(날카로운 쪽). 재능·말솜씨·비판 정신·자유를 뜻해요. 많으면 규칙과 윗사람과 부딪히기 쉬워요.'],
+    ['편재', '내가 극하는 기운(유동적). 큰 돈·사업·투자·사교·활동성을 뜻해요. 많으면 돈이 들어오는 만큼 나가고 안정이 흔들려요.'],
+    ['정재', '내가 극하는 기운(안정적). 월급·저축·성실·꼼꼼함을 뜻해요. 많으면 현실에 묶여 모험을 못 하는 면이 있어요.'],
+    ['편관', '나를 극하는 기운(강한 쪽). 압박·도전·권위·책임·추진력을 뜻해요. 잘 다루면 리더십, 못 다루면 스트레스예요.'],
+    ['정관', '나를 극하는 기운(바른 쪽). 규범·직장·명예·책임감을 뜻해요. 많으면 눈치와 틀에 갇히기 쉬워요.'],
+    ['편인', '나를 낳는 기운(특이한 쪽). 직관·영감·독특한 재능·비주류 학문을 뜻해요. 많으면 생각만 많고 실행이 늦어져요.'],
+    ['정인', '나를 낳는 기운(바른 쪽). 학문·자격·보호·어머니·안정을 뜻해요. 많으면 의존적이고 행동이 느려질 수 있어요.']
+  ];
+  const GRP = {
+    0: { many: '비겁(나와 같은 편)이 강해요. 자립심과 추진력이 크지만 고집, 경쟁, 재물이 나뉘는 흐름을 조심해야 해요.', none: '비겁이 거의 없어요. 내 편이 되어주는 힘이 약해 혼자 짊어지기 쉬우니 믿을 사람·동료를 의식적으로 만드는 게 좋아요.', ok: '비겁이 적당해서 자기 중심을 지키는 힘이 있어요.' },
+    1: { many: '식상(표현·재능)이 강해요. 말과 아이디어, 창작 재능이 풍부하지만 관(규칙·윗사람)과 부딪히거나 산만해질 수 있어요.', none: '식상이 거의 없어요. 생각을 밖으로 풀어내는 통로가 약해서 속에 쌓아두기 쉬우니, 글·운동·취미 같은 표현 창구가 도움이 돼요.', ok: '식상이 적당해서 표현력과 재능을 무리 없이 쓸 수 있어요.' },
+    2: { many: '재성(재물·현실)이 강해요. 돈과 현실 감각이 밝지만 몸이 힘들어지거나 돈에 끌려다닐 수 있어요.', none: '재성이 거의 없어요. 돈과 현실 관리가 약점이 되기 쉬워서 수입·지출 구조를 의식적으로 만들어두는 게 좋아요.', ok: '재성이 적당해서 현실 감각과 재물 운용이 무난해요.' },
+    3: { many: '관성(규범·책임·압박)이 강해요. 책임감과 조직 적응력이 있지만 스트레스와 눈치가 많고 자유가 줄어들 수 있어요.', none: '관성이 거의 없어요. 틀에 매이는 걸 싫어하는 자유로운 기질이지만, 조직·규칙 속에서 인정받는 길은 의식적으로 챙겨야 해요.', ok: '관성이 적당해서 책임감과 자기 규율이 균형 잡혀 있어요.' },
+    4: { many: '인성(배움·보호)이 강해요. 생각이 깊고 학문·자격에 강하지만 의존적이고 행동이 느려질 수 있어요.', none: '인성이 거의 없어요. 기댈 곳, 배움의 기회가 적어 스스로 공부하고 쉬는 시간을 만들어야 해요.', ok: '인성이 적당해서 배움과 휴식의 기반이 안정적이에요.' }
+  };
+  const ELEM = [
+    { n: '목', many: '목(木)이 많아요. 성장욕, 계획, 자존심이 강해지고 욕심과 분주함이 늘어요.', lack: '목(木)이 부족해요. 시작하고 뻗어나가는 힘이 약할 수 있어요.', organ: '간·담, 근육·눈' },
+    { n: '화', many: '화(火)가 많아요. 열정과 표현이 크지만 급하고 흥분하기 쉬워요.', lack: '화(火)가 부족해요. 열정과 활력, 따뜻함이 모자랄 수 있어요.', organ: '심장·소장, 혈압·혈액순환' },
+    { n: '토', many: '토(土)가 많아요. 신중하고 안정적이지만 고집이 세고 변화에 느려요.', lack: '토(土)가 부족해요. 중심을 잡아주는 신용·끈기가 약할 수 있어요.', organ: '위·비장, 소화기' },
+    { n: '금', many: '금(金)이 많아요. 결단력과 원칙이 강하지만 날카롭고 냉정해 보여요.', lack: '금(金)이 부족해요. 결단과 마무리하는 힘이 약할 수 있어요.', organ: '폐·대장, 호흡기·피부' },
+    { n: '수', many: '수(水)가 많아요. 지혜와 유연함이 크지만 생각이 많고 불안정해지기 쉬워요.', lack: '수(水)가 부족해요. 유연함과 쉬어가는 지혜가 약할 수 있어요.', organ: '신장·방광, 비뇨기·허리' }
+  ];
+  const GRADE = {
+    xs: '일간을 돕는 힘(비겁·인성)이 매우 강해요. 에너지가 넘치는 만큼 쓸 곳(식상·재성·관성)이 있어야 빛나고, 그렇지 않으면 고집이 세지고 답답해져요.',
+    s: '일간이 힘이 있는 신강 사주예요. 자기 주관이 뚜렷하고 추진력이 있어요. 힘을 쓸 무대(일·재물·책임)가 주어질수록 좋아요.',
+    m: '일간의 힘과 주변 기운이 비교적 균형을 이룬 중화 사주예요. 극단으로 치우치지 않아 상황에 맞게 대응하기 좋은 구조예요.',
+    w: '일간이 힘이 약한 신약 사주예요. 주변 환경과 사람의 영향을 많이 받아요. 나를 지지해주는 사람·배움·휴식이 중요해요.',
+    xw: '일간을 돕는 힘이 매우 약해요. 주변 기운이 너무 강해서 버겁게 느끼기 쉬우니, 무리하지 말고 든든한 지원군을 두는 게 중요해요.'
+  };
+  const GYEOK = {
+    '건록격': '월지가 나와 같은 기운이라 자립심이 강하고 스스로 일어서는 구조예요. 남에게 기대기보다 내 힘으로 길을 여는 타입이에요.',
+    '양인격': '월지에 강한 같은 기운(양인)이 있어요. 추진력과 승부욕이 크고 성격이 날카로울 수 있어, 힘을 쓰는 방향이 중요해요.',
+    '월겁격': '월지가 나와 비슷한 기운이라 독립적이고 경쟁에 강해요. 재물이 나뉘지 않게 관리하는 게 숙제예요.',
+    '식신격': '식신이 중심이라 여유 있게 재능을 펼치는 구조예요. 기술·창작·서비스로 꾸준히 먹고사는 데 유리해요.',
+    '상관격': '상관이 중심이라 재능과 말솜씨, 비판 정신이 돋보이는 구조예요. 틀에 얽매이지 않는 일에서 빛나고, 윗사람과의 마찰을 조심해야 해요.',
+    '편재격': '편재가 중심이라 사업·유통·투자처럼 움직이는 재물과 인연이 있어요. 활동 범위가 넓고 사람을 잘 다뤄요.',
+    '정재격': '정재가 중심이라 성실하게 쌓아가는 재물운이에요. 안정적인 수입, 꼼꼼한 관리에 강해요.',
+    '편관격': '편관이 중심이라 압박 속에서 성장하는 구조예요. 책임이 큰 자리, 도전적인 일에서 힘을 내고, 스트레스 관리가 필요해요.',
+    '정관격': '정관이 중심이라 규범과 신뢰로 인정받는 구조예요. 조직·직장·전문직에서 안정적으로 올라가는 타입이에요.',
+    '편인격': '편인이 중심이라 독특한 재능과 직관이 돋보이는 구조예요. 남들이 안 하는 분야나 연구·기획형 일에 잘 맞아요.',
+    '정인격': '정인이 중심이라 배움과 신뢰, 보호를 바탕으로 가는 구조예요. 학문·교육·자격으로 길을 여는 데 유리해요.'
+  };
+  const FLOW = [
+    '비견 흐름 · 나와 같은 기운이 들어와요. 독립·경쟁·동료와의 관계가 이슈가 되고, 자기 주장이 강해지는 시기예요.',
+    '겁재 흐름 · 경쟁과 승부의 기운이 들어와요. 의욕은 커지지만 지출·동업·보증을 조심해야 해요.',
+    '식신 흐름 · 표현과 여유의 기운이 들어와요. 재능을 펼치고 결과물을 만들기 좋은 시기예요.',
+    '상관 흐름 · 재능과 변화의 기운이 들어와요. 새로운 시도·이직·창작에 좋지만, 말과 규칙 문제를 조심해야 해요.',
+    '편재 흐름 · 활동적인 재물 기운이 들어와요. 사업·투자·사교 기회가 늘지만 씀씀이도 커져요.',
+    '정재 흐름 · 안정적인 재물 기운이 들어와요. 수입·저축·현실 정리에 좋은 시기예요.',
+    '편관 흐름 · 압박과 도전의 기운이 들어와요. 책임이 늘고 바빠지지만, 잘 버티면 한 단계 올라서요.',
+    '정관 흐름 · 규범과 명예의 기운이 들어와요. 직장·승진·평판과 연결되고 생활이 정돈돼요.',
+    '편인 흐름 · 직관과 특수한 배움의 기운이 들어와요. 새 분야를 공부하거나 생각이 깊어지는 시기예요.',
+    '정인 흐름 · 배움과 보호의 기운이 들어와요. 자격·공부·귀인의 도움을 받기 좋은 시기예요.'
+  ];
+  const STAGE_TXT = ['장생: 새로 시작하는 힘', '목욕: 불안정하지만 매력적인 기운', '관대: 한창 뻗어나가는 기운', '건록: 자립하는 힘', '제왕: 정점의 기운', '쇠: 서서히 기운이 빠지는 단계', '병: 힘이 약해지는 단계', '사: 정지 상태', '묘: 저장·갈무리', '절: 끊김과 새 출발의 씨앗', '태: 잉태, 가능성', '양: 길러지는 단계'];
+  const POS = {
+    year: '년주(조상·어린 시절·사회 바깥 환경)', month: '월주(부모·청년기·직업 환경)', day: '일주(나 자신·배우자 자리)', hour: '시주(자식·말년·내 결과물)'
+  };
+  const REL = {
+    '천간합': '두 기운이 끌려서 하나로 묶이려는 힘이에요. 인연·협력이 생기지만, 일간이 묶이면 본래 성향이 바뀌기도 해요.',
+    '천간충': '천간끼리 정면으로 부딪히는 힘이에요. 갈등·변화·결단의 계기가 되기 쉬워요.',
+    '육합': '지지끼리 결합하는 힘이에요. 안정적인 관계·협력·인연을 뜻하고, 주변 변화에 잘 흔들리지 않게 해줘요.',
+    '삼합': '세 지지가 모여 한 오행의 큰 힘을 만드는 구조예요. 그 오행이 사주 전체에서 강해져요.',
+    '방합': '같은 계절의 세 지지가 모여 한 방향으로 힘이 쏠리는 구조예요.',
+    '충': '지지끼리 부딪히는 힘이에요. 변동·이동·갈등이 생기기 쉽고, 해당 궁(년·월·일·시)에 관련된 일에서 변화가 나타나요.',
+    '형': '지지끼리 서로 찌르는 힘이에요. 마찰·압박·시련이 있으나 단련되는 면도 있어요.',
+    '삼형': '세 지지가 서로 형을 이루는 구조예요. 마찰과 압박이 크지만 단단해지는 계기가 돼요.',
+    '파': '지지끼리 약하게 깨뜨리는 힘이에요. 관계나 계획이 어긋나기 쉬운 가벼운 흠이에요.',
+    '해': '지지끼리 은근히 해치는 힘이에요. 서운함·오해·소소한 갈등으로 나타나요.'
+  };
+  const SEASON = { spr: '봄', sum: '여름', aut: '가을', win: '겨울' };
+  return { DAY, SS, GRP, ELEM, GRADE, GYEOK, FLOW, STAGE_TXT, POS, REL, SEASON };
+})();
+
+/* 규칙 기반 풀이: 계산 결과 → [{t: 제목, p: [문단...]}] */
+function sjReading(c) {
+  const A = c.analysis, P = c.pillars, F = c.fortune, d = P.day.s;
+  const N = SJ.ELEM, T = SJ_TXT, out = [];
+  const gz = (s, b) => SJ.STEM[s] + SJ.BRANCH[b];
+  const pct = v => Math.round(v) + '%';
+  /* 1. 한눈에 */
+  out.push({
+    t: '한눈에 보기', p: [
+      `일주는 ${gz(P.day.s, P.day.b)}(${SJ.STEM_H[P.day.s]}${SJ.BRANCH_H[P.day.b]})이고, 나를 나타내는 일간은 ${T.DAY[d][0].split(' · ')[0]}이에요. 물상으로는 '${T.DAY[d][0].split(' · ')[1]}'에 해당해요.`,
+      `${T.SEASON[A.season]}(월지 ${SJ.BRANCH[P.month.b]}${SJ.BRANCH_H[P.month.b]})에 태어났고, 일간의 힘은 ${A.grade}${A.deukryeong ? '(월령을 얻음)' : '(월령을 얻지 못함)'}이에요. 격국은 ${A.gyeok.name}${A.gyeok.touchul ? '' : '(월지 기운이 천간에 드러나지 않아 정기 기준)'}이고, 용신 후보는 ${N[A.yong.e]}(${SJ.ELEM_H[A.yong.e]}) 쪽이에요.`
+    ]
+  });
+  /* 2. 타고난 기질 */
+  const sp = [T.DAY[d][1], T.GRADE[A.gradeKey]];
+  if (A.jong) sp.push(`일간을 돕는 뿌리가 매우 약하거나 지나치게 강해서 ${A.jong} 가능성이 있어요. 이런 구조는 일반 신강신약과 해석이 달라지니, 전문가 확인을 권해요.`);
+  out.push({ t: '타고난 기질', p: sp });
+  /* 3. 오행 균형 */
+  const ep = [`오행 분포는 목 ${pct(A.elemPct[0])} · 화 ${pct(A.elemPct[1])} · 토 ${pct(A.elemPct[2])} · 금 ${pct(A.elemPct[3])} · 수 ${pct(A.elemPct[4])}예요. (천간·지지, 지장간의 힘을 위치별 가중치로 계산한 값이에요.)`];
+  A.excess.forEach(e => ep.push(T.ELEM[e].many));
+  A.missing.forEach(e => ep.push(T.ELEM[e].lack + ' 전통적으로는 ' + T.ELEM[e].organ + ' 쪽을 생활 습관으로 챙기라고 해요(의학적 근거가 아니라 전통 해석이에요).'));
+  if (!A.excess.length && !A.missing.length) ep.push('특별히 치우치거나 비어 있는 오행이 없어 비교적 고른 편이에요.');
+  if (A.yong.johu) ep.push(A.yong.johu.note);
+  out.push({ t: '오행의 균형', p: ep });
+  /* 4. 십성 구조 */
+  const order = [0, 1, 2, 3, 4].map(g => [g, A.grpPct[g]]).sort((a, b) => b[1] - a[1]);
+  const sp2 = [`십성 비중은 비겁 ${pct(A.grpPct[0])} · 식상 ${pct(A.grpPct[1])} · 재성 ${pct(A.grpPct[2])} · 관성 ${pct(A.grpPct[3])} · 인성 ${pct(A.grpPct[4])}예요.`];
+  const g0 = order[0][0], g1 = order[1][0];
+  sp2.push(T.GRP[g0][order[0][1] >= 28 ? 'many' : 'ok']);
+  if (order[1][1] >= 22) sp2.push(T.GRP[g1].many);
+  [0, 1, 2, 3, 4].filter(g => A.grpPct[g] < 5).forEach(g => sp2.push(T.GRP[g].none));
+  const dayHid = SJ.mainHid(P.day.b), ssSp = SJ.ssIdx(d, dayHid);
+  sp2.push(`배우자 자리인 일지(${SJ.BRANCH[P.day.b]})의 십성은 ${SJ.SS[ssSp]}이에요. ${T.SS[ssSp][1]}`);
+  out.push({ t: '십성 구조', p: sp2 });
+  /* 5. 격국 */
+  out.push({ t: '격국(사주의 틀)', p: [T.GYEOK[A.gyeok.name] || '', `월지 ${SJ.BRANCH[P.month.b]}의 지장간 중 ${SJ.STEM[A.gyeok.stem]}(${SJ.SS[A.gyeok.ss]})을 기준으로 잡았어요. ${A.gyeok.touchul ? '이 기운이 천간에 드러나 있어 격이 뚜렷해요.' : '천간에 드러난 글자가 없어 월지 정기를 기준으로 했어요.'}`] });
+  /* 6. 용신 */
+  const yp = [A.yong.reason];
+  yp.push(`희신(용신을 돕는 기운)은 ${N[A.yong.hui]}(${SJ.ELEM_H[A.yong.hui]})이에요.` + (A.yong.gi.length ? ` 반대로 부담이 되는 기신 후보는 ${A.yong.gi.map(e => N[e]).join('·')}이에요.` : ''));
+  yp.push('용신은 학파와 해석자에 따라 달라질 수 있는 부분이라, 참고용 방향으로만 보세요.');
+  out.push({ t: '용신(필요한 기운)', p: yp });
+  /* 7. 합충 */
+  if (A.rel.length) {
+    const seen = new Set(), rp = [];
+    A.rel.forEach(r => {
+      const k = r.t === '삼형' ? '삼형' : r.t;
+      const line = `${r.n} (${r.pos}) — ${T.REL[k] || ''}`;
+      if (!seen.has(line)) { seen.add(line); rp.push(line); }
+    });
+    out.push({ t: '합·충·형 관계', p: rp });
+  } else out.push({ t: '합·충·형 관계', p: ['명식 안에서 뚜렷한 합·충·형이 없어요. 큰 충돌 없이 구조가 안정적인 편이에요.'] });
+  /* 8. 대운·세운 */
+  const fp = [`대운은 ${F.forward ? '순행' : '역행'}이고, 대운수는 ${F.dae}세예요. (${c.gender === '남' ? '남' : '여'}자·${P.year.s % 2 === 0 ? '양' : '음'}년생 기준)`];
+  const cur = F.cur ? F.list[F.cur - 1] : null;
+  if (cur) {
+    fp.push(`지금은 ${gz(cur.s, cur.b)} 대운(${cur.startAge}~${cur.endAge}세, ${cur.startYear}~${cur.endYear}년)이에요. 천간 ${SJ.SS[cur.ssStem]}, 지지 ${SJ.SS[cur.ssBranch]}의 흐름이에요.`);
+    fp.push(T.FLOW[cur.ssStem]);
+    if (cur.ssBranch !== cur.ssStem) fp.push('지지 쪽은 ' + T.FLOW[cur.ssBranch]);
+  } else if (F.dae > 0 && F.nowY < F.list[0].startYear) fp.push('아직 첫 대운이 시작되기 전이에요.');
+  const sy = F.seun.find(x => x.y === F.nowY);
+  if (sy) {
+    fp.push(`${sy.y}년(${gz(sy.s, sy.b)}년) 세운은 천간 ${SJ.SS[sy.ssStem]}, 지지 ${SJ.SS[sy.ssBranch]}이에요. ${T.FLOW[sy.ssStem]}`);
+    if (sy.rels.length) fp.push('올해 지지가 명식과 만나는 관계: ' + sy.rels.map(r => `${r.n}(${r.pos})`).join(', ') + '. 해당 자리와 관련된 일에서 변화가 나타나기 쉬워요.');
+  }
+  out.push({ t: '대운과 올해의 흐름', p: fp });
+  /* 9. 신살 */
+  if (A.sinsal.length) out.push({ t: '신살(보조 참고)', p: A.sinsal.map(s => `${s.n} (${s.pos.join('·')}) — ${s.desc}`).concat(['신살은 자평명리에서 핵심이 아니라 보조 참고로만 봐요.']) });
+  return out;
+}
+
+/* AI 에 보낼 요약 데이터 (계산 결과 그대로) */
+function sjChartForAI(c, nameLabel) {
+  const A = c.analysis, P = c.pillars, F = c.fortune, gz = (s, b) => SJ.STEM[s] + SJ.BRANCH[b] + '(' + SJ.STEM_H[s] + SJ.BRANCH_H[b] + ')';
+  const pos = ['year', 'month', 'day', 'hour'], lab = ['년주', '월주', '일주', '시주'];
+  return {
+    성별: c.gender, 양력생일: `${c.solar.y}-${c.solar.m}-${c.solar.d}`, 음력: c.lunar ? `${c.lunar.y}-${c.lunar.m}-${c.lunar.d}${c.lunar.leap ? '(윤달)' : ''}` : null,
+    시간모름: !c.hourKnown, 오늘기준연도: F.nowY,
+    사주: pos.map((k, i) => (k === 'hour' && !c.hourKnown) ? null : { 위치: lab[i], 간지: gz(P[k].s, P[k].b), 천간십성: k === 'day' ? '일간(나)' : SJ.SS[A.table[i].ssStem], 지지십성: SJ.SS[A.table[i].ssBranch], 운성: SJ.STAGE[A.table[i].stage], 지장간: A.table[i].hid.map(h => SJ.STEM[h.s] + '(' + SJ.SS[h.ss] + ')').join(' ') }).filter(Boolean),
+    일간: SJ.STEM[d0(P)] + '(' + SJ.ELEM[SJ.SE[d0(P)]] + ')',
+    오행비율: SJ.ELEM.map((e, i) => e + ' ' + Math.round(A.elemPct[i]) + '%').join(', '),
+    십성그룹비율: SJ.GRP.map((g, i) => g + ' ' + Math.round(A.grpPct[i]) + '%').join(', '),
+    신강신약: A.grade + ' (일간 편 ' + Math.round(A.self) + '%, 월령 ' + (A.deukryeong ? '득령' : '실령') + ')', 종격가능성: A.jong,
+    격국: A.gyeok.name, 용신: SJ.ELEM[A.yong.e], 희신: SJ.ELEM[A.yong.hui], 기신후보: A.yong.gi.map(e => SJ.ELEM[e]), 용신근거: A.yong.reason, 조후: A.yong.johu ? A.yong.johu.note : null,
+    합충형: A.rel.map(r => r.n + ' ' + r.pos), 신살: A.sinsal.map(s => s.n + ' ' + s.pos.join('·')),
+    대운: { 방향: F.forward ? '순행' : '역행', 대운수: F.dae, 현재대운번호: F.cur, 목록: F.list.map(l => ({ 간지: gz(l.s, l.b), 나이: l.startAge + '~' + l.endAge, 연도: l.startYear + '~' + l.endYear, 십성: SJ.SS[l.ssStem] + '/' + SJ.SS[l.ssBranch] })) },
+    세운: F.seun.filter(s => s.y >= F.nowY - 1 && s.y <= F.nowY + 5).map(s => ({ 연도: s.y, 간지: gz(s.s, s.b), 십성: SJ.SS[s.ssStem] + '/' + SJ.SS[s.ssBranch], 충합: s.rels.map(r => r.n + '(' + r.pos + ')') }))
+  };
+  function d0(P) { return P.day.s; }
+}
+
+/* ===== 사주 탭 UI ===== */
+const SJA = { loaded: false, loading: false, list: [], sel: null, opt: Object.assign({ dst: true, lon: true, zi: 'ya' }, store.get('sj_opt', {})), aiBusy: false, q: '', err: '' };
+const SJ_EC = ['var(--sj-e0)', 'var(--sj-e1)', 'var(--sj-e2)', 'var(--sj-e3)', 'var(--sj-e4)'];
+const sjP2 = n => String(n).padStart(2, '0');
+function sjFmtKst(ms) { const d = new Date(ms + 9 * 3600000); return `${d.getUTCFullYear()}.${sjP2(d.getUTCMonth() + 1)}.${sjP2(d.getUTCDate())} ${sjP2(d.getUTCHours())}:${sjP2(d.getUTCMinutes())}`; }
+function sjInput(p) {
+  return { y: p.birth_year, m: p.birth_month, d: p.birth_day, h: p.birth_hour, mi: p.birth_minute || 0, gender: p.gender, calendar: p.calendar, leap: !!p.is_leap, dst: SJA.opt.dst, lon: SJA.opt.lon, zi: SJA.opt.zi, nowYear: new Date().getFullYear() };
+}
+function sjCur() { return SJA.list.find(x => x.id === SJA.sel) || null; }
+
+async function sjLoad() {
+  if (SJA.loading) return; SJA.loading = true;
+  try {
+    const { data, error } = await sb.from('saju_profiles').select('*').order('created_at', { ascending: true });
+    if (error) throw error;
+    SJA.list = data || []; SJA.loaded = true; SJA.err = '';
+    if (!SJA.list.find(x => x.id === SJA.sel)) { const me = SJA.list.find(x => x.is_me) || SJA.list[0]; SJA.sel = me ? me.id : null; }
+  } catch (e) { SJA.err = e.message || '불러오지 못했어요'; SJA.loaded = true; }
+  SJA.loading = false; sjRender();
+}
+function renderSajuTab() { if (!SJA.loaded) { sjRender(); sjLoad(); } else sjRender(); }
+
+function sjMd(txt) {
+  const lines = String(txt || '').split('\n'); let h = '', inUl = false;
+  const inl = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  const closeUl = () => { if (inUl) { h += '</ul>'; inUl = false; } };
+  for (const raw of lines) {
+    const l = raw.trimEnd();
+    if (/^#{1,3}\s/.test(l)) { closeUl(); h += `<h4>${inl(l.replace(/^#{1,3}\s+/, ''))}</h4>`; }
+    else if (/^\s*[-*]\s+/.test(l)) { if (!inUl) { h += '<ul>'; inUl = true; } h += `<li>${inl(l.replace(/^\s*[-*]\s+/, ''))}</li>`; }
+    else if (!l.trim()) { closeUl(); }
+    else { closeUl(); h += `<p>${inl(l)}</p>`; }
+  }
+  closeUl(); return h;
+}
+
+function sjRender() {
+  const el = $('#sajuView'); if (!el) return;
+  const head = `<div class="fin-head"><div><h2>사주</h2><p>자평명리 기준 · 만세력 계산 · 풀이</p></div><div class="fin-act"><button type="button" class="btn primary" data-sj="new">+ 사람 추가</button></div></div>`;
+  if (!SJA.loaded) { el.innerHTML = head + '<div class="lf-empty">불러오는 중…</div>'; return; }
+  if (SJA.err) { el.innerHTML = head + `<div class="lf-empty">불러오지 못했어요: ${esc(SJA.err)}<br><button type="button" class="btn" data-sj="reload">다시 시도</button></div>`; return; }
+  if (!SJA.list.length) {
+    el.innerHTML = head + `<div class="lf-empty">아직 등록한 사람이 없어요.<br>생년월일(양력·음력)과 태어난 시각, 성별을 넣으면 사주 여덟 글자와 대운을 계산해줘요.<br><button type="button" class="btn primary" data-sj="new:me">내 사주 등록하기</button></div>${sjNote()}`;
+    return;
+  }
+  const p = sjCur(); let c = null, err = '';
+  try { c = SJ.calc(sjInput(p)); } catch (e) { err = e.message || '계산하지 못했어요'; }
+  const chips = SJA.list.map(x => `<button type="button" class="chip ${x.id === SJA.sel ? 'on' : ''}" data-sj="sel:${esc(x.id)}">${esc(x.name)}${x.is_me ? ' · 나' : ''}</button>`).join('');
+  const opt = `<details class="sj-opt"><summary>계산 기준 설정</summary><div class="sj-optb">
+    <label><input type="checkbox" data-sjo="dst" ${SJA.opt.dst ? 'checked' : ''}> 한국 서머타임(1948~51, 55~60, 87~88) 반영</label>
+    <label><input type="checkbox" data-sjo="lon" ${SJA.opt.lon ? 'checked' : ''}> 30분 경도 보정(서울 기준 -30분)</label>
+    <div class="sj-opt2"><span>밤 11시~자정 출생</span><div class="seg"><button type="button" data-sjo="zi:ya" class="${SJA.opt.zi === 'ya' ? 'on' : ''}">야자시</button><button type="button" data-sjo="zi:jo" class="${SJA.opt.zi === 'jo' ? 'on' : ''}">조자시</button></div></div>
+    <p>만세력 앱·책마다 기준이 달라 결과가 갈리는 부분이에요. 내 사주를 다른 만세력과 비교해서 맞는 쪽으로 맞춰 쓰세요.</p></div></details>`;
+  if (!c) { el.innerHTML = head + `<div class="sj-chips">${chips}</div>${opt}<div class="lf-empty">${esc(err)}<br><button type="button" class="btn" data-sj="edit">정보 수정</button></div>`; return; }
+  el.innerHTML = head + `<div class="sj-chips">${chips}</div>` + sjInfo(p, c) + opt + sjPillars(c) + sjBalance(c) + sjStructure(c) + sjFortune(c) + sjReadingCard(c) + sjAiCard(p, c) + sjNote();
+}
+
+function sjInfo(p, c) {
+  const L = c.lunar, P = c.pillars, k = P.clock;
+  const lun = L ? `음력 ${L.y}.${L.m}.${L.d}${L.leap ? '(윤달)' : ''}` : '';
+  const hour = c.hourKnown ? `${sjP2(k.h)}:${sjP2(k.mi)}` : '시간 모름';
+  const adj = []; if (c.dstApplied) adj.push('서머타임 반영'); if (c.opt.lon) adj.push('30분 경도 보정'); if (c.opt.zi === 'jo' && c.hourKnown && k.h >= 23) adj.push('조자시');
+  const j = P.curJie, n = P.nextJie;
+  return `<section class="card sj-info"><div class="sj-i1"><b>${esc(p.name)}</b>${p.relation ? `<span>${esc(p.relation)}</span>` : ''}<button type="button" class="btn sj-edit" data-sj="edit">수정</button></div>
+    <div class="sj-i2">양력 ${c.solar.y}.${c.solar.m}.${c.solar.d} ${p.birth_hour == null ? '(시간 모름)' : sjP2(p.birth_hour) + ':' + sjP2(p.birth_minute || 0)} · ${esc(lun)} · ${esc(p.gender)}</div>
+    <div class="sj-i3">사주 기준 시각 ${k.y}.${sjP2(k.m)}.${sjP2(k.d)} ${hour}${adj.length ? ' (' + adj.join(' · ') + ')' : ''}<br>월주 기준 절기: ${esc(j.name)} ${sjFmtKst(j.ms)} ~ ${esc(n.name)} ${sjFmtKst(n.ms)} (한국시각)</div>
+    ${p.memo ? `<div class="sj-i3">${esc(p.memo)}</div>` : ''}</section>`;
+}
+
+function sjPillars(c) {
+  const A = c.analysis, P = c.pillars, order = [['hour', '시주', 3], ['day', '일주', 2], ['month', '월주', 1], ['year', '연주', 0]];
+  const col = ([k, lab, i]) => {
+    const unknown = k === 'hour' && !c.hourKnown;
+    if (unknown) return `<div class="sj-col unk"><div class="sj-ch">${lab}</div><div class="sj-q">?</div><div class="sj-q">?</div></div>`;
+    const t = A.table[i], sE = SJ.SE[t.s], bE = SJ.BE[t.b];
+    return `<div class="sj-col ${k === 'day' ? 'me' : ''}"><div class="sj-ch">${lab}${k === 'day' ? ' · 일원' : ''}</div>
+      <div class="sj-ss">${k === 'day' ? '일간(나)' : SJ.SS[t.ssStem]}</div>
+      <div class="sj-gz ${k === 'day' ? 'dm' : ''}" style="--e:${SJ_EC[sE]}"><b>${SJ.STEM_H[t.s]}</b><small>${SJ.STEM[t.s]} · ${SJ.ELEM[sE]}</small></div>
+      <div class="sj-gz" style="--e:${SJ_EC[bE]}"><b>${SJ.BRANCH_H[t.b]}</b><small>${SJ.BRANCH[t.b]} · ${SJ.ELEM[bE]}</small></div>
+      <div class="sj-ss">${SJ.SS[t.ssBranch]}</div>
+      <div class="sj-hid">${t.hid.map(h => `<span style="--e:${SJ_EC[SJ.SE[h.s]]}">${SJ.STEM[h.s]}</span>`).join('')}</div>
+      <div class="sj-st">${SJ.STAGE[t.stage]}</div></div>`;
+  };
+  const lab = `<div class="sj-rows"><div></div><div>십성</div><div>천간</div><div>지지</div><div>십성</div><div>지장간</div><div>12운성</div></div>`;
+  return `<section class="card sj-pil"><div class="fin-sec" style="margin-top:0"><h3>명식 (사주 여덟 글자)</h3><span>${SJ.STEM[P.day.s]}${SJ.BRANCH[P.day.b]}일주</span></div>
+    <div class="sj-grid">${lab}${order.map(col).join('')}</div>
+    <div class="sj-legend">${SJ.ELEM.map((e, i) => `<span style="--e:${SJ_EC[i]}">${e}(${SJ.ELEM_H[i]})</span>`).join('')}</div></section>`;
+}
+
+function sjBalance(c) {
+  const A = c.analysis;
+  const bar = (label, v, color, extra) => `<div class="sj-bar"><span class="sj-bl">${label}</span><span class="sj-bt"><i style="width:${Math.max(1.5, v)}%;background:${color}"></i></span><span class="sj-bv">${Math.round(v)}%${extra || ''}</span></div>`;
+  const elems = [0, 1, 2, 3, 4].map(i => bar(`${SJ.ELEM[i]} ${SJ.ELEM_H[i]}`, A.elemPct[i], SJ_EC[i], `<small>${A.elemCnt[i]}자</small>`)).join('');
+  const grps = [0, 1, 2, 3, 4].map(g => bar(SJ.GRP[g], A.grpPct[g], 'var(--sj-g)')).join('');
+  const self = A.self;
+  return `<section class="card sj-bal"><div class="fin-sec" style="margin-top:0"><h3>오행 · 십성 · 신강신약</h3></div>
+    <div class="sj-two"><div><h5>오행 분포</h5>${elems}</div><div><h5>십성 그룹</h5>${grps}</div></div>
+    <div class="sj-str"><h5>신강신약 · 일간 편(비겁+인성) ${Math.round(self)}% → <b>${A.grade}</b></h5>
+      <div class="sj-meter"><i style="width:${Math.min(100, self)}%"></i><u style="left:30%"></u><u style="left:42%"></u><u style="left:52%"></u><u style="left:65%"></u></div>
+      <div class="sj-mlab"><span>극신약</span><span>신약</span><span>중화</span><span>신강</span><span>극신강</span></div></div></section>`;
+}
+
+function sjStructure(c) {
+  const A = c.analysis, N = SJ.ELEM;
+  const y = A.yong;
+  const tile = (k, v, s) => `<div class="sj-tile"><small>${k}</small><b>${v}</b>${s ? `<span>${s}</span>` : ''}</div>`;
+  const tiles = `<div class="sj-tiles">${tile('격국', A.gyeok.name, A.gyeok.touchul ? '투출' : '정기 기준')}${tile('용신', `${N[y.e]}(${SJ.ELEM_H[y.e]})`, '억부 기준')}${tile('희신', `${N[y.hui]}(${SJ.ELEM_H[y.hui]})`, '')}${tile('득령', A.deukryeong ? '득령' : '실령', SJ.BRANCH[c.pillars.month.b] + '월')}</div>`;
+  const rels = A.rel.length ? A.rel.map(r => `<span class="sj-tag t-${r.t === '천간합' || r.t === '육합' || r.t === '삼합' || r.t === '방합' ? 'h' : 'x'}"><b>${esc(r.n)}</b> ${esc(r.pos)}</span>`).join('') : '<span class="sj-none">뚜렷한 합·충·형이 없어요</span>';
+  const sal = A.sinsal.length ? A.sinsal.map(s => `<span class="sj-tag"><b>${esc(s.n)}</b> ${esc(s.pos.join('·'))}</span>`).join('') : '<span class="sj-none">해당 없음</span>';
+  return `<section class="card sj-str2"><div class="fin-sec" style="margin-top:0"><h3>격국 · 용신 · 관계</h3></div>${tiles}
+    <p class="sj-p">${esc(y.reason)}${A.jong ? ' (' + esc(A.jong) + ' 가능성)' : ''}</p>
+    <h5>합 · 충 · 형</h5><div class="sj-tags">${rels}</div>
+    <h5>신살 <small>(보조)</small></h5><div class="sj-tags">${sal}</div></section>`;
+}
+
+function sjFortune(c) {
+  const F = c.fortune, gz = (s, b) => SJ.STEM_H[s] + SJ.BRANCH_H[b], N = SJ.ELEM;
+  const dae = F.list.map(l => `<div class="sj-fc ${F.cur === l.n ? 'cur' : ''}"><small>${l.startAge}세~</small><b><i style="color:${SJ_EC[SJ.SE[l.s]]}">${SJ.STEM_H[l.s]}</i><i style="color:${SJ_EC[SJ.BE[l.b]]}">${SJ.BRANCH_H[l.b]}</i></b><span>${SJ.STEM[l.s]}${SJ.BRANCH[l.b]}</span><em>${SJ.SS[l.ssStem]}·${SJ.SS[l.ssBranch]}</em><small>${l.startYear}~${String(l.endYear).slice(2)}</small></div>`).join('');
+  const se = F.seun.map(s => `<div class="sj-fc ${s.y === F.nowY ? 'cur' : ''}"><small>${s.y}</small><b><i style="color:${SJ_EC[SJ.SE[s.s]]}">${SJ.STEM_H[s.s]}</i><i style="color:${SJ_EC[SJ.BE[s.b]]}">${SJ.BRANCH_H[s.b]}</i></b><span>${SJ.STEM[s.s]}${SJ.BRANCH[s.b]}</span><em>${SJ.SS[s.ssStem]}·${SJ.SS[s.ssBranch]}</em>${s.rels.length ? `<small class="rel">${esc(s.rels.map(r => r.n).join(' '))}</small>` : '<small>&nbsp;</small>'}</div>`).join('');
+  return `<section class="card sj-fort"><div class="fin-sec" style="margin-top:0"><h3>대운 · 세운</h3><span>${F.forward ? '순행' : '역행'} · 대운수 ${F.dae}</span></div>
+    <p class="sj-p">첫 대운은 ${F.years}년 ${F.months}개월 ${F.remDays}일 뒤(약 ${F.dae}세)에 시작해요. 일간 기준 십성으로 표시했어요.</p>
+    <h5>10년 단위 대운</h5><div class="sj-fs">${dae}</div><h5>연도별 세운</h5><div class="sj-fs">${se}</div></section>`;
+}
+
+function sjReadingCard(c) {
+  const secs = sjReading(c);
+  return `<section class="card sj-read"><div class="fin-sec" style="margin-top:0"><h3>기본 풀이 <small>규칙 기반</small></h3></div>
+    ${secs.map((s, i) => `<details class="sj-rs" ${i < 2 ? 'open' : ''}><summary>${esc(s.t)}</summary>${s.p.map(x => `<p>${esc(x)}</p>`).join('')}</details>`).join('')}</section>`;
+}
+
+function sjAiCard(p, c) {
+  const at = p.ai_at ? new Date(p.ai_at) : null;
+  const when = at ? `${at.getFullYear()}.${sjP2(at.getMonth() + 1)}.${sjP2(at.getDate())} 생성` : '';
+  return `<section class="card sj-ai"><div class="fin-sec" style="margin-top:0"><h3>AI 종합 풀이</h3><span>${esc(when)}</span></div>
+    <p class="sj-p">위에서 계산한 명식을 근거로 AI가 문장으로 풀어줘요. 계산은 앱이 하고 AI는 해석만 해요.</p>
+    <textarea class="in sj-q2" id="sjQ" rows="2" maxlength="300" placeholder="궁금한 점이 있으면 적어요 (예: 올해 이직해도 될까, 재물운)">${esc(SJA.q)}</textarea>
+    <div class="sj-aibtn"><button type="button" class="btn primary" data-sj="ai" ${SJA.aiBusy ? 'disabled' : ''}>${SJA.aiBusy ? '풀이 중… (최대 1분)' : (p.ai_reading ? '다시 풀이받기' : 'AI 풀이 받기')}</button></div>
+    ${p.ai_reading ? `<div class="sj-md">${sjMd(p.ai_reading)}</div>` : ''}</section>`;
+}
+
+function sjNote() {
+  return `<p class="sj-foot">1900~2099년 출생 계산 · 절기 시각은 천문 계산식으로 구해 최대 5분 안팎의 오차가 있을 수 있어요(절입 시각 몇 분 이내 출생은 다른 만세력과 꼭 비교). 음력은 한국 표준시 기준이라 중국 달력과 하루 다른 해가 있어요. 풀이는 자평명리의 일반 해석을 따른 참고용이에요.</p>`;
+}
+
+/* ----- 입력 폼 ----- */
+function sjOpenForm(p, asMe) {
+  const isNew = !p;
+  p = p || { name: asMe ? '나' : '', relation: '', gender: '남', calendar: 'solar', birth_year: 1990, birth_month: 1, birth_day: 1, is_leap: false, birth_hour: 12, birth_minute: 0, is_me: !!asMe || !SJA.list.length, memo: '' };
+  let gender = p.gender || '남', cal = p.calendar || 'solar', unk = p.birth_hour == null && !isNew, leap = !!p.is_leap;
+  const seg = (id, items) => `<div class="seg" id="${id}">${items.map(([k, t, on]) => `<button type="button" data-k="${k}" class="${on ? 'on' : ''}">${t}</button>`).join('')}</div>`;
+  openFinModal({
+    title: isNew ? '사람 추가' : '사람 수정',
+    html: `<div class="row2">${fld('이름', `<input class="in" id="sjN" value="${esc(p.name)}" maxlength="20" placeholder="이름 또는 별명">`)}${fld('관계', `<input class="in" id="sjR" value="${esc(p.relation || '')}" maxlength="20" placeholder="예: 본인, 가족, 친구">`)}</div>
+      ${fld('성별 (대운 방향에 필요)', seg('sjG', [['남', '남', gender === '남'], ['여', '여', gender === '여']]))}
+      ${fld('달력', seg('sjC', [['solar', '양력', cal === 'solar'], ['lunar', '음력', cal === 'lunar']]))}
+      <div class="row2" style="grid-template-columns:1.3fr 1fr 1fr">${fld('년', `<input class="in" id="sjY" type="number" min="1900" max="2099" value="${p.birth_year}">`)}${fld('월', `<input class="in" id="sjM" type="number" min="1" max="12" value="${p.birth_month}">`)}${fld('일', `<input class="in" id="sjD" type="number" min="1" max="31" value="${p.birth_day}">`)}</div>
+      <label class="sj-chk" id="sjLeapW" ${cal === 'lunar' ? '' : 'hidden'}><input type="checkbox" id="sjLeap" ${leap ? 'checked' : ''}> 윤달이에요</label>
+      <div class="row2">${fld('시 (0~23)', `<input class="in" id="sjH" type="number" min="0" max="23" value="${p.birth_hour == null ? 12 : p.birth_hour}" ${unk ? 'disabled' : ''}>`)}${fld('분', `<input class="in" id="sjMi" type="number" min="0" max="59" value="${p.birth_minute || 0}" ${unk ? 'disabled' : ''}>`)}</div>
+      <label class="sj-chk"><input type="checkbox" id="sjUnk" ${unk ? 'checked' : ''}> 태어난 시간을 몰라요 (시주 없이 계산)</label>
+      <label class="sj-chk"><input type="checkbox" id="sjMe" ${p.is_me ? 'checked' : ''}> 이 사람이 나예요</label>
+      ${fld('메모', `<input class="in" id="sjMemo" value="${esc(p.memo || '')}" maxlength="80" placeholder="선택">`)}`,
+    onOpen(b) {
+      b.querySelector('#sjG').addEventListener('click', e => { const t = e.target.closest('button'); if (!t) return; gender = t.dataset.k; b.querySelectorAll('#sjG button').forEach(x => x.classList.toggle('on', x === t)); });
+      b.querySelector('#sjC').addEventListener('click', e => { const t = e.target.closest('button'); if (!t) return; cal = t.dataset.k; b.querySelectorAll('#sjC button').forEach(x => x.classList.toggle('on', x === t)); b.querySelector('#sjLeapW').hidden = cal !== 'lunar'; });
+      b.querySelector('#sjUnk').addEventListener('change', e => { b.querySelector('#sjH').disabled = e.target.checked; b.querySelector('#sjMi').disabled = e.target.checked; });
+    },
+    async onSave(b) {
+      const g = id => b.querySelector(id), num = id => parseInt(g(id).value, 10);
+      const name = g('#sjN').value.trim(); if (!name) throw new Error('이름을 입력해 주세요');
+      const y = num('#sjY'), m = num('#sjM'), d = num('#sjD'), unkn = g('#sjUnk').checked;
+      if (!(y >= 1900 && y <= 2099)) throw new Error('년도는 1900~2099 사이로 넣어 주세요');
+      if (!(m >= 1 && m <= 12)) throw new Error('월은 1~12 사이예요');
+      if (!(d >= 1 && d <= 31)) throw new Error('일은 1~31 사이예요');
+      let h = null, mi = null;
+      if (!unkn) { h = num('#sjH'); mi = num('#sjMi') || 0; if (!(h >= 0 && h <= 23)) throw new Error('시는 0~23 사이예요'); if (!(mi >= 0 && mi <= 59)) throw new Error('분은 0~59 사이예요'); }
+      const row = { name, relation: g('#sjR').value.trim() || null, gender, calendar: cal, birth_year: y, birth_month: m, birth_day: d, is_leap: cal === 'lunar' && g('#sjLeap').checked, birth_hour: h, birth_minute: mi, is_me: g('#sjMe').checked, memo: g('#sjMemo').value.trim() || null };
+      SJ.calc({ y, m, d, h, mi: mi || 0, gender, calendar: cal, leap: row.is_leap, nowYear: new Date().getFullYear() }); /* 날짜 검증 */
+      const changed = !isNew && (p.birth_year !== y || p.birth_month !== m || p.birth_day !== d || p.birth_hour !== h || p.birth_minute !== mi || p.gender !== gender || p.calendar !== cal || !!p.is_leap !== row.is_leap);
+      if (changed) { row.ai_reading = null; row.ai_at = null; }
+      let id = p.id;
+      if (isNew) { const { data, error } = await sb.from('saju_profiles').insert(row).select().single(); if (error) throw error; id = data.id; }
+      else { const { error } = await sb.from('saju_profiles').update(row).eq('id', id); if (error) throw error; }
+      if (row.is_me) { await sb.from('saju_profiles').update({ is_me: false }).eq('is_me', true).neq('id', id); }
+      SJA.sel = id; closeFinModal(); toast('저장했어요'); await sjLoad();
+    },
+    onDelete: isNew ? null : async () => {
+      const { error } = await sb.from('saju_profiles').delete().eq('id', p.id); if (error) throw error;
+      closeFinModal(); toast('삭제했어요'); SJA.sel = null; await sjLoad();
+    }
+  });
+}
+
+async function sjAsk() {
+  const p = sjCur(); if (!p || SJA.aiBusy) return;
+  const qEl = $('#sjQ'); SJA.q = qEl ? qEl.value.trim() : SJA.q;
+  let c; try { c = SJ.calc(sjInput(p)); } catch (e) { toast(e.message, true); return; }
+  SJA.aiBusy = true; sjRender();
+  const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 120000);
+  try {
+    const { data } = await sb.auth.getSession(); const tok = data && data.session && data.session.access_token;
+    if (!tok) throw new Error('로그인 정보를 찾지 못했어요. 다시 로그인해 주세요');
+    const r = await fetch(SUPABASE_URL + '/functions/v1/saju-ai', { method: 'POST', signal: ctl.signal, headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tok, 'apikey': SUPABASE_KEY }, body: JSON.stringify({ chart: sjChartForAI(c), question: SJA.q }) });
+    let j = null; try { j = await r.json(); } catch (e) {}
+    if (!r.ok || !j || !j.text) throw new Error((j && j.error) || ('AI 서버 오류 ' + r.status));
+    const at = new Date().toISOString();
+    const { error } = await sb.from('saju_profiles').update({ ai_reading: j.text, ai_at: at }).eq('id', p.id);
+    p.ai_reading = j.text; p.ai_at = at;
+    if (error) toast('풀이는 받았지만 저장하지 못했어요: ' + error.message, true); else toast('풀이를 받았어요');
+  } catch (e) { toast(e.name === 'AbortError' ? '시간이 너무 오래 걸려서 멈췄어요. 다시 시도해 주세요' : (e.message || 'AI 풀이를 받지 못했어요'), true); }
+  clearTimeout(to); SJA.aiBusy = false; sjRender();
+}
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('#sajuView [data-sj]'); if (!t) return;
+  const k = t.dataset.sj;
+  if (k === 'new') sjOpenForm(null, false);
+  else if (k === 'new:me') sjOpenForm(null, true);
+  else if (k === 'edit') sjOpenForm(sjCur());
+  else if (k === 'reload') { SJA.loaded = false; renderSajuTab(); }
+  else if (k === 'ai') sjAsk();
+  else if (k.startsWith('sel:')) { SJA.sel = k.slice(4); SJA.q = ''; sjRender(); }
+});
+document.addEventListener('click', e => {
+  const t = e.target.closest('#sajuView [data-sjo]'); if (!t || t.tagName === 'INPUT') return;
+  const [a, b] = t.dataset.sjo.split(':'); if (a === 'zi') { SJA.opt.zi = b; store.set('sj_opt', SJA.opt); sjRender(); const d = $('#sajuView .sj-opt'); if (d) d.open = true; }
+});
+document.addEventListener('change', e => {
+  const t = e.target.closest('#sajuView [data-sjo]'); if (!t || t.tagName !== 'INPUT') return;
+  SJA.opt[t.dataset.sjo] = t.checked; store.set('sj_opt', SJA.opt); sjRender(); const d = $('#sajuView .sj-opt'); if (d) d.open = true;
+});
+
 
 /* ---------- 시작 ---------- */
 async function startApp() {
